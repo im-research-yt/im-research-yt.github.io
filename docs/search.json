@@ -9,15 +9,29 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "Welcome to the IM Research Blog",
+    "title": "About",
     "section": "",
-    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
+    "text": "I am Yuki Toyoda, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses in business data analysis, research methodology, and marketing science. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics."
+  },
+  {
+    "objectID": "about.html#what-you-will-find-here",
+    "href": "about.html#what-you-will-find-here",
+    "title": "About",
+    "section": "What you will find here",
+    "text": "What you will find here\n\nPosts about threshold-sweep QCA and the ThSQCA R package\nNotes on QCA methodology and data analysis in R\nBrowser-based helper tools for generating R code"
+  },
+  {
+    "objectID": "about.html#links",
+    "href": "about.html#links",
+    "title": "About",
+    "section": "Links",
+    "text": "Links\n\nThSQCA on CRAN\nThSQCA on GitHub\nQCA Quickstart\nSweep Builder"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "IM Research Blog",
+    "title": "Welcome to the IM Research Blog",
     "section": "",
-    "text": "Welcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nSep 28, 2026\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
   }
 ]

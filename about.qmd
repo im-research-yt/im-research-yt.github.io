@@ -1,12 +1,18 @@
 ---
-title: "Welcome to the IM Research Blog"
-author: "Yuki Toyoda"
-date: "2026-10-01"
-categories: [news]
+title: "About"
 ---
 
-This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.
+I am Yuki Toyoda, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses in business data analysis, research methodology, and marketing science. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics.
 
-Two browser tools are already available for generating R code: the [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) for a first `truthTable()` and `minimize()` script, and the [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) for turning a fixed-threshold QCA setup into ThSQCA sweep code.
+## What you will find here
 
-Technical posts with reproducible R code will follow.
+- Posts about threshold-sweep QCA and the ThSQCA R package
+- Notes on QCA methodology and data analysis in R
+- Browser-based helper tools for generating R code
+
+## Links
+
+- [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA)
+- [ThSQCA on GitHub](https://github.com/im-research-yt/ThSQCA)
+- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)
+- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
