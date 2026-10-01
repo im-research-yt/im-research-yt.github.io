@@ -1,0 +1,72 @@
+---
+title: "Introducing ThSQCA: threshold-sweep QCA in R"
+author: "Yuki Toyoda"
+date: "2026-10-01"
+categories: [ThSQCA]
+description: "ThSQCA is an R package that reruns a QCA analysis across a range of thresholds and records how the sufficiency solutions change."
+---
+
+In qualitative comparative analysis (QCA), the thresholds that turn continuous scores into set memberships are usually fixed before the analysis. The resulting solution is then an answer to one specific definition, such as "usage intention is high" meaning a score of 7 or above. **ThSQCA** is an R package that makes the threshold itself an object of analysis: it repeats the same QCA analysis over a range of thresholds, under identical settings, and records how the sufficiency solution changes.
+
+## The idea
+
+Changing a threshold changes which cases belong to a set. That can change the truth table, the fit measures, and the Boolean minimization. The relationship between a threshold *t* and the sufficiency solution *S* is therefore better described as a mapping, *t* → *S(t)*, than as a single solution.
+
+This is not the same question as a robustness check, which asks whether a favored solution survives alternative settings. It is also different from a search for the best threshold. Threshold-sweep QCA asks a descriptive question: how are sufficiency structures distributed across threshold definitions, and where do they persist, appear, or disappear? The methodology is developed in the paper below.
+
+## What the package does
+
+ThSQCA does not implement its own minimization algorithm. Truth table construction and minimization are delegated to the [QCA](https://cran.r-project.org/package=QCA) package, so the computational core is the same as in a standard analysis. ThSQCA adds the workflow around it:
+
+- the same consistency threshold, frequency threshold, solution type, and directional expectations are applied at every step of the sweep;
+- product terms, solution consistency, and coverage are collected into one common format;
+- cases with no solution or with multiple minimal solutions are recorded rather than lost;
+- results can be shown as tables, configuration charts, trajectory plots, and heatmaps, and written out as a Markdown report.
+
+## Four sweep functions
+
+| Question | Function | Threshold varied |
+|---|---|---|
+| How does the solution change as the target outcome level changes? | `otSweep()` | Outcome |
+| How does it change as the criterion for one condition changes? | `ctSweepS()` | One condition |
+| What happens when the criteria for several conditions change together? | `ctSweepM()` | Several conditions |
+| How does it change when outcome and condition criteria change together? | `dtSweep()` | Outcome and conditions |
+
+## Getting started
+
+```r
+install.packages("ThSQCA")
+library(ThSQCA)
+```
+
+A minimal outcome-threshold sweep looks like this (`dat` is your data frame, with a 0 to 10 outcome `Y` and conditions `A`, `B`, `C`):
+
+```r
+res <- otSweep(
+  dat = dat,
+  outcome = "Y",
+  conditions = c("A", "B", "C"),
+  sweep_range = 6:9,
+  thrX = c(A = 7, B = 7, C = 7),
+  incl.cut = 0.8,
+  n.cut = 1,
+  include = "?",
+  dir.exp = c(1, 1, 1),
+  return_details = TRUE
+)
+res$summary
+```
+
+The package vignette covers all four functions with worked examples.
+
+## A note on use
+
+ThSQCA is not a device for finding the threshold that gives the most appealing result. The range of thresholds should be justified in advance by the meaning of the scale, theory, and practical goals, and the range explored should be reported in full. The `generate_report()` function is designed to keep that record.
+
+## Links
+
+- Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
+- Package on CRAN: [ThSQCA](https://cran.r-project.org/package=ThSQCA)
+- Source code: [GitHub](https://github.com/im-research-yt/ThSQCA)
+- Documentation: [im-research-yt.github.io/ThSQCA](https://im-research-yt.github.io/ThSQCA/)
+- Browser tools: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) and [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)

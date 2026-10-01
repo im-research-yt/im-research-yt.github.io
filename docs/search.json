@@ -7,6 +7,20 @@
     "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "",
+    "text": "Notes on the ThSQCA R package and hands-on web tools for QCA and marketing research.\nThSQCA on CRAN QCA Quickstart Sweep Builder"
+  },
+  {
+    "objectID": "index.html#latest-posts",
+    "href": "index.html#latest-posts",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "Latest posts",
+    "text": "Latest posts"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -28,17 +42,52 @@
     "text": "Links\n\nThSQCA on CRAN\nThSQCA on GitHub\nQCA Quickstart\nSweep Builder"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Yuki Toyoda’s Blog",
+    "objectID": "posts/introducing-thsqca/index.html",
+    "href": "posts/introducing-thsqca/index.html",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
     "section": "",
-    "text": "Notes on the ThSQCA R package and hands-on web tools for QCA and marketing research.\nThSQCA on CRAN QCA Quickstart Sweep Builder"
+    "text": "In qualitative comparative analysis (QCA), the thresholds that turn continuous scores into set memberships are usually fixed before the analysis. The resulting solution is then an answer to one specific definition, such as “usage intention is high” meaning a score of 7 or above. ThSQCA is an R package that makes the threshold itself an object of analysis: it repeats the same QCA analysis over a range of thresholds, under identical settings, and records how the sufficiency solution changes."
   },
   {
-    "objectID": "index.html#latest-posts",
-    "href": "index.html#latest-posts",
-    "title": "Yuki Toyoda’s Blog",
-    "section": "Latest posts",
-    "text": "Latest posts"
+    "objectID": "posts/introducing-thsqca/index.html#the-idea",
+    "href": "posts/introducing-thsqca/index.html#the-idea",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "The idea",
+    "text": "The idea\nChanging a threshold changes which cases belong to a set. That can change the truth table, the fit measures, and the Boolean minimization. The relationship between a threshold t and the sufficiency solution S is therefore better described as a mapping, t → S(t), than as a single solution.\nThis is not the same question as a robustness check, which asks whether a favored solution survives alternative settings. It is also different from a search for the best threshold. Threshold-sweep QCA asks a descriptive question: how are sufficiency structures distributed across threshold definitions, and where do they persist, appear, or disappear? The methodology is developed in the paper below."
+  },
+  {
+    "objectID": "posts/introducing-thsqca/index.html#what-the-package-does",
+    "href": "posts/introducing-thsqca/index.html#what-the-package-does",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "What the package does",
+    "text": "What the package does\nThSQCA does not implement its own minimization algorithm. Truth table construction and minimization are delegated to the QCA package, so the computational core is the same as in a standard analysis. ThSQCA adds the workflow around it:\n\nthe same consistency threshold, frequency threshold, solution type, and directional expectations are applied at every step of the sweep;\nproduct terms, solution consistency, and coverage are collected into one common format;\ncases with no solution or with multiple minimal solutions are recorded rather than lost;\nresults can be shown as tables, configuration charts, trajectory plots, and heatmaps, and written out as a Markdown report."
+  },
+  {
+    "objectID": "posts/introducing-thsqca/index.html#four-sweep-functions",
+    "href": "posts/introducing-thsqca/index.html#four-sweep-functions",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "Four sweep functions",
+    "text": "Four sweep functions\n\n\n\n\n\n\n\n\nQuestion\nFunction\nThreshold varied\n\n\n\n\nHow does the solution change as the target outcome level changes?\notSweep()\nOutcome\n\n\nHow does it change as the criterion for one condition changes?\nctSweepS()\nOne condition\n\n\nWhat happens when the criteria for several conditions change together?\nctSweepM()\nSeveral conditions\n\n\nHow does it change when outcome and condition criteria change together?\ndtSweep()\nOutcome and conditions"
+  },
+  {
+    "objectID": "posts/introducing-thsqca/index.html#getting-started",
+    "href": "posts/introducing-thsqca/index.html#getting-started",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "Getting started",
+    "text": "Getting started\ninstall.packages(\"ThSQCA\")\nlibrary(ThSQCA)\nA minimal outcome-threshold sweep looks like this (dat is your data frame, with a 0 to 10 outcome Y and conditions A, B, C):\nres &lt;- otSweep(\n  dat = dat,\n  outcome = \"Y\",\n  conditions = c(\"A\", \"B\", \"C\"),\n  sweep_range = 6:9,\n  thrX = c(A = 7, B = 7, C = 7),\n  incl.cut = 0.8,\n  n.cut = 1,\n  include = \"?\",\n  dir.exp = c(1, 1, 1),\n  return_details = TRUE\n)\nres$summary\nThe package vignette covers all four functions with worked examples."
+  },
+  {
+    "objectID": "posts/introducing-thsqca/index.html#a-note-on-use",
+    "href": "posts/introducing-thsqca/index.html#a-note-on-use",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "A note on use",
+    "text": "A note on use\nThSQCA is not a device for finding the threshold that gives the most appealing result. The range of thresholds should be justified in advance by the meaning of the scale, theory, and practical goals, and the range explored should be reported in full. The generate_report() function is designed to keep that record."
+  },
+  {
+    "objectID": "posts/introducing-thsqca/index.html#links",
+    "href": "posts/introducing-thsqca/index.html#links",
+    "title": "Introducing ThSQCA: threshold-sweep QCA in R",
+    "section": "Links",
+    "text": "Links\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nPackage on CRAN: ThSQCA\nSource code: GitHub\nDocumentation: im-research-yt.github.io/ThSQCA\nBrowser tools: QCA Quickstart and Sweep Builder"
   }
 ]

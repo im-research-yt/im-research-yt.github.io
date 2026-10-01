@@ -12,6 +12,191 @@
 <generator>quarto-1.9.38</generator>
 <lastBuildDate>Wed, 30 Sep 2026 15:00:00 GMT</lastBuildDate>
 <item>
+  <title>Introducing ThSQCA: threshold-sweep QCA in R</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/posts/introducing-thsqca/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>In qualitative comparative analysis (QCA), the thresholds that turn continuous scores into set memberships are usually fixed before the analysis. The resulting solution is then an answer to one specific definition, such as “usage intention is high” meaning a score of 7 or above. <strong>ThSQCA</strong> is an R package that makes the threshold itself an object of analysis: it repeats the same QCA analysis over a range of thresholds, under identical settings, and records how the sufficiency solution changes.</p>
+<section id="the-idea" class="level2">
+<h2 class="anchored" data-anchor-id="the-idea">The idea</h2>
+<p>Changing a threshold changes which cases belong to a set. That can change the truth table, the fit measures, and the Boolean minimization. The relationship between a threshold <em>t</em> and the sufficiency solution <em>S</em> is therefore better described as a mapping, <em>t</em> → <em>S(t)</em>, than as a single solution.</p>
+<p>This is not the same question as a robustness check, which asks whether a favored solution survives alternative settings. It is also different from a search for the best threshold. Threshold-sweep QCA asks a descriptive question: how are sufficiency structures distributed across threshold definitions, and where do they persist, appear, or disappear? The methodology is developed in the paper below.</p>
+</section>
+<section id="what-the-package-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-package-does">What the package does</h2>
+<p>ThSQCA does not implement its own minimization algorithm. Truth table construction and minimization are delegated to the <a href="https://cran.r-project.org/package=QCA">QCA</a> package, so the computational core is the same as in a standard analysis. ThSQCA adds the workflow around it:</p>
+<ul>
+<li>the same consistency threshold, frequency threshold, solution type, and directional expectations are applied at every step of the sweep;</li>
+<li>product terms, solution consistency, and coverage are collected into one common format;</li>
+<li>cases with no solution or with multiple minimal solutions are recorded rather than lost;</li>
+<li>results can be shown as tables, configuration charts, trajectory plots, and heatmaps, and written out as a Markdown report.</li>
+</ul>
+</section>
+<section id="four-sweep-functions" class="level2">
+<h2 class="anchored" data-anchor-id="four-sweep-functions">Four sweep functions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Function</th>
+<th>Threshold varied</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How does the solution change as the target outcome level changes?</td>
+<td><code>otSweep()</code></td>
+<td>Outcome</td>
+</tr>
+<tr class="even">
+<td>How does it change as the criterion for one condition changes?</td>
+<td><code>ctSweepS()</code></td>
+<td>One condition</td>
+</tr>
+<tr class="odd">
+<td>What happens when the criteria for several conditions change together?</td>
+<td><code>ctSweepM()</code></td>
+<td>Several conditions</td>
+</tr>
+<tr class="even">
+<td>How does it change when outcome and condition criteria change together?</td>
+<td><code>dtSweep()</code></td>
+<td>Outcome and conditions</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ThSQCA"</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span></code></pre></div></div>
+<p>A minimal outcome-threshold sweep looks like this (<code>dat</code> is your data frame, with a 0 to 10 outcome <code>Y</code> and conditions <code>A</code>, <code>B</code>, <code>C</code>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(</span>
+<span id="cb2-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> dat,</span>
+<span id="cb2-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Y"</span>,</span>
+<span id="cb2-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>),</span>
+<span id="cb2-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb2-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">A =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">B =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">C =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb2-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>,</span>
+<span id="cb2-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb2-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>,</span>
+<span id="cb2-10">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir.exp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>),</span>
+<span id="cb2-11">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">return_details =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb2-12">)</span>
+<span id="cb2-13">res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span></code></pre></div></div>
+<p>The package vignette covers all four functions with worked examples.</p>
+</section>
+<section id="a-note-on-use" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-use">A note on use</h2>
+<p>ThSQCA is not a device for finding the threshold that gives the most appealing result. The range of thresholds should be justified in advance by the meaning of the scale, theory, and practical goals, and the range explored should be reported in full. The <code>generate_report()</code> function is designed to keep that record.</p>
+</section>
+<section id="links" class="level2">
+<h2 class="anchored" data-anchor-id="links">Links</h2>
+<ul>
+<li>Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. <a href="https://doi.org/10.1007/s11135-026-03092-3">https://doi.org/10.1007/s11135-026-03092-3</a></li>
+<li>Package on CRAN: <a href="https://cran.r-project.org/package=ThSQCA">ThSQCA</a></li>
+<li>Source code: <a href="https://github.com/im-research-yt/ThSQCA">GitHub</a></li>
+<li>Documentation: <a href="https://im-research-yt.github.io/ThSQCA/">im-research-yt.github.io/ThSQCA</a></li>
+<li>Browser tools: <a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> and <a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <guid>https://im-research-yt.github.io/posts/introducing-thsqca/</guid>
+  <pubDate>Wed, 30 Sep 2026 15:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Welcome</title>
   <dc:creator>Yuki Toyoda</dc:creator>
   <link>https://im-research-yt.github.io/posts/welcome/</link>
