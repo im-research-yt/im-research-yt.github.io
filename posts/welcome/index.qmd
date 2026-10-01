@@ -3,6 +3,7 @@ title: "Welcome to the IM Research Blog"
 author: "Yuki Toyoda"
 date: "2026-10-01"
 categories: [news]
+description: "Notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research."
 ---
 
 This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.

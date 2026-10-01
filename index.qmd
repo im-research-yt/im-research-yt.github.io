@@ -1,5 +1,9 @@
 ---
 title: "IM Research Blog"
+subtitle: "Threshold-sweep QCA, marketing science, and data analysis tools"
+title-block-banner: "#1f3a5f"
+title-block-banner-color: white
+page-layout: full
 listing:
   contents: posts
   feed:
@@ -7,10 +11,20 @@ listing:
     categories: [R]
     items: 20
   sort: "date desc"
-  type: default
+  type: grid
+  grid-columns: 2
+  fields: [date, title, description, categories]
   categories: true
   sort-ui: false
   filter-ui: false
-page-layout: full
-title-block-banner: true
 ---
+
+::: {.intro}
+Notes on the **ThSQCA** R package and hands-on web tools for QCA and marketing research.
+
+[ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA){.btn .btn-primary .btn-sm}
+[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html){.btn .btn-outline-primary .btn-sm}
+[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html){.btn .btn-outline-primary .btn-sm}
+:::
+
+## Latest posts

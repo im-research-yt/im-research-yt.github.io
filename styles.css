@@ -1,1 +1,17 @@
-/* css styles */
+.intro {
+  font-size: 1.15rem;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.intro .btn { margin-right: 0.4rem; }
+
+.quarto-grid-item {
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s;
+}
+.quarto-grid-item:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+.quarto-title-banner .quarto-title .title {
+  font-weight: 700;
+}
