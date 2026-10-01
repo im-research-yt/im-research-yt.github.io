@@ -10,7 +10,318 @@
 <atom:link href="https://im-research-yt.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>Threshold-sweep QCA, marketing science, and data analysis tools</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 30 Sep 2026 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 01 Oct 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>ThSQCA for beginners, part 1: your first threshold sweep</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/posts/thsqca-beginners-1/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first part of a beginner’s series on <strong>ThSQCA</strong>, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result.</p>
+<section id="the-one-idea-you-need" class="level2">
+<h2 class="anchored" data-anchor-id="the-one-idea-you-need">The one idea you need</h2>
+<p>QCA looks for combinations of conditions that are <em>sufficient</em> for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.</p>
+<p>To do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a <strong>threshold</strong>: a customer is “high” on a variable when the score is greater than or equal to the threshold.</p>
+<p>Here is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.</p>
+<p>ThSQCA does not replace the <a href="https://cran.r-project.org/package=QCA">QCA</a> package. For every threshold, it calls QCA’s <code>truthTable()</code> and <code>minimize()</code> for you, with identical settings each time, and collects the results.</p>
+</section>
+<section id="step-1-install-the-packages" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-install-the-packages">Step 1: install the packages</h2>
+<p>Run this once. (If you already installed them, skip it.)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QCA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ThSQCA"</span>))</span></code></pre></div></div>
+</div>
+<p>Then load ThSQCA in every new R session:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span></code></pre></div></div>
+</div>
+</section>
+<section id="step-2-create-a-small-practice-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-a-small-practice-data-set">Step 2: create a small practice data set</h2>
+<p>To keep things reproducible, we simulate 400 customers. Each has four scores from 0 to 10: loyalty (<code>LOY</code>), and evaluations of quality (<code>QUA</code>), service (<code>SER</code>), and store environment (<code>ENV</code>). In this simulated world, loyalty is high when quality and service are both high, or (a little less strongly) when quality and environment are both high. A good analysis should discover this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">make_demo_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">400</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>) {</span>
+<span id="cb3-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(seed)</span>
+<span id="cb3-3">  clip <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(x)))</span>
+<span id="cb3-4">  QUA <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-5">  SER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-6">  ENV <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-7">  core <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, SER), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, ENV) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-8">  LOY  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(core <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>))</span>
+<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(LOY, QUA, SER, ENV)</span>
+<span id="cb3-10">}</span>
+<span id="cb3-11"></span>
+<span id="cb3-12">demo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_demo_data</span>()</span>
+<span id="cb3-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(demo)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  LOY QUA SER ENV
+1   7   7   9   3
+2   5   4   7   5
+3   4   6   4   4
+4   6   6   6   4
+5   5   5   4   7
+6   0   1   2   5</code></pre>
+</div>
+</div>
+<p>Each row is one customer. You do not have to understand the function above; it only produces the practice data. With your own data, you would simply read your file into a data frame with these kinds of columns.</p>
+</section>
+<section id="step-3-run-the-sweep" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-run-the-sweep">Step 3: run the sweep</h2>
+<p>We want to know: <em>how does the answer change as we raise the bar for “high loyalty”?</em> So we keep the thresholds of the three conditions fixed at 7, and vary the outcome threshold from 5 to 8. This is called an <strong>outcome threshold sweep</strong>, and the function is <code>otSweep()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(</span>
+<span id="cb5-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat         =</span> demo,</span>
+<span id="cb5-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome     =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb5-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb5-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,</span>
+<span id="cb5-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX        =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb5-7">)</span></code></pre></div></div>
+</div>
+<p>Here is what each line means.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dat</code></td>
+<td>the data frame to analyze</td>
+</tr>
+<tr class="even">
+<td><code>outcome</code></td>
+<td>the outcome column</td>
+</tr>
+<tr class="odd">
+<td><code>conditions</code></td>
+<td>the condition columns</td>
+</tr>
+<tr class="even">
+<td><code>sweep_range</code></td>
+<td>the outcome thresholds to try: here 5, 6, 7, and 8</td>
+</tr>
+<tr class="odd">
+<td><code>thrX</code></td>
+<td>the fixed threshold for each condition: “high” means 7 or more</td>
+</tr>
+</tbody>
+</table>
+<p>Two settings are not written here because they have defaults: the minimum consistency for a combination to count as sufficient (<code>incl.cut</code>, default 0.8) and the minimum number of cases per combination (<code>n.cut</code>, default 1).</p>
+</section>
+<section id="step-4-read-the-result" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-read-the-result">Step 4: read the result</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OTS Summary
+=========== 
+
+Analysis Parameters:
+  Outcome: LOY 
+  Conditions: QUA, SER, ENV 
+  Consistency cutoff: 0.8 
+  Frequency cutoff: 1 
+
+Results by Threshold:
+
+ thrY        expression inclS  covS n_solutions
+    5 QUA*SER + QUA*ENV 0.981 0.403           1
+    6 QUA*SER + QUA*ENV 0.926 0.565           1
+    7           QUA*SER 0.894 0.656           1
+    8       No solution    NA    NA           0</code></pre>
+</div>
+</div>
+<p>The table has one row per outcome threshold. The columns are:</p>
+<ul>
+<li><code>thrY</code>: the outcome threshold used in that row. In the first row, “high loyalty” means <code>LOY &gt;= 5</code>.</li>
+<li><code>expression</code>: the sufficient combination found. <code>*</code> means AND, <code>+</code> means OR, and <code>~</code> means NOT.</li>
+<li><code>inclS</code>: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.</li>
+<li><code>covS</code>: solution coverage. The share of the outcome cases that the solution explains.</li>
+<li><code>n_solutions</code>: how many equivalent minimal solutions were found (1 here).</li>
+</ul>
+<p>Now read the <code>expression</code> column from top to bottom.</p>
+<ul>
+<li>At <code>LOY &gt;= 5</code> and <code>LOY &gt;= 6</code>, two combinations are sufficient: <code>QUA*SER</code> (high quality and high service) and <code>QUA*ENV</code> (high quality and a high store environment).</li>
+<li>At <code>LOY &gt;= 7</code>, only <code>QUA*SER</code> remains.</li>
+<li>At <code>LOY &gt;= 8</code>, the result is <strong>No solution</strong>. At this level, no combination of the three conditions reached the required consistency.</li>
+</ul>
+<p>This is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only <code>LOY &gt;= 6</code>, we would have reported two paths. Had we analyzed only <code>LOY &gt;= 7</code>, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.</p>
+<p>A note on “No solution”: it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement.</p>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
+<p>In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.</p>
+<p>The full package tutorial is available in the <a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCA documentation</a>, and the methodology is described in <a href="https://doi.org/10.1007/s11135-026-03092-3">Toyoda (2026), <em>Quality &amp; Quantity</em></a>.</p>
+<p><em>Software used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later.</em> ```</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>ThSQCA</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/thsqca-beginners-1/</guid>
+  <pubDate>Thu, 01 Oct 2026 15:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Introducing ThSQCA: threshold-sweep QCA in R</title>
   <dc:creator>Yuki Toyoda</dc:creator>

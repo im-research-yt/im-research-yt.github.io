@@ -1,0 +1,116 @@
+---
+title: "ThSQCA for beginners, part 1: your first threshold sweep"
+author: "Yuki Toyoda"
+date: "2026-10-02"
+categories: [R, ThSQCA, tutorial]
+description: "A step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA."
+---
+
+This is the first part of a beginner's series on **ThSQCA**, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result.
+
+## The one idea you need
+
+QCA looks for combinations of conditions that are *sufficient* for an outcome. Suppose we study customer loyalty. A combination such as "high quality AND high service" is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.
+
+To do this, QCA first has to decide who counts as "high". With survey scores from 0 to 10, we pick a **threshold**: a customer is "high" on a variable when the score is greater than or equal to the threshold.
+
+Here is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.
+
+ThSQCA does not replace the [QCA](https://cran.r-project.org/package=QCA) package. For every threshold, it calls QCA's `truthTable()` and `minimize()` for you, with identical settings each time, and collects the results.
+
+## Step 1: install the packages
+
+Run this once. (If you already installed them, skip it.)
+
+```{r}
+#| eval: false
+install.packages(c("QCA", "ThSQCA"))
+```
+
+Then load ThSQCA in every new R session:
+
+```{r}
+library(ThSQCA)
+```
+
+## Step 2: create a small practice data set
+
+To keep things reproducible, we simulate 400 customers. Each has four scores from 0 to 10: loyalty (`LOY`), and evaluations of quality (`QUA`), service (`SER`), and store environment (`ENV`). In this simulated world, loyalty is high when quality and service are both high, or (a little less strongly) when quality and environment are both high. A good analysis should discover this.
+
+```{r}
+make_demo_data <- function(n = 400, seed = 2026) {
+  set.seed(seed)
+  clip <- function(x) pmin(10, pmax(0, round(x)))
+  QUA <- clip(rnorm(n, 6, 2))
+  SER <- clip(rnorm(n, 6, 2))
+  ENV <- clip(rnorm(n, 6, 2))
+  core <- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)
+  LOY  <- clip(core + rnorm(n, 0, 0.7))
+  data.frame(LOY, QUA, SER, ENV)
+}
+
+demo <- make_demo_data()
+head(demo)
+```
+
+Each row is one customer. You do not have to understand the function above; it only produces the practice data. With your own data, you would simply read your file into a data frame with these kinds of columns.
+
+## Step 3: run the sweep
+
+We want to know: *how does the answer change as we raise the bar for "high loyalty"?* So we keep the thresholds of the three conditions fixed at 7, and vary the outcome threshold from 5 to 8. This is called an **outcome threshold sweep**, and the function is `otSweep()`.
+
+```{r}
+res <- otSweep(
+  dat         = demo,
+  outcome     = "LOY",
+  conditions  = c("QUA", "SER", "ENV"),
+  sweep_range = 5:8,
+  thrX        = c(QUA = 7, SER = 7, ENV = 7)
+)
+```
+
+Here is what each line means.
+
+| Argument | Meaning |
+|---|---|
+| `dat` | the data frame to analyze |
+| `outcome` | the outcome column |
+| `conditions` | the condition columns |
+| `sweep_range` | the outcome thresholds to try: here 5, 6, 7, and 8 |
+| `thrX` | the fixed threshold for each condition: "high" means 7 or more |
+
+Two settings are not written here because they have defaults: the minimum consistency for a combination to count as sufficient (`incl.cut`, default 0.8) and the minimum number of cases per combination (`n.cut`, default 1).
+
+## Step 4: read the result
+
+```{r}
+summary(res)
+```
+
+The table has one row per outcome threshold. The columns are:
+
+- `thrY`: the outcome threshold used in that row. In the first row, "high loyalty" means `LOY >= 5`.
+- `expression`: the sufficient combination found. `*` means AND, `+` means OR, and `~` means NOT.
+- `inclS`: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.
+- `covS`: solution coverage. The share of the outcome cases that the solution explains.
+- `n_solutions`: how many equivalent minimal solutions were found (1 here).
+
+Now read the `expression` column from top to bottom.
+
+- At `LOY >= 5` and `LOY >= 6`, two combinations are sufficient: `QUA*SER` (high quality and high service) and `QUA*ENV` (high quality and a high store environment).
+- At `LOY >= 7`, only `QUA*SER` remains.
+- At `LOY >= 8`, the result is **No solution**. At this level, no combination of the three conditions reached the required consistency.
+
+This is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only `LOY >= 6`, we would have reported two paths. Had we analyzed only `LOY >= 7`, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.
+
+A note on "No solution": it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement.
+
+## What comes next
+
+In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.
+
+The full package tutorial is available in the [ThSQCA documentation](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html), and the methodology is described in [Toyoda (2026), *Quality & Quantity*](https://doi.org/10.1007/s11135-026-03092-3).
+
+
+*Software used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later.*
+```
