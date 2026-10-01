@@ -7,7 +7,7 @@ website:
   site-url: https://im-research-yt.github.io
   title: "IM Research Blog"
   navbar:
-    background: "#1f3a5f"
+    background: "#233A9A"
     foreground: white
     right:
       - about.qmd

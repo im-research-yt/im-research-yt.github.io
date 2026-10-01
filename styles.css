@@ -4,6 +4,31 @@
 }
 .intro .btn { margin-right: 0.4rem; }
 
+/* ボタン: 塗りはオレンジ、枠のみは青 */
+.intro .btn-primary {
+  background-color: #F28018;
+  border-color: #F28018;
+  color: white;
+}
+.intro .btn-primary:hover {
+  background-color: #d66d0c;
+  border-color: #d66d0c;
+}
+.intro .btn-outline-primary {
+  color: #233A9A;
+  border-color: #233A9A;
+}
+.intro .btn-outline-primary:hover {
+  background-color: #233A9A;
+  color: white;
+}
+
+/* 見出しの下線をオレンジに */
+h2 {
+  border-bottom: 2px solid #F28018;
+}
+
+/* カード */
 .quarto-grid-item {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);

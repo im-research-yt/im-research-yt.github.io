@@ -1,7 +1,7 @@
 ---
 title: "IM Research Blog"
 subtitle: "Threshold-sweep QCA, marketing science, and data analysis tools"
-title-block-banner: "#1f3a5f"
+title-block-banner: "#233A9A"
 title-block-banner-color: white
 page-layout: full
 listing:
