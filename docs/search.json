@@ -137,6 +137,6 @@
     "href": "posts/thsqca-beginners-1/index.html#what-comes-next",
     "title": "ThSQCA for beginners, part 1: your first threshold sweep",
     "section": "What comes next",
-    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later. ```"
+    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later."
   }
 ]
