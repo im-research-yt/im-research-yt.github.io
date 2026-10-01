@@ -1,34 +1,38 @@
+/* Hosei University colors: blue #233A9A, orange #F28018 */
+
 .intro {
   font-size: 1.15rem;
   margin: 0.5rem 0 1.5rem 0;
 }
 .intro .btn { margin-right: 0.4rem; }
 
-/* ボタン: 塗りはオレンジ、枠のみは青 */
-.intro .btn-primary {
-  background-color: #F28018;
-  border-color: #F28018;
-  color: white;
+/* Buttons: filled = orange, outlined = blue */
+.intro a.btn-primary {
+  background-color: #F28018 !important;
+  border-color: #F28018 !important;
+  color: #ffffff !important;
 }
-.intro .btn-primary:hover {
-  background-color: #d66d0c;
-  border-color: #d66d0c;
+.intro a.btn-primary:hover {
+  background-color: #d66d0c !important;
+  border-color: #d66d0c !important;
 }
-.intro .btn-outline-primary {
-  color: #233A9A;
-  border-color: #233A9A;
+.intro a.btn-outline-primary {
+  background-color: transparent !important;
+  border-color: #233A9A !important;
+  color: #233A9A !important;
 }
-.intro .btn-outline-primary:hover {
-  background-color: #233A9A;
-  color: white;
+.intro a.btn-outline-primary:hover {
+  background-color: #233A9A !important;
+  color: #ffffff !important;
 }
 
-/* 見出しの下線をオレンジに */
+/* Orange rule under section headings */
+#quarto-content h2,
 h2 {
-  border-bottom: 2px solid #F28018;
+  border-bottom: 2px solid #F28018 !important;
 }
 
-/* カード */
+/* Post cards */
 .quarto-grid-item {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);

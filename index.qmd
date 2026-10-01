@@ -1,6 +1,6 @@
 ---
-title: "IM Research Blog"
-subtitle: "Threshold-sweep QCA, marketing science, and data analysis tools"
+title: "Yuki Toyoda's Blog"
+subtitle: "Hosei University | QCA, marketing science, and data analysis tools"
 title-block-banner: "#233A9A"
 title-block-banner-color: white
 page-layout: full

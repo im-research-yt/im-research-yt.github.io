@@ -5,14 +5,14 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>IM Research Blog</title>
+<title>Yuki Toyoda&#39;s Blog</title>
 <link>https://im-research-yt.github.io/</link>
 <atom:link href="https://im-research-yt.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>Threshold-sweep QCA, marketing science, and data analysis tools</description>
 <generator>quarto-1.9.38</generator>
 <lastBuildDate>Wed, 30 Sep 2026 15:00:00 GMT</lastBuildDate>
 <item>
-  <title>Welcome to the IM Research Blog</title>
+  <title>Welcome</title>
   <dc:creator>Yuki Toyoda</dc:creator>
   <link>https://im-research-yt.github.io/posts/welcome/</link>
   <description><![CDATA[ 

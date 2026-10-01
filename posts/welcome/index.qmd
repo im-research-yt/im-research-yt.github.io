@@ -1,5 +1,5 @@
 ---
-title: "Welcome to the IM Research Blog"
+title: "Welcome"
 author: "Yuki Toyoda"
 date: "2026-10-01"
 categories: [news]

@@ -5,7 +5,7 @@ project:
 website:
   description: "Threshold-sweep QCA, marketing science, and data analysis tools"
   site-url: https://im-research-yt.github.io
-  title: "IM Research Blog"
+  title: "Yuki Toyoda's Blog"
   navbar:
     background: "#233A9A"
     foreground: white
@@ -22,4 +22,3 @@ format:
       - cosmo
       - brand
     css: styles.css
-

@@ -2,13 +2,13 @@
 title: "About"
 ---
 
-I am Yuki Toyoda, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses in business data analysis, research methodology, and marketing science. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics.
+I am a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach business data analysis, research methodology, and marketing science in the MBA program. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics.
 
 ## What you will find here
 
-- Posts about threshold-sweep QCA and the ThSQCA R package
-- Notes on QCA methodology and data analysis in R
-- Browser-based helper tools for generating R code
+- Notes on threshold-sweep QCA and the ThSQCA R package
+- Reproducible R code for QCA and marketing research
+- Small browser-based tools for data analysis
 
 ## Links
 

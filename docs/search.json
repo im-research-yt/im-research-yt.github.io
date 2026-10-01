@@ -2,7 +2,7 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome to the IM Research Blog",
+    "title": "Welcome",
     "section": "",
     "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
   },
@@ -11,14 +11,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I am Yuki Toyoda, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses in business data analysis, research methodology, and marketing science. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics."
+    "text": "I am a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach business data analysis, research methodology, and marketing science in the MBA program. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics."
   },
   {
     "objectID": "about.html#what-you-will-find-here",
     "href": "about.html#what-you-will-find-here",
     "title": "About",
     "section": "What you will find here",
-    "text": "What you will find here\n\nPosts about threshold-sweep QCA and the ThSQCA R package\nNotes on QCA methodology and data analysis in R\nBrowser-based helper tools for generating R code"
+    "text": "What you will find here\n\nNotes on threshold-sweep QCA and the ThSQCA R package\nReproducible R code for QCA and marketing research\nSmall browser-based tools for data analysis"
   },
   {
     "objectID": "about.html#links",
@@ -30,14 +30,14 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "IM Research Blog",
+    "title": "Yuki Toyoda’s Blog",
     "section": "",
     "text": "Notes on the ThSQCA R package and hands-on web tools for QCA and marketing research.\nThSQCA on CRAN QCA Quickstart Sweep Builder"
   },
   {
     "objectID": "index.html#latest-posts",
     "href": "index.html#latest-posts",
-    "title": "IM Research Blog",
+    "title": "Yuki Toyoda’s Blog",
     "section": "Latest posts",
     "text": "Latest posts"
   }
