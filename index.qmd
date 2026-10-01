@@ -1,12 +1,16 @@
 ---
-title: "Welcome to the IM Research Blog"
-author: "Yuki Toyoda"
-date: "2026-10-01"
-categories: [news]
+title: "IM Research Blog"
+listing:
+  contents: posts
+  feed:
+    type: full
+    categories: [R]
+    items: 20
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
 ---
-
-This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.
-
-Two browser tools are already available for generating R code: the [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) for a first `truthTable()` and `minimize()` script, and the [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) for turning a fixed-threshold QCA setup into ThSQCA sweep code.
-
-Technical posts with reproducible R code will follow.

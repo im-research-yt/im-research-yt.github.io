@@ -2,9 +2,9 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "title": "Welcome to the IM Research Blog",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
   },
   {
     "objectID": "about.html",
@@ -30,8 +30,8 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome to the IM Research Blog",
+    "title": "IM Research Blog",
     "section": "",
-    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
+    "text": "Welcome to the IM Research Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nOct 1, 2026\n\n\nYuki Toyoda\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>IM Research Blog</title>
+<link>https://im-research-yt.github.io/</link>
+<atom:link href="https://im-research-yt.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<description>Threshold-sweep QCA, marketing science, and data analysis tools</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Wed, 30 Sep 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Welcome to the IM Research Blog</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.</p>
+<p>Two browser tools are already available for generating R code: the <a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> for a first <code>truthTable()</code> and <code>minimize()</code> script, and the <a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> for turning a fixed-threshold QCA setup into ThSQCA sweep code.</p>
+<p>Technical posts with reproducible R code will follow.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://im-research-yt.github.io/posts/welcome/</guid>
+  <pubDate>Wed, 30 Sep 2026 15:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
