@@ -1,0 +1,46 @@
+---
+sidebar: false
+title: "Glossary"
+description: "Short definitions of the terms used on this blog."
+---
+
+Short definitions, in plain language. Each is a first step, not a full treatment.
+
+**QCA (qualitative comparative analysis)**
+:   A method that looks for combinations of conditions that go with an outcome, using set relations rather than averages.
+
+**Condition and outcome**
+:   A condition is a possible cause (for example, high quality). The outcome is what you want to explain (for example, loyalty).
+
+**Crisp set and fuzzy set**
+:   In a crisp set, each case is in or out (0 or 1). In a fuzzy set, each case has a degree of membership between 0 and 1.
+
+**Calibration**
+:   Turning raw scores into set membership scores, using chosen thresholds for "fully in", "fully out", and the crossover point.
+
+**Truth table**
+:   A table with one row for each combination of conditions, showing how many cases fall in that row and how consistently they show the outcome.
+
+**Necessity and sufficiency**
+:   A condition is necessary if the outcome is not found without it. A condition (or combination) is sufficient if the outcome is found whenever it is present.
+
+**Consistency (inclS) and coverage (covS)**
+:   Consistency shows how well the cases follow a sufficiency relation. Coverage shows how much of the outcome the relation accounts for.
+
+**PRI**
+:   A measure that helps detect a condition combination that looks sufficient for both the outcome and its absence.
+
+**Configuration (recipe)**
+:   A combination of conditions that together are linked to the outcome.
+
+**Equifinality**
+:   More than one configuration can lead to the same outcome.
+
+**Asymmetry**
+:   The causes of the outcome's presence need not be the mirror image of the causes of its absence.
+
+**Minimization and solution**
+:   The step that simplifies the truth table into shorter expressions. The result is called the solution.
+
+**Threshold sweep**
+:   Rerunning the same analysis across a range of thresholds, under identical settings, and recording how the solutions change.

@@ -1,0 +1,143 @@
+---
+sidebar: false
+title: "ThSQCA for beginners, part 3: solution types and multiple solutions"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-09"
+categories: [R, ThSQCA, tutorial]
+description: "Complex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution."
+---
+
+```{r}
+#| include: false
+.libPaths(c("D:/R_cran_lib", .libPaths()))
+```
+
+In [part 2](../thsqca-beginners-2/index.html) we ran all four sweeps. Two questions remain for a careful analysis. First, QCA can produce three kinds of solution (complex, parsimonious, and intermediate); which should you use? Second, what if a cell has more than one minimal solution? This post answers both with a second, smaller practice data set.
+
+## A second practice data set
+
+We simulate 60 business software accounts. Each has a renewal score (`RNW`) and three evaluations: trust (`TRU`), price (`PRC`), and support (`SUP`), all from 0 to 10. In this simulated world, renewal is high when trust is high and either price or support is high. The three evaluations are strongly correlated, which will leave some combinations of conditions unobserved. That is deliberate, because unobserved combinations are exactly what the three solution types treat differently.
+
+```{r}
+library(ThSQCA)
+library(QCA)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Practice data set 2"
+make_demo_data2 <- function(n = 60, seed = 89, rho = 0.85) {
+  set.seed(seed)
+  clip <- function(x) pmin(10, pmax(0, round(x)))
+  L   <- rnorm(n)
+  mk  <- function() clip(6 + 2 * (rho * L + sqrt(1 - rho^2) * rnorm(n)))
+  TRU <- mk(); PRC <- mk(); SUP <- mk()
+  RNW <- clip(pmin(TRU, pmax(PRC, SUP)) + rnorm(n, 0, 0.7))
+  data.frame(RNW, TRU, PRC, SUP)
+}
+
+demo2 <- make_demo_data2()
+head(demo2)
+```
+
+## Unobserved combinations ("logical remainders")
+
+With three conditions, each either high or low, there are 2 x 2 x 2 = 8 possible combinations. QCA lists them in a **truth table**. Let us build one by hand with the QCA package, using renewal of 5 or more as the outcome and 7 or more as "high" for each condition.
+
+```{r}
+bin2 <- data.frame(
+  RNW = as.integer(demo2$RNW >= 5),
+  TRU = as.integer(demo2$TRU >= 7),
+  PRC = as.integer(demo2$PRC >= 7),
+  SUP = as.integer(demo2$SUP >= 7)
+)
+
+tt2 <- truthTable(bin2, outcome = "RNW", conditions = c("TRU", "PRC", "SUP"),
+                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)
+tt2
+```
+
+Look at the row numbers on the left. Only 6 of the 8 possible combinations appear (rows 3 and 5 are missing), because the data contain no accounts with, for example, high trust alone, or high price evaluation alone. The combinations that are missing are the **logical remainders**. The column `n` is the number of accounts in each combination, `incl` is how consistently they renew, and `OUT` is 1 when the combination is consistent enough to count as sufficient.
+
+Remainders matter because Boolean minimization can use them to make a formula shorter, and the three solution types differ in whether, and how, they do that.
+
+| Solution type | Remainders used | `include` | `dir.exp` |
+|---|---|---|---|
+| Complex | none | `""` (default) | `NULL` |
+| Parsimonious | any remainder that shortens the formula | `"?"` | `NULL` |
+| Intermediate | only remainders that agree with your stated expectations | `"?"` | e.g. `c(1, 1, 1)` |
+
+Here `dir.exp = c(1, 1, 1)` says: we expect high trust, high price evaluation, and high support each to favor renewal.
+
+## The three solution types, side by side
+
+We run the same outcome threshold sweep (renewal of 5, 6, 7, and 8) three times, changing only the solution type.
+
+```{r}
+thr2  <- c(TRU = 7, PRC = 7, SUP = 7)
+cond2 <- c("TRU", "PRC", "SUP")
+
+run2 <- function(...) {
+  otSweep(dat = demo2, outcome = "RNW", conditions = cond2, sweep_range = 5:8,
+          thrX = thr2, incl.cut = 0.8, n.cut = 1, ...)
+}
+
+res_cx <- run2()                                     # complex
+res_ps <- run2(include = "?")                        # parsimonious
+res_im <- run2(include = "?", dir.exp = c(1, 1, 1))  # intermediate
+
+data.frame(
+  thrY         = 5:8,
+  complex      = res_cx$summary$expression,
+  parsimonious = res_ps$summary$expression,
+  intermediate = res_im$summary$expression
+)
+```
+
+The warning shown with the output is a note from ThSQCA: at renewal of 5, the parsimonious analysis has more than one equally short solution. We come back to this below.
+
+At renewal of 7, all three agree (`TRU*SUP`), and at 8 none finds a solution. At 5 and 6 the parsimonious solution is shorter. For example, at renewal of 5 it reports `TRU + SUP`, whereas the complex solution is `SUP + TRU*PRC`. The term `TRU` alone covers the combination "high trust, but low price and support evaluations", which does not appear in the data. The parsimonious solution is willing to assume that this unobserved combination would also be sufficient. The complex solution makes no such assumption. In this particular data set the intermediate solution happens to coincide with the complex one.
+
+How to choose:
+
+| Solution | When it is a good choice | Strength | Caution |
+|---|---|---|---|
+| Complex | Exploration; you want no assumptions about unobserved cases | Every claim rests on observed cases | Formulas can be long |
+| Parsimonious | You want to see the maximal simplification | Shortest formulas | May rely on implausible remainders |
+| Intermediate | Theory-driven reporting | Uses only plausible remainders | Needs a justified `dir.exp` |
+
+Whatever you choose, keep it the same across the whole sweep, and say which one you used.
+
+## When a cell has more than one minimal solution
+
+Boolean minimization can return several equally short solutions for the same truth table. By default ThSQCA reports the first one (`M1`) and records the number of solutions in `n_solutions`. To see all of them, use `extract_mode = "all"`.
+
+```{r}
+res_all <- run2(include = "?", extract_mode = "all")
+summary(res_all)
+```
+
+At renewal of 5, the parsimonious analysis finds two equivalent solutions, `TRU + SUP` and `PRC + SUP`. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.
+
+If you prefer a compact view, use `extract_mode = "essential"`. It separates the terms that are present in every solution from the rest.
+
+```{r}
+res_ess <- run2(include = "?", extract_mode = "essential")
+res_ess$summary[, c("thrY", "expression", "selective_terms",
+                    "unique_terms", "n_solutions")]
+```
+
+| Term type | Meaning | Here (renewal of 5) |
+|---|---|---|
+| Essential | present in every solution | `SUP` |
+| Selective | present in some solutions | `TRU` and `PRC` |
+| Unique | present in only one solution | `TRU` in M1, `PRC` in M2 |
+
+ThSQCA records the alternatives, but deciding which one to prioritize is a theoretical judgment that stays with the researcher.
+
+## What comes next
+
+In [part 4](../thsqca-beginners-4/index.html), the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.
+
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*

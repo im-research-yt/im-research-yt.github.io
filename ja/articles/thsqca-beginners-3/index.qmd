@@ -1,0 +1,142 @@
+---
+title: "ThSQCA 入門 第3回: 解の種類と、複数の解"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-09"
+categories: [ThSQCA, tutorial]
+description: "複雑解、簡潔解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。"
+---
+
+```{r}
+#| include: false
+.libPaths(c("D:/R_cran_lib", .libPaths()))
+```
+
+[第2回](../thsqca-beginners-2/index.qmd)では、4つのスイープをすべて実行しました。丁寧な分析には、まだ2つの問いが残っています。1つ目は、QCAには3種類の解(複雑解、簡潔解、中間解)がありますが、どれを使うべきか、です。2つ目は、1つのセルに最小解が複数あるときは、どうするか、です。この回では、2つ目の、もっと小さな練習用データで、両方に答えます。
+
+## 2つ目の練習用データ
+
+企業向けソフトウェアのアカウントを、60件シミュレーションで作ります。各アカウントは、更新スコア(`RNW`)と、3つの評価をもちます。信頼(`TRU`)、価格(`PRC`)、サポート(`SUP`)で、どれも0〜10点です。この模擬の世界では、信頼が高く、かつ、価格かサポートのどちらかが高いときに、更新が高くなります。3つの評価は強く相関しているので、条件の組み合わせのうち、観察されないものが出てきます。これは意図的です。観察されない組み合わせこそ、3種類の解が、違う扱いをするものだからです。
+
+```{r}
+library(ThSQCA)
+library(QCA)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "練習用データ2"
+make_demo_data2 <- function(n = 60, seed = 89, rho = 0.85) {
+  set.seed(seed)
+  clip <- function(x) pmin(10, pmax(0, round(x)))
+  L   <- rnorm(n)
+  mk  <- function() clip(6 + 2 * (rho * L + sqrt(1 - rho^2) * rnorm(n)))
+  TRU <- mk(); PRC <- mk(); SUP <- mk()
+  RNW <- clip(pmin(TRU, pmax(PRC, SUP)) + rnorm(n, 0, 0.7))
+  data.frame(RNW, TRU, PRC, SUP)
+}
+
+demo2 <- make_demo_data2()
+head(demo2)
+```
+
+## 観察されない組み合わせ(「論理的残余」)
+
+条件が3つあり、それぞれが高いか低いかなら、可能な組み合わせは 2 x 2 x 2 = 8通りです。QCAは、それらを**真理表**に並べます。QCAパッケージで、真理表を手で作ってみましょう。結果は更新が5以上、各条件の「高い」は7以上とします。
+
+```{r}
+bin2 <- data.frame(
+  RNW = as.integer(demo2$RNW >= 5),
+  TRU = as.integer(demo2$TRU >= 7),
+  PRC = as.integer(demo2$PRC >= 7),
+  SUP = as.integer(demo2$SUP >= 7)
+)
+
+tt2 <- truthTable(bin2, outcome = "RNW", conditions = c("TRU", "PRC", "SUP"),
+                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)
+tt2
+```
+
+左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、**論理的残余**です。列 `n` は、各組み合わせのアカウント数、`incl` は、それらがどれだけ一貫して更新しているか、`OUT` は、組み合わせが十分と認められるだけの整合度があるとき1になります。
+
+残余が重要なのは、ブール最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。
+
+| 解の種類 | 使う残余 | `include` | `dir.exp` |
+|---|---|---|---|
+| 複雑解 | なし | `""`(既定) | `NULL` |
+| 簡潔解 | 式を短くする、すべての残余 | `"?"` | `NULL` |
+| 中間解 | 自分が述べた期待と合う残余だけ | `"?"` | たとえば `c(1, 1, 1)` |
+
+ここで `dir.exp = c(1, 1, 1)` は、「信頼が高いこと、価格の評価が高いこと、サポートが高いことは、どれも更新に有利だと期待する」という意味です。
+
+## 3種類の解を並べる
+
+同じ結果の閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。
+
+```{r}
+thr2  <- c(TRU = 7, PRC = 7, SUP = 7)
+cond2 <- c("TRU", "PRC", "SUP")
+
+run2 <- function(...) {
+  otSweep(dat = demo2, outcome = "RNW", conditions = cond2, sweep_range = 5:8,
+          thrX = thr2, incl.cut = 0.8, n.cut = 1, ...)
+}
+
+res_cx <- run2()                                     # complex
+res_ps <- run2(include = "?")                        # parsimonious
+res_im <- run2(include = "?", dir.exp = c(1, 1, 1))  # intermediate
+
+data.frame(
+  thrY         = 5:8,
+  complex      = res_cx$summary$expression,
+  parsimonious = res_ps$summary$expression,
+  intermediate = res_im$summary$expression
+)
+```
+
+出力と一緒に表示される警告は、ThSQCAからの注意です。更新が5のとき、簡潔解の分析には、同じ長さの解が複数あります。これは、後で扱います。
+
+更新が7のときは、3つとも一致して(`TRU*SUP`)、8ではどれも解がありません。5と6では、簡潔解のほうが短くなります。たとえば、更新が5のとき、簡潔解は `TRU + SUP` ですが、複雑解は `SUP + TRU*PRC` です。`TRU` だけの項は、「信頼は高いが、価格とサポートの評価が低い」という組み合わせをカバーしますが、この組み合わせは、データに現れません。簡潔解は、この観察されない組み合わせも十分だろう、と仮定する立場です。複雑解は、そのような仮定を置きません。このデータでは、たまたま、中間解は複雑解と一致します。
+
+選び方です。
+
+| 解 | 向いている場面 | 強み | 注意 |
+|---|---|---|---|
+| 複雑解 | 探索。観察されない事例に仮定を置きたくないとき | すべての主張が、観察された事例に基づく | 式が長くなることがある |
+| 簡潔解 | 最大限の単純化を見たいとき | 式がいちばん短い | もっともらしくない残余に頼ることがある |
+| 中間解 | 理論に基づいて報告するとき | もっともらしい残余だけを使う | 根拠のある `dir.exp` が要る |
+
+どれを選んでも、スイープ全体で同じものを使い、どれを使ったかを書いてください。
+
+## 1つのセルに、最小解が複数あるとき
+
+ブール最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(`M1`)を報告し、解の数を `n_solutions` に記録します。すべてを見るには、`extract_mode = "all"` を使います。
+
+```{r}
+res_all <- run2(include = "?", extract_mode = "all")
+summary(res_all)
+```
+
+更新が5のとき、簡潔解の分析は、等価な2つの解、`TRU + SUP` と `PRC + SUP` を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。
+
+コンパクトに見たいときは、`extract_mode = "essential"` を使います。すべての解に含まれる項と、それ以外を分けます。
+
+```{r}
+res_ess <- run2(include = "?", extract_mode = "essential")
+res_ess$summary[, c("thrY", "expression", "selective_terms",
+                    "unique_terms", "n_solutions")]
+```
+
+| 項の種類 | 意味 | ここでは(更新が5) |
+|---|---|---|
+| 本質項(essential) | すべての解に含まれる | `SUP` |
+| 選択項(selective) | 一部の解に含まれる | `TRU` と `PRC` |
+| 固有項(unique) | 1つの解にだけ含まれる | M1では `TRU`、M2では `PRC` |
+
+ThSQCAは、代替案を記録します。しかし、どれを優先するかは、理論的な判断で、研究者に残されます。
+
+## 次回
+
+最終回の[第4回](../thsqca-beginners-4/index.qmd)では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。
+
+*使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8*

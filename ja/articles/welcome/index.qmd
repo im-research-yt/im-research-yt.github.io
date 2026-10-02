@@ -1,0 +1,14 @@
+---
+title: "ようこそ"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-01"
+categories: [news]
+description: "閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたブログです。"
+---
+
+このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。
+
+Rのコードを生成する、ブラウザのツールを2つ公開しています。[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) は、最初の `truthTable()` と `minimize()` のスクリプトを作ります。[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。
+
+再現できるRのコードを載せた、技術的な記事が、このあと続きます。

@@ -1,0 +1,28 @@
+---
+sidebar: false
+title: "Software"
+description: "ThSQCA: an R package for threshold-sweep QCA."
+---
+
+**ThSQCA** is an R package that reruns a QCA analysis across a range of thresholds, under identical settings, and records how the sufficiency solutions change. Truth table construction and minimization are delegated to the [QCA](https://cran.r-project.org/package=QCA) package, so the computational core is the same as in a standard analysis.
+
+```r
+install.packages("ThSQCA")
+library(ThSQCA)
+```
+
+## Links
+
+- [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA)
+- [Source code on GitHub](https://github.com/im-research-yt/ThSQCA)
+- [Documentation](https://im-research-yt.github.io/ThSQCA/)
+- [Tutorial (English)](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html)
+
+## The method
+
+Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
+
+## Learn it step by step
+
+- [Introducing ThSQCA](posts/introducing-thsqca/index.qmd)
+- [ThSQCA for beginners, part 1](posts/thsqca-beginners-1/index.qmd)

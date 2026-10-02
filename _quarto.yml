@@ -3,14 +3,30 @@ project:
   output-dir: docs
 
 website:
+  title: "Yuki Toyoda's Blog"
   description: "Threshold-sweep QCA, marketing science, and data analysis tools"
   site-url: https://im-research-yt.github.io
-  title: "Yuki Toyoda's Blog"
+  favicon: favicon.svg
+  open-graph: true
+  twitter-card: true
   navbar:
     background: "#233A9A"
     foreground: white
+    logo: logo.svg
+    left:
+      - text: "Start here"
+        href: start-here.qmd
+      - text: "Blog"
+        href: index.qmd
+      - text: "Tools"
+        href: tools.qmd
+      - text: "Software"
+        href: software.qmd
+      - text: "About"
+        href: about.qmd
     right:
-      - about.qmd
+      - text: "日本語"
+        href: ja/index.qmd
       - icon: github
         href: https://github.com/im-research-yt
   page-footer:

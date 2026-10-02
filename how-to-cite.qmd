@@ -1,0 +1,27 @@
+---
+sidebar: false
+title: "How to cite"
+description: "How to cite the ThSQCA package, the method paper, blog posts, and tools."
+---
+
+## The method
+
+Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
+
+## The R package
+
+Run this in R to get the citation for the version you installed:
+
+```r
+citation("ThSQCA")
+```
+
+## A blog post
+
+Use the author, year, title, blog name, and the URL of the post, with the date you accessed it. For example:
+
+Toyoda, Y. (year). *Title of the post*. Yuki Toyoda's Blog. https://im-research-yt.github.io/posts/post-name/ (accessed day month year).
+
+## The tools
+
+The tools are for learning, so please do not treat them as the only source for a published result. If you used a tool, cite the tool by name and URL, and say that you confirmed the numbers with R or other software. Each tool can create an R script that repeats the calculation.

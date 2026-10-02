@@ -1,0 +1,154 @@
+---
+sidebar: false
+title: "ThSQCA for beginners, part 4: reporting and checking your results"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-10"
+categories: [R, ThSQCA, tutorial]
+description: "Turn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting."
+---
+
+```{r}
+#| include: false
+.libPaths(c("D:/R_cran_lib", .libPaths()))
+```
+
+In the first three parts we ran sweeps and learned to read them. In this last part we turn a sweep into something you can report and defend: a written record of what was explored, a chart of the configurations, and a check that the numbers agree with the QCA package.
+
+```{r}
+library(ThSQCA)
+library(QCA)
+```
+
+```{r}
+#| code-fold: true
+#| code-summary: "Practice data (identical to part 1)"
+make_demo_data <- function(n = 400, seed = 2026) {
+  set.seed(seed)
+  clip <- function(x) pmin(10, pmax(0, round(x)))
+  QUA <- clip(rnorm(n, 6, 2))
+  SER <- clip(rnorm(n, 6, 2))
+  ENV <- clip(rnorm(n, 6, 2))
+  core <- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)
+  LOY  <- clip(core + rnorm(n, 0, 0.7))
+  data.frame(LOY, QUA, SER, ENV)
+}
+
+demo <- make_demo_data()
+```
+
+We reuse the outcome threshold sweep from part 1. This time we ask for the full details, which the report needs.
+
+```{r}
+res_ots <- otSweep(
+  dat            = demo,
+  outcome        = "LOY",
+  conditions     = c("QUA", "SER", "ENV"),
+  sweep_range    = 5:8,
+  thrX           = c(QUA = 7, SER = 7, ENV = 7),
+  incl.cut       = 0.8,
+  n.cut          = 1,
+  return_details = TRUE
+)
+```
+
+## A report that records the whole sweep
+
+A sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. `generate_report()` writes this into a Markdown file. It comes in two formats.
+
+- `"simple"` is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.
+- `"full"` is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.
+
+```{r}
+#| output: false
+#| message: false
+report_file <- tempfile(fileext = ".md")
+generate_report(res_ots, report_file, dat = demo, format = "simple")
+```
+
+Here are the first lines of the file it wrote. On your own computer, give the file a real name, such as `"ots_report_simple.md"`, and it will appear in your working folder.
+
+```{r}
+cat(head(readLines(report_file), 25), sep = "\n")
+```
+
+A few options are worth knowing:
+
+```{r}
+#| eval: false
+generate_report(res_ots, "r.md", dat = demo, format = "full")              # more detail
+generate_report(res_ots, "r.md", dat = demo, include_chart = FALSE)        # no charts
+generate_report(res_ots, "r.md", dat = demo, chart_symbol_set = "latex")   # LaTeX symbols
+generate_report(res_ots, "r.md", dat = demo, include_raw_output = FALSE)   # omit QCA output
+```
+
+## Configuration charts
+
+QCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for "present", a crossed circle for "absent", and a blank for "does not matter". You can draw one from a list of paths with `config_chart_from_paths()`.
+
+```{r}
+#| results: asis
+paths <- c("A*B*~C", "A*D", "B*E")
+cat(config_chart_from_paths(paths))
+```
+
+If you prefer plain characters, for example for a journal that cannot print the circle symbols, use the ASCII version:
+
+```{r}
+#| results: asis
+cat(config_chart_from_paths(paths, symbol_set = "ascii"))
+```
+
+## Check a cell against the QCA package
+
+ThSQCA does not invent new results. Every cell is an ordinary QCA analysis, so you can reproduce any cell by hand. This is a good way to build trust in the tool, and to answer a reviewer who asks. Here we reproduce the cell at an outcome threshold of 7.
+
+```{r}
+bin <- function(x, t) as.integer(x >= t)
+
+d7 <- data.frame(
+  LOY = bin(demo$LOY, 7), QUA = bin(demo$QUA, 7),
+  SER = bin(demo$SER, 7), ENV = bin(demo$ENV, 7)
+)
+
+tt  <- truthTable(d7, outcome = "LOY", conditions = c("QUA", "SER", "ENV"),
+                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)
+sol <- minimize(tt)
+sol
+```
+
+The solution printed by `minimize()` matches the row for `thrY = 7` in the sweep table from part 1 (`QUA*SER`). In both cases the data were binarized in the same way (a score of 7 or above is a member), and in both cases the same QCA functions did the minimization.
+
+## Record your software versions
+
+Results can depend on the versions of R and the packages. Print them and keep them with your report:
+
+```{r}
+#| eval: false
+c(R      = R.version.string,
+  QCA    = as.character(packageVersion("QCA")),
+  ThSQCA = as.character(packageVersion("ThSQCA")))
+```
+
+## A short checklist for reporting a sweep
+
+Because a sweep gives you freedom to explore, it also asks you to be transparent. Before you report one, make sure that you can answer yes to each of these questions.
+
+1. Did I decide the threshold range, and the step between values, before looking at the results?
+2. Do I state every setting that was held fixed (consistency cutoff, frequency cutoff, solution type, directional expectations)?
+3. Did I report every cell of the grid, including the cells with no solution?
+4. Did I check how many cases stand behind the cells at the edges of the grid?
+5. If a cell had several minimal solutions, did I say so?
+6. Did I avoid presenting the sweep as a search for the best threshold?
+7. Did I record the versions of R, QCA, and ThSQCA?
+
+## Where to go from here
+
+You now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.
+
+- [ThSQCA documentation and tutorial](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html)
+- [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA)
+- Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
+- Browser tools: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) and [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
+
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*

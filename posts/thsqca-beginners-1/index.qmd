@@ -1,10 +1,17 @@
 ---
+sidebar: false
 title: "ThSQCA for beginners, part 1: your first threshold sweep"
 author: "Yuki Toyoda"
-date: "2026-10-02"
+image: thumbnail.png
+date: "2026-10-07"
 categories: [R, ThSQCA, tutorial]
 description: "A step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA."
 ---
+
+```{r}
+#| include: false
+.libPaths(c("D:/R_cran_lib", .libPaths()))
+```
 
 This is the first part of a beginner's series on **ThSQCA**, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result.
 
@@ -111,6 +118,4 @@ In the next part we will look more closely at the four kinds of sweeps (outcome,
 
 The full package tutorial is available in the [ThSQCA documentation](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html), and the methodology is described in [Toyoda (2026), *Quality & Quantity*](https://doi.org/10.1007/s11135-026-03092-3).
 
-
-*Software used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later.*
-
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*

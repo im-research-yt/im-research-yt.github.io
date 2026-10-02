@@ -33,6 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-listing/list.min.js"></script>
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -82,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
@@ -150,7 +151,19 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Yuki Toyoda's Blog" href="index.xml" data-external="1"></head>
+<link rel="alternate" type="application/rss+xml" title="Yuki Toyoda's Blog" href="index.xml" data-external="1"><meta property="og:title" content="Yuki Toyoda’s Blog">
+<meta property="og:description" content="Hosei University | QCA, marketing science, and data analysis tools">
+<meta property="og:image" content="https://im-research-yt.github.io/posts/thsqca-beginners-4/thumbnail.png">
+<meta property="og:site_name" content="Yuki Toyoda’s Blog">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="Yuki Toyoda’s Blog">
+<meta name="twitter:description" content="Hosei University | QCA, marketing science, and data analysis tools">
+<meta name="twitter:image" content="https://im-research-yt.github.io/posts/thsqca-beginners-4/thumbnail.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
 
 <body class="nav-fixed quarto-light">
 
@@ -159,6 +172,10 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logo.svg" alt="" class="navbar-logo light-content">
+    <img src="./logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Yuki Toyoda’s Blog</span>
     </a>
@@ -168,10 +185,32 @@ window.Quarto = {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./start-here.html"> 
+<span class="menu-text">Start here</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./tools.html"> 
+<span class="menu-text">Tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./ja/index.html"> 
+<span class="menu-text">日本語</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/im-research-yt"> <i class="bi bi-github" role="img">
@@ -208,7 +247,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGhTUUNB">ThSQCA <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dHV0b3JpYWw=">tutorial <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="bWFya2V0aW5n">marketing <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZXM=">notes <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UUNB">QCA <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="VGhTUUNB">ThSQCA <span class="quarto-category-count">(6)</span></div><div class="category" data-category="dHV0b3JpYWw=">tutorial <span class="quarto-category-count">(4)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -217,8 +256,8 @@ window.Quarto = {
 
 
 <div class="intro">
-<p>Notes on the <strong>ThSQCA</strong> R package and hands-on web tools for QCA and marketing research.</p>
-<p><a href="https://cran.r-project.org/package=ThSQCA" class="btn btn-primary btn-sm">ThSQCA on CRAN</a> <a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html" class="btn btn-outline-primary btn-sm">QCA Quickstart</a> <a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html" class="btn btn-outline-primary btn-sm">Sweep Builder</a></p>
+<p>Notes on the <strong>ThSQCA</strong> R package, qualitative comparative analysis, and hands-on web tools for marketing research.</p>
+<p><a href="./start-here.html" class="btn btn-primary btn-sm">New here? Start here</a> <a href="./ja/index.html" class="btn btn-outline-primary btn-sm">日本語の方はこちら</a> <a href="https://cran.r-project.org/package=ThSQCA" class="btn btn-outline-primary btn-sm">ThSQCA on CRAN</a></p>
 </div>
 <section id="latest-posts" class="level2">
 <h2 class="anchored" data-anchor-id="latest-posts">Latest posts</h2>
@@ -229,9 +268,102 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-2">
-<div class="g-col-1" data-index="0" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1790866800000" data-listing-file-modified-sort="1790832785395" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="932">
+<div class="g-col-1" data-index="0" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791558000000" data-listing-file-modified-sort="1790951067986" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="982">
+<a href="./posts/thsqca-beginners-4/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-beginners-4/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+ThSQCA for beginners, part 4: reporting and checking your results
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VGhTUUNB'); return false;">ThSQCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Turn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 10, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791471600000" data-listing-file-modified-sort="1790951067985" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1156">
+<a href="./posts/thsqca-beginners-3/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-beginners-3/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+ThSQCA for beginners, part 3: solution types and multiple solutions
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VGhTUUNB'); return false;">ThSQCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Complex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 9, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791385200000" data-listing-file-modified-sort="1790951067984" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1250">
+<a href="./posts/thsqca-beginners-2/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-beginners-2/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+ThSQCA for beginners, part 2: the four sweeps and how to choose a range
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VGhTUUNB'); return false;">ThSQCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 8, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791298800000" data-listing-file-modified-sort="1790951067983" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="933">
 <a href="./posts/thsqca-beginners-1/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-beginners-1/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 ThSQCA for beginners, part 1: your first threshold sweep
@@ -250,15 +382,134 @@ ThSQCA for beginners, part 1: your first threshold sweep
 </div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
-Oct 2, 2026
+Oct 7, 2026
 </div>
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="VGhTUUNB" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1790832019323" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="543">
+<div class="g-col-1" data-index="4" data-categories="UUNBJTJDbWFya2V0aW5nJTJDbm90ZXM=" data-listing-date-sort="1791212400000" data-listing-file-modified-sort="1790951067983" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="437">
+<a href="./posts/reading-list-applied/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/reading-list-applied/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+QCA in marketing and management: five papers to read first (applications)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UUNB'); return false;">QCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Papers that use QCA in marketing and management, and practical guides on how to run and report an analysis.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="5" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1790951067982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="456">
+<a href="./posts/reading-list-basics/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/reading-list-basics/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Papers and books for getting to know QCA: six to read first (basics)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UUNB'); return false;">QCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bm90ZXM='); return false;">notes</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>A short, goal-based list of the papers and books worth reading first if you want to understand how QCA thinks.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 5, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="6" data-categories="VGhTUUNBJTJDbWFya2V0aW5nJTJDUUNB" data-listing-date-sort="1791039600000" data-listing-file-modified-sort="1790951067982" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="762">
+<a href="./posts/qca-for-marketers/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/qca-for-marketers/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('VGhTUUNB'); return false;">ThSQCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UUNB'); return false;">QCA</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>A brand manager’s target level changes which strengths matter. Threshold-sweep QCA shows how the winning combination changes as the bar rises.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 4, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="7" data-categories="UUNBJTJDbWFya2V0aW5n" data-listing-date-sort="1790953200000" data-listing-file-modified-sort="1790951067981" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="653">
+<a href="./posts/why-qca-decisions/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/why-qca-decisions/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Why QCA suits decision-making: looking for “recipes” instead of single effects
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UUNB'); return false;">QCA</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Marketing actions work in combination. Qualitative comparative analysis (QCA) looks for the recipes that are enough for an outcome. Here is how it differs from regression…</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Oct 3, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="8" data-categories="VGhTUUNB" data-listing-date-sort="1790866800000" data-listing-file-modified-sort="1790951067980" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="543">
 <a href="./posts/introducing-thsqca/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/introducing-thsqca/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Introducing ThSQCA: threshold-sweep QCA in R
@@ -273,15 +524,18 @@ Introducing ThSQCA: threshold-sweep QCA in R
 </div>
 <div class="card-attribution card-text-small end">
 <div class="listing-date">
-Oct 1, 2026
+Oct 2, 2026
 </div>
 </div>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1790831595487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="57">
+<div class="g-col-1" data-index="9" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1790951067980" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="57">
 <a href="./posts/welcome/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/welcome/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 Welcome

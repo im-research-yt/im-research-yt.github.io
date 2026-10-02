@@ -1,0 +1,70 @@
+---
+sidebar: false
+title: "Why QCA suits decision-making: looking for \"recipes\" instead of single effects"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-03"
+categories: [QCA, marketing]
+description: "Marketing actions work in combination. Qualitative comparative analysis (QCA) looks for the recipes that are enough for an outcome. Here is how it differs from regression, and what to watch for."
+---
+
+A marketing manager's question is not only "If we raise quality, will customers increase?" More often it is "Which things should we combine to reach our target?"
+
+Qualitative comparative analysis (QCA) was built to answer that kind of question. Statistical methods such as regression are good at showing how much one factor matters on its own, with the other conditions held constant. QCA looks at the data from a different angle.
+
+## Why QCA is attractive for decisions
+
+### 1. Actions are taken in combination, not alone
+
+Store renovation, better service, and a price review are usually carried out together. QCA takes the combination (the recipe) as its unit, for example "high quality and high service", and asks what happens to the outcome.
+
+### 2. There may be more than one road to success
+
+The same outcome can be reached in several ways (equifinality). QCA finds all of those roads, so a manager can choose the one that fits the budget and the company's strengths.
+
+### 3. The reasons for success are not always the mirror image of the reasons for failure
+
+The conditions that produce loyal customers and the conditions that produce customers who leave may need separate analyses (asymmetry). QCA analyzes the high case and the low case separately.
+
+### 4. It works even with few cases
+
+With stores, brands, campaigns, or corporate customers, you may have only dozens or a few hundred cases. QCA lets you analyze them while keeping an eye on what is inside each case, which suits problems of a size where statistics are hard to apply.
+
+### 5. The result reads as an "if ... then" rule
+
+A result comes out as a short rule, such as "high quality and high service". It is easy to explain in a meeting, and it tells people on the front line what to do.
+
+### 6. It separates "necessary" from "sufficient"
+
+You can treat "without this, success does not happen" (a necessary condition) differently from "with this, success happens" (a sufficient condition). That lets you think separately about the actions you cannot skip and the actions that win.
+
+## How it differs from regression (roughly)
+
+| Point of view | Regression | QCA |
+|---|---|---|
+| The question | How much does one factor matter on its own, with the others held constant? | Which combinations are enough for the outcome? |
+| Unit of analysis | Each variable | Combinations of conditions |
+| Multiple roads | Hard to anticipate | Can be found |
+| How results read | Coefficients and significance | Rules such as "A and B" |
+| Typical scale | Large samples | Dozens to a few hundred cases |
+
+Neither is better than the other. You choose according to the question.
+
+## What QCA cannot do (and what is also true of other methods)
+
+- **QCA is not the only method that cannot prove causation.** Analyses of observational data, regression included, cannot fully establish causation. Saying that X influences Y is one thing; whether Y moves when you move X is another. Most of the time, the former is what people call "causation". The sufficient conditions QCA reports are best read as candidates for a causal structure.
+- **It needs theory and knowledge of the cases.** The analyst decides which conditions to include and where "high" begins.
+
+## The pitfall is the threshold
+
+That last point matters more than it first appears. In QCA, the analyst decides the **threshold** that separates "high" from "low". But a decision target is exactly such a threshold: do you aim for "reasonably satisfied" or for "loved"? When the threshold changes, the answer can change too.
+
+Threshold-sweep QCA (ThSQCA) addresses this problem. The next post continues from here.
+
+[Next: Is "good enough" the same goal as "loved"?](../qca-for-marketers/index.qmd)
+
+## References
+
+- Ragin, C. C. (2008). *Redesigning Social Inquiry: Fuzzy Sets and Beyond*. University of Chicago Press.
+- Fiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. *Academy of Management Journal*, 54(2), 393-420.
+- Woodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. *Journal of Business Research*, 66(4), 463-472.

@@ -1,7 +1,8 @@
 ---
 title: "Introducing ThSQCA: threshold-sweep QCA in R"
 author: "Yuki Toyoda"
-date: "2026-10-01"
+image: thumbnail.png
+date: "2026-10-02"
 categories: [ThSQCA]
 description: "ThSQCA is an R package that reruns a QCA analysis across a range of thresholds and records how the sufficiency solutions change."
 ---

@@ -1,0 +1,33 @@
+---
+sidebar: false
+title: "Tools"
+description: "Browser-based tools for QCA and marketing research."
+---
+
+These tools run in your browser. Nothing you enter is sent to a server.
+
+::: {.callout-note}
+## For learning use
+Developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University. These tools are intended for learning. They may contain calculation errors, so please verify the results with other software before using them in research or business.
+:::
+
+## QCA
+
+- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html): creates a first QCA analysis script from the column names of your data.
+- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html): turns that setup into a threshold-sweep script for ThSQCA.
+
+## Marketing research and multivariate analysis
+
+The screens of these seven tools are in Japanese; English versions will be added over time. Each tool can also output an **R script that repeats the same calculation with your data embedded**, so you can check the result on your own computer.
+
+- [Price sensitivity (Van Westendorp PSM)](https://im-research-yt.github.io/analysis-tools/psm.html) (Japanese screen): Finds acceptable price ranges from four price questions.
+- [Cluster analysis](https://im-research-yt.github.io/analysis-tools/cluster.html) (Japanese screen): Hierarchical clustering with dendrogram, using the same algorithms as R's hclust.
+- [Principal component and factor analysis](https://im-research-yt.github.io/analysis-tools/pca.html) (Japanese screen): Varimax and promax rotation, matched to R's stats functions.
+- [Correspondence analysis](https://im-research-yt.github.io/analysis-tools/ca.html) (Japanese screen): Maps rows and columns of a cross table; matches the ca package.
+- [Decision tree](https://im-research-yt.github.io/analysis-tools/decision_tree.html) (Japanese screen): Classification and regression trees, matched to rpart (cp = 0).
+- [Conjoint analysis: design](https://im-research-yt.github.io/analysis-tools/conjoint_design.html) (Japanese screen): Builds an orthogonal set of profiles for your attributes and levels.
+- [Conjoint analysis: estimation](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html) (Japanese screen): Part-worth utilities and importance, matched to the conjoint package.
+
+## Check the results in R
+
+Every marketing and multivariate tool has a button that creates an R script with your data and settings. Run it in RStudio to confirm the numbers. Packages needed: pricesensitivitymeter (price sensitivity), rpart (decision tree), ca (correspondence analysis), conjoint (conjoint analysis). The other tools use base R only.

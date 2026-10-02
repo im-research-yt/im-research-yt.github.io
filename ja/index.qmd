@@ -1,0 +1,31 @@
+---
+title: "Yuki Toyoda のブログ(日本語版)"
+subtitle: "法政大学 | QCA、マーケティング・サイエンス、データ分析ツール"
+title-block-banner: "#233A9A"
+title-block-banner-color: white
+page-layout: full
+listing:
+  contents: articles
+  feed: true
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  fields: [image, date, title, description, categories]
+  categories: true
+  sort-ui: false
+  filter-ui: false
+---
+
+::: {.ja-nav}
+[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [ツール](tools.qmd) | [ソフトウェア](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
+:::
+
+::: {.intro}
+**ThSQCA** パッケージ、質的比較分析(QCA)、マーケティング調査のためのWebツールについて書いています。
+
+[はじめての方へ](start.qmd){.btn .btn-primary .btn-sm}
+[ツール](tools.qmd){.btn .btn-outline-primary .btn-sm}
+[English](../index.html){.btn .btn-outline-primary .btn-sm}
+:::
+
+## 新着記事

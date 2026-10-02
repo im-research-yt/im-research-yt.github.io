@@ -1,0 +1,26 @@
+---
+title: "ソフトウェア"
+description: "ThSQCA: 閾値スイープQCAのためのRパッケージ。"
+---
+
+::: {.ja-nav}
+[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [ツール](tools.qmd) | [ソフトウェア](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
+:::
+
+**ThSQCA** は、QCAの分析を、閾値を変えながら同じ設定で繰り返し、十分条件の解がどう変わるかを記録するRパッケージです。真理表の作成と最小化は [QCA](https://cran.r-project.org/package=QCA) パッケージに任せているので、計算の中身は標準的な分析と同じです。
+
+```r
+install.packages("ThSQCA")
+library(ThSQCA)
+```
+
+## リンク
+
+- [CRAN](https://cran.r-project.org/package=ThSQCA)
+- [GitHub](https://github.com/im-research-yt/ThSQCA)
+- [ドキュメント](https://im-research-yt.github.io/ThSQCA/)
+- [チュートリアル(英語)](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html)
+
+## 手法の論文
+
+Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)

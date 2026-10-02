@@ -1,0 +1,64 @@
+---
+sidebar: false
+title: "Is \"good enough\" the same goal as \"loved\"? A marketer's guide to threshold-sweep QCA"
+author: "Yuki Toyoda"
+image: thumbnail.png
+date: "2026-10-04"
+categories: [ThSQCA, marketing, QCA]
+description: "A brand manager's target level changes which strengths matter. Threshold-sweep QCA shows how the winning combination changes as the bar rises."
+---
+
+The previous post explained [why QCA suits decision-making](../why-qca-decisions/index.qmd). One question was left open: where should the line between "high" and "low" go? This post takes it up.
+
+Two managers in the same company are looking at the same customer survey.
+
+The first wants to **widen the base**: get as many customers as possible to say the brand is acceptable to use. The second wants to **build fans**: create customers who really want to use the brand. Both ask the same question: "What combination of brand strengths gets customers there?"
+
+Here is the uncomfortable part. A standard analysis answers that question for **one** cutoff. If you define "high" as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Nobody reports both, so nobody knows whether the manager who wants fans and the manager who wants a wider base should be doing the same thing.
+
+## The cutoff is something to vary
+
+Threshold-sweep QCA (ThSQCA) does not fix the cutoff in advance. It tries several. You run the same analysis at several cutoffs, with everything else held constant, and line the answers up in one table. You see where the answer holds steady, where it changes shape, and where it disappears.
+
+If you have used **top-box versus top-2-box** scoring, you already know the problem. A result that looks solid at top-2-box can look very different at top-box. The sweep makes that comparison systematic.
+
+## A small example (simulated data)
+
+To show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on **quality**, **service**, and **store environment**, and also gave a **loyalty** score from 0 to 10. We then asked: which combinations of "high" ratings (7 or above) are enough for customers to reach each loyalty target?
+
+| Loyalty target | Routes that get customers there | How reliably | Share of target customers explained |
+|---|---|---|---|
+| 5 or above | quality and service, **or** quality and store environment | 0.98 | 40% |
+| 6 or above | quality and service, **or** quality and store environment | 0.93 | 57% |
+| 7 or above | quality and service only | 0.89 | 66% |
+| 8 or above | no combination of the three is reliable enough | n/a | n/a |
+
+Read down the table as the bar rises.
+
+- **A modest goal has options.** There are two routes, so a manager can choose the cheaper one: improve quality and service, or improve quality and the store.
+- **A demanding goal has fewer options.** At 7 or above, only the quality and service route remains. The store environment stops being a way in.
+- **A very demanding goal can outrun the data.** At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three levers do not explain the very top, and you should look for other ones.
+
+A single analysis at "7 or above" would have told the first manager something misleading: that quality and service is the only route, when for a broader goal there is a second one.
+
+## Questions where this helps
+
+- **Satisfaction, NPS, or purchase intent:** does the recipe for "satisfied" equal the recipe for "delighted"?
+- **Segment definitions:** if "heavy user" means 10 purchases a year versus 20, do the drivers change?
+- **Campaign targets:** what does it take to move customers from "consider" to "prefer"?
+- **Reporting:** instead of defending one cutoff, show the range and let readers see how much depends on it.
+
+## Two honest cautions
+
+1. **It shows combinations that go together with the outcome. It does not prove cause.** This is true of any analysis of observational data. Treat the results as a map for where to look and what to test.
+2. **Do not hunt for the cutoff that gives the nicest answer.** Decide the range before you look, say why, and report all of it. The value of the sweep is in being transparent about how much the answer depends on the definition.
+
+## Try it on your own survey
+
+You do not need to write code from scratch.
+
+1. **[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)** creates a first analysis script from the names of your columns.
+2. **[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)** turns that setup into a threshold-sweep script.
+3. Paste the script into R. The package is free: `install.packages("ThSQCA")`.
+
+If you would like a gentler walk through the same ideas, the [beginner's series](../thsqca-beginners-1/index.qmd) explains every line with a practice data set. The method itself is described in Toyoda (2026), [Threshold-sweep QCA: threshold dependence as an analytical dimension](https://doi.org/10.1007/s11135-026-03092-3), *Quality & Quantity*, and the package is on [CRAN](https://cran.r-project.org/package=ThSQCA).

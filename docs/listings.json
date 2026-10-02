@@ -1,8 +1,30 @@
 [
   {
+    "listing": "/ja/index.html",
+    "items": [
+      "/ja/articles/thsqca-beginners-4/index.html",
+      "/ja/articles/thsqca-beginners-3/index.html",
+      "/ja/articles/thsqca-beginners-2/index.html",
+      "/ja/articles/thsqca-beginners-1/index.html",
+      "/ja/articles/reading-list-applied/index.html",
+      "/ja/articles/reading-list-basics/index.html",
+      "/ja/articles/qca-for-marketers/index.html",
+      "/ja/articles/why-qca-decisions/index.html",
+      "/ja/articles/introducing-thsqca/index.html",
+      "/ja/articles/welcome/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
+      "/posts/thsqca-beginners-4/index.html",
+      "/posts/thsqca-beginners-3/index.html",
+      "/posts/thsqca-beginners-2/index.html",
       "/posts/thsqca-beginners-1/index.html",
+      "/posts/reading-list-applied/index.html",
+      "/posts/reading-list-basics/index.html",
+      "/posts/qca-for-marketers/index.html",
+      "/posts/why-qca-decisions/index.html",
       "/posts/introducing-thsqca/index.html",
       "/posts/welcome/index.html"
     ]

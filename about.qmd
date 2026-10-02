@@ -1,18 +1,27 @@
 ---
+sidebar: false
 title: "About"
+description: "About the author and this blog."
 ---
 
-I am a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach business data analysis, research methodology, and marketing science in the MBA program. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics.
+I am **Yuki Toyoda**, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses on business data analysis, research methodology, and marketing science. My research covers the methodology of qualitative comparative analysis (QCA) and its use in marketing and management.
 
-## What you will find here
+## What this blog is for
 
-- Notes on threshold-sweep QCA and the ThSQCA R package
-- Reproducible R code for QCA and marketing research
-- Small browser-based tools for data analysis
+- Explaining **threshold-sweep QCA** and the **ThSQCA** R package, step by step.
+- Sharing browser-based **tools** for QCA and marketing research, built for teaching.
+- Writing short notes on papers, methods, and teaching, in plain language.
 
-## Links
+Posts tagged **R** are also distributed through [R-bloggers](https://www.r-bloggers.com/) once the blog is registered there.
 
-- [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA)
-- [ThSQCA on GitHub](https://github.com/im-research-yt/ThSQCA)
-- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)
-- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
+## Where to go next
+
+- New here? Read [Start here](start-here.qmd).
+- Want the package? See [Software](software.qmd).
+- Want to cite something? See [How to cite](how-to-cite.qmd).
+- Something unclear or wrong? See [Contact](contact.qmd).
+- Unfamiliar word? See the [Glossary](glossary.qmd).
+
+## A note on the tools
+
+The tools are developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University, for learning. They may contain calculation errors, so please verify results with other software before using them in research or business.

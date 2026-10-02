@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuki Toyoda">
+<meta name="dcterms.date" content="2026-10-08">
+<meta name="description" content="Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.">
+
+<title>ThSQCA for beginners, part 2: the four sweeps and how to choose a range – Yuki Toyoda’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b886970056a1d13a9646ddbc21f6bb82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="ThSQCA for beginners, part 2: the four sweeps and how to choose a range – Yuki Toyoda’s Blog">
+<meta property="og:description" content="Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.">
+<meta property="og:image" content="https://im-research-yt.github.io/posts/thsqca-beginners-2/thumbnail.png">
+<meta property="og:site_name" content="Yuki Toyoda’s Blog">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="ThSQCA for beginners, part 2: the four sweeps and how to choose a range – Yuki Toyoda’s Blog">
+<meta name="twitter:description" content="Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.">
+<meta name="twitter:image" content="https://im-research-yt.github.io/posts/thsqca-beginners-2/thumbnail.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../../logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Yuki Toyoda’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../start-here.html"> 
+<span class="menu-text">Start here</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tools.html"> 
+<span class="menu-text">Tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../ja/index.html"> 
+<span class="menu-text">日本語</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/im-research-yt"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">ThSQCA for beginners, part 2: the four sweeps and how to choose a range</h1>
+                  <div>
+        <div class="description">
+          Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">ThSQCA</div>
+                <div class="quarto-category">tutorial</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Yuki Toyoda </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 8, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>In <a href="../thsqca-beginners-1/index.html">part 1</a> we ran an outcome threshold sweep and read its result. ThSQCA has four sweep functions in total. This post runs all four on the same practice data, and ends with practical advice on choosing the range of thresholds.</p>
+<section id="the-four-sweeps-at-a-glance" class="level2">
+<h2 class="anchored" data-anchor-id="the-four-sweeps-at-a-glance">The four sweeps at a glance</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Function</th>
+<th>What varies</th>
+<th>What stays fixed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How does the solution change as the target level of the outcome rises?</td>
+<td><code>otSweep()</code></td>
+<td>the outcome threshold</td>
+<td>all condition thresholds</td>
+</tr>
+<tr class="even">
+<td>How sensitive is it to one condition’s definition of “high”?</td>
+<td><code>ctSweepS()</code></td>
+<td>one condition threshold</td>
+<td>the outcome and the other conditions</td>
+</tr>
+<tr class="odd">
+<td>What if several conditions’ definitions change together?</td>
+<td><code>ctSweepM()</code></td>
+<td>several condition thresholds (a grid)</td>
+<td>the outcome threshold</td>
+</tr>
+<tr class="even">
+<td>What if the target level and the conditions’ definitions both change?</td>
+<td><code>dtSweep()</code></td>
+<td>the outcome and the conditions</td>
+<td>nothing</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="setup-the-same-practice-data-as-part-1" class="level2">
+<h2 class="anchored" data-anchor-id="setup-the-same-practice-data-as-part-1">Setup: the same practice data as part 1</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThSQCA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Practice data (identical to part 1)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>make_demo_data <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">400</span>, <span class="at">seed =</span> <span class="dv">2026</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  clip <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">pmin</span>(<span class="dv">10</span>, <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(x)))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  QUA <span class="ot">&lt;-</span> <span class="fu">clip</span>(<span class="fu">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  SER <span class="ot">&lt;-</span> <span class="fu">clip</span>(<span class="fu">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ENV <span class="ot">&lt;-</span> <span class="fu">clip</span>(<span class="fu">rnorm</span>(n, <span class="dv">6</span>, <span class="dv">2</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  core <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="fu">pmin</span>(QUA, SER), <span class="fu">pmin</span>(QUA, ENV) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  LOY  <span class="ot">&lt;-</span> <span class="fu">clip</span>(core <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.7</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(LOY, QUA, SER, ENV)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>demo <span class="ot">&lt;-</span> <span class="fu">make_demo_data</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Remember the story behind the data: loyalty (<code>LOY</code>) is high when quality (<code>QUA</code>) and service (<code>SER</code>) are both high, or, a little less strongly, when quality and the store environment (<code>ENV</code>) are both high.</p>
+</section>
+<section id="sweep-1-one-condition-with-ctsweeps" class="level2">
+<h2 class="anchored" data-anchor-id="sweep-1-one-condition-with-ctsweeps">Sweep 1: one condition with <code>ctSweepS()</code></h2>
+<p>Suppose you are unsure where to draw the line for “high service delivery”. Is 6 high enough? 7? 9? Fix the outcome at <code>LOY &gt;= 7</code>, fix the other conditions at 7, and sweep the threshold of <code>SER</code> from 5 to 9.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>res_cts <span class="ot">&lt;-</span> <span class="fu">ctSweepS</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat          =</span> demo,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome      =</span> <span class="st">"LOY"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions   =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_var    =</span> <span class="st">"SER"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range  =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY         =</span> <span class="dv">7</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrX_default =</span> <span class="dv">7</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res_cts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CTS (single) Summary
+==================== 
+
+Analysis Parameters:
+  Outcome: LOY 
+  Conditions: QUA, SER, ENV 
+  Consistency cutoff: 0.8 
+  Frequency cutoff: 1 
+
+Results by Threshold:
+
+ threshold   expression inclS  covS n_solutions
+         5  No solution    NA    NA           0
+         6  No solution    NA    NA           0
+         7      QUA*SER 0.894 0.656           1
+         8      QUA*SER 0.909 0.333           1
+         9 QUA*SER*~ENV 0.917 0.122           1</code></pre>
+</div>
+</div>
+<p>The new arguments are <code>sweep_var</code> (the condition whose threshold is swept), <code>thrY</code> (the fixed outcome threshold), and <code>thrX_default</code> (the fixed threshold for all other conditions).</p>
+<p>Reading the table from top to bottom: when “high service” is defined as 5 or 6, there is no solution, because the definition is so loose that the group of “highly served” customers is no longer reliably loyal. At 7 and 8 the solution is <code>QUA*SER</code>. At 9 the solution gains a third element, <code>QUA*SER*~ENV</code>, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(demo<span class="sc">$</span>QUA <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>SER <span class="sc">&gt;=</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+<p>Only 16 of the 400 customers satisfy both conditions at that level, so the result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it.</p>
+</section>
+<section id="sweep-2-several-conditions-with-ctsweepm" class="level2">
+<h2 class="anchored" data-anchor-id="sweep-2-several-conditions-with-ctsweepm">Sweep 2: several conditions with <code>ctSweepM()</code></h2>
+<p>Now let the thresholds of all three conditions vary at once: each of <code>QUA</code>, <code>SER</code>, and <code>ENV</code> is tried at 6, 7, and 8. That is 3 x 3 x 3 = 27 combinations. The outcome stays at <code>LOY &gt;= 7</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res_mcts <span class="ot">&lt;-</span> <span class="fu">ctSweepM</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat        =</span> demo,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"LOY"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY       =</span> <span class="dv">7</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The output has 27 rows. To keep it readable, show only the combinations that produced a solution:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> res_mcts<span class="sc">$</span>summary</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>n_solutions <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   combo_id           threshold                  expression     inclS      covS
+5         5 QUA=7, SER=7, ENV=6                     QUA*SER 0.8939394 0.6555556
+6         6 QUA=8, SER=7, ENV=6                     QUA*SER 0.9189189 0.3777778
+8         8 QUA=7, SER=8, ENV=6                     QUA*SER 0.9090909 0.3333333
+9         9 QUA=8, SER=8, ENV=6                     QUA*SER 0.9047619 0.2111111
+12       12 QUA=8, SER=6, ENV=7                QUA*SER*~ENV 0.8000000 0.3111111
+14       14 QUA=7, SER=7, ENV=7                     QUA*SER 0.8939394 0.6555556
+15       15 QUA=8, SER=7, ENV=7                QUA*SER*~ENV 1.0000000 0.3000000
+17       17 QUA=7, SER=8, ENV=7                     QUA*SER 0.9090909 0.3333333
+18       18 QUA=8, SER=8, ENV=7                QUA*SER*~ENV 1.0000000 0.1888889
+21       21 QUA=8, SER=6, ENV=8                     QUA*ENV 0.8888889 0.1777778
+23       23 QUA=7, SER=7, ENV=8                     QUA*SER 0.8939394 0.6555556
+24       24 QUA=8, SER=7, ENV=8           QUA*SER + QUA*ENV 0.9200000 0.5111111
+26       26 QUA=7, SER=8, ENV=8                     QUA*SER 0.9090909 0.3333333
+27       27 QUA=8, SER=8, ENV=8 QUA*SER*~ENV + QUA*~SER*ENV 0.9393939 0.3444444
+   n_solutions
+5            1
+6            1
+8            1
+9            1
+12           1
+14           1
+15           1
+17           1
+18           1
+21           1
+23           1
+24           1
+26           1
+27           1</code></pre>
+</div>
+</div>
+<p>Some patterns to look for:</p>
+<ul>
+<li>Fourteen of the 27 combinations have a solution. In every combination where “high quality” is defined as 6, there is no solution at all.</li>
+<li>With <code>QUA</code> at 7 and <code>SER</code> at 7 or 8, the solution is <code>QUA*SER</code> no matter which threshold is used for <code>ENV</code>. This is a <strong>stable region</strong>.</li>
+<li>With <code>QUA</code> at 8, the solution depends on <code>ENV</code> (and on <code>SER</code>). With <code>ENV</code> at 6 it is <code>QUA*SER</code> (when <code>SER</code> is 7 or 8). With <code>ENV</code> at 7 it is <code>QUA*SER*~ENV</code>. With <code>ENV</code> at 8 it varies, from <code>QUA*ENV</code> alone to two-path solutions such as <code>QUA*SER + QUA*ENV</code>. When “high quality” is defined strictly, the definition of the store environment starts to matter.</li>
+</ul>
+<p>The grid shows both where a conclusion is robust and where it is fragile, which a single analysis cannot.</p>
+</section>
+<section id="sweep-3-the-outcome-and-the-conditions-together-with-dtsweep" class="level2">
+<h2 class="anchored" data-anchor-id="sweep-3-the-outcome-and-the-conditions-together-with-dtsweep">Sweep 3: the outcome and the conditions together with <code>dtSweep()</code></h2>
+<p>The dual threshold sweep combines the two ideas: it varies the target level of the outcome and the conditions’ definitions at the same time. Here we use 3 outcome thresholds (6, 7, 8) and 8 condition combinations (<code>QUA</code>, <code>SER</code>, <code>ENV</code> each at 6 or 7), so 24 cells.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res_dts <span class="ot">&lt;-</span> <span class="fu">dtSweep</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat           =</span> demo,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome       =</span> <span class="st">"LOY"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions    =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list_X  =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range_Y =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>res_dts<span class="sc">$</span>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   combo_id thrY                thrX        expression     inclS      covS
+1         1    6 QUA=6, SER=6, ENV=6           QUA*SER 0.8630137 0.7118644
+2         1    7 QUA=6, SER=6, ENV=6       No solution        NA        NA
+3         1    8 QUA=6, SER=6, ENV=6       No solution        NA        NA
+4         2    6 QUA=7, SER=6, ENV=6           QUA*SER 0.9215686 0.5310734
+5         2    7 QUA=7, SER=6, ENV=6       No solution        NA        NA
+6         2    8 QUA=7, SER=6, ENV=6       No solution        NA        NA
+7         3    6 QUA=6, SER=7, ENV=6           QUA*SER 0.8932039 0.5197740
+8         3    7 QUA=6, SER=7, ENV=6       No solution        NA        NA
+9         3    8 QUA=6, SER=7, ENV=6       No solution        NA        NA
+10        4    6 QUA=7, SER=7, ENV=6           QUA*SER 0.9848485 0.3672316
+11        4    7 QUA=7, SER=7, ENV=6           QUA*SER 0.8939394 0.6555556
+12        4    8 QUA=7, SER=7, ENV=6       No solution        NA        NA
+13        5    6 QUA=6, SER=6, ENV=7           QUA*SER 0.8630137 0.7118644
+14        5    7 QUA=6, SER=6, ENV=7       No solution        NA        NA
+15        5    8 QUA=6, SER=6, ENV=7       No solution        NA        NA
+16        6    6 QUA=7, SER=6, ENV=7 QUA*SER + QUA*ENV 0.9076923 0.6666667
+17        6    7 QUA=7, SER=6, ENV=7       No solution        NA        NA
+18        6    8 QUA=7, SER=6, ENV=7       No solution        NA        NA
+19        7    6 QUA=6, SER=7, ENV=7           QUA*SER 0.8932039 0.5197740
+20        7    7 QUA=6, SER=7, ENV=7       No solution        NA        NA
+21        7    8 QUA=6, SER=7, ENV=7       No solution        NA        NA
+22        8    6 QUA=7, SER=7, ENV=7 QUA*SER + QUA*ENV 0.9259259 0.5649718
+23        8    7 QUA=7, SER=7, ENV=7           QUA*SER 0.8939394 0.6555556
+24        8    8 QUA=7, SER=7, ENV=7       No solution        NA        NA
+   n_solutions
+1            1
+2            0
+3            0
+4            1
+5            0
+6            0
+7            1
+8            0
+9            0
+10           1
+11           1
+12           0
+13           1
+14           0
+15           0
+16           1
+17           0
+18           0
+19           1
+20           0
+21           0
+22           1
+23           1
+24           0</code></pre>
+</div>
+</div>
+<p>Reading it: at <code>LOY &gt;= 6</code>, every one of the 8 condition definitions gives a solution, usually <code>QUA*SER</code>, and sometimes <code>QUA*SER + QUA*ENV</code>. At <code>LOY &gt;= 7</code>, only two definitions still give a solution, the ones where <code>QUA</code> and <code>SER</code> are both at 7. At <code>LOY &gt;= 8</code>, none do. In this data set, raising the target level is the strongest driver of change.</p>
+</section>
+<section id="how-big-is-a-sweep" class="level2">
+<h2 class="anchored" data-anchor-id="how-big-is-a-sweep">How big is a sweep?</h2>
+<p>Every cell is a full QCA analysis, so the number of cells matters for run time and for how readable the results are.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Number of analyses</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>otSweep()</code></td>
+<td>one per outcome threshold</td>
+<td>5 thresholds = 5</td>
+</tr>
+<tr class="even">
+<td><code>ctSweepS()</code></td>
+<td>one per threshold of the swept condition</td>
+<td>5 thresholds = 5</td>
+</tr>
+<tr class="odd">
+<td><code>ctSweepM()</code></td>
+<td>the product of the candidate counts</td>
+<td>3 x 3 x 3 = 27</td>
+</tr>
+<tr class="even">
+<td><code>dtSweep()</code></td>
+<td>outcome thresholds x condition grid</td>
+<td>3 x (3 x 3 x 3) = 81</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="choosing-a-range-you-can-defend" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-a-range-you-can-defend">Choosing a range you can defend</h2>
+<p>A sweep is easy to run, which is exactly why it needs discipline. Trying many thresholds and reporting only the convenient ones would add researcher degrees of freedom instead of removing them. Some rules of thumb:</p>
+<ol type="1">
+<li><strong>Decide the range before you look at the results.</strong> Base it on what the scale means, on theory, and on practical targets (for example “acceptable”, “good”, “very good”).</li>
+<li><strong>Include your baseline.</strong> The threshold you would have used in an ordinary analysis should be inside the grid, so readers can compare.</li>
+<li><strong>Avoid the neutral zone.</strong> On a 0 to 10 scale, scores around the midpoint do not clearly mean “high” for anyone, so ranges usually start above it.</li>
+<li><strong>Keep the grid small enough to read.</strong> A few meaningful values per variable are better than every possible value.</li>
+<li><strong>Check the case counts at the edges.</strong> Cells at the extremes of the grid often rest on very few cases.</li>
+<li><strong>Report the whole grid.</strong> Show the stable and the unstable regions, not only the cells that support your story.</li>
+</ol>
+</section>
+<section id="what-comes-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
+<p>In <a href="../thsqca-beginners-3/index.html">part 3</a> we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.</p>
+<p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/im-research-yt\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

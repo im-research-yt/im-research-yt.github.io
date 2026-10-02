@@ -1,0 +1,2652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Yuki Toyoda&#39;s Blog</title>
+<link>https://im-research-yt.github.io/ja/</link>
+<atom:link href="https://im-research-yt.github.io/ja/index.xml" rel="self" type="application/rss+xml"/>
+<description>Threshold-sweep QCA, marketing science, and data analysis tools</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Fri, 09 Oct 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>ThSQCA 入門 第4回: 結果の報告と確認</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/thsqca-beginners-4/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>最初の3回では、スイープを実行して、読み方を学びました。最終回では、スイープを、報告でき、擁護できる形にします。何を探索したかの記録、構成図、そして、数値がQCAパッケージと一致することの確認です。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(QCA)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: admisc</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+To cite package QCA in publications, please use:
+  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.
+  Springer International Publishing.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>練習用データ(第1回と同じ)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">make_demo_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">400</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>) {</span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(seed)</span>
+<span id="cb4-3">  clip <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(x)))</span>
+<span id="cb4-4">  QUA <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb4-5">  SER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb4-6">  ENV <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb4-7">  core <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, SER), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, ENV) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb4-8">  LOY  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(core <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>))</span>
+<span id="cb4-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(LOY, QUA, SER, ENV)</span>
+<span id="cb4-10">}</span>
+<span id="cb4-11"></span>
+<span id="cb4-12">demo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_demo_data</span>()</span></code></pre></div></div>
+</details>
+</div>
+<p>第1回の結果の閾値スイープを、再び使います。今回は、レポートに必要な、完全な詳細を求めます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">res_ots <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(</span>
+<span id="cb5-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat            =</span> demo,</span>
+<span id="cb5-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome        =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb5-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions     =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb5-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range    =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,</span>
+<span id="cb5-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX           =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb5-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut       =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>,</span>
+<span id="cb5-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut          =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb5-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">return_details =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb5-10">)</span></code></pre></div></div>
+</div>
+<section id="スイープ全体を記録するレポート" class="level2">
+<h2 class="anchored" data-anchor-id="スイープ全体を記録するレポート">スイープ全体を記録するレポート</h2>
+<p>スイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。<code>generate_report()</code> は、それをMarkdownファイルに書き出します。形式は2つあります。</p>
+<ul>
+<li><code>"simple"</code> は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。</li>
+<li><code>"full"</code> は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">report_file <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tempfile</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fileext =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".md"</span>)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">generate_report</span>(res_ots, report_file, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"simple"</span>)</span></code></pre></div></div>
+</div>
+<p>書き出されたファイルの、最初の数行です。自分のコンピュータでは、<code>"ots_report_simple.md"</code> のような、きちんとした名前を付けると、作業フォルダにファイルができます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">readLines</span>(report_file), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">25</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sep =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># QCA Analysis Report
+
+*(Auto-generated by ThSQCA package)*
+
+**Generated**: 2026-10-02 23:26
+
+---
+
+## Summary
+
+| thrY | expression | inclS | covS | n_solutions |
+|---|---|---|---|---|
+| 5 | QUA\*SER + QUA\*ENV | 0.981 | 0.403 | 1 |
+| 6 | QUA\*SER + QUA\*ENV | 0.926 | 0.565 | 1 |
+| 7 | QUA\*SER | 0.894 | 0.656 | 1 |
+| 8 | No solution | NA | NA | 0 |
+
+
+---
+
+## Solutions Overview
+
+### LOY &gt;= 5
+
+**Solution**: QUA\*SER + QUA\*ENV -&gt; LOY</code></pre>
+</div>
+</div>
+<p>知っておくと便利なオプションがあります。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">generate_report</span>(res_ots, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r.md"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"full"</span>)              <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># more detail</span></span>
+<span id="cb9-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">generate_report</span>(res_ots, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r.md"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include_chart =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># no charts</span></span>
+<span id="cb9-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">generate_report</span>(res_ots, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r.md"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">chart_symbol_set =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"latex"</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># LaTeX symbols</span></span>
+<span id="cb9-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">generate_report</span>(res_ots, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"r.md"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include_raw_output =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># omit QCA output</span></span></code></pre></div></div>
+</div>
+</section>
+<section id="構成図" class="level2">
+<h2 class="anchored" data-anchor-id="構成図">構成図</h2>
+<p>QCAの論文では、解を図で示すことがよくあります。道ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、「関係ない」は空白にします。道のリストから、<code>config_chart_from_paths()</code> で描けます。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">paths <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A*B*~C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A*D"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B*E"</span>)</span>
+<span id="cb10-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_chart_from_paths</span>(paths))</span></code></pre></div></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Condition</th>
+<th style="text-align: center;">T1</th>
+<th style="text-align: center;">T2</th>
+<th style="text-align: center;">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">●</td>
+<td style="text-align: center;">●</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">●</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">●</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">⊗</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">●</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">E</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">●</td>
+</tr>
+</tbody>
+</table>
+<p><em>● = presence, ⊗ = absence, blank = don’t care</em></p>
+<p>円の記号を印刷できない雑誌などのために、普通の文字がよいなら、ASCII版を使います。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cat</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">config_chart_from_paths</span>(paths, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">symbol_set =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ascii"</span>))</span></code></pre></div></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Condition</th>
+<th style="text-align: center;">T1</th>
+<th style="text-align: center;">T2</th>
+<th style="text-align: center;">T3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">O</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">E</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">O</td>
+</tr>
+</tbody>
+</table>
+<p><em>O = presence, X = absence, blank = don’t care</em></p>
+</section>
+<section id="qcaパッケージでセルを確認する" class="level2">
+<h2 class="anchored" data-anchor-id="qcaパッケージでセルを確認する">QCAパッケージで、セルを確認する</h2>
+<p>ThSQCAは、新しい結果を作り出すわけではありません。どのセルも、普通のQCA分析なので、どのセルでも、手で再現できます。これは、道具への信頼を築く、よい方法で、査読者に聞かれたときの答えにもなります。ここでは、結果の閾値が7のセルを再現します。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">bin <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x, t) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> t)</span>
+<span id="cb12-2"></span>
+<span id="cb12-3">d7 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb12-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">LOY =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bin</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>LOY, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bin</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>QUA, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb12-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bin</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SER, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bin</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>ENV, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb12-6">)</span>
+<span id="cb12-7"></span>
+<span id="cb12-8">tt  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">truthTable</span>(d7, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb12-9">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.cases =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb12-10">sol <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">minimize</span>(tt)</span>
+<span id="cb12-11">sol</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+M1: QUA*SER -&gt; LOY</code></pre>
+</div>
+</div>
+<p><code>minimize()</code> が出力した解は、第1回のスイープ表の <code>thrY = 7</code> の行(<code>QUA*SER</code>)と一致します。どちらも、データを同じ方法で二値化し(得点が7以上なら、集合に入る)、どちらも、同じQCAの関数が最小化を行ったからです。</p>
+</section>
+<section id="ソフトウェアのバージョンを記録する" class="level2">
+<h2 class="anchored" data-anchor-id="ソフトウェアのバージョンを記録する">ソフトウェアのバージョンを記録する</h2>
+<p>結果は、Rやパッケージのバージョンに左右されることがあります。表示して、レポートと一緒に保管してください。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">R      =</span> R.version.string,</span>
+<span id="cb14-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QCA    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">packageVersion</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QCA"</span>)),</span>
+<span id="cb14-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ThSQCA =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">packageVersion</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ThSQCA"</span>)))</span></code></pre></div></div>
+</div>
+</section>
+<section id="スイープを報告するための短いチェックリスト" class="level2">
+<h2 class="anchored" data-anchor-id="スイープを報告するための短いチェックリスト">スイープを報告するための、短いチェックリスト</h2>
+<p>スイープは、探索する自由を与えるので、透明であることも求めます。報告する前に、次の問いのすべてに、「はい」と答えられるか、確かめてください。</p>
+<ol type="1">
+<li>閾値の範囲と、値の間隔を、結果を見る前に決めたか。</li>
+<li>固定したすべての設定(整合度の基準、頻度の基準、解の種類、方向性の期待)を書いたか。</li>
+<li>解がないセルも含めて、格子のすべてのセルを報告したか。</li>
+<li>格子の端のセルの背後に、事例が何件あるかを確かめたか。</li>
+<li>あるセルに最小解が複数あったなら、そのことを書いたか。</li>
+<li>スイープを、最良の閾値を探す作業として示すことを、避けたか。</li>
+<li>R、QCA、ThSQCAのバージョンを記録したか。</li>
+</ol>
+</section>
+<section id="ここから先" class="level2">
+<h2 class="anchored" data-anchor-id="ここから先">ここから先</h2>
+<p>これで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。</p>
+<ul>
+<li><a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCAのドキュメントとチュートリアル</a>(英語)</li>
+<li><a href="https://cran.r-project.org/package=ThSQCA">CRANのThSQCA</a></li>
+<li>Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. <a href="https://doi.org/10.1007/s11135-026-03092-3">https://doi.org/10.1007/s11135-026-03092-3</a></li>
+<li>ブラウザのツール: <a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a>、<a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a></li>
+</ul>
+<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/ja/articles/thsqca-beginners-4/</guid>
+  <pubDate>Fri, 09 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/thsqca-beginners-4/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ThSQCA 入門 第3回: 解の種類と、複数の解</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="../../../ja/articles/thsqca-beginners-2/index.html">第2回</a>では、4つのスイープをすべて実行しました。丁寧な分析には、まだ2つの問いが残っています。1つ目は、QCAには3種類の解(複雑解、簡潔解、中間解)がありますが、どれを使うべきか、です。2つ目は、1つのセルに最小解が複数あるときは、どうするか、です。この回では、2つ目の、もっと小さな練習用データで、両方に答えます。</p>
+<section id="つ目の練習用データ" class="level2">
+<h2 class="anchored" data-anchor-id="つ目の練習用データ">2つ目の練習用データ</h2>
+<p>企業向けソフトウェアのアカウントを、60件シミュレーションで作ります。各アカウントは、更新スコア(<code>RNW</code>)と、3つの評価をもちます。信頼(<code>TRU</code>)、価格(<code>PRC</code>)、サポート(<code>SUP</code>)で、どれも0〜10点です。この模擬の世界では、信頼が高く、かつ、価格かサポートのどちらかが高いときに、更新が高くなります。3つの評価は強く相関しているので、条件の組み合わせのうち、観察されないものが出てきます。これは意図的です。観察されない組み合わせこそ、3種類の解が、違う扱いをするものだからです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(QCA)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: admisc</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+To cite package QCA in publications, please use:
+  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.
+  Springer International Publishing.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>練習用データ2</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">make_demo_data2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">60</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">89</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rho =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.85</span>) {</span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(seed)</span>
+<span id="cb4-3">  clip <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(x)))</span>
+<span id="cb4-4">  L   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n)</span>
+<span id="cb4-5">  mk  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>() <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (rho <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> L <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> rho<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n)))</span>
+<span id="cb4-6">  TRU <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mk</span>(); PRC <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mk</span>(); SUP <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mk</span>()</span>
+<span id="cb4-7">  RNW <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(TRU, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(PRC, SUP)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>))</span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(RNW, TRU, PRC, SUP)</span>
+<span id="cb4-9">}</span>
+<span id="cb4-10"></span>
+<span id="cb4-11">demo2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_demo_data2</span>()</span>
+<span id="cb4-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(demo2)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  RNW TRU PRC SUP
+1   3   3   4   4
+2   6   8   7   7
+3   9   9   9   7
+4   5   5   4   6
+5  10  10   8   9
+6   1   2   4   5</code></pre>
+</div>
+</div>
+</section>
+<section id="観察されない組み合わせ論理的残余" class="level2">
+<h2 class="anchored" data-anchor-id="観察されない組み合わせ論理的残余">観察されない組み合わせ(「論理的残余」)</h2>
+<p>条件が3つあり、それぞれが高いか低いかなら、可能な組み合わせは 2 x 2 x 2 = 8通りです。QCAは、それらを<strong>真理表</strong>に並べます。QCAパッケージで、真理表を手で作ってみましょう。結果は更新が5以上、各条件の「高い」は7以上とします。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">bin2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb6-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">RNW =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(demo2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>RNW <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>),</span>
+<span id="cb6-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">TRU =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(demo2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb6-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PRC =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(demo2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb6-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SUP =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(demo2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb6-6">)</span>
+<span id="cb6-7"></span>
+<span id="cb6-8">tt2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">truthTable</span>(bin2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"RNW"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>),</span>
+<span id="cb6-9">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show.cases =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb6-10">tt2</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  OUT: output value
+    n: number of cases in configuration
+ incl: sufficiency inclusion score
+  PRI: proportional reduction in inconsistency
+
+    TRU PRC SUP   OUT    n   incl  PRI  
+1    0   0   0     0     30  0.433 0.433
+2    0   0   1     1     7   0.857 0.857
+4    0   1   1     1     3   1.000 1.000
+6    1   0   1     1     3   1.000 1.000
+7    1   1   0     1     4   1.000 1.000
+8    1   1   1     1     13  1.000 1.000</code></pre>
+</div>
+</div>
+<p>左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、<strong>論理的残余</strong>です。列 <code>n</code> は、各組み合わせのアカウント数、<code>incl</code> は、それらがどれだけ一貫して更新しているか、<code>OUT</code> は、組み合わせが十分と認められるだけの整合度があるとき1になります。</p>
+<p>残余が重要なのは、ブール最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>解の種類</th>
+<th>使う残余</th>
+<th><code>include</code></th>
+<th><code>dir.exp</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>複雑解</td>
+<td>なし</td>
+<td><code>""</code>(既定)</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="even">
+<td>簡潔解</td>
+<td>式を短くする、すべての残余</td>
+<td><code>"?"</code></td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="odd">
+<td>中間解</td>
+<td>自分が述べた期待と合う残余だけ</td>
+<td><code>"?"</code></td>
+<td>たとえば <code>c(1, 1, 1)</code></td>
+</tr>
+</tbody>
+</table>
+<p>ここで <code>dir.exp = c(1, 1, 1)</code> は、「信頼が高いこと、価格の評価が高いこと、サポートが高いことは、どれも更新に有利だと期待する」という意味です。</p>
+</section>
+<section id="種類の解を並べる" class="level2">
+<h2 class="anchored" data-anchor-id="種類の解を並べる">3種類の解を並べる</h2>
+<p>同じ結果の閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">thr2  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">TRU =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PRC =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SUP =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb8-2">cond2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>)</span>
+<span id="cb8-3"></span>
+<span id="cb8-4">run2 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(...) {</span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> demo2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"RNW"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> cond2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,</span>
+<span id="cb8-6">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX =</span> thr2, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, ...)</span>
+<span id="cb8-7">}</span>
+<span id="cb8-8"></span>
+<span id="cb8-9">res_cx <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run2</span>()                                     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># complex</span></span>
+<span id="cb8-10">res_ps <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>)                        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># parsimonious</span></span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
+Only the first solution (M1) and its fit metrics are shown. Use
+generate_report() for full analysis.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">res_im <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir.exp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># intermediate</span></span>
+<span id="cb10-2"></span>
+<span id="cb10-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb10-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrY         =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,</span>
+<span id="cb10-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">complex      =</span> res_cx<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>expression,</span>
+<span id="cb10-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">parsimonious =</span> res_ps<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>expression,</span>
+<span id="cb10-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intermediate =</span> res_im<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>expression</span>
+<span id="cb10-8">)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  thrY            complex   parsimonious       intermediate
+1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC
+2    6 TRU*PRC + ~PRC*SUP TRU + ~PRC*SUP TRU*PRC + ~PRC*SUP
+3    7            TRU*SUP        TRU*SUP            TRU*SUP
+4    8        No solution    No solution        No solution</code></pre>
+</div>
+</div>
+<p>出力と一緒に表示される警告は、ThSQCAからの注意です。更新が5のとき、簡潔解の分析には、同じ長さの解が複数あります。これは、後で扱います。</p>
+<p>更新が7のときは、3つとも一致して(<code>TRU*SUP</code>)、8ではどれも解がありません。5と6では、簡潔解のほうが短くなります。たとえば、更新が5のとき、簡潔解は <code>TRU + SUP</code> ですが、複雑解は <code>SUP + TRU*PRC</code> です。<code>TRU</code> だけの項は、「信頼は高いが、価格とサポートの評価が低い」という組み合わせをカバーしますが、この組み合わせは、データに現れません。簡潔解は、この観察されない組み合わせも十分だろう、と仮定する立場です。複雑解は、そのような仮定を置きません。このデータでは、たまたま、中間解は複雑解と一致します。</p>
+<p>選び方です。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>解</th>
+<th>向いている場面</th>
+<th>強み</th>
+<th>注意</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>複雑解</td>
+<td>探索。観察されない事例に仮定を置きたくないとき</td>
+<td>すべての主張が、観察された事例に基づく</td>
+<td>式が長くなることがある</td>
+</tr>
+<tr class="even">
+<td>簡潔解</td>
+<td>最大限の単純化を見たいとき</td>
+<td>式がいちばん短い</td>
+<td>もっともらしくない残余に頼ることがある</td>
+</tr>
+<tr class="odd">
+<td>中間解</td>
+<td>理論に基づいて報告するとき</td>
+<td>もっともらしい残余だけを使う</td>
+<td>根拠のある <code>dir.exp</code> が要る</td>
+</tr>
+</tbody>
+</table>
+<p>どれを選んでも、スイープ全体で同じものを使い、どれを使ったかを書いてください。</p>
+</section>
+<section id="つのセルに最小解が複数あるとき" class="level2">
+<h2 class="anchored" data-anchor-id="つのセルに最小解が複数あるとき">1つのセルに、最小解が複数あるとき</h2>
+<p>ブール最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(<code>M1</code>)を報告し、解の数を <code>n_solutions</code> に記録します。すべてを見るには、<code>extract_mode = "all"</code> を使います。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">res_all <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">extract_mode =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"all"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
+Only the first solution (M1) and its fit metrics are shown. Use
+generate_report() for full analysis.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res_all)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OTS Summary
+=========== 
+
+Analysis Parameters:
+  Outcome: RNW 
+  Conditions: TRU, PRC, SUP 
+  Consistency cutoff: 0.8 
+  Frequency cutoff: 1 
+
+Results by Threshold:
+
+ thrY                   expression inclS  covS n_solutions
+    5 M1: TRU + SUP; M2: PRC + SUP 0.967 0.690           2
+    6           M1: TRU + ~PRC*SUP 0.963 0.788           1
+    7                  M1: TRU*SUP 0.875 0.667           1
+    8                  No solution    NA    NA           0
+
+Note: 1 threshold setting(s) had multiple solutions.
+      Use generate_report() for full details.</code></pre>
+</div>
+</div>
+<p>更新が5のとき、簡潔解の分析は、等価な2つの解、<code>TRU + SUP</code> と <code>PRC + SUP</code> を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。</p>
+<p>コンパクトに見たいときは、<code>extract_mode = "essential"</code> を使います。すべての解に含まれる項と、それ以外を分けます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">res_ess <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">run2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">extract_mode =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"essential"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
+Only the first solution (M1) and its fit metrics are shown. Use
+generate_report() for full analysis.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">res_ess<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"thrY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"selective_terms"</span>,</span>
+<span id="cb18-2">                    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"unique_terms"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n_solutions"</span>)]</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  thrY     expression selective_terms   unique_terms n_solutions
+1    5            SUP       TRU + PRC M1:TRU; M2:PRC           2
+2    6 TRU + ~PRC*SUP            &lt;NA&gt;           &lt;NA&gt;           1
+3    7        TRU*SUP            &lt;NA&gt;           &lt;NA&gt;           1
+4    8    No solution            &lt;NA&gt;           &lt;NA&gt;           0</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>項の種類</th>
+<th>意味</th>
+<th>ここでは(更新が5)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>本質項(essential)</td>
+<td>すべての解に含まれる</td>
+<td><code>SUP</code></td>
+</tr>
+<tr class="even">
+<td>選択項(selective)</td>
+<td>一部の解に含まれる</td>
+<td><code>TRU</code> と <code>PRC</code></td>
+</tr>
+<tr class="odd">
+<td>固有項(unique)</td>
+<td>1つの解にだけ含まれる</td>
+<td>M1では <code>TRU</code>、M2では <code>PRC</code></td>
+</tr>
+</tbody>
+</table>
+<p>ThSQCAは、代替案を記録します。しかし、どれを優先するかは、理論的な判断で、研究者に残されます。</p>
+</section>
+<section id="次回" class="level2">
+<h2 class="anchored" data-anchor-id="次回">次回</h2>
+<p>最終回の<a href="../../../ja/articles/thsqca-beginners-4/index.html">第4回</a>では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。</p>
+<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/</guid>
+  <pubDate>Thu, 08 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="../../../ja/articles/thsqca-beginners-1/index.html">第1回</a>では、結果の閾値スイープを実行して、結果を読みました。ThSQCAには、スイープの関数が全部で4つあります。この回では、同じ練習用データで4つすべてを実行し、最後に、閾値の範囲の選び方についての、実践的な助言を述べます。</p>
+<section id="つのスイープの一覧" class="level2">
+<h2 class="anchored" data-anchor-id="つのスイープの一覧">4つのスイープの一覧</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>問い</th>
+<th>関数</th>
+<th>動かすもの</th>
+<th>固定するもの</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>結果の目標水準が上がると、解はどう変わるか</td>
+<td><code>otSweep()</code></td>
+<td>結果の閾値</td>
+<td>すべての条件の閾値</td>
+</tr>
+<tr class="even">
+<td>1つの条件の「高い」の定義に、どれだけ敏感か</td>
+<td><code>ctSweepS()</code></td>
+<td>1つの条件の閾値</td>
+<td>結果と、ほかの条件</td>
+</tr>
+<tr class="odd">
+<td>複数の条件の定義が、一緒に変わったらどうなるか</td>
+<td><code>ctSweepM()</code></td>
+<td>複数の条件の閾値(格子状)</td>
+<td>結果の閾値</td>
+</tr>
+<tr class="even">
+<td>目標水準と、条件の定義の両方が変わったらどうなるか</td>
+<td><code>dtSweep()</code></td>
+<td>結果と条件</td>
+<td>なし</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="準備-第1回と同じ練習用データ" class="level2">
+<h2 class="anchored" data-anchor-id="準備-第1回と同じ練習用データ">準備: 第1回と同じ練習用データ</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span></code></pre></div></div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>練習用データ(第1回と同じ)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">make_demo_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">400</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>) {</span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(seed)</span>
+<span id="cb2-3">  clip <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(x)))</span>
+<span id="cb2-4">  QUA <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-5">  SER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-6">  ENV <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb2-7">  core <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, SER), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, ENV) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb2-8">  LOY  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(core <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>))</span>
+<span id="cb2-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(LOY, QUA, SER, ENV)</span>
+<span id="cb2-10">}</span>
+<span id="cb2-11"></span>
+<span id="cb2-12">demo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_demo_data</span>()</span></code></pre></div></div>
+</details>
+</div>
+<p>データの背景を思い出してください。品質(<code>QUA</code>)とサービス(<code>SER</code>)がどちらも高いとき、または、それより少し弱く、品質と店舗環境(<code>ENV</code>)がどちらも高いときに、ロイヤルティ(<code>LOY</code>)が高くなります。</p>
+</section>
+<section id="スイープ1-ctsweeps-で1つの条件を動かす" class="level2">
+<h2 class="anchored" data-anchor-id="スイープ1-ctsweeps-で1つの条件を動かす">スイープ1: <code>ctSweepS()</code> で、1つの条件を動かす</h2>
+<p>「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。結果を <code>LOY &gt;= 7</code> に固定し、ほかの条件を7に固定して、<code>SER</code> の閾値を5から9まで動かします。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">res_cts <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ctSweepS</span>(</span>
+<span id="cb3-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat          =</span> demo,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome      =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions   =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb3-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_var    =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>,</span>
+<span id="cb3-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range  =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb3-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrY         =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>,</span>
+<span id="cb3-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX_default =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span></span>
+<span id="cb3-9">)</span>
+<span id="cb3-10"></span>
+<span id="cb3-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res_cts)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CTS (single) Summary
+==================== 
+
+Analysis Parameters:
+  Outcome: LOY 
+  Conditions: QUA, SER, ENV 
+  Consistency cutoff: 0.8 
+  Frequency cutoff: 1 
+
+Results by Threshold:
+
+ threshold   expression inclS  covS n_solutions
+         5  No solution    NA    NA           0
+         6  No solution    NA    NA           0
+         7      QUA*SER 0.894 0.656           1
+         8      QUA*SER 0.909 0.333           1
+         9 QUA*SER*~ENV 0.917 0.122           1</code></pre>
+</div>
+</div>
+<p>新しい引数は、<code>sweep_var</code>(閾値を動かす条件)、<code>thrY</code>(固定する結果の閾値)、<code>thrX_default</code>(ほかのすべての条件の、固定する閾値)です。</p>
+<p>表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は <code>QUA*SER</code> です。9では、解に3つ目の要素が加わって <code>QUA*SER*~ENV</code> になり、被覆度は、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>QUA <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SER <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+<p>その水準で、両方の条件を満たす顧客は、400人のうち16人だけです。そこでの結果は、ごく少数の事例に支えられています。これは役に立つ習慣です。解が格子の端にしか現れないときは、その背後にある事例の数を確かめてください。</p>
+</section>
+<section id="スイープ2-ctsweepm-で複数の条件を動かす" class="level2">
+<h2 class="anchored" data-anchor-id="スイープ2-ctsweepm-で複数の条件を動かす">スイープ2: <code>ctSweepM()</code> で、複数の条件を動かす</h2>
+<p>次に、3つの条件の閾値を、一度に動かします。<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれを、6、7、8で試します。3 x 3 x 3 = 27通りの組み合わせです。結果は <code>LOY &gt;= 7</code> のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">res_mcts <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ctSweepM</span>(</span>
+<span id="cb7-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat        =</span> demo,</span>
+<span id="cb7-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome    =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb7-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb7-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_list =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>),</span>
+<span id="cb7-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrY       =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span></span>
+<span id="cb7-7">)</span></code></pre></div></div>
+</div>
+<p>出力は27行になります。読みやすくするために、解が出た組み合わせだけを表示します。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">tab <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> res_mcts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span>
+<span id="cb8-2">tab[tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n_solutions <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, ]</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   combo_id           threshold                  expression     inclS      covS
+5         5 QUA=7, SER=7, ENV=6                     QUA*SER 0.8939394 0.6555556
+6         6 QUA=8, SER=7, ENV=6                     QUA*SER 0.9189189 0.3777778
+8         8 QUA=7, SER=8, ENV=6                     QUA*SER 0.9090909 0.3333333
+9         9 QUA=8, SER=8, ENV=6                     QUA*SER 0.9047619 0.2111111
+12       12 QUA=8, SER=6, ENV=7                QUA*SER*~ENV 0.8000000 0.3111111
+14       14 QUA=7, SER=7, ENV=7                     QUA*SER 0.8939394 0.6555556
+15       15 QUA=8, SER=7, ENV=7                QUA*SER*~ENV 1.0000000 0.3000000
+17       17 QUA=7, SER=8, ENV=7                     QUA*SER 0.9090909 0.3333333
+18       18 QUA=8, SER=8, ENV=7                QUA*SER*~ENV 1.0000000 0.1888889
+21       21 QUA=8, SER=6, ENV=8                     QUA*ENV 0.8888889 0.1777778
+23       23 QUA=7, SER=7, ENV=8                     QUA*SER 0.8939394 0.6555556
+24       24 QUA=8, SER=7, ENV=8           QUA*SER + QUA*ENV 0.9200000 0.5111111
+26       26 QUA=7, SER=8, ENV=8                     QUA*SER 0.9090909 0.3333333
+27       27 QUA=8, SER=8, ENV=8 QUA*SER*~ENV + QUA*~SER*ENV 0.9393939 0.3444444
+   n_solutions
+5            1
+6            1
+8            1
+9            1
+12           1
+14           1
+15           1
+17           1
+18           1
+21           1
+23           1
+24           1
+26           1
+27           1</code></pre>
+</div>
+</div>
+<p>注目したいパターンは、次のとおりです。</p>
+<ul>
+<li>27通りのうち、解があるのは14通りです。「品質が高い」を6と定義した組み合わせでは、解がまったくありません。</li>
+<li><code>QUA</code> が7で、<code>SER</code> が7または8のとき、<code>ENV</code> の閾値がどれであっても、解は <code>QUA*SER</code> です。これが<strong>安定した領域</strong>です。</li>
+<li><code>QUA</code> が8のとき、解は <code>ENV</code>(と <code>SER</code>)に左右されます。<code>ENV</code> が6なら、(<code>SER</code> が7または8のとき)<code>QUA*SER</code> です。<code>ENV</code> が7なら、<code>QUA*SER*~ENV</code> です。<code>ENV</code> が8なら、<code>QUA*ENV</code> だけのものから、<code>QUA*SER + QUA*ENV</code> のような2つの道をもつ解まで、さまざまです。「品質が高い」を厳しく定義すると、店舗環境の定義が重要になり始めます。</li>
+</ul>
+<p>格子を見ると、結論が頑健なところと、もろいところの両方が分かります。1回の分析では、これはできません。</p>
+</section>
+<section id="スイープ3-dtsweep-で結果と条件を一緒に動かす" class="level2">
+<h2 class="anchored" data-anchor-id="スイープ3-dtsweep-で結果と条件を一緒に動かす">スイープ3: <code>dtSweep()</code> で、結果と条件を一緒に動かす</h2>
+<p>二重閾値スイープは、2つの考え方を組み合わせて、結果の目標水準と条件の定義を、同時に動かします。ここでは、結果の閾値を3つ(6、7、8)、条件の組み合わせを8つ(<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれが6または7)にして、24のセルを作ります。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">res_dts <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dtSweep</span>(</span>
+<span id="cb10-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat           =</span> demo,</span>
+<span id="cb10-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome       =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb10-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb10-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_list_X  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>),</span>
+<span id="cb10-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range_Y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span></span>
+<span id="cb10-7">)</span>
+<span id="cb10-8"></span>
+<span id="cb10-9">res_dts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   combo_id thrY                thrX        expression     inclS      covS
+1         1    6 QUA=6, SER=6, ENV=6           QUA*SER 0.8630137 0.7118644
+2         1    7 QUA=6, SER=6, ENV=6       No solution        NA        NA
+3         1    8 QUA=6, SER=6, ENV=6       No solution        NA        NA
+4         2    6 QUA=7, SER=6, ENV=6           QUA*SER 0.9215686 0.5310734
+5         2    7 QUA=7, SER=6, ENV=6       No solution        NA        NA
+6         2    8 QUA=7, SER=6, ENV=6       No solution        NA        NA
+7         3    6 QUA=6, SER=7, ENV=6           QUA*SER 0.8932039 0.5197740
+8         3    7 QUA=6, SER=7, ENV=6       No solution        NA        NA
+9         3    8 QUA=6, SER=7, ENV=6       No solution        NA        NA
+10        4    6 QUA=7, SER=7, ENV=6           QUA*SER 0.9848485 0.3672316
+11        4    7 QUA=7, SER=7, ENV=6           QUA*SER 0.8939394 0.6555556
+12        4    8 QUA=7, SER=7, ENV=6       No solution        NA        NA
+13        5    6 QUA=6, SER=6, ENV=7           QUA*SER 0.8630137 0.7118644
+14        5    7 QUA=6, SER=6, ENV=7       No solution        NA        NA
+15        5    8 QUA=6, SER=6, ENV=7       No solution        NA        NA
+16        6    6 QUA=7, SER=6, ENV=7 QUA*SER + QUA*ENV 0.9076923 0.6666667
+17        6    7 QUA=7, SER=6, ENV=7       No solution        NA        NA
+18        6    8 QUA=7, SER=6, ENV=7       No solution        NA        NA
+19        7    6 QUA=6, SER=7, ENV=7           QUA*SER 0.8932039 0.5197740
+20        7    7 QUA=6, SER=7, ENV=7       No solution        NA        NA
+21        7    8 QUA=6, SER=7, ENV=7       No solution        NA        NA
+22        8    6 QUA=7, SER=7, ENV=7 QUA*SER + QUA*ENV 0.9259259 0.5649718
+23        8    7 QUA=7, SER=7, ENV=7           QUA*SER 0.8939394 0.6555556
+24        8    8 QUA=7, SER=7, ENV=7       No solution        NA        NA
+   n_solutions
+1            1
+2            0
+3            0
+4            1
+5            0
+6            0
+7            1
+8            0
+9            0
+10           1
+11           1
+12           0
+13           1
+14           0
+15           0
+16           1
+17           0
+18           0
+19           1
+20           0
+21           0
+22           1
+23           1
+24           0</code></pre>
+</div>
+</div>
+<p>読み方です。<code>LOY &gt;= 6</code> では、8通りの条件の定義のすべてで解があり、たいていは <code>QUA*SER</code> で、ときには <code>QUA*SER + QUA*ENV</code> です。<code>LOY &gt;= 7</code> では、解が残るのは、<code>QUA</code> と <code>SER</code> がどちらも7の、2通りだけです。<code>LOY &gt;= 8</code> では、どれにも解がありません。このデータでは、目標水準を上げることが、変化のいちばん強い要因です。</p>
+</section>
+<section id="スイープの大きさ" class="level2">
+<h2 class="anchored" data-anchor-id="スイープの大きさ">スイープの大きさ</h2>
+<p>すべてのセルが、1回分のQCA分析です。そのため、セルの数は、実行時間にも、結果の読みやすさにも関わります。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>関数</th>
+<th>分析の回数</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>otSweep()</code></td>
+<td>結果の閾値ごとに1回</td>
+<td>閾値5つ = 5回</td>
+</tr>
+<tr class="even">
+<td><code>ctSweepS()</code></td>
+<td>動かす条件の閾値ごとに1回</td>
+<td>閾値5つ = 5回</td>
+</tr>
+<tr class="odd">
+<td><code>ctSweepM()</code></td>
+<td>候補の数の積</td>
+<td>3 x 3 x 3 = 27回</td>
+</tr>
+<tr class="even">
+<td><code>dtSweep()</code></td>
+<td>結果の閾値 x 条件の格子</td>
+<td>3 x (3 x 3 x 3) = 81回</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="擁護できる範囲を選ぶ" class="level2">
+<h2 class="anchored" data-anchor-id="擁護できる範囲を選ぶ">擁護できる範囲を選ぶ</h2>
+<p>スイープは、簡単に実行できます。だからこそ、規律が必要です。たくさんの閾値を試して、都合のよいものだけを報告すれば、研究者の自由度を減らすどころか、増やしてしまいます。目安を挙げます。</p>
+<ol type="1">
+<li><strong>結果を見る前に、範囲を決める。</strong> 尺度の意味、理論、実務上の目標(たとえば「許容できる」「良い」「とても良い」)に基づいて決めます。</li>
+<li><strong>基準点を含める。</strong> 通常の分析で使う閾値は、格子の中に入れておきます。読み手が比較できるようにするためです。</li>
+<li><strong>中立の領域を避ける。</strong> 0〜10の尺度では、中点のあたりの得点は、誰にとっても、はっきり「高い」とは言えません。そのため、範囲は、たいてい、それより上から始めます。</li>
+<li><strong>読める大きさに、格子を抑える。</strong> 変数ごとに、意味のある値を少し選ぶほうが、可能な値をすべて並べるより、よいです。</li>
+<li><strong>端の事例数を確かめる。</strong> 格子の端のセルは、ごく少数の事例に支えられていることが、よくあります。</li>
+<li><strong>格子全体を報告する。</strong> ストーリーに合うセルだけでなく、安定した領域も、不安定な領域も、示します。</li>
+</ol>
+</section>
+<section id="次回" class="level2">
+<h2 class="anchored" data-anchor-id="次回">次回</h2>
+<p><a href="../../../ja/articles/thsqca-beginners-3/index.html">第3回</a>では、3種類の解(複雑解、簡潔解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。</p>
+<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/</guid>
+  <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ThSQCA 入門 第1回: はじめての閾値スイープ</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/thsqca-beginners-1/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>これは、閾値スイープ質的比較分析(QCA)のRパッケージ <strong>ThSQCA</strong> を学ぶ、入門シリーズの第1回です。QCAを事前に知っている必要はありません。この回の終わりには、閾値スイープを自分で実行して、結果を読めるようになります。</p>
+<section id="知っておくべきひとつの考え方" class="level2">
+<h2 class="anchored" data-anchor-id="知っておくべきひとつの考え方">知っておくべき、ひとつの考え方</h2>
+<p>QCAは、ある結果にとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。</p>
+<p>これを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、<strong>閾値</strong>を選びます。得点が閾値以上なら、その変数で「高い」とします。</p>
+<p>ここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。</p>
+<p>ThSQCAは、<a href="https://cran.r-project.org/package=QCA">QCA</a> パッケージの代わりではありません。閾値ごとに、QCAの <code>truthTable()</code> と <code>minimize()</code> を、毎回同じ設定で呼び出して、結果を集めます。</p>
+</section>
+<section id="ステップ1-パッケージをインストールする" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ1-パッケージをインストールする">ステップ1: パッケージをインストールする</h2>
+<p>1回だけ実行します。(すでにインストールしてあれば、省略してください。)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QCA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ThSQCA"</span>))</span></code></pre></div></div>
+</div>
+<p>そのあと、新しいRのセッションごとに、ThSQCAを読み込みます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span></code></pre></div></div>
+</div>
+</section>
+<section id="ステップ2-小さな練習用データを作る" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ2-小さな練習用データを作る">ステップ2: 小さな練習用データを作る</h2>
+<p>再現できるように、400人の顧客をシミュレーションで作ります。各顧客は、0〜10点の4つの得点をもちます。ロイヤルティ(<code>LOY</code>)と、品質(<code>QUA</code>)、サービス(<code>SER</code>)、店舗環境(<code>ENV</code>)の評価です。この模擬の世界では、品質とサービスがどちらも高いとき、または、(それより少し弱く)品質と環境がどちらも高いときに、ロイヤルティが高くなります。良い分析なら、これを見つけ出すはずです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">make_demo_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">400</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">seed =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>) {</span>
+<span id="cb3-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(seed)</span>
+<span id="cb3-3">  clip <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(x)))</span>
+<span id="cb3-4">  QUA <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-5">  SER <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-6">  ENV <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span>
+<span id="cb3-7">  core <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmax</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, SER), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pmin</span>(QUA, ENV) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb3-8">  LOY  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clip</span>(core <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>))</span>
+<span id="cb3-9">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(LOY, QUA, SER, ENV)</span>
+<span id="cb3-10">}</span>
+<span id="cb3-11"></span>
+<span id="cb3-12">demo <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">make_demo_data</span>()</span>
+<span id="cb3-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(demo)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  LOY QUA SER ENV
+1   7   7   9   3
+2   5   4   7   5
+3   4   6   4   4
+4   6   6   6   4
+5   5   5   4   7
+6   0   1   2   5</code></pre>
+</div>
+</div>
+<p>1行が、1人の顧客です。上の関数は、理解しなくても構いません。練習用データを作るためだけのものです。自分のデータでは、このような列をもつデータフレームに、ファイルを読み込むだけです。</p>
+</section>
+<section id="ステップ3-スイープを実行する" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ3-スイープを実行する">ステップ3: スイープを実行する</h2>
+<p>知りたいのは、<em>「高いロイヤルティ」の基準を上げると、答えがどう変わるか</em>、です。そこで、3つの条件の閾値は7に固定し、結果の閾値を5から8まで動かします。これを<strong>結果の閾値スイープ</strong>と呼び、関数は <code>otSweep()</code> です。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(</span>
+<span id="cb5-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat         =</span> demo,</span>
+<span id="cb5-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome     =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"LOY"</span>,</span>
+<span id="cb5-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUA"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ENV"</span>),</span>
+<span id="cb5-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>,</span>
+<span id="cb5-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX        =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">QUA =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SER =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ENV =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb5-7">)</span></code></pre></div></div>
+</div>
+<p>各行の意味は、次のとおりです。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>引数</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dat</code></td>
+<td>分析するデータフレーム</td>
+</tr>
+<tr class="even">
+<td><code>outcome</code></td>
+<td>結果の列</td>
+</tr>
+<tr class="odd">
+<td><code>conditions</code></td>
+<td>条件の列</td>
+</tr>
+<tr class="even">
+<td><code>sweep_range</code></td>
+<td>試す結果の閾値。ここでは5、6、7、8</td>
+</tr>
+<tr class="odd">
+<td><code>thrX</code></td>
+<td>各条件の固定した閾値。「高い」は7以上</td>
+</tr>
+</tbody>
+</table>
+<p>ここに書いていない設定が2つあります。既定値があるためです。組み合わせが十分と認められる最低の整合度(<code>incl.cut</code>、既定は0.8)と、組み合わせごとの最低の事例数(<code>n.cut</code>、既定は1)です。</p>
+</section>
+<section id="ステップ4-結果を読む" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ4-結果を読む">ステップ4: 結果を読む</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OTS Summary
+=========== 
+
+Analysis Parameters:
+  Outcome: LOY 
+  Conditions: QUA, SER, ENV 
+  Consistency cutoff: 0.8 
+  Frequency cutoff: 1 
+
+Results by Threshold:
+
+ thrY        expression inclS  covS n_solutions
+    5 QUA*SER + QUA*ENV 0.981 0.403           1
+    6 QUA*SER + QUA*ENV 0.926 0.565           1
+    7           QUA*SER 0.894 0.656           1
+    8       No solution    NA    NA           0</code></pre>
+</div>
+</div>
+<p>表は、結果の閾値ごとに1行です。列は、次のとおりです。</p>
+<ul>
+<li><code>thrY</code>: その行で使った結果の閾値。1行目では、「高いロイヤルティ」は <code>LOY &gt;= 5</code> を意味します。</li>
+<li><code>expression</code>: 見つかった十分な組み合わせ。<code>*</code> はAND、<code>+</code> はOR、<code>~</code> はNOTです。</li>
+<li><code>inclS</code>: 解の整合度。解がカバーする事例が、どれだけ確実に、結果の集合に入っているか。高いほどよく、1が完全です。</li>
+<li><code>covS</code>: 解の被覆度。結果をもつ事例のうち、解が説明する割合です。</li>
+<li><code>n_solutions</code>: 見つかった、等価な最小解の数(ここでは1)。</li>
+</ul>
+<p>では、<code>expression</code> の列を、上から下へ読みましょう。</p>
+<ul>
+<li><code>LOY &gt;= 5</code> と <code>LOY &gt;= 6</code> では、2つの組み合わせが十分です。<code>QUA*SER</code>(品質が高く、サービスが高い)と、<code>QUA*ENV</code>(品質が高く、店舗環境が高い)です。</li>
+<li><code>LOY &gt;= 7</code> では、<code>QUA*SER</code> だけが残ります。</li>
+<li><code>LOY &gt;= 8</code> では、結果は <strong>No solution</strong>(解なし)です。この水準では、3つの条件のどの組み合わせも、必要な整合度に届きませんでした。</li>
+</ul>
+<p>これは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。<code>LOY &gt;= 6</code> だけを分析していたら、道が2つあると報告したでしょう。<code>LOY &gt;= 7</code> だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。</p>
+<p>「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの道が存在しない、という意味ではありません。このデータとこの設定では、QCAが、整合度の条件を満たす最小解を作れなかった、という意味です。</p>
+</section>
+<section id="次回" class="level2">
+<h2 class="anchored" data-anchor-id="次回">次回</h2>
+<p>次回は、4種類のスイープ(結果、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>
+<p>パッケージの完全なチュートリアルは、<a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCAのドキュメント</a>(英語)にあります。手法そのものは、<a href="https://doi.org/10.1007/s11135-026-03092-3">Toyoda (2026), <em>Quality &amp; Quantity</em></a> で説明しています。</p>
+<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/ja/articles/thsqca-beginners-1/</guid>
+  <pubDate>Tue, 06 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/thsqca-beginners-1/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/reading-list-applied/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>基礎編では、QCA の考え方をつかむ文献を紹介しました。次に出てくる疑問は、「実際にどんな研究で使われているのか」でしょう。ここでは、マーケティングと経営学の分野で、自分の研究の手本にするために読む価値のある論文を、目的別に紹介します。</p>
+<section id="マーケティングサービスでの応用" class="level2">
+<h2 class="anchored" data-anchor-id="マーケティングサービスでの応用">1. マーケティング・サービスでの応用</h2>
+<ul>
+<li>Ordanini, A., Parasuraman, A., &amp; Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. <em>Journal of Service Research</em>, 17(2), 134-149. <a href="https://doi.org/10.1177/1094670513513337">https://doi.org/10.1177/1094670513513337</a> 高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。</li>
+<li>Frambach, R. T., Fiss, P. C., &amp; Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. <em>Journal of Business Research</em>, 69(4), 1428-1436. <a href="https://doi.org/10.1016/j.jbusres.2015.10.120">https://doi.org/10.1016/j.jbusres.2015.10.120</a> 顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。</li>
+</ul>
+</section>
+<section id="分析の進め方報告のしかた実務ガイド" class="level2">
+<h2 class="anchored" data-anchor-id="分析の進め方報告のしかた実務ガイド">2. 分析の進め方・報告のしかた(実務ガイド)</h2>
+<ul>
+<li>Greckhamer, T., Furnari, S., Fiss, P. C., &amp; Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. <em>Strategic Organization</em>, 16(4), 482-495. <a href="https://doi.org/10.1177/1476127018786487">https://doi.org/10.1177/1476127018786487</a> 戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。</li>
+<li>Pappas, I. O., &amp; Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. <em>International Journal of Information Management</em>, 58, Article 102310. <a href="https://doi.org/10.1016/j.ijinfomgt.2021.102310">https://doi.org/10.1016/j.ijinfomgt.2021.102310</a> 情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。</li>
+<li>Park, Y., Fiss, P. C., &amp; El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. <em>MIS Quarterly</em>, 44(4), 1493-1520. <a href="https://doi.org/10.25300/MISQ/2020/13879">https://doi.org/10.25300/MISQ/2020/13879</a> 複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。</li>
+</ul>
+</section>
+<section id="しきい値の選び方を扱った論文" class="level2">
+<h2 class="anchored" data-anchor-id="しきい値の選び方を扱った論文">3. しきい値の選び方を扱った論文</h2>
+<p>基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), <em>Quality &amp; Quantity</em>, <a href="https://doi.org/10.1007/s11135-026-03092-3">https://doi.org/10.1007/s11135-026-03092-3</a> もあります。</p>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>marketing</category>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/ja/articles/reading-list-applied/</guid>
+  <pubDate>Mon, 05 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/reading-list-applied/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>QCA を知るための論文と本: 最初に読む 6 点(基礎編)</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/reading-list-basics/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>前回までは、QCA が意思決定に向く理由と、基準の置き方を説明しました。ここでは、QCA の考え方をつかむために、最初に読む価値のある文献を、目的別に紹介します。</p>
+<section id="考え方をつかむ論文" class="level2">
+<h2 class="anchored" data-anchor-id="考え方をつかむ論文">1. 考え方をつかむ(論文)</h2>
+<ul>
+<li>Fiss, P. C. (2007). A set-theoretic approach to organizational configurations. <em>Academy of Management Review</em>, 32(4), 1180-1198. <a href="https://doi.org/10.5465/amr.2007.26586092">https://doi.org/10.5465/amr.2007.26586092</a> 組織を複数の要素の組み合わせとして捉え、その組み合わせと成果の関係を、集合論的に分析する意義を論じています。同じ成果に至る複数の組み合わせを考えるための、基礎となる論文です。</li>
+<li>Fiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. <em>Academy of Management Journal</em>, 54(2), 393-420. <a href="https://doi.org/10.5465/amj.2011.60263120">https://doi.org/10.5465/amj.2011.60263120</a> 組織の類型をファジィ集合で分析し、成果につながる条件の組み合わせを検討しています。成果の有無で、因果が非対称になりうることを理解するうえで重要な論文です。</li>
+<li>Woodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. <em>Journal of Business Research</em>, 66(4), 463-472. <a href="https://doi.org/10.1016/j.jbusres.2012.12.021">https://doi.org/10.1016/j.jbusres.2012.12.021</a> 重回帰分析による各変数の効果の検討に加え、条件の組み合わせと因果の非対称性に注目する分析を提案しています。同じデータを用いた重回帰分析と fsQCA の例を通じて、分析と理論構築の考え方を論じています。</li>
+<li>Misangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., &amp; Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. <em>Journal of Management</em>, 43(1), 255-282. <a href="https://doi.org/10.1177/0149206316679252">https://doi.org/10.1177/0149206316679252</a> 経営・組織研究における QCA の展開をレビューし、因果の複雑さを捉える「新しいコンフィギュレーションの視点」を整理しています。集合への所属、必要・十分関係、反実仮想分析などを、理論的な視点と結びつけています。</li>
+</ul>
+</section>
+<section id="手法を体系的に学ぶ本" class="level2">
+<h2 class="anchored" data-anchor-id="手法を体系的に学ぶ本">2. 手法を体系的に学ぶ(本)</h2>
+<ul>
+<li>Ragin, C. C. (2008). <em>Redesigning Social Inquiry: Fuzzy Sets and Beyond</em>. University of Chicago Press. 集合論的な分析と従来の量的研究を対比しながら、キャリブレーション、条件の組み合わせ、因果の複雑さを解説しています。QCA の手順だけでなく、その背後にある研究の考え方を学ぶための本です。</li>
+<li>Schneider, C. Q., &amp; Wagemann, C. (2012). <em>Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis</em>. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9781139004244">https://doi.org/10.1017/CBO9781139004244</a> 集合論の基礎から QCA の実践までを、体系的に解説した教科書です。分析上の注意点や陥りやすい問題も扱い、手順と判断の根拠をあわせて理解するのに役立ちます。</li>
+</ul>
+</section>
+<section id="しきい値の選び方を扱った論文" class="level2">
+<h2 class="anchored" data-anchor-id="しきい値の選び方を扱った論文">3. しきい値の選び方を扱った論文</h2>
+<p>基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), <em>Quality &amp; Quantity</em>, <a href="https://doi.org/10.1007/s11135-026-03092-3">https://doi.org/10.1007/s11135-026-03092-3</a> もあります。</p>
+<p>次の記事では、マーケティング・経営学で QCA を使った論文(応用編)を紹介します。</p>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/ja/articles/reading-list-basics/</guid>
+  <pubDate>Sun, 04 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/reading-list-basics/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/qca-for-marketers/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>前回は、なぜ QCA が意思決定に向くのかを説明しました。最後に残った疑問は、「高い」を分ける基準をどこに置くか、です。今回は、その問題に取り組みます。</p>
+<p>同じ会社の2人のマネージャーが、同じ顧客調査を見ています。</p>
+<p>1人目は顧客層を広げたいと考えています。ブランドを「使ってもよい」と思う人を、できるだけ増やしたいのです。2人目はファンを育てたいと考えています。「ぜひ使いたい」と心から思う顧客を、つくりたいのです。2人とも、同じ問いを立てます。「顧客をそこに連れていくには、ブランドのどんな強みを組み合わせればよいのか」。</p>
+<p>ここに、困った点があります。標準的な分析は、この問いに1つの基準でしか答えを出しません。「高い」を7点以上と決めれば、答えは1つです。8点にしていたら、別の答えになったかもしれません。両方を報告する人はいないので、ファンを育てたい人と、顧客層を広げたい人が、同じ施策をとるべきなのかどうかは、誰にも分かりません。</p>
+<section id="基準は変えてみるもの" class="level2">
+<h2 class="anchored" data-anchor-id="基準は変えてみるもの">基準は、変えてみるもの</h2>
+<p>閾値スイープ QCA(ThSQCA)は、基準を1つに決めず、変えて試します。ほかの条件をすべて同じにして、同じ分析をいくつかの基準で実行し、答えを1つの表に並べます。答えが安定しているところ、形が変わるところ、消えてしまうところが、見えるようになります。</p>
+<p>トップボックスとトップ2ボックスの集計をしたことがある方は、この問題をご存じのはずです。トップ2ボックスでは確かな結果に見えても、トップボックスでは、まったく違って見えることがあります。スイープは、この比較を、体系的に行います。</p>
+</section>
+<section id="小さな例模擬データ" class="level2">
+<h2 class="anchored" data-anchor-id="小さな例模擬データ">小さな例(模擬データ)</h2>
+<p>実際の顧客データを使わずに考え方を示すため、あるカフェブランドの顧客400人を、シミュレーションで作りました。顧客はそれぞれ、ブランドの品質、サービス、店舗環境を0〜10点で評価し、ロイヤルティも0〜10点で答えています。ここで、次のように問います。「高い」評価(7点以上)をどう組み合わせれば、顧客は、それぞれのロイヤルティの目標に届くのか。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ロイヤルティの目標</th>
+<th>顧客をそこへ導く道</th>
+<th>確からしさ</th>
+<th>目標の顧客のうち説明できる割合</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5点以上</td>
+<td>品質とサービス、または品質と店舗環境</td>
+<td>0.98</td>
+<td>40%</td>
+</tr>
+<tr class="even">
+<td>6点以上</td>
+<td>品質とサービス、または品質と店舗環境</td>
+<td>0.93</td>
+<td>57%</td>
+</tr>
+<tr class="odd">
+<td>7点以上</td>
+<td>品質とサービスのみ</td>
+<td>0.89</td>
+<td>66%</td>
+</tr>
+<tr class="even">
+<td>8点以上</td>
+<td>3つの強みのどの組み合わせでも、十分に確かではない</td>
+<td>なし</td>
+<td>なし</td>
+</tr>
+</tbody>
+</table>
+<p>基準が上がるにつれて、表を下に読んでください。</p>
+<ul>
+<li><strong>ほどほどの目標には、選択肢があります。</strong> 道は2つあるので、マネージャーは、費用の少ない方を選べます。品質とサービスを高めるか、品質と店舗を高めるか、です。</li>
+<li><strong>厳しい目標には、選択肢が少なくなります。</strong> 7点以上では、品質とサービスの道だけが残ります。店舗環境は、入口ではなくなります。</li>
+<li><strong>非常に厳しい目標は、データの説明力を超えることがあります。</strong> 8点以上では、3つの強みの、単独でも組み合わせでも、足りませんでした。これは、道が存在しない証拠ではありません。この3つのてこでは、最上位の顧客を説明できないので、ほかのてこを探すべきだ、という意味です。</li>
+</ul>
+<p>「7点以上」だけの分析では、1人目のマネージャーに、誤解を招く答えを伝えてしまいます。品質とサービスが唯一の道だと言ってしまうのですが、広い目標では、もう1つの道があるのです。</p>
+</section>
+<section id="どんな問いに役立つか" class="level2">
+<h2 class="anchored" data-anchor-id="どんな問いに役立つか">どんな問いに役立つか</h2>
+<ul>
+<li><strong>満足度、NPS、購入意向:</strong> 「満足」のレシピは、「感動」のレシピと同じでしょうか。</li>
+<li><strong>セグメントの定義:</strong> 「ヘビーユーザー」を年10回購入とするか、20回とするかで、要因は変わるでしょうか。</li>
+<li><strong>キャンペーンの目標:</strong> 顧客を「検討する」から「選ぶ」へ動かすには、何が必要でしょうか。</li>
+<li><strong>報告:</strong> 1つの基準を弁護する代わりに、範囲を見せて、答えが基準にどれだけ左右されるかを、読み手に示せます。</li>
+</ul>
+</section>
+<section id="つの正直な注意点" class="level2">
+<h2 class="anchored" data-anchor-id="つの正直な注意点">2つの正直な注意点</h2>
+<ol type="1">
+<li><strong>結果は、成果と一緒に現れる強みの組み合わせを示します。</strong> 観察データの分析に共通して、因果関係の証明にはなりません。どこを見るか、何を検証するかを決めるための地図として使ってください。</li>
+<li><strong>いちばん都合のよい答えが出る基準を、探さないでください。</strong> 結果を見る前に範囲を決めて、理由を説明し、すべてを報告します。スイープの価値は、答えが定義にどれだけ依存するかを、透明にすることにあります。</li>
+</ol>
+</section>
+<section id="自分の調査で試す" class="level2">
+<h2 class="anchored" data-anchor-id="自分の調査で試す">自分の調査で試す</h2>
+<p>ゼロからコードを書く必要はありません。</p>
+<ol type="1">
+<li><a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> が、手元のデータの列名から、最初の分析スクリプトを作ります。</li>
+<li><a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> が、その設定を、閾値スイープのスクリプトに変換します。</li>
+<li>スクリプトを R に貼り付けます。パッケージは無料です(<code>install.packages("ThSQCA")</code>)。</li>
+</ol>
+<p>同じ考え方を、もう少しゆっくり学びたい方には、初心者向けシリーズがあります。練習用データを使って、1行ずつ説明しています。手法そのものは、Toyoda (2026) の論文「Threshold-sweep QCA: threshold dependence as an analytical dimension」(<em>Quality &amp; Quantity</em>)で解説しています。パッケージは <a href="https://cran.r-project.org/package=ThSQCA">CRAN</a> にあります。</p>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <category>marketing</category>
+  <category>QCA</category>
+  <guid>https://im-research-yt.github.io/ja/articles/qca-for-marketers/</guid>
+  <pubDate>Sat, 03 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/qca-for-marketers/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/why-qca-decisions/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>マーケティング・マネージャーの問いは、「品質を上げれば、顧客は増えるか」だけではありません。多くの場合は、「何と何を組み合わせれば、目標に届くのか」です。</p>
+<p>質的比較分析(QCA)は、この問いに答えるために作られた分析です。回帰分析のような統計手法は、他の条件を一定にしたとき、1つの要因が単独でどれだけ効くかを見るのが得意です。QCA は、別の角度から、データを見ます。</p>
+<section id="意思決定にとって魅力的な理由" class="level2">
+<h2 class="anchored" data-anchor-id="意思決定にとって魅力的な理由">意思決定にとって魅力的な理由</h2>
+<section id="施策は単独ではなく組み合わせで動かす" class="level3">
+<h3 class="anchored" data-anchor-id="施策は単独ではなく組み合わせで動かす">1. 施策は、単独ではなく組み合わせで動かす</h3>
+<p>店舗の改装、接客の強化、価格の見直しは、たいてい一緒に実行されます。QCA は、「品質が高く、かつサービスが高い」のように、条件の組み合わせ(レシピ)を単位に、結果を見ます。</p>
+</section>
+<section id="成功への道は1つとは限らない" class="level3">
+<h3 class="anchored" data-anchor-id="成功への道は1つとは限らない">2. 成功への道は、1つとは限らない</h3>
+<p>同じ成果に、複数の道があることがあります(等結果性)。QCA は、その道を、すべて見つけます。経営者は、予算や強みに合わせて、どの道が自社に合うかを選べます。</p>
+</section>
+<section id="成功の理由は失敗の理由の裏返しとは限らない" class="level3">
+<h3 class="anchored" data-anchor-id="成功の理由は失敗の理由の裏返しとは限らない">3. 成功の理由は、失敗の理由の裏返しとは限らない</h3>
+<p>ロイヤルティが高い顧客を生む条件と、離反する顧客を生む条件は、別の分析が必要なことがあります(非対称性)。QCA は、高い場合と低い場合を、別々に分析します。</p>
+</section>
+<section id="事例が少なくても使える" class="level3">
+<h3 class="anchored" data-anchor-id="事例が少なくても使える">4. 事例が少なくても、使える</h3>
+<p>店舗、ブランド、キャンペーン、法人顧客のように、事例が数十から数百の単位でも、事例の中身を見ながら分析できます。統計が使いにくい規模の問題に、向いています。</p>
+</section>
+<section id="結果がもしならの形で読める" class="level3">
+<h3 class="anchored" data-anchor-id="結果がもしならの形で読める">5. 結果が「もし〜なら」の形で読める</h3>
+<p>結果は、「品質が高く、かつサービスが高い」という、短い規則として出ます。会議で説明しやすく、現場でも、何をすればよいかが伝わります。</p>
+</section>
+<section id="必須と十分を区別できる" class="level3">
+<h3 class="anchored" data-anchor-id="必須と十分を区別できる">6. 「必須」と「十分」を区別できる</h3>
+<p>「これがなければ成功しない」(必要条件)と、「これがあれば成功する」(十分条件)を、区別して扱えます。「外せない施策」と「勝ち筋」を、分けて考えられます。</p>
+</section>
+</section>
+<section id="回帰分析との違いざっくり" class="level2">
+<h2 class="anchored" data-anchor-id="回帰分析との違いざっくり">回帰分析との違い(ざっくり)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>観点</th>
+<th>回帰分析</th>
+<th>QCA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>問い</td>
+<td>他の条件を一定にしたとき、1つの要因が単独でどれだけ効くか</td>
+<td>どの組み合わせが、成果に十分か</td>
+</tr>
+<tr class="even">
+<td>見る単位</td>
+<td>1つ1つの変数</td>
+<td>条件の組み合わせ</td>
+</tr>
+<tr class="odd">
+<td>複数の道</td>
+<td>想定しにくい</td>
+<td>見つけられる</td>
+</tr>
+<tr class="even">
+<td>結果の読み方</td>
+<td>係数、有意性</td>
+<td>「AかつB」という規則</td>
+</tr>
+<tr class="odd">
+<td>得意な規模</td>
+<td>大きなサンプル</td>
+<td>数十から数百の事例</td>
+</tr>
+</tbody>
+</table>
+<p>どちらが優れているということではありません。問いによって、使い分けます。</p>
+</section>
+<section id="qca-にできないことと他の分析にも言えること" class="level2">
+<h2 class="anchored" data-anchor-id="qca-にできないことと他の分析にも言えること">QCA にできないこと(と、他の分析にも言えること)</h2>
+<ul>
+<li><strong>因果関係を、QCA だけが証明できないわけではありません。</strong> 観察データの分析は、回帰分析を含めて、因果関係を証明しきれません。X が Y に影響していると言えることと、X を動かしたときに Y が連動するかは、別の話です。多くの場合、前者を「因果関係」と呼んでいます。QCA が示す十分条件は、因果構造の候補を与えるものとして読むのが適切です。</li>
+<li><strong>理論と事例の知識が必要です。</strong> 条件の選び方や、どこから「高い」とするかは、分析する人が決めます。</li>
+</ul>
+</section>
+<section id="落とし穴は基準にある" class="level2">
+<h2 class="anchored" data-anchor-id="落とし穴は基準にある">落とし穴は、「基準」にある</h2>
+<p>最後の点が、実は重要です。QCA では、「高い」と「低い」を分ける<strong>基準(閾値)</strong>を、分析する人が決めます。ところが、意思決定の目標とは、まさにこの基準のことです。「ほどほどに満足」を目指すのか、「大好き」を目指すのか。基準を変えると、答えも変わることがあります。</p>
+<p>この問題には、閾値スイープ QCA(ThSQCA)で取り組みます。続きは、次の記事です。</p>
+<p><a href="../../../ja/articles/qca-for-marketers/index.html">続編: 「ほどほど」と「大好き」は、同じ目標でしょうか</a></p>
+</section>
+<section id="参考文献" class="level2">
+<h2 class="anchored" data-anchor-id="参考文献">参考文献</h2>
+<ul>
+<li>Ragin, C. C. (2008). <em>Redesigning Social Inquiry: Fuzzy Sets and Beyond</em>. University of Chicago Press.</li>
+<li>Fiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. <em>Academy of Management Journal</em>, 54(2), 393-420.</li>
+<li>Woodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. <em>Journal of Business Research</em>, 66(4), 463-472.</li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>marketing</category>
+  <guid>https://im-research-yt.github.io/ja/articles/why-qca-decisions/</guid>
+  <pubDate>Fri, 02 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/why-qca-decisions/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ThSQCA の紹介: Rで閾値スイープQCAを行う</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/introducing-thsqca/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>質的比較分析(QCA)では、連続的な得点を集合への所属に変える閾値を、ふつう、分析の前に1つに決めます。そのため、得られる解は、ある1つの定義への答えになります。たとえば、「利用意向が高い」を7点以上と定義したときの答えです。<strong>ThSQCA</strong> は、閾値そのものを分析の対象にする R パッケージです。同じ QCA の分析を、同じ設定のまま、閾値の範囲全体で繰り返し、十分条件の解がどう変わるかを記録します。</p>
+<section id="考え方" class="level2">
+<h2 class="anchored" data-anchor-id="考え方">考え方</h2>
+<p>閾値を変えると、どの事例が集合に入るかが変わります。すると、真理表も、適合度の指標も、ブール最小化の結果も変わることがあります。したがって、閾値 <em>t</em> と十分条件の解 <em>S</em> の関係は、1つの解というより、対応関係 <em>t</em> → <em>S(t)</em> として記述するほうが適切です。</p>
+<p>これは、頑健性の確認とは、別の問いです。頑健性の確認は、気に入った解が、別の設定でも残るかを問います。また、最良の閾値を探すことでもありません。閾値スイープQCAは、記述的な問いを立てます。十分条件の構造は、閾値の定義にわたって、どのように分布するのか。どこで持続し、現れ、消えるのか。方法論は、下に挙げる論文で展開しています。</p>
+</section>
+<section id="パッケージが行うこと" class="level2">
+<h2 class="anchored" data-anchor-id="パッケージが行うこと">パッケージが行うこと</h2>
+<p>ThSQCA は、独自の最小化アルゴリズムを実装していません。真理表の作成と最小化は、<a href="https://cran.r-project.org/package=QCA">QCA</a> パッケージに任せています。計算の中心は、通常の分析と同じです。ThSQCA が加えるのは、その周りの作業の流れです。</p>
+<ul>
+<li>整合度の基準、頻度の基準、解の種類、方向性の期待を、スイープのすべての段階で同じにします。</li>
+<li>項、解の整合度、被覆度を、共通の形式にまとめます。</li>
+<li>解がない場合や、最小解が複数ある場合も、失わずに記録します。</li>
+<li>結果は、表、構成図、軌跡の図、ヒートマップで示せます。Markdown 形式のレポートとしても書き出せます。</li>
+</ul>
+</section>
+<section id="つのスイープ関数" class="level2">
+<h2 class="anchored" data-anchor-id="つのスイープ関数">4つのスイープ関数</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>問い</th>
+<th>関数</th>
+<th>動かす閾値</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>結果の目標水準が変わると、解はどう変わるか</td>
+<td><code>otSweep()</code></td>
+<td>結果</td>
+</tr>
+<tr class="even">
+<td>1つの条件の基準が変わると、どう変わるか</td>
+<td><code>ctSweepS()</code></td>
+<td>1つの条件</td>
+</tr>
+<tr class="odd">
+<td>複数の条件の基準が一緒に変わると、どうなるか</td>
+<td><code>ctSweepM()</code></td>
+<td>複数の条件</td>
+</tr>
+<tr class="even">
+<td>結果と条件の基準が一緒に変わると、どう変わるか</td>
+<td><code>dtSweep()</code></td>
+<td>結果と条件</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="はじめてみる" class="level2">
+<h2 class="anchored" data-anchor-id="はじめてみる">はじめてみる</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ThSQCA"</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span></code></pre></div></div>
+<p>パッケージには、小さな例のデータ <code>sample_data</code> が入っています。結果 <code>Y</code> と、3つの条件 <code>X1</code>、<code>X2</code>、<code>X3</code> で、どれも0〜10点です。次は、そのまま動く、最小の結果の閾値スイープです。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(sample_data)</span>
+<span id="cb2-4"></span>
+<span id="cb2-5">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(</span>
+<span id="cb2-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat         =</span> sample_data,</span>
+<span id="cb2-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome     =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Y"</span>,</span>
+<span id="cb2-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"X1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"X2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"X3"</span>),</span>
+<span id="cb2-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb2-10">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX        =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">X1 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">X2 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">X3 =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>)</span>
+<span id="cb2-11">)</span>
+<span id="cb2-12"></span>
+<span id="cb2-13"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(res)</span></code></pre></div></div>
+<p>このスイープは、「高い結果」を <code>Y &gt;= 6</code>、<code>Y &gt;= 7</code>、<code>Y &gt;= 8</code>、<code>Y &gt;= 9</code> と定義したときに、十分条件の解がどう変わるかを調べます。各条件は、得点が7以上のとき「高い」とします。各行の意味や、結果の表の読み方を、ゆっくり、順を追って知りたい方は、<a href="../../../ja/articles/thsqca-beginners-1/index.html">入門シリーズの第1回</a>をご覧ください。</p>
+<p>実行すると、次のような表が出ます(結果の部分だけを示します)。</p>
+<pre><code> thrY                  expression inclS  covS n_solutions
+    6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1
+    7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1
+    8                 No solution    NA    NA           0
+    9                 No solution    NA    NA           0</code></pre>
+<p>1行が、1つの結果の閾値です。<code>expression</code> の列では、<code>*</code> が AND、<code>+</code> が OR、<code>~</code> が NOT を表します。<code>Y &gt;= 6</code> と <code>Y &gt;= 7</code> では、同じ3つの十分な道が現れます。<code>Y &gt;= 8</code> と <code>Y &gt;= 9</code> では、整合度の条件を満たす解がありません。閾値を1つにした分析だけでは、答えがどこで成り立たなくなるかは見えません。スイープなら、それが見えます。</p>
+<p>パッケージのビネットには、4つの関数すべてについて、実例つきの説明があります。</p>
+</section>
+<section id="使うときの注意" class="level2">
+<h2 class="anchored" data-anchor-id="使うときの注意">使うときの注意</h2>
+<p>ThSQCA は、いちばん魅力的な結果を出す閾値を探すための道具ではありません。閾値の範囲は、尺度の意味、理論、実務上の目標に基づいて、あらかじめ正当化しておく必要があります。探索した範囲は、すべて報告してください。<code>generate_report()</code> 関数は、その記録を残すために作られています。</p>
+</section>
+<section id="リンク" class="level2">
+<h2 class="anchored" data-anchor-id="リンク">リンク</h2>
+<ul>
+<li>論文: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. <a href="https://doi.org/10.1007/s11135-026-03092-3">https://doi.org/10.1007/s11135-026-03092-3</a></li>
+<li>CRAN のパッケージ: <a href="https://cran.r-project.org/package=ThSQCA">ThSQCA</a></li>
+<li>ソースコード: <a href="https://github.com/im-research-yt/ThSQCA">GitHub</a></li>
+<li>ドキュメント(英語): <a href="https://im-research-yt.github.io/ThSQCA/">im-research-yt.github.io/ThSQCA</a></li>
+<li>ブラウザのツール: <a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a>、<a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>ThSQCA</category>
+  <guid>https://im-research-yt.github.io/ja/articles/introducing-thsqca/</guid>
+  <pubDate>Thu, 01 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/introducing-thsqca/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ようこそ</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/ja/articles/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。</p>
+<p>Rのコードを生成する、ブラウザのツールを2つ公開しています。<a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> は、最初の <code>truthTable()</code> と <code>minimize()</code> のスクリプトを作ります。<a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。</p>
+<p>再現できるRのコードを載せた、技術的な記事が、このあと続きます。</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://im-research-yt.github.io/ja/articles/welcome/</guid>
+  <pubDate>Wed, 30 Sep 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/welcome/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+</channel>
+</rss>

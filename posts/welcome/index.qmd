@@ -1,6 +1,7 @@
 ---
 title: "Welcome"
 author: "Yuki Toyoda"
+image: thumbnail.png
 date: "2026-10-01"
 categories: [news]
 description: "Notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research."

@@ -1,0 +1,12 @@
+---
+sidebar: false
+title: "Contact"
+description: "How to report an error or ask a question."
+---
+
+The easiest way to reach me about this blog, the tools, or the ThSQCA package is to open an issue on GitHub:
+
+- [ThSQCA package issues](https://github.com/im-research-yt/ThSQCA/issues): bugs and questions about the R package
+- [Blog and tools issues](https://github.com/im-research-yt/im-research-yt.github.io/issues): errors in posts, and questions about the tools
+
+When you report a problem, please include what you did, what you expected, and what you saw (the text on the screen is best). Please do not send confidential data.

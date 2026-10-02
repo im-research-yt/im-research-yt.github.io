@@ -1,10 +1,185 @@
 [
   {
+    "objectID": "tools.html",
+    "href": "tools.html",
+    "title": "Tools",
+    "section": "",
+    "text": "These tools run in your browser. Nothing you enter is sent to a server."
+  },
+  {
+    "objectID": "tools.html#qca",
+    "href": "tools.html#qca",
+    "title": "Tools",
+    "section": "QCA",
+    "text": "QCA\n\nQCA Quickstart: creates a first QCA analysis script from the column names of your data.\nSweep Builder: turns that setup into a threshold-sweep script for ThSQCA."
+  },
+  {
+    "objectID": "tools.html#marketing-research-and-multivariate-analysis",
+    "href": "tools.html#marketing-research-and-multivariate-analysis",
+    "title": "Tools",
+    "section": "Marketing research and multivariate analysis",
+    "text": "Marketing research and multivariate analysis\nThe screens of these seven tools are in Japanese; English versions will be added over time. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer.\n\nPrice sensitivity (Van Westendorp PSM) (Japanese screen): Finds acceptable price ranges from four price questions.\nCluster analysis (Japanese screen): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.\nPrincipal component and factor analysis (Japanese screen): Varimax and promax rotation, matched to R’s stats functions.\nCorrespondence analysis (Japanese screen): Maps rows and columns of a cross table; matches the ca package.\nDecision tree (Japanese screen): Classification and regression trees, matched to rpart (cp = 0).\nConjoint analysis: design (Japanese screen): Builds an orthogonal set of profiles for your attributes and levels.\nConjoint analysis: estimation (Japanese screen): Part-worth utilities and importance, matched to the conjoint package."
+  },
+  {
+    "objectID": "tools.html#check-the-results-in-r",
+    "href": "tools.html#check-the-results-in-r",
+    "title": "Tools",
+    "section": "Check the results in R",
+    "text": "Check the results in R\nEvery marketing and multivariate tool has a button that creates an R script with your data and settings. Run it in RStudio to confirm the numbers. Packages needed: pricesensitivitymeter (price sensitivity), rpart (decision tree), ca (correspondence analysis), conjoint (conjoint analysis). The other tools use base R only."
+  },
+  {
+    "objectID": "software.html",
+    "href": "software.html",
+    "title": "Software",
+    "section": "",
+    "text": "ThSQCA is an R package that reruns a QCA analysis across a range of thresholds, under identical settings, and records how the sufficiency solutions change. Truth table construction and minimization are delegated to the QCA package, so the computational core is the same as in a standard analysis."
+  },
+  {
+    "objectID": "software.html#links",
+    "href": "software.html#links",
+    "title": "Software",
+    "section": "Links",
+    "text": "Links\n\nThSQCA on CRAN\nSource code on GitHub\nDocumentation\nTutorial (English)"
+  },
+  {
+    "objectID": "software.html#the-method",
+    "href": "software.html#the-method",
+    "title": "Software",
+    "section": "The method",
+    "text": "The method\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "software.html#learn-it-step-by-step",
+    "href": "software.html#learn-it-step-by-step",
+    "title": "Software",
+    "section": "Learn it step by step",
+    "text": "Learn it step by step\n\nIntroducing ThSQCA\nThSQCA for beginners, part 1"
+  },
+  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
     "title": "Welcome",
     "section": "",
     "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html",
+    "href": "posts/thsqca-beginners-3/index.html",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "",
+    "text": "In part 2 we ran all four sweeps. Two questions remain for a careful analysis. First, QCA can produce three kinds of solution (complex, parsimonious, and intermediate); which should you use? Second, what if a cell has more than one minimal solution? This post answers both with a second, smaller practice data set."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html#a-second-practice-data-set",
+    "href": "posts/thsqca-beginners-3/index.html#a-second-practice-data-set",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "A second practice data set",
+    "text": "A second practice data set\nWe simulate 60 business software accounts. Each has a renewal score (RNW) and three evaluations: trust (TRU), price (PRC), and support (SUP), all from 0 to 10. In this simulated world, renewal is high when trust is high and either price or support is high. The three evaluations are strongly correlated, which will leave some combinations of conditions unobserved. That is deliberate, because unobserved combinations are exactly what the three solution types treat differently.\n\nlibrary(ThSQCA)\nlibrary(QCA)\n\nLoading required package: admisc\n\n\n\nTo cite package QCA in publications, please use:\n  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.\n  Springer International Publishing.\n\n\n\n\nPractice data set 2\nmake_demo_data2 &lt;- function(n = 60, seed = 89, rho = 0.85) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  L   &lt;- rnorm(n)\n  mk  &lt;- function() clip(6 + 2 * (rho * L + sqrt(1 - rho^2) * rnorm(n)))\n  TRU &lt;- mk(); PRC &lt;- mk(); SUP &lt;- mk()\n  RNW &lt;- clip(pmin(TRU, pmax(PRC, SUP)) + rnorm(n, 0, 0.7))\n  data.frame(RNW, TRU, PRC, SUP)\n}\n\ndemo2 &lt;- make_demo_data2()\nhead(demo2)\n\n\n  RNW TRU PRC SUP\n1   3   3   4   4\n2   6   8   7   7\n3   9   9   9   7\n4   5   5   4   6\n5  10  10   8   9\n6   1   2   4   5"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html#unobserved-combinations-logical-remainders",
+    "href": "posts/thsqca-beginners-3/index.html#unobserved-combinations-logical-remainders",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "Unobserved combinations (“logical remainders”)",
+    "text": "Unobserved combinations (“logical remainders”)\nWith three conditions, each either high or low, there are 2 x 2 x 2 = 8 possible combinations. QCA lists them in a truth table. Let us build one by hand with the QCA package, using renewal of 5 or more as the outcome and 7 or more as “high” for each condition.\n\nbin2 &lt;- data.frame(\n  RNW = as.integer(demo2$RNW &gt;= 5),\n  TRU = as.integer(demo2$TRU &gt;= 7),\n  PRC = as.integer(demo2$PRC &gt;= 7),\n  SUP = as.integer(demo2$SUP &gt;= 7)\n)\n\ntt2 &lt;- truthTable(bin2, outcome = \"RNW\", conditions = c(\"TRU\", \"PRC\", \"SUP\"),\n                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)\ntt2\n\n\n  OUT: output value\n    n: number of cases in configuration\n incl: sufficiency inclusion score\n  PRI: proportional reduction in inconsistency\n\n    TRU PRC SUP   OUT    n   incl  PRI  \n1    0   0   0     0     30  0.433 0.433\n2    0   0   1     1     7   0.857 0.857\n4    0   1   1     1     3   1.000 1.000\n6    1   0   1     1     3   1.000 1.000\n7    1   1   0     1     4   1.000 1.000\n8    1   1   1     1     13  1.000 1.000\n\n\nLook at the row numbers on the left. Only 6 of the 8 possible combinations appear (rows 3 and 5 are missing), because the data contain no accounts with, for example, high trust alone, or high price evaluation alone. The combinations that are missing are the logical remainders. The column n is the number of accounts in each combination, incl is how consistently they renew, and OUT is 1 when the combination is consistent enough to count as sufficient.\nRemainders matter because Boolean minimization can use them to make a formula shorter, and the three solution types differ in whether, and how, they do that.\n\n\n\n\n\n\n\n\n\nSolution type\nRemainders used\ninclude\ndir.exp\n\n\n\n\nComplex\nnone\n\"\" (default)\nNULL\n\n\nParsimonious\nany remainder that shortens the formula\n\"?\"\nNULL\n\n\nIntermediate\nonly remainders that agree with your stated expectations\n\"?\"\ne.g. c(1, 1, 1)\n\n\n\nHere dir.exp = c(1, 1, 1) says: we expect high trust, high price evaluation, and high support each to favor renewal."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html#the-three-solution-types-side-by-side",
+    "href": "posts/thsqca-beginners-3/index.html#the-three-solution-types-side-by-side",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "The three solution types, side by side",
+    "text": "The three solution types, side by side\nWe run the same outcome threshold sweep (renewal of 5, 6, 7, and 8) three times, changing only the solution type.\n\nthr2  &lt;- c(TRU = 7, PRC = 7, SUP = 7)\ncond2 &lt;- c(\"TRU\", \"PRC\", \"SUP\")\n\nrun2 &lt;- function(...) {\n  otSweep(dat = demo2, outcome = \"RNW\", conditions = cond2, sweep_range = 5:8,\n          thrX = thr2, incl.cut = 0.8, n.cut = 1, ...)\n}\n\nres_cx &lt;- run2()                                     # complex\nres_ps &lt;- run2(include = \"?\")                        # parsimonious\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nres_im &lt;- run2(include = \"?\", dir.exp = c(1, 1, 1))  # intermediate\n\ndata.frame(\n  thrY         = 5:8,\n  complex      = res_cx$summary$expression,\n  parsimonious = res_ps$summary$expression,\n  intermediate = res_im$summary$expression\n)\n\n  thrY            complex   parsimonious       intermediate\n1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC\n2    6 TRU*PRC + ~PRC*SUP TRU + ~PRC*SUP TRU*PRC + ~PRC*SUP\n3    7            TRU*SUP        TRU*SUP            TRU*SUP\n4    8        No solution    No solution        No solution\n\n\nThe warning shown with the output is a note from ThSQCA: at renewal of 5, the parsimonious analysis has more than one equally short solution. We come back to this below.\nAt renewal of 7, all three agree (TRU*SUP), and at 8 none finds a solution. At 5 and 6 the parsimonious solution is shorter. For example, at renewal of 5 it reports TRU + SUP, whereas the complex solution is SUP + TRU*PRC. The term TRU alone covers the combination “high trust, but low price and support evaluations”, which does not appear in the data. The parsimonious solution is willing to assume that this unobserved combination would also be sufficient. The complex solution makes no such assumption. In this particular data set the intermediate solution happens to coincide with the complex one.\nHow to choose:\n\n\n\n\n\n\n\n\n\nSolution\nWhen it is a good choice\nStrength\nCaution\n\n\n\n\nComplex\nExploration; you want no assumptions about unobserved cases\nEvery claim rests on observed cases\nFormulas can be long\n\n\nParsimonious\nYou want to see the maximal simplification\nShortest formulas\nMay rely on implausible remainders\n\n\nIntermediate\nTheory-driven reporting\nUses only plausible remainders\nNeeds a justified dir.exp\n\n\n\nWhatever you choose, keep it the same across the whole sweep, and say which one you used."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html#when-a-cell-has-more-than-one-minimal-solution",
+    "href": "posts/thsqca-beginners-3/index.html#when-a-cell-has-more-than-one-minimal-solution",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "When a cell has more than one minimal solution",
+    "text": "When a cell has more than one minimal solution\nBoolean minimization can return several equally short solutions for the same truth table. By default ThSQCA reports the first one (M1) and records the number of solutions in n_solutions. To see all of them, use extract_mode = \"all\".\n\nres_all &lt;- run2(include = \"?\", extract_mode = \"all\")\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nsummary(res_all)\n\nOTS Summary\n=========== \n\nAnalysis Parameters:\n  Outcome: RNW \n  Conditions: TRU, PRC, SUP \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n thrY                   expression inclS  covS n_solutions\n    5 M1: TRU + SUP; M2: PRC + SUP 0.967 0.690           2\n    6           M1: TRU + ~PRC*SUP 0.963 0.788           1\n    7                  M1: TRU*SUP 0.875 0.667           1\n    8                  No solution    NA    NA           0\n\nNote: 1 threshold setting(s) had multiple solutions.\n      Use generate_report() for full details.\n\n\nAt renewal of 5, the parsimonious analysis finds two equivalent solutions, TRU + SUP and PRC + SUP. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.\nIf you prefer a compact view, use extract_mode = \"essential\". It separates the terms that are present in every solution from the rest.\n\nres_ess &lt;- run2(include = \"?\", extract_mode = \"essential\")\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nres_ess$summary[, c(\"thrY\", \"expression\", \"selective_terms\",\n                    \"unique_terms\", \"n_solutions\")]\n\n  thrY     expression selective_terms   unique_terms n_solutions\n1    5            SUP       TRU + PRC M1:TRU; M2:PRC           2\n2    6 TRU + ~PRC*SUP            &lt;NA&gt;           &lt;NA&gt;           1\n3    7        TRU*SUP            &lt;NA&gt;           &lt;NA&gt;           1\n4    8    No solution            &lt;NA&gt;           &lt;NA&gt;           0\n\n\n\n\n\nTerm type\nMeaning\nHere (renewal of 5)\n\n\n\n\nEssential\npresent in every solution\nSUP\n\n\nSelective\npresent in some solutions\nTRU and PRC\n\n\nUnique\npresent in only one solution\nTRU in M1, PRC in M2\n\n\n\nThSQCA records the alternatives, but deciding which one to prioritize is a theoretical judgment that stays with the researcher."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-3/index.html#what-comes-next",
+    "href": "posts/thsqca-beginners-3/index.html#what-comes-next",
+    "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
+    "section": "What comes next",
+    "text": "What comes next\nIn part 4, the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html",
+    "href": "posts/thsqca-beginners-1/index.html",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "",
+    "text": "This is the first part of a beginner’s series on ThSQCA, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#the-one-idea-you-need",
+    "href": "posts/thsqca-beginners-1/index.html#the-one-idea-you-need",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "The one idea you need",
+    "text": "The one idea you need\nQCA looks for combinations of conditions that are sufficient for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.\nTo do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a threshold: a customer is “high” on a variable when the score is greater than or equal to the threshold.\nHere is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.\nThSQCA does not replace the QCA package. For every threshold, it calls QCA’s truthTable() and minimize() for you, with identical settings each time, and collects the results."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#step-1-install-the-packages",
+    "href": "posts/thsqca-beginners-1/index.html#step-1-install-the-packages",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "Step 1: install the packages",
+    "text": "Step 1: install the packages\nRun this once. (If you already installed them, skip it.)\n\ninstall.packages(c(\"QCA\", \"ThSQCA\"))\n\nThen load ThSQCA in every new R session:\n\nlibrary(ThSQCA)"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#step-2-create-a-small-practice-data-set",
+    "href": "posts/thsqca-beginners-1/index.html#step-2-create-a-small-practice-data-set",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "Step 2: create a small practice data set",
+    "text": "Step 2: create a small practice data set\nTo keep things reproducible, we simulate 400 customers. Each has four scores from 0 to 10: loyalty (LOY), and evaluations of quality (QUA), service (SER), and store environment (ENV). In this simulated world, loyalty is high when quality and service are both high, or (a little less strongly) when quality and environment are both high. A good analysis should discover this.\n\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\nhead(demo)\n\n  LOY QUA SER ENV\n1   7   7   9   3\n2   5   4   7   5\n3   4   6   4   4\n4   6   6   6   4\n5   5   5   4   7\n6   0   1   2   5\n\n\nEach row is one customer. You do not have to understand the function above; it only produces the practice data. With your own data, you would simply read your file into a data frame with these kinds of columns."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#step-3-run-the-sweep",
+    "href": "posts/thsqca-beginners-1/index.html#step-3-run-the-sweep",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "Step 3: run the sweep",
+    "text": "Step 3: run the sweep\nWe want to know: how does the answer change as we raise the bar for “high loyalty”? So we keep the thresholds of the three conditions fixed at 7, and vary the outcome threshold from 5 to 8. This is called an outcome threshold sweep, and the function is otSweep().\n\nres &lt;- otSweep(\n  dat         = demo,\n  outcome     = \"LOY\",\n  conditions  = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_range = 5:8,\n  thrX        = c(QUA = 7, SER = 7, ENV = 7)\n)\n\nHere is what each line means.\n\n\n\n\n\n\n\nArgument\nMeaning\n\n\n\n\ndat\nthe data frame to analyze\n\n\noutcome\nthe outcome column\n\n\nconditions\nthe condition columns\n\n\nsweep_range\nthe outcome thresholds to try: here 5, 6, 7, and 8\n\n\nthrX\nthe fixed threshold for each condition: “high” means 7 or more\n\n\n\nTwo settings are not written here because they have defaults: the minimum consistency for a combination to count as sufficient (incl.cut, default 0.8) and the minimum number of cases per combination (n.cut, default 1)."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#step-4-read-the-result",
+    "href": "posts/thsqca-beginners-1/index.html#step-4-read-the-result",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "Step 4: read the result",
+    "text": "Step 4: read the result\n\nsummary(res)\n\nOTS Summary\n=========== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n thrY        expression inclS  covS n_solutions\n    5 QUA*SER + QUA*ENV 0.981 0.403           1\n    6 QUA*SER + QUA*ENV 0.926 0.565           1\n    7           QUA*SER 0.894 0.656           1\n    8       No solution    NA    NA           0\n\n\nThe table has one row per outcome threshold. The columns are:\n\nthrY: the outcome threshold used in that row. In the first row, “high loyalty” means LOY &gt;= 5.\nexpression: the sufficient combination found. * means AND, + means OR, and ~ means NOT.\ninclS: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.\ncovS: solution coverage. The share of the outcome cases that the solution explains.\nn_solutions: how many equivalent minimal solutions were found (1 here).\n\nNow read the expression column from top to bottom.\n\nAt LOY &gt;= 5 and LOY &gt;= 6, two combinations are sufficient: QUA*SER (high quality and high service) and QUA*ENV (high quality and a high store environment).\nAt LOY &gt;= 7, only QUA*SER remains.\nAt LOY &gt;= 8, the result is No solution. At this level, no combination of the three conditions reached the required consistency.\n\nThis is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only LOY &gt;= 6, we would have reported two paths. Had we analyzed only LOY &gt;= 7, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.\nA note on “No solution”: it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-1/index.html#what-comes-next",
+    "href": "posts/thsqca-beginners-1/index.html#what-comes-next",
+    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "section": "What comes next",
+    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+  },
+  {
+    "objectID": "posts/reading-list-applied/index.html",
+    "href": "posts/reading-list-applied/index.html",
+    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "section": "",
+    "text": "The basics list introduced the readings that explain how QCA thinks. The next question is probably “How is it actually used in research?” Here are papers from marketing and management that are worth reading as models for your own work, grouped by purpose.\nAs in the basics list, the summaries stay within what the publishers’ abstracts say."
+  },
+  {
+    "objectID": "posts/reading-list-applied/index.html#applications-in-marketing-and-services",
+    "href": "posts/reading-list-applied/index.html#applications-in-marketing-and-services",
+    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "section": "1. Applications in marketing and services",
+    "text": "1. Applications in marketing and services\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337 Studies luxury hotel services and uses QCA to examine which combinations of attributes lead to the adoption of a new service. An application that looks not only at individual attributes but at how they are combined.\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120 Combines customer orientation with other strategic orientations, strategy types, and market environments, and uses fsQCA to find the configurations that go with high firm performance. An application that considers the role of customer orientation through its combinations with other conditions."
+  },
+  {
+    "objectID": "posts/reading-list-applied/index.html#how-to-run-and-report-an-analysis-practical-guides",
+    "href": "posts/reading-list-applied/index.html#how-to-run-and-report-an-analysis-practical-guides",
+    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "section": "2. How to run and report an analysis (practical guides)",
+    "text": "2. How to run and report an analysis (practical guides)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487 Sets out practical guidelines for QCA in strategy and organization research. It covers the whole course of a study, from model building and case selection to calibration, analysis, reporting, and interpretation.\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310 A practical guide to using fsQCA in information systems and marketing research. It explains the procedure with data from earlier studies and also touches on checking predictive validity and combining fsQCA with methods such as SEM.\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879 For digital phenomena that involve several theoretical perspectives and combinations of conditions, it offers a framework that ties QCA to theory building. Through examples, it explains how to apply QCA to deductive theory testing and to inductive theory building."
+  },
+  {
+    "objectID": "posts/reading-list-applied/index.html#choosing-the-threshold",
+    "href": "posts/reading-list-applied/index.html#choosing-the-threshold",
+    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "section": "3. Choosing the threshold",
+    "text": "3. Choosing the threshold\nOn how the placement of the threshold changes the results, see also Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3."
   },
   {
     "objectID": "posts/introducing-thsqca/index.html",
@@ -56,32 +231,235 @@
     "text": "Links\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nPackage on CRAN: ThSQCA\nSource code: GitHub\nDocumentation: im-research-yt.github.io/ThSQCA\nBrowser tools: QCA Quickstart and Sweep Builder"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "ja/start.html",
+    "href": "ja/start.html",
+    "title": "はじめに",
     "section": "",
-    "text": "I am a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach business data analysis, research methodology, and marketing science in the MBA program. My research covers qualitative comparative analysis (QCA), marketing science, brand management, and statistics."
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nこのブログは、質的比較分析(QCA)、Rパッケージ ThSQCA、マーケティング調査やデータ分析のための実用的なツールを扱います。初めての方は、次の順に読むのがおすすめです。"
   },
   {
-    "objectID": "about.html#what-you-will-find-here",
-    "href": "about.html#what-you-will-find-here",
-    "title": "About",
-    "section": "What you will find here",
-    "text": "What you will find here\n\nNotes on threshold-sweep QCA and the ThSQCA R package\nReproducible R code for QCA and marketing research\nSmall browser-based tools for data analysis"
+    "objectID": "ja/start.html#qcaを初めて知る方へ",
+    "href": "ja/start.html#qcaを初めて知る方へ",
+    "title": "はじめに",
+    "section": "QCAを初めて知る方へ",
+    "text": "QCAを初めて知る方へ\n\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)"
   },
   {
-    "objectID": "about.html#links",
-    "href": "about.html#links",
-    "title": "About",
-    "section": "Links",
-    "text": "Links\n\nThSQCA on CRAN\nThSQCA on GitHub\nQCA Quickstart\nSweep Builder"
+    "objectID": "ja/start.html#rで閾値スイープを試したい方へ",
+    "href": "ja/start.html#rで閾値スイープを試したい方へ",
+    "title": "はじめに",
+    "section": "Rで閾値スイープを試したい方へ",
+    "text": "Rで閾値スイープを試したい方へ\n\nThSQCA の紹介: Rで閾値スイープQCAを行う\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認"
+  },
+  {
+    "objectID": "ja/start.html#ツールから始めたい方へ",
+    "href": "ja/start.html#ツールから始めたい方へ",
+    "title": "はじめに",
+    "section": "ツールから始めたい方へ",
+    "text": "ツールから始めたい方へ\n\nツール: QCAとマーケティング調査のための、ブラウザで動くツール\nソフトウェア: ThSQCAパッケージ"
+  },
+  {
+    "objectID": "ja/start.html#english",
+    "href": "ja/start.html#english",
+    "title": "はじめに",
+    "section": "English",
+    "text": "English\n英語の記事は、English version にあります。"
+  },
+  {
+    "objectID": "ja/index.html",
+    "href": "ja/index.html",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "",
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English"
+  },
+  {
+    "objectID": "ja/index.html#新着記事",
+    "href": "ja/index.html#新着記事",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "新着記事",
+    "text": "新着記事"
+  },
+  {
+    "objectID": "ja/articles/welcome/index.html",
+    "href": "ja/articles/welcome/index.html",
+    "title": "ようこそ",
+    "section": "",
+    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを2つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。\n再現できるRのコードを載せた、技術的な記事が、このあと続きます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html",
+    "href": "ja/articles/thsqca-beginners-3/index.html",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "",
+    "text": "第2回では、4つのスイープをすべて実行しました。丁寧な分析には、まだ2つの問いが残っています。1つ目は、QCAには3種類の解(複雑解、簡潔解、中間解)がありますが、どれを使うべきか、です。2つ目は、1つのセルに最小解が複数あるときは、どうするか、です。この回では、2つ目の、もっと小さな練習用データで、両方に答えます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html#つ目の練習用データ",
+    "href": "ja/articles/thsqca-beginners-3/index.html#つ目の練習用データ",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "2つ目の練習用データ",
+    "text": "2つ目の練習用データ\n企業向けソフトウェアのアカウントを、60件シミュレーションで作ります。各アカウントは、更新スコア(RNW)と、3つの評価をもちます。信頼(TRU)、価格(PRC)、サポート(SUP)で、どれも0〜10点です。この模擬の世界では、信頼が高く、かつ、価格かサポートのどちらかが高いときに、更新が高くなります。3つの評価は強く相関しているので、条件の組み合わせのうち、観察されないものが出てきます。これは意図的です。観察されない組み合わせこそ、3種類の解が、違う扱いをするものだからです。\n\nlibrary(ThSQCA)\nlibrary(QCA)\n\nLoading required package: admisc\n\n\n\nTo cite package QCA in publications, please use:\n  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.\n  Springer International Publishing.\n\n\n\n\n練習用データ2\nmake_demo_data2 &lt;- function(n = 60, seed = 89, rho = 0.85) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  L   &lt;- rnorm(n)\n  mk  &lt;- function() clip(6 + 2 * (rho * L + sqrt(1 - rho^2) * rnorm(n)))\n  TRU &lt;- mk(); PRC &lt;- mk(); SUP &lt;- mk()\n  RNW &lt;- clip(pmin(TRU, pmax(PRC, SUP)) + rnorm(n, 0, 0.7))\n  data.frame(RNW, TRU, PRC, SUP)\n}\n\ndemo2 &lt;- make_demo_data2()\nhead(demo2)\n\n\n  RNW TRU PRC SUP\n1   3   3   4   4\n2   6   8   7   7\n3   9   9   9   7\n4   5   5   4   6\n5  10  10   8   9\n6   1   2   4   5"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html#観察されない組み合わせ論理的残余",
+    "href": "ja/articles/thsqca-beginners-3/index.html#観察されない組み合わせ論理的残余",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "観察されない組み合わせ(「論理的残余」)",
+    "text": "観察されない組み合わせ(「論理的残余」)\n条件が3つあり、それぞれが高いか低いかなら、可能な組み合わせは 2 x 2 x 2 = 8通りです。QCAは、それらを真理表に並べます。QCAパッケージで、真理表を手で作ってみましょう。結果は更新が5以上、各条件の「高い」は7以上とします。\n\nbin2 &lt;- data.frame(\n  RNW = as.integer(demo2$RNW &gt;= 5),\n  TRU = as.integer(demo2$TRU &gt;= 7),\n  PRC = as.integer(demo2$PRC &gt;= 7),\n  SUP = as.integer(demo2$SUP &gt;= 7)\n)\n\ntt2 &lt;- truthTable(bin2, outcome = \"RNW\", conditions = c(\"TRU\", \"PRC\", \"SUP\"),\n                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)\ntt2\n\n\n  OUT: output value\n    n: number of cases in configuration\n incl: sufficiency inclusion score\n  PRI: proportional reduction in inconsistency\n\n    TRU PRC SUP   OUT    n   incl  PRI  \n1    0   0   0     0     30  0.433 0.433\n2    0   0   1     1     7   0.857 0.857\n4    0   1   1     1     3   1.000 1.000\n6    1   0   1     1     3   1.000 1.000\n7    1   1   0     1     4   1.000 1.000\n8    1   1   1     1     13  1.000 1.000\n\n\n左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、論理的残余です。列 n は、各組み合わせのアカウント数、incl は、それらがどれだけ一貫して更新しているか、OUT は、組み合わせが十分と認められるだけの整合度があるとき1になります。\n残余が重要なのは、ブール最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。\n\n\n\n\n\n\n\n\n\n解の種類\n使う残余\ninclude\ndir.exp\n\n\n\n\n複雑解\nなし\n\"\"(既定)\nNULL\n\n\n簡潔解\n式を短くする、すべての残余\n\"?\"\nNULL\n\n\n中間解\n自分が述べた期待と合う残余だけ\n\"?\"\nたとえば c(1, 1, 1)\n\n\n\nここで dir.exp = c(1, 1, 1) は、「信頼が高いこと、価格の評価が高いこと、サポートが高いことは、どれも更新に有利だと期待する」という意味です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html#種類の解を並べる",
+    "href": "ja/articles/thsqca-beginners-3/index.html#種類の解を並べる",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "3種類の解を並べる",
+    "text": "3種類の解を並べる\n同じ結果の閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。\n\nthr2  &lt;- c(TRU = 7, PRC = 7, SUP = 7)\ncond2 &lt;- c(\"TRU\", \"PRC\", \"SUP\")\n\nrun2 &lt;- function(...) {\n  otSweep(dat = demo2, outcome = \"RNW\", conditions = cond2, sweep_range = 5:8,\n          thrX = thr2, incl.cut = 0.8, n.cut = 1, ...)\n}\n\nres_cx &lt;- run2()                                     # complex\nres_ps &lt;- run2(include = \"?\")                        # parsimonious\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nres_im &lt;- run2(include = \"?\", dir.exp = c(1, 1, 1))  # intermediate\n\ndata.frame(\n  thrY         = 5:8,\n  complex      = res_cx$summary$expression,\n  parsimonious = res_ps$summary$expression,\n  intermediate = res_im$summary$expression\n)\n\n  thrY            complex   parsimonious       intermediate\n1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC\n2    6 TRU*PRC + ~PRC*SUP TRU + ~PRC*SUP TRU*PRC + ~PRC*SUP\n3    7            TRU*SUP        TRU*SUP            TRU*SUP\n4    8        No solution    No solution        No solution\n\n\n出力と一緒に表示される警告は、ThSQCAからの注意です。更新が5のとき、簡潔解の分析には、同じ長さの解が複数あります。これは、後で扱います。\n更新が7のときは、3つとも一致して(TRU*SUP)、8ではどれも解がありません。5と6では、簡潔解のほうが短くなります。たとえば、更新が5のとき、簡潔解は TRU + SUP ですが、複雑解は SUP + TRU*PRC です。TRU だけの項は、「信頼は高いが、価格とサポートの評価が低い」という組み合わせをカバーしますが、この組み合わせは、データに現れません。簡潔解は、この観察されない組み合わせも十分だろう、と仮定する立場です。複雑解は、そのような仮定を置きません。このデータでは、たまたま、中間解は複雑解と一致します。\n選び方です。\n\n\n\n\n\n\n\n\n\n解\n向いている場面\n強み\n注意\n\n\n\n\n複雑解\n探索。観察されない事例に仮定を置きたくないとき\nすべての主張が、観察された事例に基づく\n式が長くなることがある\n\n\n簡潔解\n最大限の単純化を見たいとき\n式がいちばん短い\nもっともらしくない残余に頼ることがある\n\n\n中間解\n理論に基づいて報告するとき\nもっともらしい残余だけを使う\n根拠のある dir.exp が要る\n\n\n\nどれを選んでも、スイープ全体で同じものを使い、どれを使ったかを書いてください。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html#つのセルに最小解が複数あるとき",
+    "href": "ja/articles/thsqca-beginners-3/index.html#つのセルに最小解が複数あるとき",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "1つのセルに、最小解が複数あるとき",
+    "text": "1つのセルに、最小解が複数あるとき\nブール最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(M1)を報告し、解の数を n_solutions に記録します。すべてを見るには、extract_mode = \"all\" を使います。\n\nres_all &lt;- run2(include = \"?\", extract_mode = \"all\")\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nsummary(res_all)\n\nOTS Summary\n=========== \n\nAnalysis Parameters:\n  Outcome: RNW \n  Conditions: TRU, PRC, SUP \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n thrY                   expression inclS  covS n_solutions\n    5 M1: TRU + SUP; M2: PRC + SUP 0.967 0.690           2\n    6           M1: TRU + ~PRC*SUP 0.963 0.788           1\n    7                  M1: TRU*SUP 0.875 0.667           1\n    8                  No solution    NA    NA           0\n\nNote: 1 threshold setting(s) had multiple solutions.\n      Use generate_report() for full details.\n\n\n更新が5のとき、簡潔解の分析は、等価な2つの解、TRU + SUP と PRC + SUP を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。\nコンパクトに見たいときは、extract_mode = \"essential\" を使います。すべての解に含まれる項と、それ以外を分けます。\n\nres_ess &lt;- run2(include = \"?\", extract_mode = \"essential\")\n\nWarning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).\nOnly the first solution (M1) and its fit metrics are shown. Use\ngenerate_report() for full analysis.\n\nres_ess$summary[, c(\"thrY\", \"expression\", \"selective_terms\",\n                    \"unique_terms\", \"n_solutions\")]\n\n  thrY     expression selective_terms   unique_terms n_solutions\n1    5            SUP       TRU + PRC M1:TRU; M2:PRC           2\n2    6 TRU + ~PRC*SUP            &lt;NA&gt;           &lt;NA&gt;           1\n3    7        TRU*SUP            &lt;NA&gt;           &lt;NA&gt;           1\n4    8    No solution            &lt;NA&gt;           &lt;NA&gt;           0\n\n\n\n\n\n項の種類\n意味\nここでは(更新が5)\n\n\n\n\n本質項(essential)\nすべての解に含まれる\nSUP\n\n\n選択項(selective)\n一部の解に含まれる\nTRU と PRC\n\n\n固有項(unique)\n1つの解にだけ含まれる\nM1では TRU、M2では PRC\n\n\n\nThSQCAは、代替案を記録します。しかし、どれを優先するかは、理論的な判断で、研究者に残されます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-3/index.html#次回",
+    "href": "ja/articles/thsqca-beginners-3/index.html#次回",
+    "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
+    "section": "次回",
+    "text": "次回\n最終回の第4回では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html",
+    "href": "ja/articles/thsqca-beginners-1/index.html",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "",
+    "text": "これは、閾値スイープ質的比較分析(QCA)のRパッケージ ThSQCA を学ぶ、入門シリーズの第1回です。QCAを事前に知っている必要はありません。この回の終わりには、閾値スイープを自分で実行して、結果を読めるようになります。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#知っておくべきひとつの考え方",
+    "href": "ja/articles/thsqca-beginners-1/index.html#知っておくべきひとつの考え方",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "知っておくべき、ひとつの考え方",
+    "text": "知っておくべき、ひとつの考え方\nQCAは、ある結果にとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。\nこれを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、閾値を選びます。得点が閾値以上なら、その変数で「高い」とします。\nここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。\nThSQCAは、QCA パッケージの代わりではありません。閾値ごとに、QCAの truthTable() と minimize() を、毎回同じ設定で呼び出して、結果を集めます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#ステップ1-パッケージをインストールする",
+    "href": "ja/articles/thsqca-beginners-1/index.html#ステップ1-パッケージをインストールする",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "ステップ1: パッケージをインストールする",
+    "text": "ステップ1: パッケージをインストールする\n1回だけ実行します。(すでにインストールしてあれば、省略してください。)\n\ninstall.packages(c(\"QCA\", \"ThSQCA\"))\n\nそのあと、新しいRのセッションごとに、ThSQCAを読み込みます。\n\nlibrary(ThSQCA)"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#ステップ2-小さな練習用データを作る",
+    "href": "ja/articles/thsqca-beginners-1/index.html#ステップ2-小さな練習用データを作る",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "ステップ2: 小さな練習用データを作る",
+    "text": "ステップ2: 小さな練習用データを作る\n再現できるように、400人の顧客をシミュレーションで作ります。各顧客は、0〜10点の4つの得点をもちます。ロイヤルティ(LOY)と、品質(QUA)、サービス(SER)、店舗環境(ENV)の評価です。この模擬の世界では、品質とサービスがどちらも高いとき、または、(それより少し弱く)品質と環境がどちらも高いときに、ロイヤルティが高くなります。良い分析なら、これを見つけ出すはずです。\n\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\nhead(demo)\n\n  LOY QUA SER ENV\n1   7   7   9   3\n2   5   4   7   5\n3   4   6   4   4\n4   6   6   6   4\n5   5   5   4   7\n6   0   1   2   5\n\n\n1行が、1人の顧客です。上の関数は、理解しなくても構いません。練習用データを作るためだけのものです。自分のデータでは、このような列をもつデータフレームに、ファイルを読み込むだけです。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#ステップ3-スイープを実行する",
+    "href": "ja/articles/thsqca-beginners-1/index.html#ステップ3-スイープを実行する",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "ステップ3: スイープを実行する",
+    "text": "ステップ3: スイープを実行する\n知りたいのは、「高いロイヤルティ」の基準を上げると、答えがどう変わるか、です。そこで、3つの条件の閾値は7に固定し、結果の閾値を5から8まで動かします。これを結果の閾値スイープと呼び、関数は otSweep() です。\n\nres &lt;- otSweep(\n  dat         = demo,\n  outcome     = \"LOY\",\n  conditions  = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_range = 5:8,\n  thrX        = c(QUA = 7, SER = 7, ENV = 7)\n)\n\n各行の意味は、次のとおりです。\n\n\n\n引数\n意味\n\n\n\n\ndat\n分析するデータフレーム\n\n\noutcome\n結果の列\n\n\nconditions\n条件の列\n\n\nsweep_range\n試す結果の閾値。ここでは5、6、7、8\n\n\nthrX\n各条件の固定した閾値。「高い」は7以上\n\n\n\nここに書いていない設定が2つあります。既定値があるためです。組み合わせが十分と認められる最低の整合度(incl.cut、既定は0.8)と、組み合わせごとの最低の事例数(n.cut、既定は1)です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#ステップ4-結果を読む",
+    "href": "ja/articles/thsqca-beginners-1/index.html#ステップ4-結果を読む",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "ステップ4: 結果を読む",
+    "text": "ステップ4: 結果を読む\n\nsummary(res)\n\nOTS Summary\n=========== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n thrY        expression inclS  covS n_solutions\n    5 QUA*SER + QUA*ENV 0.981 0.403           1\n    6 QUA*SER + QUA*ENV 0.926 0.565           1\n    7           QUA*SER 0.894 0.656           1\n    8       No solution    NA    NA           0\n\n\n表は、結果の閾値ごとに1行です。列は、次のとおりです。\n\nthrY: その行で使った結果の閾値。1行目では、「高いロイヤルティ」は LOY &gt;= 5 を意味します。\nexpression: 見つかった十分な組み合わせ。* はAND、+ はOR、~ はNOTです。\ninclS: 解の整合度。解がカバーする事例が、どれだけ確実に、結果の集合に入っているか。高いほどよく、1が完全です。\ncovS: 解の被覆度。結果をもつ事例のうち、解が説明する割合です。\nn_solutions: 見つかった、等価な最小解の数(ここでは1)。\n\nでは、expression の列を、上から下へ読みましょう。\n\nLOY &gt;= 5 と LOY &gt;= 6 では、2つの組み合わせが十分です。QUA*SER(品質が高く、サービスが高い)と、QUA*ENV(品質が高く、店舗環境が高い)です。\nLOY &gt;= 7 では、QUA*SER だけが残ります。\nLOY &gt;= 8 では、結果は No solution(解なし)です。この水準では、3つの条件のどの組み合わせも、必要な整合度に届きませんでした。\n\nこれは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。LOY &gt;= 6 だけを分析していたら、道が2つあると報告したでしょう。LOY &gt;= 7 だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。\n「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの道が存在しない、という意味ではありません。このデータとこの設定では、QCAが、整合度の条件を満たす最小解を作れなかった、という意味です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-1/index.html#次回",
+    "href": "ja/articles/thsqca-beginners-1/index.html#次回",
+    "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
+    "section": "次回",
+    "text": "次回\n次回は、4種類のスイープ(結果、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。\nパッケージの完全なチュートリアルは、ThSQCAのドキュメント(英語)にあります。手法そのものは、Toyoda (2026), Quality & Quantity で説明しています。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+  },
+  {
+    "objectID": "ja/articles/reading-list-applied/index.html",
+    "href": "ja/articles/reading-list-applied/index.html",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "section": "",
+    "text": "基礎編では、QCA の考え方をつかむ文献を紹介しました。次に出てくる疑問は、「実際にどんな研究で使われているのか」でしょう。ここでは、マーケティングと経営学の分野で、自分の研究の手本にするために読む価値のある論文を、目的別に紹介します。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-applied/index.html#マーケティングサービスでの応用",
+    "href": "ja/articles/reading-list-applied/index.html#マーケティングサービスでの応用",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "section": "1. マーケティング・サービスでの応用",
+    "text": "1. マーケティング・サービスでの応用\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337 高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120 顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-applied/index.html#分析の進め方報告のしかた実務ガイド",
+    "href": "ja/articles/reading-list-applied/index.html#分析の進め方報告のしかた実務ガイド",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "section": "2. 分析の進め方・報告のしかた(実務ガイド)",
+    "text": "2. 分析の進め方・報告のしかた(実務ガイド)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487 戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310 情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879 複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-applied/index.html#しきい値の選び方を扱った論文",
+    "href": "ja/articles/reading-list-applied/index.html#しきい値の選び方を扱った論文",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "section": "3. しきい値の選び方を扱った論文",
+    "text": "3. しきい値の選び方を扱った論文\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html",
+    "href": "ja/articles/introducing-thsqca/index.html",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "",
+    "text": "質的比較分析(QCA)では、連続的な得点を集合への所属に変える閾値を、ふつう、分析の前に1つに決めます。そのため、得られる解は、ある1つの定義への答えになります。たとえば、「利用意向が高い」を7点以上と定義したときの答えです。ThSQCA は、閾値そのものを分析の対象にする R パッケージです。同じ QCA の分析を、同じ設定のまま、閾値の範囲全体で繰り返し、十分条件の解がどう変わるかを記録します。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#考え方",
+    "href": "ja/articles/introducing-thsqca/index.html#考え方",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "考え方",
+    "text": "考え方\n閾値を変えると、どの事例が集合に入るかが変わります。すると、真理表も、適合度の指標も、ブール最小化の結果も変わることがあります。したがって、閾値 t と十分条件の解 S の関係は、1つの解というより、対応関係 t → S(t) として記述するほうが適切です。\nこれは、頑健性の確認とは、別の問いです。頑健性の確認は、気に入った解が、別の設定でも残るかを問います。また、最良の閾値を探すことでもありません。閾値スイープQCAは、記述的な問いを立てます。十分条件の構造は、閾値の定義にわたって、どのように分布するのか。どこで持続し、現れ、消えるのか。方法論は、下に挙げる論文で展開しています。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#パッケージが行うこと",
+    "href": "ja/articles/introducing-thsqca/index.html#パッケージが行うこと",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "パッケージが行うこと",
+    "text": "パッケージが行うこと\nThSQCA は、独自の最小化アルゴリズムを実装していません。真理表の作成と最小化は、QCA パッケージに任せています。計算の中心は、通常の分析と同じです。ThSQCA が加えるのは、その周りの作業の流れです。\n\n整合度の基準、頻度の基準、解の種類、方向性の期待を、スイープのすべての段階で同じにします。\n項、解の整合度、被覆度を、共通の形式にまとめます。\n解がない場合や、最小解が複数ある場合も、失わずに記録します。\n結果は、表、構成図、軌跡の図、ヒートマップで示せます。Markdown 形式のレポートとしても書き出せます。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#つのスイープ関数",
+    "href": "ja/articles/introducing-thsqca/index.html#つのスイープ関数",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "4つのスイープ関数",
+    "text": "4つのスイープ関数\n\n\n\n\n\n\n\n\n問い\n関数\n動かす閾値\n\n\n\n\n結果の目標水準が変わると、解はどう変わるか\notSweep()\n結果\n\n\n1つの条件の基準が変わると、どう変わるか\nctSweepS()\n1つの条件\n\n\n複数の条件の基準が一緒に変わると、どうなるか\nctSweepM()\n複数の条件\n\n\n結果と条件の基準が一緒に変わると、どう変わるか\ndtSweep()\n結果と条件"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#はじめてみる",
+    "href": "ja/articles/introducing-thsqca/index.html#はじめてみる",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "はじめてみる",
+    "text": "はじめてみる\ninstall.packages(\"ThSQCA\")\nlibrary(ThSQCA)\nパッケージには、小さな例のデータ sample_data が入っています。結果 Y と、3つの条件 X1、X2、X3 で、どれも0〜10点です。次は、そのまま動く、最小の結果の閾値スイープです。\nlibrary(ThSQCA)\n\nhead(sample_data)\n\nres &lt;- otSweep(\n  dat         = sample_data,\n  outcome     = \"Y\",\n  conditions  = c(\"X1\", \"X2\", \"X3\"),\n  sweep_range = 6:9,\n  thrX        = c(X1 = 7, X2 = 7, X3 = 7)\n)\n\nsummary(res)\nこのスイープは、「高い結果」を Y &gt;= 6、Y &gt;= 7、Y &gt;= 8、Y &gt;= 9 と定義したときに、十分条件の解がどう変わるかを調べます。各条件は、得点が7以上のとき「高い」とします。各行の意味や、結果の表の読み方を、ゆっくり、順を追って知りたい方は、入門シリーズの第1回をご覧ください。\n実行すると、次のような表が出ます(結果の部分だけを示します)。\n thrY                  expression inclS  covS n_solutions\n    6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1\n    7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1\n    8                 No solution    NA    NA           0\n    9                 No solution    NA    NA           0\n1行が、1つの結果の閾値です。expression の列では、* が AND、+ が OR、~ が NOT を表します。Y &gt;= 6 と Y &gt;= 7 では、同じ3つの十分な道が現れます。Y &gt;= 8 と Y &gt;= 9 では、整合度の条件を満たす解がありません。閾値を1つにした分析だけでは、答えがどこで成り立たなくなるかは見えません。スイープなら、それが見えます。\nパッケージのビネットには、4つの関数すべてについて、実例つきの説明があります。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#使うときの注意",
+    "href": "ja/articles/introducing-thsqca/index.html#使うときの注意",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "使うときの注意",
+    "text": "使うときの注意\nThSQCA は、いちばん魅力的な結果を出す閾値を探すための道具ではありません。閾値の範囲は、尺度の意味、理論、実務上の目標に基づいて、あらかじめ正当化しておく必要があります。探索した範囲は、すべて報告してください。generate_report() 関数は、その記録を残すために作られています。"
+  },
+  {
+    "objectID": "ja/articles/introducing-thsqca/index.html#リンク",
+    "href": "ja/articles/introducing-thsqca/index.html#リンク",
+    "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
+    "section": "リンク",
+    "text": "リンク\n\n論文: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nCRAN のパッケージ: ThSQCA\nソースコード: GitHub\nドキュメント(英語): im-research-yt.github.io/ThSQCA\nブラウザのツール: QCA Quickstart、Sweep Builder"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Yuki Toyoda’s Blog",
     "section": "",
-    "text": "Notes on the ThSQCA R package and hands-on web tools for QCA and marketing research.\nThSQCA on CRAN QCA Quickstart Sweep Builder"
+    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here 日本語の方はこちら ThSQCA on CRAN"
   },
   {
     "objectID": "index.html#latest-posts",
@@ -91,52 +469,640 @@
     "text": "Latest posts"
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html",
-    "href": "posts/thsqca-beginners-1/index.html",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "objectID": "glossary.html",
+    "href": "glossary.html",
+    "title": "Glossary",
     "section": "",
-    "text": "This is the first part of a beginner’s series on ThSQCA, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result."
+    "text": "Short definitions, in plain language. Each is a first step, not a full treatment.\n\nQCA (qualitative comparative analysis)\n\nA method that looks for combinations of conditions that go with an outcome, using set relations rather than averages.\n\nCondition and outcome\n\nA condition is a possible cause (for example, high quality). The outcome is what you want to explain (for example, loyalty).\n\nCrisp set and fuzzy set\n\nIn a crisp set, each case is in or out (0 or 1). In a fuzzy set, each case has a degree of membership between 0 and 1.\n\nCalibration\n\nTurning raw scores into set membership scores, using chosen thresholds for “fully in”, “fully out”, and the crossover point.\n\nTruth table\n\nA table with one row for each combination of conditions, showing how many cases fall in that row and how consistently they show the outcome.\n\nNecessity and sufficiency\n\nA condition is necessary if the outcome is not found without it. A condition (or combination) is sufficient if the outcome is found whenever it is present.\n\nConsistency (inclS) and coverage (covS)\n\nConsistency shows how well the cases follow a sufficiency relation. Coverage shows how much of the outcome the relation accounts for.\n\nPRI\n\nA measure that helps detect a condition combination that looks sufficient for both the outcome and its absence.\n\nConfiguration (recipe)\n\nA combination of conditions that together are linked to the outcome.\n\nEquifinality\n\nMore than one configuration can lead to the same outcome.\n\nAsymmetry\n\nThe causes of the outcome’s presence need not be the mirror image of the causes of its absence.\n\nMinimization and solution\n\nThe step that simplifies the truth table into shorter expressions. The result is called the solution.\n\nThreshold sweep\n\nRerunning the same analysis across a range of thresholds, under identical settings, and recording how the solutions change."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#the-one-idea-you-need",
-    "href": "posts/thsqca-beginners-1/index.html#the-one-idea-you-need",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
-    "section": "The one idea you need",
-    "text": "The one idea you need\nQCA looks for combinations of conditions that are sufficient for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.\nTo do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a threshold: a customer is “high” on a variable when the score is greater than or equal to the threshold.\nHere is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.\nThSQCA does not replace the QCA package. For every threshold, it calls QCA’s truthTable() and minimize() for you, with identical settings each time, and collects the results."
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am Yuki Toyoda, a professor at the Graduate School of Innovation Management, Hosei University (Tokyo). I teach MBA courses on business data analysis, research methodology, and marketing science. My research covers the methodology of qualitative comparative analysis (QCA) and its use in marketing and management."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#step-1-install-the-packages",
-    "href": "posts/thsqca-beginners-1/index.html#step-1-install-the-packages",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
-    "section": "Step 1: install the packages",
-    "text": "Step 1: install the packages\nRun this once. (If you already installed them, skip it.)\n\ninstall.packages(c(\"QCA\", \"ThSQCA\"))\n\nThen load ThSQCA in every new R session:\n\nlibrary(ThSQCA)"
+    "objectID": "about.html#what-this-blog-is-for",
+    "href": "about.html#what-this-blog-is-for",
+    "title": "About",
+    "section": "What this blog is for",
+    "text": "What this blog is for\n\nExplaining threshold-sweep QCA and the ThSQCA R package, step by step.\nSharing browser-based tools for QCA and marketing research, built for teaching.\nWriting short notes on papers, methods, and teaching, in plain language.\n\nPosts tagged R are also distributed through R-bloggers once the blog is registered there."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#step-2-create-a-small-practice-data-set",
-    "href": "posts/thsqca-beginners-1/index.html#step-2-create-a-small-practice-data-set",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
-    "section": "Step 2: create a small practice data set",
-    "text": "Step 2: create a small practice data set\nTo keep things reproducible, we simulate 400 customers. Each has four scores from 0 to 10: loyalty (LOY), and evaluations of quality (QUA), service (SER), and store environment (ENV). In this simulated world, loyalty is high when quality and service are both high, or (a little less strongly) when quality and environment are both high. A good analysis should discover this.\n\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\nhead(demo)\n\n  LOY QUA SER ENV\n1   7   7   9   3\n2   5   4   7   5\n3   4   6   4   4\n4   6   6   6   4\n5   5   5   4   7\n6   0   1   2   5\n\n\nEach row is one customer. You do not have to understand the function above; it only produces the practice data. With your own data, you would simply read your file into a data frame with these kinds of columns."
+    "objectID": "about.html#where-to-go-next",
+    "href": "about.html#where-to-go-next",
+    "title": "About",
+    "section": "Where to go next",
+    "text": "Where to go next\n\nNew here? Read Start here.\nWant the package? See Software.\nWant to cite something? See How to cite.\nSomething unclear or wrong? See Contact.\nUnfamiliar word? See the Glossary."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#step-3-run-the-sweep",
-    "href": "posts/thsqca-beginners-1/index.html#step-3-run-the-sweep",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
-    "section": "Step 3: run the sweep",
-    "text": "Step 3: run the sweep\nWe want to know: how does the answer change as we raise the bar for “high loyalty”? So we keep the thresholds of the three conditions fixed at 7, and vary the outcome threshold from 5 to 8. This is called an outcome threshold sweep, and the function is otSweep().\n\nres &lt;- otSweep(\n  dat         = demo,\n  outcome     = \"LOY\",\n  conditions  = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_range = 5:8,\n  thrX        = c(QUA = 7, SER = 7, ENV = 7)\n)\n\nHere is what each line means.\n\n\n\n\n\n\n\nArgument\nMeaning\n\n\n\n\ndat\nthe data frame to analyze\n\n\noutcome\nthe outcome column\n\n\nconditions\nthe condition columns\n\n\nsweep_range\nthe outcome thresholds to try: here 5, 6, 7, and 8\n\n\nthrX\nthe fixed threshold for each condition: “high” means 7 or more\n\n\n\nTwo settings are not written here because they have defaults: the minimum consistency for a combination to count as sufficient (incl.cut, default 0.8) and the minimum number of cases per combination (n.cut, default 1)."
+    "objectID": "about.html#a-note-on-the-tools",
+    "href": "about.html#a-note-on-the-tools",
+    "title": "About",
+    "section": "A note on the tools",
+    "text": "A note on the tools\nThe tools are developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University, for learning. They may contain calculation errors, so please verify results with other software before using them in research or business."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#step-4-read-the-result",
-    "href": "posts/thsqca-beginners-1/index.html#step-4-read-the-result",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
-    "section": "Step 4: read the result",
-    "text": "Step 4: read the result\n\nsummary(res)\n\nOTS Summary\n=========== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n thrY        expression inclS  covS n_solutions\n    5 QUA*SER + QUA*ENV 0.981 0.403           1\n    6 QUA*SER + QUA*ENV 0.926 0.565           1\n    7           QUA*SER 0.894 0.656           1\n    8       No solution    NA    NA           0\n\n\nThe table has one row per outcome threshold. The columns are:\n\nthrY: the outcome threshold used in that row. In the first row, “high loyalty” means LOY &gt;= 5.\nexpression: the sufficient combination found. * means AND, + means OR, and ~ means NOT.\ninclS: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.\ncovS: solution coverage. The share of the outcome cases that the solution explains.\nn_solutions: how many equivalent minimal solutions were found (1 here).\n\nNow read the expression column from top to bottom.\n\nAt LOY &gt;= 5 and LOY &gt;= 6, two combinations are sufficient: QUA*SER (high quality and high service) and QUA*ENV (high quality and a high store environment).\nAt LOY &gt;= 7, only QUA*SER remains.\nAt LOY &gt;= 8, the result is No solution. At this level, no combination of the three conditions reached the required consistency.\n\nThis is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only LOY &gt;= 6, we would have reported two paths. Had we analyzed only LOY &gt;= 7, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.\nA note on “No solution”: it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement."
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "The easiest way to reach me about this blog, the tools, or the ThSQCA package is to open an issue on GitHub:\n\nThSQCA package issues: bugs and questions about the R package\nBlog and tools issues: errors in posts, and questions about the tools\n\nWhen you report a problem, please include what you did, what you expected, and what you saw (the text on the screen is best). Please do not send confidential data."
   },
   {
-    "objectID": "posts/thsqca-beginners-1/index.html#what-comes-next",
-    "href": "posts/thsqca-beginners-1/index.html#what-comes-next",
-    "title": "ThSQCA for beginners, part 1: your first threshold sweep",
+    "objectID": "how-to-cite.html",
+    "href": "how-to-cite.html",
+    "title": "How to cite",
+    "section": "",
+    "text": "Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "how-to-cite.html#the-method",
+    "href": "how-to-cite.html#the-method",
+    "title": "How to cite",
+    "section": "",
+    "text": "Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "how-to-cite.html#the-r-package",
+    "href": "how-to-cite.html#the-r-package",
+    "title": "How to cite",
+    "section": "The R package",
+    "text": "The R package\nRun this in R to get the citation for the version you installed:\ncitation(\"ThSQCA\")"
+  },
+  {
+    "objectID": "how-to-cite.html#a-blog-post",
+    "href": "how-to-cite.html#a-blog-post",
+    "title": "How to cite",
+    "section": "A blog post",
+    "text": "A blog post\nUse the author, year, title, blog name, and the URL of the post, with the date you accessed it. For example:\nToyoda, Y. (year). Title of the post. Yuki Toyoda’s Blog. https://im-research-yt.github.io/posts/post-name/ (accessed day month year)."
+  },
+  {
+    "objectID": "how-to-cite.html#the-tools",
+    "href": "how-to-cite.html#the-tools",
+    "title": "How to cite",
+    "section": "The tools",
+    "text": "The tools\nThe tools are for learning, so please do not treat them as the only source for a published result. If you used a tool, cite the tool by name and URL, and say that you confirmed the numbers with R or other software. Each tool can create an R script that repeats the calculation."
+  },
+  {
+    "objectID": "ja/about.html",
+    "href": "ja/about.html",
+    "title": "紹介",
+    "section": "",
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\n豊田裕貴(Yuki Toyoda) です。法政大学経営大学院イノベーション・マネジメント研究科の教授で、MBAで、ビジネス・データ分析、リサーチ・メソドロジー、マーケティング・サイエンスなどを教えています。研究では、質的比較分析(QCA)の方法論と、そのマーケティング・経営への応用を扱っています。"
+  },
+  {
+    "objectID": "ja/about.html#このブログについて",
+    "href": "ja/about.html#このブログについて",
+    "title": "紹介",
+    "section": "このブログについて",
+    "text": "このブログについて\n\n閾値スイープQCA と Rパッケージ ThSQCA を、順を追って説明します。\n教育用に作った、QCAとマーケティング調査のツールを公開します。\n論文や手法についての短いノートを、やさしい言葉で書きます。"
+  },
+  {
+    "objectID": "ja/about.html#ツールについて",
+    "href": "ja/about.html#ツールについて",
+    "title": "紹介",
+    "section": "ツールについて",
+    "text": "ツールについて\nツールは、法政大学経営大学院イノベーション・マネジメント研究科 豊田裕貴研究室で、学習用に開発しています。計算に誤りが含まれる可能性があるので、研究やビジネスに使う前に、別のソフトで結果を確認してください。"
+  },
+  {
+    "objectID": "ja/about.html#連絡先",
+    "href": "ja/about.html#連絡先",
+    "title": "紹介",
+    "section": "連絡先",
+    "text": "連絡先\n誤りの報告やご質問は、GitHub の Issues でお願いします。(ThSQCA、ブログとツール)機密データは送らないでください。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html",
+    "href": "ja/articles/qca-for-marketers/index.html",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "",
+    "text": "前回は、なぜ QCA が意思決定に向くのかを説明しました。最後に残った疑問は、「高い」を分ける基準をどこに置くか、です。今回は、その問題に取り組みます。\n同じ会社の2人のマネージャーが、同じ顧客調査を見ています。\n1人目は顧客層を広げたいと考えています。ブランドを「使ってもよい」と思う人を、できるだけ増やしたいのです。2人目はファンを育てたいと考えています。「ぜひ使いたい」と心から思う顧客を、つくりたいのです。2人とも、同じ問いを立てます。「顧客をそこに連れていくには、ブランドのどんな強みを組み合わせればよいのか」。\nここに、困った点があります。標準的な分析は、この問いに1つの基準でしか答えを出しません。「高い」を7点以上と決めれば、答えは1つです。8点にしていたら、別の答えになったかもしれません。両方を報告する人はいないので、ファンを育てたい人と、顧客層を広げたい人が、同じ施策をとるべきなのかどうかは、誰にも分かりません。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html#基準は変えてみるもの",
+    "href": "ja/articles/qca-for-marketers/index.html#基準は変えてみるもの",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "基準は、変えてみるもの",
+    "text": "基準は、変えてみるもの\n閾値スイープ QCA(ThSQCA)は、基準を1つに決めず、変えて試します。ほかの条件をすべて同じにして、同じ分析をいくつかの基準で実行し、答えを1つの表に並べます。答えが安定しているところ、形が変わるところ、消えてしまうところが、見えるようになります。\nトップボックスとトップ2ボックスの集計をしたことがある方は、この問題をご存じのはずです。トップ2ボックスでは確かな結果に見えても、トップボックスでは、まったく違って見えることがあります。スイープは、この比較を、体系的に行います。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html#小さな例模擬データ",
+    "href": "ja/articles/qca-for-marketers/index.html#小さな例模擬データ",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "小さな例(模擬データ)",
+    "text": "小さな例(模擬データ)\n実際の顧客データを使わずに考え方を示すため、あるカフェブランドの顧客400人を、シミュレーションで作りました。顧客はそれぞれ、ブランドの品質、サービス、店舗環境を0〜10点で評価し、ロイヤルティも0〜10点で答えています。ここで、次のように問います。「高い」評価(7点以上)をどう組み合わせれば、顧客は、それぞれのロイヤルティの目標に届くのか。\n\n\n\n\n\n\n\n\n\nロイヤルティの目標\n顧客をそこへ導く道\n確からしさ\n目標の顧客のうち説明できる割合\n\n\n\n\n5点以上\n品質とサービス、または品質と店舗環境\n0.98\n40%\n\n\n6点以上\n品質とサービス、または品質と店舗環境\n0.93\n57%\n\n\n7点以上\n品質とサービスのみ\n0.89\n66%\n\n\n8点以上\n3つの強みのどの組み合わせでも、十分に確かではない\nなし\nなし\n\n\n\n基準が上がるにつれて、表を下に読んでください。\n\nほどほどの目標には、選択肢があります。 道は2つあるので、マネージャーは、費用の少ない方を選べます。品質とサービスを高めるか、品質と店舗を高めるか、です。\n厳しい目標には、選択肢が少なくなります。 7点以上では、品質とサービスの道だけが残ります。店舗環境は、入口ではなくなります。\n非常に厳しい目標は、データの説明力を超えることがあります。 8点以上では、3つの強みの、単独でも組み合わせでも、足りませんでした。これは、道が存在しない証拠ではありません。この3つのてこでは、最上位の顧客を説明できないので、ほかのてこを探すべきだ、という意味です。\n\n「7点以上」だけの分析では、1人目のマネージャーに、誤解を招く答えを伝えてしまいます。品質とサービスが唯一の道だと言ってしまうのですが、広い目標では、もう1つの道があるのです。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html#どんな問いに役立つか",
+    "href": "ja/articles/qca-for-marketers/index.html#どんな問いに役立つか",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "どんな問いに役立つか",
+    "text": "どんな問いに役立つか\n\n満足度、NPS、購入意向: 「満足」のレシピは、「感動」のレシピと同じでしょうか。\nセグメントの定義: 「ヘビーユーザー」を年10回購入とするか、20回とするかで、要因は変わるでしょうか。\nキャンペーンの目標: 顧客を「検討する」から「選ぶ」へ動かすには、何が必要でしょうか。\n報告: 1つの基準を弁護する代わりに、範囲を見せて、答えが基準にどれだけ左右されるかを、読み手に示せます。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html#つの正直な注意点",
+    "href": "ja/articles/qca-for-marketers/index.html#つの正直な注意点",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "2つの正直な注意点",
+    "text": "2つの正直な注意点\n\n結果は、成果と一緒に現れる強みの組み合わせを示します。 観察データの分析に共通して、因果関係の証明にはなりません。どこを見るか、何を検証するかを決めるための地図として使ってください。\nいちばん都合のよい答えが出る基準を、探さないでください。 結果を見る前に範囲を決めて、理由を説明し、すべてを報告します。スイープの価値は、答えが定義にどれだけ依存するかを、透明にすることにあります。"
+  },
+  {
+    "objectID": "ja/articles/qca-for-marketers/index.html#自分の調査で試す",
+    "href": "ja/articles/qca-for-marketers/index.html#自分の調査で試す",
+    "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
+    "section": "自分の調査で試す",
+    "text": "自分の調査で試す\nゼロからコードを書く必要はありません。\n\nQCA Quickstart が、手元のデータの列名から、最初の分析スクリプトを作ります。\nSweep Builder が、その設定を、閾値スイープのスクリプトに変換します。\nスクリプトを R に貼り付けます。パッケージは無料です(install.packages(\"ThSQCA\"))。\n\n同じ考え方を、もう少しゆっくり学びたい方には、初心者向けシリーズがあります。練習用データを使って、1行ずつ説明しています。手法そのものは、Toyoda (2026) の論文「Threshold-sweep QCA: threshold dependence as an analytical dimension」(Quality & Quantity)で解説しています。パッケージは CRAN にあります。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-basics/index.html",
+    "href": "ja/articles/reading-list-basics/index.html",
+    "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
+    "section": "",
+    "text": "前回までは、QCA が意思決定に向く理由と、基準の置き方を説明しました。ここでは、QCA の考え方をつかむために、最初に読む価値のある文献を、目的別に紹介します。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-basics/index.html#考え方をつかむ論文",
+    "href": "ja/articles/reading-list-basics/index.html#考え方をつかむ論文",
+    "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
+    "section": "1. 考え方をつかむ(論文)",
+    "text": "1. 考え方をつかむ(論文)\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092 組織を複数の要素の組み合わせとして捉え、その組み合わせと成果の関係を、集合論的に分析する意義を論じています。同じ成果に至る複数の組み合わせを考えるための、基礎となる論文です。\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120 組織の類型をファジィ集合で分析し、成果につながる条件の組み合わせを検討しています。成果の有無で、因果が非対称になりうることを理解するうえで重要な論文です。\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021 重回帰分析による各変数の効果の検討に加え、条件の組み合わせと因果の非対称性に注目する分析を提案しています。同じデータを用いた重回帰分析と fsQCA の例を通じて、分析と理論構築の考え方を論じています。\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252 経営・組織研究における QCA の展開をレビューし、因果の複雑さを捉える「新しいコンフィギュレーションの視点」を整理しています。集合への所属、必要・十分関係、反実仮想分析などを、理論的な視点と結びつけています。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-basics/index.html#手法を体系的に学ぶ本",
+    "href": "ja/articles/reading-list-basics/index.html#手法を体系的に学ぶ本",
+    "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
+    "section": "2. 手法を体系的に学ぶ(本)",
+    "text": "2. 手法を体系的に学ぶ(本)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press. 集合論的な分析と従来の量的研究を対比しながら、キャリブレーション、条件の組み合わせ、因果の複雑さを解説しています。QCA の手順だけでなく、その背後にある研究の考え方を学ぶための本です。\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244 集合論の基礎から QCA の実践までを、体系的に解説した教科書です。分析上の注意点や陥りやすい問題も扱い、手順と判断の根拠をあわせて理解するのに役立ちます。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-basics/index.html#しきい値の選び方を扱った論文",
+    "href": "ja/articles/reading-list-basics/index.html#しきい値の選び方を扱った論文",
+    "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
+    "section": "3. しきい値の選び方を扱った論文",
+    "text": "3. しきい値の選び方を扱った論文\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。\n次の記事では、マーケティング・経営学で QCA を使った論文(応用編)を紹介します。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html",
+    "href": "ja/articles/thsqca-beginners-2/index.html",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "",
+    "text": "第1回では、結果の閾値スイープを実行して、結果を読みました。ThSQCAには、スイープの関数が全部で4つあります。この回では、同じ練習用データで4つすべてを実行し、最後に、閾値の範囲の選び方についての、実践的な助言を述べます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#つのスイープの一覧",
+    "href": "ja/articles/thsqca-beginners-2/index.html#つのスイープの一覧",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "4つのスイープの一覧",
+    "text": "4つのスイープの一覧\n\n\n\n\n\n\n\n\n\n問い\n関数\n動かすもの\n固定するもの\n\n\n\n\n結果の目標水準が上がると、解はどう変わるか\notSweep()\n結果の閾値\nすべての条件の閾値\n\n\n1つの条件の「高い」の定義に、どれだけ敏感か\nctSweepS()\n1つの条件の閾値\n結果と、ほかの条件\n\n\n複数の条件の定義が、一緒に変わったらどうなるか\nctSweepM()\n複数の条件の閾値(格子状)\n結果の閾値\n\n\n目標水準と、条件の定義の両方が変わったらどうなるか\ndtSweep()\n結果と条件\nなし"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#準備-第1回と同じ練習用データ",
+    "href": "ja/articles/thsqca-beginners-2/index.html#準備-第1回と同じ練習用データ",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "準備: 第1回と同じ練習用データ",
+    "text": "準備: 第1回と同じ練習用データ\n\nlibrary(ThSQCA)\n\n\n\n練習用データ(第1回と同じ)\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\n\n\nデータの背景を思い出してください。品質(QUA)とサービス(SER)がどちらも高いとき、または、それより少し弱く、品質と店舗環境(ENV)がどちらも高いときに、ロイヤルティ(LOY)が高くなります。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#スイープ1-ctsweeps-で1つの条件を動かす",
+    "href": "ja/articles/thsqca-beginners-2/index.html#スイープ1-ctsweeps-で1つの条件を動かす",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "スイープ1: ctSweepS() で、1つの条件を動かす",
+    "text": "スイープ1: ctSweepS() で、1つの条件を動かす\n「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。結果を LOY &gt;= 7 に固定し、ほかの条件を7に固定して、SER の閾値を5から9まで動かします。\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\n新しい引数は、sweep_var(閾値を動かす条件)、thrY(固定する結果の閾値)、thrX_default(ほかのすべての条件の、固定する閾値)です。\n表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は QUA*SER です。9では、解に3つ目の要素が加わって QUA*SER*~ENV になり、被覆度は、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)\n\n[1] 16\n\n\nその水準で、両方の条件を満たす顧客は、400人のうち16人だけです。そこでの結果は、ごく少数の事例に支えられています。これは役に立つ習慣です。解が格子の端にしか現れないときは、その背後にある事例の数を確かめてください。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#スイープ2-ctsweepm-で複数の条件を動かす",
+    "href": "ja/articles/thsqca-beginners-2/index.html#スイープ2-ctsweepm-で複数の条件を動かす",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "スイープ2: ctSweepM() で、複数の条件を動かす",
+    "text": "スイープ2: ctSweepM() で、複数の条件を動かす\n次に、3つの条件の閾値を、一度に動かします。QUA、SER、ENV のそれぞれを、6、7、8で試します。3 x 3 x 3 = 27通りの組み合わせです。結果は LOY &gt;= 7 のままです。\n\nres_mcts &lt;- ctSweepM(\n  dat        = demo,\n  outcome    = \"LOY\",\n  conditions = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_list = list(QUA = 6:8, SER = 6:8, ENV = 6:8),\n  thrY       = 7\n)\n\n出力は27行になります。読みやすくするために、解が出た組み合わせだけを表示します。\n\ntab &lt;- res_mcts$summary\ntab[tab$n_solutions &gt; 0, ]\n\n   combo_id           threshold                  expression     inclS      covS\n5         5 QUA=7, SER=7, ENV=6                     QUA*SER 0.8939394 0.6555556\n6         6 QUA=8, SER=7, ENV=6                     QUA*SER 0.9189189 0.3777778\n8         8 QUA=7, SER=8, ENV=6                     QUA*SER 0.9090909 0.3333333\n9         9 QUA=8, SER=8, ENV=6                     QUA*SER 0.9047619 0.2111111\n12       12 QUA=8, SER=6, ENV=7                QUA*SER*~ENV 0.8000000 0.3111111\n14       14 QUA=7, SER=7, ENV=7                     QUA*SER 0.8939394 0.6555556\n15       15 QUA=8, SER=7, ENV=7                QUA*SER*~ENV 1.0000000 0.3000000\n17       17 QUA=7, SER=8, ENV=7                     QUA*SER 0.9090909 0.3333333\n18       18 QUA=8, SER=8, ENV=7                QUA*SER*~ENV 1.0000000 0.1888889\n21       21 QUA=8, SER=6, ENV=8                     QUA*ENV 0.8888889 0.1777778\n23       23 QUA=7, SER=7, ENV=8                     QUA*SER 0.8939394 0.6555556\n24       24 QUA=8, SER=7, ENV=8           QUA*SER + QUA*ENV 0.9200000 0.5111111\n26       26 QUA=7, SER=8, ENV=8                     QUA*SER 0.9090909 0.3333333\n27       27 QUA=8, SER=8, ENV=8 QUA*SER*~ENV + QUA*~SER*ENV 0.9393939 0.3444444\n   n_solutions\n5            1\n6            1\n8            1\n9            1\n12           1\n14           1\n15           1\n17           1\n18           1\n21           1\n23           1\n24           1\n26           1\n27           1\n\n\n注目したいパターンは、次のとおりです。\n\n27通りのうち、解があるのは14通りです。「品質が高い」を6と定義した組み合わせでは、解がまったくありません。\nQUA が7で、SER が7または8のとき、ENV の閾値がどれであっても、解は QUA*SER です。これが安定した領域です。\nQUA が8のとき、解は ENV(と SER)に左右されます。ENV が6なら、(SER が7または8のとき)QUA*SER です。ENV が7なら、QUA*SER*~ENV です。ENV が8なら、QUA*ENV だけのものから、QUA*SER + QUA*ENV のような2つの道をもつ解まで、さまざまです。「品質が高い」を厳しく定義すると、店舗環境の定義が重要になり始めます。\n\n格子を見ると、結論が頑健なところと、もろいところの両方が分かります。1回の分析では、これはできません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#スイープ3-dtsweep-で結果と条件を一緒に動かす",
+    "href": "ja/articles/thsqca-beginners-2/index.html#スイープ3-dtsweep-で結果と条件を一緒に動かす",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "スイープ3: dtSweep() で、結果と条件を一緒に動かす",
+    "text": "スイープ3: dtSweep() で、結果と条件を一緒に動かす\n二重閾値スイープは、2つの考え方を組み合わせて、結果の目標水準と条件の定義を、同時に動かします。ここでは、結果の閾値を3つ(6、7、8)、条件の組み合わせを8つ(QUA、SER、ENV のそれぞれが6または7)にして、24のセルを作ります。\n\nres_dts &lt;- dtSweep(\n  dat           = demo,\n  outcome       = \"LOY\",\n  conditions    = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_list_X  = list(QUA = 6:7, SER = 6:7, ENV = 6:7),\n  sweep_range_Y = 6:8\n)\n\nres_dts$summary\n\n   combo_id thrY                thrX        expression     inclS      covS\n1         1    6 QUA=6, SER=6, ENV=6           QUA*SER 0.8630137 0.7118644\n2         1    7 QUA=6, SER=6, ENV=6       No solution        NA        NA\n3         1    8 QUA=6, SER=6, ENV=6       No solution        NA        NA\n4         2    6 QUA=7, SER=6, ENV=6           QUA*SER 0.9215686 0.5310734\n5         2    7 QUA=7, SER=6, ENV=6       No solution        NA        NA\n6         2    8 QUA=7, SER=6, ENV=6       No solution        NA        NA\n7         3    6 QUA=6, SER=7, ENV=6           QUA*SER 0.8932039 0.5197740\n8         3    7 QUA=6, SER=7, ENV=6       No solution        NA        NA\n9         3    8 QUA=6, SER=7, ENV=6       No solution        NA        NA\n10        4    6 QUA=7, SER=7, ENV=6           QUA*SER 0.9848485 0.3672316\n11        4    7 QUA=7, SER=7, ENV=6           QUA*SER 0.8939394 0.6555556\n12        4    8 QUA=7, SER=7, ENV=6       No solution        NA        NA\n13        5    6 QUA=6, SER=6, ENV=7           QUA*SER 0.8630137 0.7118644\n14        5    7 QUA=6, SER=6, ENV=7       No solution        NA        NA\n15        5    8 QUA=6, SER=6, ENV=7       No solution        NA        NA\n16        6    6 QUA=7, SER=6, ENV=7 QUA*SER + QUA*ENV 0.9076923 0.6666667\n17        6    7 QUA=7, SER=6, ENV=7       No solution        NA        NA\n18        6    8 QUA=7, SER=6, ENV=7       No solution        NA        NA\n19        7    6 QUA=6, SER=7, ENV=7           QUA*SER 0.8932039 0.5197740\n20        7    7 QUA=6, SER=7, ENV=7       No solution        NA        NA\n21        7    8 QUA=6, SER=7, ENV=7       No solution        NA        NA\n22        8    6 QUA=7, SER=7, ENV=7 QUA*SER + QUA*ENV 0.9259259 0.5649718\n23        8    7 QUA=7, SER=7, ENV=7           QUA*SER 0.8939394 0.6555556\n24        8    8 QUA=7, SER=7, ENV=7       No solution        NA        NA\n   n_solutions\n1            1\n2            0\n3            0\n4            1\n5            0\n6            0\n7            1\n8            0\n9            0\n10           1\n11           1\n12           0\n13           1\n14           0\n15           0\n16           1\n17           0\n18           0\n19           1\n20           0\n21           0\n22           1\n23           1\n24           0\n\n\n読み方です。LOY &gt;= 6 では、8通りの条件の定義のすべてで解があり、たいていは QUA*SER で、ときには QUA*SER + QUA*ENV です。LOY &gt;= 7 では、解が残るのは、QUA と SER がどちらも7の、2通りだけです。LOY &gt;= 8 では、どれにも解がありません。このデータでは、目標水準を上げることが、変化のいちばん強い要因です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#スイープの大きさ",
+    "href": "ja/articles/thsqca-beginners-2/index.html#スイープの大きさ",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "スイープの大きさ",
+    "text": "スイープの大きさ\nすべてのセルが、1回分のQCA分析です。そのため、セルの数は、実行時間にも、結果の読みやすさにも関わります。\n\n\n\n関数\n分析の回数\n例\n\n\n\n\notSweep()\n結果の閾値ごとに1回\n閾値5つ = 5回\n\n\nctSweepS()\n動かす条件の閾値ごとに1回\n閾値5つ = 5回\n\n\nctSweepM()\n候補の数の積\n3 x 3 x 3 = 27回\n\n\ndtSweep()\n結果の閾値 x 条件の格子\n3 x (3 x 3 x 3) = 81回"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#擁護できる範囲を選ぶ",
+    "href": "ja/articles/thsqca-beginners-2/index.html#擁護できる範囲を選ぶ",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "擁護できる範囲を選ぶ",
+    "text": "擁護できる範囲を選ぶ\nスイープは、簡単に実行できます。だからこそ、規律が必要です。たくさんの閾値を試して、都合のよいものだけを報告すれば、研究者の自由度を減らすどころか、増やしてしまいます。目安を挙げます。\n\n結果を見る前に、範囲を決める。 尺度の意味、理論、実務上の目標(たとえば「許容できる」「良い」「とても良い」)に基づいて決めます。\n基準点を含める。 通常の分析で使う閾値は、格子の中に入れておきます。読み手が比較できるようにするためです。\n中立の領域を避ける。 0〜10の尺度では、中点のあたりの得点は、誰にとっても、はっきり「高い」とは言えません。そのため、範囲は、たいてい、それより上から始めます。\n読める大きさに、格子を抑える。 変数ごとに、意味のある値を少し選ぶほうが、可能な値をすべて並べるより、よいです。\n端の事例数を確かめる。 格子の端のセルは、ごく少数の事例に支えられていることが、よくあります。\n格子全体を報告する。 ストーリーに合うセルだけでなく、安定した領域も、不安定な領域も、示します。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-2/index.html#次回",
+    "href": "ja/articles/thsqca-beginners-2/index.html#次回",
+    "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
+    "section": "次回",
+    "text": "次回\n第3回では、3種類の解(複雑解、簡潔解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html",
+    "href": "ja/articles/thsqca-beginners-4/index.html",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "",
+    "text": "最初の3回では、スイープを実行して、読み方を学びました。最終回では、スイープを、報告でき、擁護できる形にします。何を探索したかの記録、構成図、そして、数値がQCAパッケージと一致することの確認です。\nlibrary(ThSQCA)\nlibrary(QCA)\n\nLoading required package: admisc\n\n\n\nTo cite package QCA in publications, please use:\n  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.\n  Springer International Publishing.\n練習用データ(第1回と同じ)\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\n第1回の結果の閾値スイープを、再び使います。今回は、レポートに必要な、完全な詳細を求めます。\nres_ots &lt;- otSweep(\n  dat            = demo,\n  outcome        = \"LOY\",\n  conditions     = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_range    = 5:8,\n  thrX           = c(QUA = 7, SER = 7, ENV = 7),\n  incl.cut       = 0.8,\n  n.cut          = 1,\n  return_details = TRUE\n)"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#スイープ全体を記録するレポート",
+    "href": "ja/articles/thsqca-beginners-4/index.html#スイープ全体を記録するレポート",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "スイープ全体を記録するレポート",
+    "text": "スイープ全体を記録するレポート\nスイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。generate_report() は、それをMarkdownファイルに書き出します。形式は2つあります。\n\n\"simple\" は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。\n\"full\" は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\n書き出されたファイルの、最初の数行です。自分のコンピュータでは、\"ots_report_simple.md\" のような、きちんとした名前を付けると、作業フォルダにファイルができます。\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-02 23:26\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\n知っておくと便利なオプションがあります。\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#構成図",
+    "href": "ja/articles/thsqca-beginners-4/index.html#構成図",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "構成図",
+    "text": "構成図\nQCAの論文では、解を図で示すことがよくあります。道ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、「関係ない」は空白にします。道のリストから、config_chart_from_paths() で描けます。\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\n円の記号を印刷できない雑誌などのために、普通の文字がよいなら、ASCII版を使います。\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#qcaパッケージでセルを確認する",
+    "href": "ja/articles/thsqca-beginners-4/index.html#qcaパッケージでセルを確認する",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "QCAパッケージで、セルを確認する",
+    "text": "QCAパッケージで、セルを確認する\nThSQCAは、新しい結果を作り出すわけではありません。どのセルも、普通のQCA分析なので、どのセルでも、手で再現できます。これは、道具への信頼を築く、よい方法で、査読者に聞かれたときの答えにもなります。ここでは、結果の閾値が7のセルを再現します。\n\nbin &lt;- function(x, t) as.integer(x &gt;= t)\n\nd7 &lt;- data.frame(\n  LOY = bin(demo$LOY, 7), QUA = bin(demo$QUA, 7),\n  SER = bin(demo$SER, 7), ENV = bin(demo$ENV, 7)\n)\n\ntt  &lt;- truthTable(d7, outcome = \"LOY\", conditions = c(\"QUA\", \"SER\", \"ENV\"),\n                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)\nsol &lt;- minimize(tt)\nsol\n\n\nM1: QUA*SER -&gt; LOY\n\n\nminimize() が出力した解は、第1回のスイープ表の thrY = 7 の行(QUA*SER)と一致します。どちらも、データを同じ方法で二値化し(得点が7以上なら、集合に入る)、どちらも、同じQCAの関数が最小化を行ったからです。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#ソフトウェアのバージョンを記録する",
+    "href": "ja/articles/thsqca-beginners-4/index.html#ソフトウェアのバージョンを記録する",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "ソフトウェアのバージョンを記録する",
+    "text": "ソフトウェアのバージョンを記録する\n結果は、Rやパッケージのバージョンに左右されることがあります。表示して、レポートと一緒に保管してください。\n\nc(R      = R.version.string,\n  QCA    = as.character(packageVersion(\"QCA\")),\n  ThSQCA = as.character(packageVersion(\"ThSQCA\")))"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#スイープを報告するための短いチェックリスト",
+    "href": "ja/articles/thsqca-beginners-4/index.html#スイープを報告するための短いチェックリスト",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "スイープを報告するための、短いチェックリスト",
+    "text": "スイープを報告するための、短いチェックリスト\nスイープは、探索する自由を与えるので、透明であることも求めます。報告する前に、次の問いのすべてに、「はい」と答えられるか、確かめてください。\n\n閾値の範囲と、値の間隔を、結果を見る前に決めたか。\n固定したすべての設定(整合度の基準、頻度の基準、解の種類、方向性の期待)を書いたか。\n解がないセルも含めて、格子のすべてのセルを報告したか。\n格子の端のセルの背後に、事例が何件あるかを確かめたか。\nあるセルに最小解が複数あったなら、そのことを書いたか。\nスイープを、最良の閾値を探す作業として示すことを、避けたか。\nR、QCA、ThSQCAのバージョンを記録したか。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-beginners-4/index.html#ここから先",
+    "href": "ja/articles/thsqca-beginners-4/index.html#ここから先",
+    "title": "ThSQCA 入門 第4回: 結果の報告と確認",
+    "section": "ここから先",
+    "text": "ここから先\nこれで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。\n\nThSQCAのドキュメントとチュートリアル(英語)\nCRANのThSQCA\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nブラウザのツール: QCA Quickstart、Sweep Builder\n\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html",
+    "href": "ja/articles/why-qca-decisions/index.html",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "",
+    "text": "マーケティング・マネージャーの問いは、「品質を上げれば、顧客は増えるか」だけではありません。多くの場合は、「何と何を組み合わせれば、目標に届くのか」です。\n質的比較分析(QCA)は、この問いに答えるために作られた分析です。回帰分析のような統計手法は、他の条件を一定にしたとき、1つの要因が単独でどれだけ効くかを見るのが得意です。QCA は、別の角度から、データを見ます。"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html#意思決定にとって魅力的な理由",
+    "href": "ja/articles/why-qca-decisions/index.html#意思決定にとって魅力的な理由",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "意思決定にとって魅力的な理由",
+    "text": "意思決定にとって魅力的な理由\n\n1. 施策は、単独ではなく組み合わせで動かす\n店舗の改装、接客の強化、価格の見直しは、たいてい一緒に実行されます。QCA は、「品質が高く、かつサービスが高い」のように、条件の組み合わせ(レシピ)を単位に、結果を見ます。\n\n\n2. 成功への道は、1つとは限らない\n同じ成果に、複数の道があることがあります(等結果性)。QCA は、その道を、すべて見つけます。経営者は、予算や強みに合わせて、どの道が自社に合うかを選べます。\n\n\n3. 成功の理由は、失敗の理由の裏返しとは限らない\nロイヤルティが高い顧客を生む条件と、離反する顧客を生む条件は、別の分析が必要なことがあります(非対称性)。QCA は、高い場合と低い場合を、別々に分析します。\n\n\n4. 事例が少なくても、使える\n店舗、ブランド、キャンペーン、法人顧客のように、事例が数十から数百の単位でも、事例の中身を見ながら分析できます。統計が使いにくい規模の問題に、向いています。\n\n\n5. 結果が「もし〜なら」の形で読める\n結果は、「品質が高く、かつサービスが高い」という、短い規則として出ます。会議で説明しやすく、現場でも、何をすればよいかが伝わります。\n\n\n6. 「必須」と「十分」を区別できる\n「これがなければ成功しない」(必要条件)と、「これがあれば成功する」(十分条件)を、区別して扱えます。「外せない施策」と「勝ち筋」を、分けて考えられます。"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html#回帰分析との違いざっくり",
+    "href": "ja/articles/why-qca-decisions/index.html#回帰分析との違いざっくり",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "回帰分析との違い(ざっくり)",
+    "text": "回帰分析との違い(ざっくり)\n\n\n\n\n\n\n\n\n観点\n回帰分析\nQCA\n\n\n\n\n問い\n他の条件を一定にしたとき、1つの要因が単独でどれだけ効くか\nどの組み合わせが、成果に十分か\n\n\n見る単位\n1つ1つの変数\n条件の組み合わせ\n\n\n複数の道\n想定しにくい\n見つけられる\n\n\n結果の読み方\n係数、有意性\n「AかつB」という規則\n\n\n得意な規模\n大きなサンプル\n数十から数百の事例\n\n\n\nどちらが優れているということではありません。問いによって、使い分けます。"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html#qca-にできないことと他の分析にも言えること",
+    "href": "ja/articles/why-qca-decisions/index.html#qca-にできないことと他の分析にも言えること",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "QCA にできないこと(と、他の分析にも言えること)",
+    "text": "QCA にできないこと(と、他の分析にも言えること)\n\n因果関係を、QCA だけが証明できないわけではありません。 観察データの分析は、回帰分析を含めて、因果関係を証明しきれません。X が Y に影響していると言えることと、X を動かしたときに Y が連動するかは、別の話です。多くの場合、前者を「因果関係」と呼んでいます。QCA が示す十分条件は、因果構造の候補を与えるものとして読むのが適切です。\n理論と事例の知識が必要です。 条件の選び方や、どこから「高い」とするかは、分析する人が決めます。"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html#落とし穴は基準にある",
+    "href": "ja/articles/why-qca-decisions/index.html#落とし穴は基準にある",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "落とし穴は、「基準」にある",
+    "text": "落とし穴は、「基準」にある\n最後の点が、実は重要です。QCA では、「高い」と「低い」を分ける基準(閾値)を、分析する人が決めます。ところが、意思決定の目標とは、まさにこの基準のことです。「ほどほどに満足」を目指すのか、「大好き」を目指すのか。基準を変えると、答えも変わることがあります。\nこの問題には、閾値スイープ QCA(ThSQCA)で取り組みます。続きは、次の記事です。\n続編: 「ほどほど」と「大好き」は、同じ目標でしょうか"
+  },
+  {
+    "objectID": "ja/articles/why-qca-decisions/index.html#参考文献",
+    "href": "ja/articles/why-qca-decisions/index.html#参考文献",
+    "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
+    "section": "参考文献",
+    "text": "参考文献\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. Journal of Business Research, 66(4), 463-472."
+  },
+  {
+    "objectID": "ja/software.html",
+    "href": "ja/software.html",
+    "title": "ソフトウェア",
+    "section": "",
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nThSQCA は、QCAの分析を、閾値を変えながら同じ設定で繰り返し、十分条件の解がどう変わるかを記録するRパッケージです。真理表の作成と最小化は QCA パッケージに任せているので、計算の中身は標準的な分析と同じです。"
+  },
+  {
+    "objectID": "ja/software.html#リンク",
+    "href": "ja/software.html#リンク",
+    "title": "ソフトウェア",
+    "section": "リンク",
+    "text": "リンク\n\nCRAN\nGitHub\nドキュメント\nチュートリアル(英語)"
+  },
+  {
+    "objectID": "ja/software.html#手法の論文",
+    "href": "ja/software.html#手法の論文",
+    "title": "ソフトウェア",
+    "section": "手法の論文",
+    "text": "手法の論文\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "ja/tools.html",
+    "href": "ja/tools.html",
+    "title": "ツール",
+    "section": "",
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nこれらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。"
+  },
+  {
+    "objectID": "ja/tools.html#qca",
+    "href": "ja/tools.html#qca",
+    "title": "ツール",
+    "section": "QCA",
+    "text": "QCA\n\nQCA Quickstart(英語画面): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(英語画面): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。"
+  },
+  {
+    "objectID": "ja/tools.html#マーケティング調査多変量解析",
+    "href": "ja/tools.html#マーケティング調査多変量解析",
+    "title": "ツール",
+    "section": "マーケティング調査・多変量解析",
+    "text": "マーケティング調査・多変量解析\n\n価格感度分析(PSM): 4つの価格質問から、受け入れられる価格帯を求めます。\nクラスター分析: 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。\n主成分分析・因子分析: バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。\nコレスポンデンス分析: クロス表の行と列を同じ地図に描きます。ca パッケージと一致。\n決定木: 分類木と回帰木。rpart(cp=0)と同じ計算です。\nコンジョイント分析:直交計画: 属性と水準から、直交するプロファイルの組を作ります。\nコンジョイント分析:効用値の推定: 部分効用値と重要度。conjoint パッケージと一致。"
+  },
+  {
+    "objectID": "ja/tools.html#rで検算できます",
+    "href": "ja/tools.html#rで検算できます",
+    "title": "ツール",
+    "section": "Rで検算できます",
+    "text": "Rで検算できます\nどのツールにも、入力したデータと設定を埋め込んだRスクリプトを作るボタンがあります。RStudioで実行すれば、同じ結果になるかを自分で確かめられます。必要なパッケージは、pricesensitivitymeter(価格感度分析)、rpart(決定木)、ca(コレスポンデンス分析)、conjoint(コンジョイント分析)です。そのほかは、Rの標準機能だけで動きます。"
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html",
+    "href": "posts/qca-for-marketers/index.html",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "",
+    "text": "The previous post explained why QCA suits decision-making. One question was left open: where should the line between “high” and “low” go? This post takes it up.\nTwo managers in the same company are looking at the same customer survey.\nThe first wants to widen the base: get as many customers as possible to say the brand is acceptable to use. The second wants to build fans: create customers who really want to use the brand. Both ask the same question: “What combination of brand strengths gets customers there?”\nHere is the uncomfortable part. A standard analysis answers that question for one cutoff. If you define “high” as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Nobody reports both, so nobody knows whether the manager who wants fans and the manager who wants a wider base should be doing the same thing."
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html#the-cutoff-is-something-to-vary",
+    "href": "posts/qca-for-marketers/index.html#the-cutoff-is-something-to-vary",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "The cutoff is something to vary",
+    "text": "The cutoff is something to vary\nThreshold-sweep QCA (ThSQCA) does not fix the cutoff in advance. It tries several. You run the same analysis at several cutoffs, with everything else held constant, and line the answers up in one table. You see where the answer holds steady, where it changes shape, and where it disappears.\nIf you have used top-box versus top-2-box scoring, you already know the problem. A result that looks solid at top-2-box can look very different at top-box. The sweep makes that comparison systematic."
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html#a-small-example-simulated-data",
+    "href": "posts/qca-for-marketers/index.html#a-small-example-simulated-data",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "A small example (simulated data)",
+    "text": "A small example (simulated data)\nTo show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on quality, service, and store environment, and also gave a loyalty score from 0 to 10. We then asked: which combinations of “high” ratings (7 or above) are enough for customers to reach each loyalty target?\n\n\n\n\n\n\n\n\n\nLoyalty target\nRoutes that get customers there\nHow reliably\nShare of target customers explained\n\n\n\n\n5 or above\nquality and service, or quality and store environment\n0.98\n40%\n\n\n6 or above\nquality and service, or quality and store environment\n0.93\n57%\n\n\n7 or above\nquality and service only\n0.89\n66%\n\n\n8 or above\nno combination of the three is reliable enough\nn/a\nn/a\n\n\n\nRead down the table as the bar rises.\n\nA modest goal has options. There are two routes, so a manager can choose the cheaper one: improve quality and service, or improve quality and the store.\nA demanding goal has fewer options. At 7 or above, only the quality and service route remains. The store environment stops being a way in.\nA very demanding goal can outrun the data. At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three levers do not explain the very top, and you should look for other ones.\n\nA single analysis at “7 or above” would have told the first manager something misleading: that quality and service is the only route, when for a broader goal there is a second one."
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html#questions-where-this-helps",
+    "href": "posts/qca-for-marketers/index.html#questions-where-this-helps",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "Questions where this helps",
+    "text": "Questions where this helps\n\nSatisfaction, NPS, or purchase intent: does the recipe for “satisfied” equal the recipe for “delighted”?\nSegment definitions: if “heavy user” means 10 purchases a year versus 20, do the drivers change?\nCampaign targets: what does it take to move customers from “consider” to “prefer”?\nReporting: instead of defending one cutoff, show the range and let readers see how much depends on it."
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html#two-honest-cautions",
+    "href": "posts/qca-for-marketers/index.html#two-honest-cautions",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "Two honest cautions",
+    "text": "Two honest cautions\n\nIt shows combinations that go together with the outcome. It does not prove cause. This is true of any analysis of observational data. Treat the results as a map for where to look and what to test.\nDo not hunt for the cutoff that gives the nicest answer. Decide the range before you look, say why, and report all of it. The value of the sweep is in being transparent about how much the answer depends on the definition."
+  },
+  {
+    "objectID": "posts/qca-for-marketers/index.html#try-it-on-your-own-survey",
+    "href": "posts/qca-for-marketers/index.html#try-it-on-your-own-survey",
+    "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
+    "section": "Try it on your own survey",
+    "text": "Try it on your own survey\nYou do not need to write code from scratch.\n\nQCA Quickstart creates a first analysis script from the names of your columns.\nSweep Builder turns that setup into a threshold-sweep script.\nPaste the script into R. The package is free: install.packages(\"ThSQCA\").\n\nIf you would like a gentler walk through the same ideas, the beginner’s series explains every line with a practice data set. The method itself is described in Toyoda (2026), Threshold-sweep QCA: threshold dependence as an analytical dimension, Quality & Quantity, and the package is on CRAN."
+  },
+  {
+    "objectID": "posts/reading-list-basics/index.html",
+    "href": "posts/reading-list-basics/index.html",
+    "title": "Papers and books for getting to know QCA: six to read first (basics)",
+    "section": "",
+    "text": "The earlier posts explained why QCA suits decision-making and why the placement of the threshold matters. Here is a short list of what to read first if you want to grasp how QCA thinks, grouped by purpose.\nThe summaries below stay within what the publishers’ abstracts and descriptions say. They are not evaluations based on a full reading."
+  },
+  {
+    "objectID": "posts/reading-list-basics/index.html#getting-the-idea-papers",
+    "href": "posts/reading-list-basics/index.html#getting-the-idea-papers",
+    "title": "Papers and books for getting to know QCA: six to read first (basics)",
+    "section": "1. Getting the idea (papers)",
+    "text": "1. Getting the idea (papers)\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092 Treats an organization as a combination of elements and argues for analyzing the link between those combinations and outcomes with set theory. A foundation for thinking about several combinations that lead to the same outcome.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120 Analyzes organizational typologies with fuzzy sets and examines the combinations of conditions that lead to an outcome. Important for understanding that the causes can be asymmetric between the presence and the absence of an outcome.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021 Alongside the effects of single variables in multiple regression, it proposes an analysis that looks at combinations of conditions and at causal asymmetry. It discusses how to analyze data and build theory, using regression and fsQCA on the same data.\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252 Reviews how QCA has developed in management and organization research and sets out a “neo-configurational perspective” for capturing causal complexity. It links set membership, necessity and sufficiency, and counterfactual analysis to theoretical viewpoints."
+  },
+  {
+    "objectID": "posts/reading-list-basics/index.html#learning-the-method-systematically-books",
+    "href": "posts/reading-list-basics/index.html#learning-the-method-systematically-books",
+    "title": "Papers and books for getting to know QCA: six to read first (basics)",
+    "section": "2. Learning the method systematically (books)",
+    "text": "2. Learning the method systematically (books)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press. Contrasts set-theoretic analysis with conventional quantitative research and explains calibration, combinations of conditions, and causal complexity. A book for learning the way of thinking behind QCA, not only its procedure.\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244 A textbook that runs from the basics of set theory to the practice of QCA. It also covers cautions and common problems, which helps you understand the procedure together with the reasons behind each judgment."
+  },
+  {
+    "objectID": "posts/reading-list-basics/index.html#choosing-the-threshold",
+    "href": "posts/reading-list-basics/index.html#choosing-the-threshold",
+    "title": "Papers and books for getting to know QCA: six to read first (basics)",
+    "section": "3. Choosing the threshold",
+    "text": "3. Choosing the threshold\nOn how the placement of the threshold changes the results, see also Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3.\nThe next post introduces papers that use QCA in marketing and management (applications)."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html",
+    "href": "posts/thsqca-beginners-2/index.html",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "",
+    "text": "In part 1 we ran an outcome threshold sweep and read its result. ThSQCA has four sweep functions in total. This post runs all four on the same practice data, and ends with practical advice on choosing the range of thresholds."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#the-four-sweeps-at-a-glance",
+    "href": "posts/thsqca-beginners-2/index.html#the-four-sweeps-at-a-glance",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "The four sweeps at a glance",
+    "text": "The four sweeps at a glance\n\n\n\n\n\n\n\n\n\nQuestion\nFunction\nWhat varies\nWhat stays fixed\n\n\n\n\nHow does the solution change as the target level of the outcome rises?\notSweep()\nthe outcome threshold\nall condition thresholds\n\n\nHow sensitive is it to one condition’s definition of “high”?\nctSweepS()\none condition threshold\nthe outcome and the other conditions\n\n\nWhat if several conditions’ definitions change together?\nctSweepM()\nseveral condition thresholds (a grid)\nthe outcome threshold\n\n\nWhat if the target level and the conditions’ definitions both change?\ndtSweep()\nthe outcome and the conditions\nnothing"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#setup-the-same-practice-data-as-part-1",
+    "href": "posts/thsqca-beginners-2/index.html#setup-the-same-practice-data-as-part-1",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "Setup: the same practice data as part 1",
+    "text": "Setup: the same practice data as part 1\n\nlibrary(ThSQCA)\n\n\n\nPractice data (identical to part 1)\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\n\n\nRemember the story behind the data: loyalty (LOY) is high when quality (QUA) and service (SER) are both high, or, a little less strongly, when quality and the store environment (ENV) are both high."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#sweep-1-one-condition-with-ctsweeps",
+    "href": "posts/thsqca-beginners-2/index.html#sweep-1-one-condition-with-ctsweeps",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "Sweep 1: one condition with ctSweepS()",
+    "text": "Sweep 1: one condition with ctSweepS()\nSuppose you are unsure where to draw the line for “high service delivery”. Is 6 high enough? 7? 9? Fix the outcome at LOY &gt;= 7, fix the other conditions at 7, and sweep the threshold of SER from 5 to 9.\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\nThe new arguments are sweep_var (the condition whose threshold is swept), thrY (the fixed outcome threshold), and thrX_default (the fixed threshold for all other conditions).\nReading the table from top to bottom: when “high service” is defined as 5 or 6, there is no solution, because the definition is so loose that the group of “highly served” customers is no longer reliably loyal. At 7 and 8 the solution is QUA*SER. At 9 the solution gains a third element, QUA*SER*~ENV, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)\n\n[1] 16\n\n\nOnly 16 of the 400 customers satisfy both conditions at that level, so the result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#sweep-2-several-conditions-with-ctsweepm",
+    "href": "posts/thsqca-beginners-2/index.html#sweep-2-several-conditions-with-ctsweepm",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "Sweep 2: several conditions with ctSweepM()",
+    "text": "Sweep 2: several conditions with ctSweepM()\nNow let the thresholds of all three conditions vary at once: each of QUA, SER, and ENV is tried at 6, 7, and 8. That is 3 x 3 x 3 = 27 combinations. The outcome stays at LOY &gt;= 7.\n\nres_mcts &lt;- ctSweepM(\n  dat        = demo,\n  outcome    = \"LOY\",\n  conditions = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_list = list(QUA = 6:8, SER = 6:8, ENV = 6:8),\n  thrY       = 7\n)\n\nThe output has 27 rows. To keep it readable, show only the combinations that produced a solution:\n\ntab &lt;- res_mcts$summary\ntab[tab$n_solutions &gt; 0, ]\n\n   combo_id           threshold                  expression     inclS      covS\n5         5 QUA=7, SER=7, ENV=6                     QUA*SER 0.8939394 0.6555556\n6         6 QUA=8, SER=7, ENV=6                     QUA*SER 0.9189189 0.3777778\n8         8 QUA=7, SER=8, ENV=6                     QUA*SER 0.9090909 0.3333333\n9         9 QUA=8, SER=8, ENV=6                     QUA*SER 0.9047619 0.2111111\n12       12 QUA=8, SER=6, ENV=7                QUA*SER*~ENV 0.8000000 0.3111111\n14       14 QUA=7, SER=7, ENV=7                     QUA*SER 0.8939394 0.6555556\n15       15 QUA=8, SER=7, ENV=7                QUA*SER*~ENV 1.0000000 0.3000000\n17       17 QUA=7, SER=8, ENV=7                     QUA*SER 0.9090909 0.3333333\n18       18 QUA=8, SER=8, ENV=7                QUA*SER*~ENV 1.0000000 0.1888889\n21       21 QUA=8, SER=6, ENV=8                     QUA*ENV 0.8888889 0.1777778\n23       23 QUA=7, SER=7, ENV=8                     QUA*SER 0.8939394 0.6555556\n24       24 QUA=8, SER=7, ENV=8           QUA*SER + QUA*ENV 0.9200000 0.5111111\n26       26 QUA=7, SER=8, ENV=8                     QUA*SER 0.9090909 0.3333333\n27       27 QUA=8, SER=8, ENV=8 QUA*SER*~ENV + QUA*~SER*ENV 0.9393939 0.3444444\n   n_solutions\n5            1\n6            1\n8            1\n9            1\n12           1\n14           1\n15           1\n17           1\n18           1\n21           1\n23           1\n24           1\n26           1\n27           1\n\n\nSome patterns to look for:\n\nFourteen of the 27 combinations have a solution. In every combination where “high quality” is defined as 6, there is no solution at all.\nWith QUA at 7 and SER at 7 or 8, the solution is QUA*SER no matter which threshold is used for ENV. This is a stable region.\nWith QUA at 8, the solution depends on ENV (and on SER). With ENV at 6 it is QUA*SER (when SER is 7 or 8). With ENV at 7 it is QUA*SER*~ENV. With ENV at 8 it varies, from QUA*ENV alone to two-path solutions such as QUA*SER + QUA*ENV. When “high quality” is defined strictly, the definition of the store environment starts to matter.\n\nThe grid shows both where a conclusion is robust and where it is fragile, which a single analysis cannot."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#sweep-3-the-outcome-and-the-conditions-together-with-dtsweep",
+    "href": "posts/thsqca-beginners-2/index.html#sweep-3-the-outcome-and-the-conditions-together-with-dtsweep",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "Sweep 3: the outcome and the conditions together with dtSweep()",
+    "text": "Sweep 3: the outcome and the conditions together with dtSweep()\nThe dual threshold sweep combines the two ideas: it varies the target level of the outcome and the conditions’ definitions at the same time. Here we use 3 outcome thresholds (6, 7, 8) and 8 condition combinations (QUA, SER, ENV each at 6 or 7), so 24 cells.\n\nres_dts &lt;- dtSweep(\n  dat           = demo,\n  outcome       = \"LOY\",\n  conditions    = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_list_X  = list(QUA = 6:7, SER = 6:7, ENV = 6:7),\n  sweep_range_Y = 6:8\n)\n\nres_dts$summary\n\n   combo_id thrY                thrX        expression     inclS      covS\n1         1    6 QUA=6, SER=6, ENV=6           QUA*SER 0.8630137 0.7118644\n2         1    7 QUA=6, SER=6, ENV=6       No solution        NA        NA\n3         1    8 QUA=6, SER=6, ENV=6       No solution        NA        NA\n4         2    6 QUA=7, SER=6, ENV=6           QUA*SER 0.9215686 0.5310734\n5         2    7 QUA=7, SER=6, ENV=6       No solution        NA        NA\n6         2    8 QUA=7, SER=6, ENV=6       No solution        NA        NA\n7         3    6 QUA=6, SER=7, ENV=6           QUA*SER 0.8932039 0.5197740\n8         3    7 QUA=6, SER=7, ENV=6       No solution        NA        NA\n9         3    8 QUA=6, SER=7, ENV=6       No solution        NA        NA\n10        4    6 QUA=7, SER=7, ENV=6           QUA*SER 0.9848485 0.3672316\n11        4    7 QUA=7, SER=7, ENV=6           QUA*SER 0.8939394 0.6555556\n12        4    8 QUA=7, SER=7, ENV=6       No solution        NA        NA\n13        5    6 QUA=6, SER=6, ENV=7           QUA*SER 0.8630137 0.7118644\n14        5    7 QUA=6, SER=6, ENV=7       No solution        NA        NA\n15        5    8 QUA=6, SER=6, ENV=7       No solution        NA        NA\n16        6    6 QUA=7, SER=6, ENV=7 QUA*SER + QUA*ENV 0.9076923 0.6666667\n17        6    7 QUA=7, SER=6, ENV=7       No solution        NA        NA\n18        6    8 QUA=7, SER=6, ENV=7       No solution        NA        NA\n19        7    6 QUA=6, SER=7, ENV=7           QUA*SER 0.8932039 0.5197740\n20        7    7 QUA=6, SER=7, ENV=7       No solution        NA        NA\n21        7    8 QUA=6, SER=7, ENV=7       No solution        NA        NA\n22        8    6 QUA=7, SER=7, ENV=7 QUA*SER + QUA*ENV 0.9259259 0.5649718\n23        8    7 QUA=7, SER=7, ENV=7           QUA*SER 0.8939394 0.6555556\n24        8    8 QUA=7, SER=7, ENV=7       No solution        NA        NA\n   n_solutions\n1            1\n2            0\n3            0\n4            1\n5            0\n6            0\n7            1\n8            0\n9            0\n10           1\n11           1\n12           0\n13           1\n14           0\n15           0\n16           1\n17           0\n18           0\n19           1\n20           0\n21           0\n22           1\n23           1\n24           0\n\n\nReading it: at LOY &gt;= 6, every one of the 8 condition definitions gives a solution, usually QUA*SER, and sometimes QUA*SER + QUA*ENV. At LOY &gt;= 7, only two definitions still give a solution, the ones where QUA and SER are both at 7. At LOY &gt;= 8, none do. In this data set, raising the target level is the strongest driver of change."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#how-big-is-a-sweep",
+    "href": "posts/thsqca-beginners-2/index.html#how-big-is-a-sweep",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "How big is a sweep?",
+    "text": "How big is a sweep?\nEvery cell is a full QCA analysis, so the number of cells matters for run time and for how readable the results are.\n\n\n\n\n\n\n\n\nFunction\nNumber of analyses\nExample\n\n\n\n\notSweep()\none per outcome threshold\n5 thresholds = 5\n\n\nctSweepS()\none per threshold of the swept condition\n5 thresholds = 5\n\n\nctSweepM()\nthe product of the candidate counts\n3 x 3 x 3 = 27\n\n\ndtSweep()\noutcome thresholds x condition grid\n3 x (3 x 3 x 3) = 81"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#choosing-a-range-you-can-defend",
+    "href": "posts/thsqca-beginners-2/index.html#choosing-a-range-you-can-defend",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
+    "section": "Choosing a range you can defend",
+    "text": "Choosing a range you can defend\nA sweep is easy to run, which is exactly why it needs discipline. Trying many thresholds and reporting only the convenient ones would add researcher degrees of freedom instead of removing them. Some rules of thumb:\n\nDecide the range before you look at the results. Base it on what the scale means, on theory, and on practical targets (for example “acceptable”, “good”, “very good”).\nInclude your baseline. The threshold you would have used in an ordinary analysis should be inside the grid, so readers can compare.\nAvoid the neutral zone. On a 0 to 10 scale, scores around the midpoint do not clearly mean “high” for anyone, so ranges usually start above it.\nKeep the grid small enough to read. A few meaningful values per variable are better than every possible value.\nCheck the case counts at the edges. Cells at the extremes of the grid often rest on very few cases.\nReport the whole grid. Show the stable and the unstable regions, not only the cells that support your story."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-2/index.html#what-comes-next",
+    "href": "posts/thsqca-beginners-2/index.html#what-comes-next",
+    "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
     "section": "What comes next",
-    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25, and ThSQCA 2.0.8 or later."
+    "text": "What comes next\nIn part 3 we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html",
+    "href": "posts/thsqca-beginners-4/index.html",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "",
+    "text": "In the first three parts we ran sweeps and learned to read them. In this last part we turn a sweep into something you can report and defend: a written record of what was explored, a chart of the configurations, and a check that the numbers agree with the QCA package.\nlibrary(ThSQCA)\nlibrary(QCA)\n\nLoading required package: admisc\n\n\n\nTo cite package QCA in publications, please use:\n  Dusa, Adrian (2019) QCA with R. A Comprehensive Resource.\n  Springer International Publishing.\nPractice data (identical to part 1)\nmake_demo_data &lt;- function(n = 400, seed = 2026) {\n  set.seed(seed)\n  clip &lt;- function(x) pmin(10, pmax(0, round(x)))\n  QUA &lt;- clip(rnorm(n, 6, 2))\n  SER &lt;- clip(rnorm(n, 6, 2))\n  ENV &lt;- clip(rnorm(n, 6, 2))\n  core &lt;- pmax(pmin(QUA, SER), pmin(QUA, ENV) - 1)\n  LOY  &lt;- clip(core + rnorm(n, 0, 0.7))\n  data.frame(LOY, QUA, SER, ENV)\n}\n\ndemo &lt;- make_demo_data()\nWe reuse the outcome threshold sweep from part 1. This time we ask for the full details, which the report needs.\nres_ots &lt;- otSweep(\n  dat            = demo,\n  outcome        = \"LOY\",\n  conditions     = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_range    = 5:8,\n  thrX           = c(QUA = 7, SER = 7, ENV = 7),\n  incl.cut       = 0.8,\n  n.cut          = 1,\n  return_details = TRUE\n)"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#a-report-that-records-the-whole-sweep",
+    "href": "posts/thsqca-beginners-4/index.html#a-report-that-records-the-whole-sweep",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "A report that records the whole sweep",
+    "text": "A report that records the whole sweep\nA sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. generate_report() writes this into a Markdown file. It comes in two formats.\n\n\"simple\" is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.\n\"full\" is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\nHere are the first lines of the file it wrote. On your own computer, give the file a real name, such as \"ots_report_simple.md\", and it will appear in your working folder.\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-02 23:25\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\nA few options are worth knowing:\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#configuration-charts",
+    "href": "posts/thsqca-beginners-4/index.html#configuration-charts",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "Configuration charts",
+    "text": "Configuration charts\nQCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for “present”, a crossed circle for “absent”, and a blank for “does not matter”. You can draw one from a list of paths with config_chart_from_paths().\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\nIf you prefer plain characters, for example for a journal that cannot print the circle symbols, use the ASCII version:\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#check-a-cell-against-the-qca-package",
+    "href": "posts/thsqca-beginners-4/index.html#check-a-cell-against-the-qca-package",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "Check a cell against the QCA package",
+    "text": "Check a cell against the QCA package\nThSQCA does not invent new results. Every cell is an ordinary QCA analysis, so you can reproduce any cell by hand. This is a good way to build trust in the tool, and to answer a reviewer who asks. Here we reproduce the cell at an outcome threshold of 7.\n\nbin &lt;- function(x, t) as.integer(x &gt;= t)\n\nd7 &lt;- data.frame(\n  LOY = bin(demo$LOY, 7), QUA = bin(demo$QUA, 7),\n  SER = bin(demo$SER, 7), ENV = bin(demo$ENV, 7)\n)\n\ntt  &lt;- truthTable(d7, outcome = \"LOY\", conditions = c(\"QUA\", \"SER\", \"ENV\"),\n                  incl.cut = 0.8, n.cut = 1, show.cases = FALSE)\nsol &lt;- minimize(tt)\nsol\n\n\nM1: QUA*SER -&gt; LOY\n\n\nThe solution printed by minimize() matches the row for thrY = 7 in the sweep table from part 1 (QUA*SER). In both cases the data were binarized in the same way (a score of 7 or above is a member), and in both cases the same QCA functions did the minimization."
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#record-your-software-versions",
+    "href": "posts/thsqca-beginners-4/index.html#record-your-software-versions",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "Record your software versions",
+    "text": "Record your software versions\nResults can depend on the versions of R and the packages. Print them and keep them with your report:\n\nc(R      = R.version.string,\n  QCA    = as.character(packageVersion(\"QCA\")),\n  ThSQCA = as.character(packageVersion(\"ThSQCA\")))"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#a-short-checklist-for-reporting-a-sweep",
+    "href": "posts/thsqca-beginners-4/index.html#a-short-checklist-for-reporting-a-sweep",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "A short checklist for reporting a sweep",
+    "text": "A short checklist for reporting a sweep\nBecause a sweep gives you freedom to explore, it also asks you to be transparent. Before you report one, make sure that you can answer yes to each of these questions.\n\nDid I decide the threshold range, and the step between values, before looking at the results?\nDo I state every setting that was held fixed (consistency cutoff, frequency cutoff, solution type, directional expectations)?\nDid I report every cell of the grid, including the cells with no solution?\nDid I check how many cases stand behind the cells at the edges of the grid?\nIf a cell had several minimal solutions, did I say so?\nDid I avoid presenting the sweep as a search for the best threshold?\nDid I record the versions of R, QCA, and ThSQCA?"
+  },
+  {
+    "objectID": "posts/thsqca-beginners-4/index.html#where-to-go-from-here",
+    "href": "posts/thsqca-beginners-4/index.html#where-to-go-from-here",
+    "title": "ThSQCA for beginners, part 4: reporting and checking your results",
+    "section": "Where to go from here",
+    "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools: QCA Quickstart and Sweep Builder\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html",
+    "href": "posts/why-qca-decisions/index.html",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "",
+    "text": "A marketing manager’s question is not only “If we raise quality, will customers increase?” More often it is “Which things should we combine to reach our target?”\nQualitative comparative analysis (QCA) was built to answer that kind of question. Statistical methods such as regression are good at showing how much one factor matters on its own, with the other conditions held constant. QCA looks at the data from a different angle."
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html#why-qca-is-attractive-for-decisions",
+    "href": "posts/why-qca-decisions/index.html#why-qca-is-attractive-for-decisions",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "Why QCA is attractive for decisions",
+    "text": "Why QCA is attractive for decisions\n\n1. Actions are taken in combination, not alone\nStore renovation, better service, and a price review are usually carried out together. QCA takes the combination (the recipe) as its unit, for example “high quality and high service”, and asks what happens to the outcome.\n\n\n2. There may be more than one road to success\nThe same outcome can be reached in several ways (equifinality). QCA finds all of those roads, so a manager can choose the one that fits the budget and the company’s strengths.\n\n\n3. The reasons for success are not always the mirror image of the reasons for failure\nThe conditions that produce loyal customers and the conditions that produce customers who leave may need separate analyses (asymmetry). QCA analyzes the high case and the low case separately.\n\n\n4. It works even with few cases\nWith stores, brands, campaigns, or corporate customers, you may have only dozens or a few hundred cases. QCA lets you analyze them while keeping an eye on what is inside each case, which suits problems of a size where statistics are hard to apply.\n\n\n5. The result reads as an “if … then” rule\nA result comes out as a short rule, such as “high quality and high service”. It is easy to explain in a meeting, and it tells people on the front line what to do.\n\n\n6. It separates “necessary” from “sufficient”\nYou can treat “without this, success does not happen” (a necessary condition) differently from “with this, success happens” (a sufficient condition). That lets you think separately about the actions you cannot skip and the actions that win."
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html#how-it-differs-from-regression-roughly",
+    "href": "posts/why-qca-decisions/index.html#how-it-differs-from-regression-roughly",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "How it differs from regression (roughly)",
+    "text": "How it differs from regression (roughly)\n\n\n\n\n\n\n\n\nPoint of view\nRegression\nQCA\n\n\n\n\nThe question\nHow much does one factor matter on its own, with the others held constant?\nWhich combinations are enough for the outcome?\n\n\nUnit of analysis\nEach variable\nCombinations of conditions\n\n\nMultiple roads\nHard to anticipate\nCan be found\n\n\nHow results read\nCoefficients and significance\nRules such as “A and B”\n\n\nTypical scale\nLarge samples\nDozens to a few hundred cases\n\n\n\nNeither is better than the other. You choose according to the question."
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html#what-qca-cannot-do-and-what-is-also-true-of-other-methods",
+    "href": "posts/why-qca-decisions/index.html#what-qca-cannot-do-and-what-is-also-true-of-other-methods",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "What QCA cannot do (and what is also true of other methods)",
+    "text": "What QCA cannot do (and what is also true of other methods)\n\nQCA is not the only method that cannot prove causation. Analyses of observational data, regression included, cannot fully establish causation. Saying that X influences Y is one thing; whether Y moves when you move X is another. Most of the time, the former is what people call “causation”. The sufficient conditions QCA reports are best read as candidates for a causal structure.\nIt needs theory and knowledge of the cases. The analyst decides which conditions to include and where “high” begins."
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html#the-pitfall-is-the-threshold",
+    "href": "posts/why-qca-decisions/index.html#the-pitfall-is-the-threshold",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "The pitfall is the threshold",
+    "text": "The pitfall is the threshold\nThat last point matters more than it first appears. In QCA, the analyst decides the threshold that separates “high” from “low”. But a decision target is exactly such a threshold: do you aim for “reasonably satisfied” or for “loved”? When the threshold changes, the answer can change too.\nThreshold-sweep QCA (ThSQCA) addresses this problem. The next post continues from here.\nNext: Is “good enough” the same goal as “loved”?"
+  },
+  {
+    "objectID": "posts/why-qca-decisions/index.html#references",
+    "href": "posts/why-qca-decisions/index.html#references",
+    "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
+    "section": "References",
+    "text": "References\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. Journal of Business Research, 66(4), 463-472."
+  },
+  {
+    "objectID": "start-here.html",
+    "href": "start-here.html",
+    "title": "Start here",
+    "section": "",
+    "text": "This blog is about qualitative comparative analysis (QCA), the ThSQCA R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order."
+  },
+  {
+    "objectID": "start-here.html#if-you-are-new-to-qca",
+    "href": "start-here.html#if-you-are-new-to-qca",
+    "title": "Start here",
+    "section": "If you are new to QCA",
+    "text": "If you are new to QCA\n\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: five papers to read first (applications)"
+  },
+  {
+    "objectID": "start-here.html#if-you-want-to-try-threshold-sweep-qca-in-r",
+    "href": "start-here.html#if-you-want-to-try-threshold-sweep-qca-in-r",
+    "title": "Start here",
+    "section": "If you want to try threshold-sweep QCA in R",
+    "text": "If you want to try threshold-sweep QCA in R\n\nIntroducing ThSQCA: threshold-sweep QCA in R\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results"
+  },
+  {
+    "objectID": "start-here.html#if-you-prefer-to-start-from-a-tool",
+    "href": "start-here.html#if-you-prefer-to-start-from-a-tool",
+    "title": "Start here",
+    "section": "If you prefer to start from a tool",
+    "text": "If you prefer to start from a tool\n\nTools: browser-based tools for QCA and marketing research\nSoftware: the ThSQCA package, with links to CRAN, GitHub, and the documentation"
+  },
+  {
+    "objectID": "start-here.html#japanese-version",
+    "href": "start-here.html#japanese-version",
+    "title": "Start here",
+    "section": "Japanese version",
+    "text": "Japanese version\n日本語の記事とツールは、日本語版にあります。"
   }
 ]
