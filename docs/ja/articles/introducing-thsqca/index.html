@@ -109,6 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -235,15 +236,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>質的比較分析(QCA)では、連続的な得点を集合への所属に変える閾値を、ふつう、分析の前に1つに決めます。そのため、得られる解は、ある1つの定義への答えになります。たとえば、「利用意向が高い」を7点以上と定義したときの答えです。<strong>ThSQCA</strong> は、閾値そのものを分析の対象にする R パッケージです。同じ QCA の分析を、同じ設定のまま、閾値の範囲全体で繰り返し、十分条件の解がどう変わるかを記録します。</p>
 <section id="考え方" class="level2">
 <h2 class="anchored" data-anchor-id="考え方">考え方</h2>
-<p>閾値を変えると、どの事例が集合に入るかが変わります。すると、真理表も、適合度の指標も、ブール最小化の結果も変わることがあります。したがって、閾値 <em>t</em> と十分条件の解 <em>S</em> の関係は、1つの解というより、対応関係 <em>t</em> → <em>S(t)</em> として記述するほうが適切です。</p>
+<p>閾値を変えると、どの事例が集合に入るかが変わります。すると、真理表も、適合度の指標も、Boolean最小化の結果も変わることがあります。したがって、閾値 <em>t</em> と十分条件の解 <em>S</em> の関係は、1つの解というより、対応関係 <em>t</em> → <em>S(t)</em> として記述するほうが適切です。</p>
 <p>これは、頑健性の確認とは、別の問いです。頑健性の確認は、気に入った解が、別の設定でも残るかを問います。また、最良の閾値を探すことでもありません。閾値スイープQCAは、記述的な問いを立てます。十分条件の構造は、閾値の定義にわたって、どのように分布するのか。どこで持続し、現れ、消えるのか。方法論は、下に挙げる論文で展開しています。</p>
 </section>
 <section id="パッケージが行うこと" class="level2">
 <h2 class="anchored" data-anchor-id="パッケージが行うこと">パッケージが行うこと</h2>
 <p>ThSQCA は、独自の最小化アルゴリズムを実装していません。真理表の作成と最小化は、<a href="https://cran.r-project.org/package=QCA">QCA</a> パッケージに任せています。計算の中心は、通常の分析と同じです。ThSQCA が加えるのは、その周りの作業の流れです。</p>
 <ul>
-<li>整合度の基準、頻度の基準、解の種類、方向性の期待を、スイープのすべての段階で同じにします。</li>
-<li>項、解の整合度、被覆度を、共通の形式にまとめます。</li>
+<li>一貫性閾値、頻度閾値、解の種類、方向性の期待を、スイープのすべての段階で同じにします。</li>
+<li>項、解の一貫性、カバレッジを、共通の形式にまとめます。</li>
 <li>解がない場合や、最小解が複数ある場合も、失わずに記録します。</li>
 <li>結果は、表、構成図、軌跡の図、ヒートマップで示せます。Markdown 形式のレポートとしても書き出せます。</li>
 </ul>
@@ -265,9 +266,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>結果の目標水準が変わると、解はどう変わるか</td>
+<td>アウトカムの目標水準が変わると、解はどう変わるか</td>
 <td><code>otSweep()</code></td>
-<td>結果</td>
+<td>アウトカム</td>
 </tr>
 <tr class="even">
 <td>1つの条件の基準が変わると、どう変わるか</td>
@@ -280,9 +281,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>複数の条件</td>
 </tr>
 <tr class="even">
-<td>結果と条件の基準が一緒に変わると、どう変わるか</td>
+<td>アウトカムと条件の基準が一緒に変わると、どう変わるか</td>
 <td><code>dtSweep()</code></td>
-<td>結果と条件</td>
+<td>アウトカムと条件</td>
 </tr>
 </tbody>
 </table>
@@ -291,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="はじめてみる">はじめてみる</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ThSQCA"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThSQCA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>パッケージには、小さな例のデータ <code>sample_data</code> が入っています。結果 <code>Y</code> と、3つの条件 <code>X1</code>、<code>X2</code>、<code>X3</code> で、どれも0〜10点です。次は、そのまま動く、最小の結果の閾値スイープです。</p>
+<p>パッケージには、小さな例のデータ <code>sample_data</code> が入っています。アウトカム <code>Y</code> と、3つの条件 <code>X1</code>、<code>X2</code>、<code>X3</code> で、どれも0〜10点です。次は、そのまま動く、最小のアウトカム閾値スイープです。</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThSQCA)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_data)</span>
@@ -305,14 +306,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>このスイープは、「高い結果」を <code>Y &gt;= 6</code>、<code>Y &gt;= 7</code>、<code>Y &gt;= 8</code>、<code>Y &gt;= 9</code> と定義したときに、十分条件の解がどう変わるかを調べます。各条件は、得点が7以上のとき「高い」とします。各行の意味や、結果の表の読み方を、ゆっくり、順を追って知りたい方は、<a href="../../../ja/articles/thsqca-beginners-1/index.html">入門シリーズの第1回</a>をご覧ください。</p>
+<p>このスイープは、「高いアウトカム」を <code>Y &gt;= 6</code>、<code>Y &gt;= 7</code>、<code>Y &gt;= 8</code>、<code>Y &gt;= 9</code> と定義したときに、十分条件の解がどう変わるかを調べます。各条件は、得点が7以上のとき「高い」とします。各行の意味や、結果の表の読み方を、ゆっくり、順を追って知りたい方は、<a href="../../../ja/articles/thsqca-beginners-1/index.html">入門シリーズの第1回</a>をご覧ください。</p>
 <p>実行すると、次のような表が出ます(結果の部分だけを示します)。</p>
 <pre><code> thrY                  expression inclS  covS n_solutions
     6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1
     7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1
     8                 No solution    NA    NA           0
     9                 No solution    NA    NA           0</code></pre>
-<p>1行が、1つの結果の閾値です。<code>expression</code> の列では、<code>*</code> が AND、<code>+</code> が OR、<code>~</code> が NOT を表します。<code>Y &gt;= 6</code> と <code>Y &gt;= 7</code> では、同じ3つの十分な道が現れます。<code>Y &gt;= 8</code> と <code>Y &gt;= 9</code> では、整合度の条件を満たす解がありません。閾値を1つにした分析だけでは、答えがどこで成り立たなくなるかは見えません。スイープなら、それが見えます。</p>
+<p>1行が、1つのアウトカム閾値です。<code>expression</code> の列では、<code>*</code> が AND、<code>+</code> が OR、<code>~</code> が NOT を表します。<code>Y &gt;= 6</code> と <code>Y &gt;= 7</code> では、同じ3つの十分な経路が現れます。<code>Y &gt;= 8</code> と <code>Y &gt;= 9</code> では、一貫性の条件を満たす解がありません。閾値を1つにした分析だけでは、答えがどこで成り立たなくなるかは見えません。スイープなら、それが見えます。</p>
 <p>パッケージのビネットには、4つの関数すべてについて、実例つきの説明があります。</p>
 </section>
 <section id="使うときの注意" class="level2">
@@ -741,6 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

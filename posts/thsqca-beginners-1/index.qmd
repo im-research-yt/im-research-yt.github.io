@@ -100,7 +100,7 @@ The table has one row per outcome threshold. The columns are:
 - `expression`: the sufficient combination found. `*` means AND, `+` means OR, and `~` means NOT.
 - `inclS`: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.
 - `covS`: solution coverage. The share of the outcome cases that the solution explains.
-- `n_solutions`: how many equivalent minimal solutions were found (1 here).
+- `n_solutions`: how many minimal solutions were found (1 here).
 
 Now read the `expression` column from top to bottom.
 

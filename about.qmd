@@ -25,3 +25,7 @@ Posts tagged **R** are also distributed through [R-bloggers](https://www.r-blogg
 ## A note on the tools
 
 The tools are developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University, for learning. They may contain calculation errors, so please verify results with other software before using them in research or business.
+
+## How this site was made
+
+This site and its browser tools were developed with the assistance of Claude, an AI model made by Anthropic. I used Claude for writing and verifying the code of the tools, proofreading and translating the text, and building the website. The content and the analytical methods are my own, and I am responsible for them.

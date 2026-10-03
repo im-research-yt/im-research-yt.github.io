@@ -8,7 +8,7 @@
 
 <meta name="author" content="Yuki Toyoda">
 <meta name="dcterms.date" content="2026-10-08">
-<meta name="description" content="結果、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
+<meta name="description" content="アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
 
 <title>ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方 – Yuki Toyoda’s Blog</title>
 <style>
@@ -109,17 +109,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方 – Yuki Toyoda’s Blog">
-<meta property="og:description" content="結果、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
+<meta property="og:description" content="アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
 <meta property="og:image" content="https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/thumbnail.png">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方 – Yuki Toyoda’s Blog">
-<meta name="twitter:description" content="結果、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
+<meta name="twitter:description" content="アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。">
 <meta name="twitter:image" content="https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/thumbnail.png">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
@@ -204,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    結果、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。
+    アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。
   </div>
 </div>
 
@@ -233,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="../../../ja/articles/thsqca-beginners-1/index.html">第1回</a>では、結果の閾値スイープを実行して、結果を読みました。ThSQCAには、スイープの関数が全部で4つあります。この回では、同じ練習用データで4つすべてを実行し、最後に、閾値の範囲の選び方についての、実践的な助言を述べます。</p>
+<p><a href="../../../ja/articles/thsqca-beginners-1/index.html">第1回</a>では、アウトカム閾値スイープを実行して、結果を読みました。ThSQCAには、スイープの関数が全部で4つあります。この回では、同じ練習用データで4つすべてを実行し、最後に、閾値の範囲の選び方についての、実践的な助言を述べます。</p>
 <section id="つのスイープの一覧" class="level2">
 <h2 class="anchored" data-anchor-id="つのスイープの一覧">4つのスイープの一覧</h2>
 <table class="caption-top table">
@@ -253,27 +254,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>結果の目標水準が上がると、解はどう変わるか</td>
+<td>アウトカムの目標水準が上がると、解はどう変わるか</td>
 <td><code>otSweep()</code></td>
-<td>結果の閾値</td>
+<td>アウトカムの閾値</td>
 <td>すべての条件の閾値</td>
 </tr>
 <tr class="even">
 <td>1つの条件の「高い」の定義に、どれだけ敏感か</td>
 <td><code>ctSweepS()</code></td>
 <td>1つの条件の閾値</td>
-<td>結果と、ほかの条件</td>
+<td>アウトカムと、ほかの条件</td>
 </tr>
 <tr class="odd">
 <td>複数の条件の定義が、一緒に変わったらどうなるか</td>
 <td><code>ctSweepM()</code></td>
 <td>複数の条件の閾値(格子状)</td>
-<td>結果の閾値</td>
+<td>アウトカムの閾値</td>
 </tr>
 <tr class="even">
 <td>目標水準と、条件の定義の両方が変わったらどうなるか</td>
 <td><code>dtSweep()</code></td>
-<td>結果と条件</td>
+<td>アウトカムと条件</td>
 <td>なし</td>
 </tr>
 </tbody>
@@ -305,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="スイープ1-ctsweeps-で1つの条件を動かす" class="level2">
 <h2 class="anchored" data-anchor-id="スイープ1-ctsweeps-で1つの条件を動かす">スイープ1: <code>ctSweepS()</code> で、1つの条件を動かす</h2>
-<p>「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。結果を <code>LOY &gt;= 7</code> に固定し、ほかの条件を7に固定して、<code>SER</code> の閾値を5から9まで動かします。</p>
+<p>「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。アウトカムを <code>LOY &gt;= 7</code> に固定し、ほかの条件を7に固定して、<code>SER</code> の閾値を5から9まで動かします。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>res_cts <span class="ot">&lt;-</span> <span class="fu">ctSweepS</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat          =</span> demo,</span>
@@ -338,8 +339,8 @@ Results by Threshold:
          9 QUA*SER*~ENV 0.917 0.122           1</code></pre>
 </div>
 </div>
-<p>新しい引数は、<code>sweep_var</code>(閾値を動かす条件)、<code>thrY</code>(固定する結果の閾値)、<code>thrX_default</code>(ほかのすべての条件の、固定する閾値)です。</p>
-<p>表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は <code>QUA*SER</code> です。9では、解に3つ目の要素が加わって <code>QUA*SER*~ENV</code> になり、被覆度は、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。</p>
+<p>新しい引数は、<code>sweep_var</code>(閾値を動かす条件)、<code>thrY</code>(固定するアウトカムの閾値)、<code>thrX_default</code>(ほかのすべての条件の、固定する閾値)です。</p>
+<p>表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は <code>QUA*SER</code> です。9では、解に3つ目の要素が加わって <code>QUA*SER*~ENV</code> になり、カバレッジは、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(demo<span class="sc">$</span>QUA <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>SER <span class="sc">&gt;=</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -350,7 +351,7 @@ Results by Threshold:
 </section>
 <section id="スイープ2-ctsweepm-で複数の条件を動かす" class="level2">
 <h2 class="anchored" data-anchor-id="スイープ2-ctsweepm-で複数の条件を動かす">スイープ2: <code>ctSweepM()</code> で、複数の条件を動かす</h2>
-<p>次に、3つの条件の閾値を、一度に動かします。<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれを、6、7、8で試します。3 x 3 x 3 = 27通りの組み合わせです。結果は <code>LOY &gt;= 7</code> のままです。</p>
+<p>次に、3つの条件の閾値を、一度に動かします。<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれを、6、7、8で試します。3 x 3 x 3 = 27通りの組み合わせです。アウトカムは <code>LOY &gt;= 7</code> のままです。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res_mcts <span class="ot">&lt;-</span> <span class="fu">ctSweepM</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat        =</span> demo,</span>
@@ -401,13 +402,13 @@ Results by Threshold:
 <ul>
 <li>27通りのうち、解があるのは14通りです。「品質が高い」を6と定義した組み合わせでは、解がまったくありません。</li>
 <li><code>QUA</code> が7で、<code>SER</code> が7または8のとき、<code>ENV</code> の閾値がどれであっても、解は <code>QUA*SER</code> です。これが<strong>安定した領域</strong>です。</li>
-<li><code>QUA</code> が8のとき、解は <code>ENV</code>(と <code>SER</code>)に左右されます。<code>ENV</code> が6なら、(<code>SER</code> が7または8のとき)<code>QUA*SER</code> です。<code>ENV</code> が7なら、<code>QUA*SER*~ENV</code> です。<code>ENV</code> が8なら、<code>QUA*ENV</code> だけのものから、<code>QUA*SER + QUA*ENV</code> のような2つの道をもつ解まで、さまざまです。「品質が高い」を厳しく定義すると、店舗環境の定義が重要になり始めます。</li>
+<li><code>QUA</code> が8のとき、解は <code>ENV</code>(と <code>SER</code>)に左右されます。<code>ENV</code> が6なら、(<code>SER</code> が7または8のとき)<code>QUA*SER</code> です。<code>ENV</code> が7なら、<code>QUA*SER*~ENV</code> です。<code>ENV</code> が8なら、<code>QUA*ENV</code> だけのものから、<code>QUA*SER + QUA*ENV</code> のような2つの経路をもつ解まで、さまざまです。「品質が高い」を厳しく定義すると、店舗環境の定義が重要になり始めます。</li>
 </ul>
 <p>格子を見ると、結論が頑健なところと、もろいところの両方が分かります。1回の分析では、これはできません。</p>
 </section>
-<section id="スイープ3-dtsweep-で結果と条件を一緒に動かす" class="level2">
-<h2 class="anchored" data-anchor-id="スイープ3-dtsweep-で結果と条件を一緒に動かす">スイープ3: <code>dtSweep()</code> で、結果と条件を一緒に動かす</h2>
-<p>二重閾値スイープは、2つの考え方を組み合わせて、結果の目標水準と条件の定義を、同時に動かします。ここでは、結果の閾値を3つ(6、7、8)、条件の組み合わせを8つ(<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれが6または7)にして、24のセルを作ります。</p>
+<section id="スイープ3-dtsweep-でアウトカムと条件を一緒に動かす" class="level2">
+<h2 class="anchored" data-anchor-id="スイープ3-dtsweep-でアウトカムと条件を一緒に動かす">スイープ3: <code>dtSweep()</code> で、アウトカムと条件を一緒に動かす</h2>
+<p>二重閾値スイープは、2つの考え方を組み合わせて、アウトカムの目標水準と条件の定義を、同時に動かします。ここでは、アウトカムの閾値を3つ(6、7、8)、条件の組み合わせを8つ(<code>QUA</code>、<code>SER</code>、<code>ENV</code> のそれぞれが6または7)にして、24のセルを作ります。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res_dts <span class="ot">&lt;-</span> <span class="fu">dtSweep</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat           =</span> demo,</span>
@@ -487,7 +488,7 @@ Results by Threshold:
 <tbody>
 <tr class="odd">
 <td><code>otSweep()</code></td>
-<td>結果の閾値ごとに1回</td>
+<td>アウトカムの閾値ごとに1回</td>
 <td>閾値5つ = 5回</td>
 </tr>
 <tr class="even">
@@ -502,7 +503,7 @@ Results by Threshold:
 </tr>
 <tr class="even">
 <td><code>dtSweep()</code></td>
-<td>結果の閾値 x 条件の格子</td>
+<td>アウトカムの閾値 x 条件の格子</td>
 <td>3 x (3 x 3 x 3) = 81回</td>
 </tr>
 </tbody>
@@ -522,7 +523,7 @@ Results by Threshold:
 </section>
 <section id="次回" class="level2">
 <h2 class="anchored" data-anchor-id="次回">次回</h2>
-<p><a href="../../../ja/articles/thsqca-beginners-3/index.html">第3回</a>では、3種類の解(複雑解、簡潔解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。</p>
+<p><a href="../../../ja/articles/thsqca-beginners-3/index.html">第3回</a>では、3種類の解(複雑解、倹約解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。</p>
 <p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
 
 
@@ -937,6 +938,7 @@ Results by Threshold:
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

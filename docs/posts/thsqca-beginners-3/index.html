@@ -109,6 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -458,7 +459,7 @@ Note: 1 threshold setting(s) had multiple solutions.
       Use generate_report() for full details.</code></pre>
 </div>
 </div>
-<p>At renewal of 5, the parsimonious analysis finds two equivalent solutions, <code>TRU + SUP</code> and <code>PRC + SUP</code>. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.</p>
+<p>At renewal of 5, the parsimonious analysis finds two minimal solutions of equal length (multiple minimal solutions), <code>TRU + SUP</code> and <code>PRC + SUP</code>. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.</p>
 <p>If you prefer a compact view, use <code>extract_mode = "essential"</code>. It separates the terms that are present in every solution from the rest.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res_ess <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"essential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -922,6 +923,7 @@ generate_report() for full analysis.</code></pre>
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

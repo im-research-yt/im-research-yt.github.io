@@ -1181,7 +1181,7 @@ Note: 1 threshold setting(s) had multiple solutions.
       Use generate_report() for full details.</code></pre>
 </div>
 </div>
-<p>At renewal of 5, the parsimonious analysis finds two equivalent solutions, <code>TRU + SUP</code> and <code>PRC + SUP</code>. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.</p>
+<p>At renewal of 5, the parsimonious analysis finds two minimal solutions of equal length (multiple minimal solutions), <code>TRU + SUP</code> and <code>PRC + SUP</code>. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.</p>
 <p>If you prefer a compact view, use <code>extract_mode = "essential"</code>. It separates the terms that are present in every solution from the rest.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">res_ess <span class="ot" style="color: #003B4F;
@@ -2142,7 +2142,7 @@ Results by Threshold:
 <li><code>expression</code>: the sufficient combination found. <code>*</code> means AND, <code>+</code> means OR, and <code>~</code> means NOT.</li>
 <li><code>inclS</code>: solution consistency. How reliably the cases covered by the solution are members of the outcome. Higher is better, and 1 is perfect.</li>
 <li><code>covS</code>: solution coverage. The share of the outcome cases that the solution explains.</li>
-<li><code>n_solutions</code>: how many equivalent minimal solutions were found (1 here).</li>
+<li><code>n_solutions</code>: how many minimal solutions were found (1 here).</li>
 </ul>
 <p>Now read the <code>expression</code> column from top to bottom.</p>
 <ul>

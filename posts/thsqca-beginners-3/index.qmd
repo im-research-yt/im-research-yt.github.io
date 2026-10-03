@@ -118,7 +118,7 @@ res_all <- run2(include = "?", extract_mode = "all")
 summary(res_all)
 ```
 
-At renewal of 5, the parsimonious analysis finds two equivalent solutions, `TRU + SUP` and `PRC + SUP`. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.
+At renewal of 5, the parsimonious analysis finds two minimal solutions of equal length (multiple minimal solutions), `TRU + SUP` and `PRC + SUP`. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.
 
 If you prefer a compact view, use `extract_mode = "essential"`. It separates the terms that are present in every solution from the rest.
 

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Yuki Toyoda">
 <meta name="dcterms.date" content="2026-10-09">
-<meta name="description" content="複雑解、簡潔解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
+<meta name="description" content="複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
 
 <title>ThSQCA 入門 第3回: 解の種類と、複数の解 – Yuki Toyoda’s Blog</title>
 <style>
@@ -109,17 +109,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
 
 <link rel="stylesheet" href="../../../styles.css">
 <meta property="og:title" content="ThSQCA 入門 第3回: 解の種類と、複数の解 – Yuki Toyoda’s Blog">
-<meta property="og:description" content="複雑解、簡潔解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
+<meta property="og:description" content="複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
 <meta property="og:image" content="https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/thumbnail.png">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="ThSQCA 入門 第3回: 解の種類と、複数の解 – Yuki Toyoda’s Blog">
-<meta name="twitter:description" content="複雑解、簡潔解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
+<meta name="twitter:description" content="複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。">
 <meta name="twitter:image" content="https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/thumbnail.png">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
@@ -204,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    複雑解、簡潔解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。
+    複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。
   </div>
 </div>
 
@@ -233,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="../../../ja/articles/thsqca-beginners-2/index.html">第2回</a>では、4つのスイープをすべて実行しました。丁寧な分析には、まだ2つの問いが残っています。1つ目は、QCAには3種類の解(複雑解、簡潔解、中間解)がありますが、どれを使うべきか、です。2つ目は、1つのセルに最小解が複数あるときは、どうするか、です。この回では、2つ目の、もっと小さな練習用データで、両方に答えます。</p>
+<p><a href="../../../ja/articles/thsqca-beginners-2/index.html">第2回</a>では、4つのスイープをすべて実行しました。丁寧な分析には、まだ2つの問いが残っています。1つ目は、QCAには3種類の解(複雑解、倹約解、中間解)がありますが、どれを使うべきか、です。2つ目は、1つのセルに最小解が複数あるときは、どうするか、です。この回では、2つ目の、もっと小さな練習用データで、両方に答えます。</p>
 <section id="つ目の練習用データ" class="level2">
 <h2 class="anchored" data-anchor-id="つ目の練習用データ">2つ目の練習用データ</h2>
 <p>企業向けソフトウェアのアカウントを、60件シミュレーションで作ります。各アカウントは、更新スコア(<code>RNW</code>)と、3つの評価をもちます。信頼(<code>TRU</code>)、価格(<code>PRC</code>)、サポート(<code>SUP</code>)で、どれも0〜10点です。この模擬の世界では、信頼が高く、かつ、価格かサポートのどちらかが高いときに、更新が高くなります。3つの評価は強く相関しているので、条件の組み合わせのうち、観察されないものが出てきます。これは意図的です。観察されない組み合わせこそ、3種類の解が、違う扱いをするものだからです。</p>
@@ -277,9 +278,9 @@ To cite package QCA in publications, please use:
 </div>
 </div>
 </section>
-<section id="観察されない組み合わせ論理的残余" class="level2">
-<h2 class="anchored" data-anchor-id="観察されない組み合わせ論理的残余">観察されない組み合わせ(「論理的残余」)</h2>
-<p>条件が3つあり、それぞれが高いか低いかなら、可能な組み合わせは 2 x 2 x 2 = 8通りです。QCAは、それらを<strong>真理表</strong>に並べます。QCAパッケージで、真理表を手で作ってみましょう。結果は更新が5以上、各条件の「高い」は7以上とします。</p>
+<section id="観察されない組み合わせ論理残余" class="level2">
+<h2 class="anchored" data-anchor-id="観察されない組み合わせ論理残余">観察されない組み合わせ(「論理残余」)</h2>
+<p>条件が3つあり、それぞれが高いか低いかなら、可能な組み合わせは 2 x 2 x 2 = 8通りです。QCAは、それらを<strong>真理表</strong>に並べます。QCAパッケージで、真理表を手で作ってみましょう。アウトカムは更新が5以上、各条件の「高い」は7以上とします。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bin2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">RNW =</span> <span class="fu">as.integer</span>(demo2<span class="sc">$</span>RNW <span class="sc">&gt;=</span> <span class="dv">5</span>),</span>
@@ -307,8 +308,8 @@ To cite package QCA in publications, please use:
 8    1   1   1     1     13  1.000 1.000</code></pre>
 </div>
 </div>
-<p>左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、<strong>論理的残余</strong>です。列 <code>n</code> は、各組み合わせのアカウント数、<code>incl</code> は、それらがどれだけ一貫して更新しているか、<code>OUT</code> は、組み合わせが十分と認められるだけの整合度があるとき1になります。</p>
-<p>残余が重要なのは、ブール最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。</p>
+<p>左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、<strong>論理残余</strong>です。列 <code>n</code> は、各組み合わせのアカウント数、<code>incl</code> は、それらがどれだけ一貫して更新しているか、<code>OUT</code> は、組み合わせが十分と認められるだけの一貫性があるとき1になります。</p>
+<p>残余が重要なのは、Boolean最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -332,7 +333,7 @@ To cite package QCA in publications, please use:
 <td><code>NULL</code></td>
 </tr>
 <tr class="even">
-<td>簡潔解</td>
+<td>倹約解</td>
 <td>式を短くする、すべての残余</td>
 <td><code>"?"</code></td>
 <td><code>NULL</code></td>
@@ -349,7 +350,7 @@ To cite package QCA in publications, please use:
 </section>
 <section id="種類の解を並べる" class="level2">
 <h2 class="anchored" data-anchor-id="種類の解を並べる">3種類の解を並べる</h2>
-<p>同じ結果の閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。</p>
+<p>同じアウトカム閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>thr2  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">TRU =</span> <span class="dv">7</span>, <span class="at">PRC =</span> <span class="dv">7</span>, <span class="at">SUP =</span> <span class="dv">7</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cond2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TRU"</span>, <span class="st">"PRC"</span>, <span class="st">"SUP"</span>)</span>
@@ -382,8 +383,8 @@ generate_report() for full analysis.</code></pre>
 4    8        No solution    No solution        No solution</code></pre>
 </div>
 </div>
-<p>出力と一緒に表示される警告は、ThSQCAからの注意です。更新が5のとき、簡潔解の分析には、同じ長さの解が複数あります。これは、後で扱います。</p>
-<p>更新が7のときは、3つとも一致して(<code>TRU*SUP</code>)、8ではどれも解がありません。5と6では、簡潔解のほうが短くなります。たとえば、更新が5のとき、簡潔解は <code>TRU + SUP</code> ですが、複雑解は <code>SUP + TRU*PRC</code> です。<code>TRU</code> だけの項は、「信頼は高いが、価格とサポートの評価が低い」という組み合わせをカバーしますが、この組み合わせは、データに現れません。簡潔解は、この観察されない組み合わせも十分だろう、と仮定する立場です。複雑解は、そのような仮定を置きません。このデータでは、たまたま、中間解は複雑解と一致します。</p>
+<p>出力と一緒に表示される警告は、ThSQCAからの注意です。更新が5のとき、倹約解の分析には、同じ長さの解が複数あります。これは、後で扱います。</p>
+<p>更新が7のときは、3つとも一致して(<code>TRU*SUP</code>)、8ではどれも解がありません。5と6では、倹約解のほうが短くなります。たとえば、更新が5のとき、倹約解は <code>TRU + SUP</code> ですが、複雑解は <code>SUP + TRU*PRC</code> です。<code>TRU</code> だけの項は、「信頼は高いが、価格とサポートの評価が低い」という組み合わせをカバーしますが、この組み合わせは、データに現れません。倹約解は、この観察されない組み合わせも十分だろう、と仮定する立場です。複雑解は、そのような仮定を置きません。このデータでは、たまたま、中間解は複雑解と一致します。</p>
 <p>選び方です。</p>
 <table class="caption-top table">
 <colgroup>
@@ -408,7 +409,7 @@ generate_report() for full analysis.</code></pre>
 <td>式が長くなることがある</td>
 </tr>
 <tr class="even">
-<td>簡潔解</td>
+<td>倹約解</td>
 <td>最大限の単純化を見たいとき</td>
 <td>式がいちばん短い</td>
 <td>もっともらしくない残余に頼ることがある</td>
@@ -425,7 +426,7 @@ generate_report() for full analysis.</code></pre>
 </section>
 <section id="つのセルに最小解が複数あるとき" class="level2">
 <h2 class="anchored" data-anchor-id="つのセルに最小解が複数あるとき">1つのセルに、最小解が複数あるとき</h2>
-<p>ブール最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(<code>M1</code>)を報告し、解の数を <code>n_solutions</code> に記録します。すべてを見るには、<code>extract_mode = "all"</code> を使います。</p>
+<p>Boolean最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(<code>M1</code>)を報告し、解の数を <code>n_solutions</code> に記録します。すべてを見るには、<code>extract_mode = "all"</code> を使います。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res_all <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -456,7 +457,7 @@ Note: 1 threshold setting(s) had multiple solutions.
       Use generate_report() for full details.</code></pre>
 </div>
 </div>
-<p>更新が5のとき、簡潔解の分析は、等価な2つの解、<code>TRU + SUP</code> と <code>PRC + SUP</code> を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。</p>
+<p>更新が5のとき、倹約解の分析は、等しく最小な2つの解、<code>TRU + SUP</code> と <code>PRC + SUP</code> を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。</p>
 <p>コンパクトに見たいときは、<code>extract_mode = "essential"</code> を使います。すべての解に含まれる項と、それ以外を分けます。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res_ess <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"essential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -920,6 +921,7 @@ generate_report() for full analysis.</code></pre>
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

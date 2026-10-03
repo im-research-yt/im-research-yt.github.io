@@ -30,7 +30,7 @@ website:
       - icon: github
         href: https://github.com/im-research-yt
   page-footer:
-    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University"
+    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University\n\nDeveloped with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作"
 
 format:
   html:
@@ -38,3 +38,7 @@ format:
       - cosmo
       - brand
     css: styles.css
+    include-in-header:
+      text: |
+        <script data-goatcounter="https://yuki-toyoda.goatcounter.com/count"
+                async src="https://gc.zgo.at/count.js"></script>

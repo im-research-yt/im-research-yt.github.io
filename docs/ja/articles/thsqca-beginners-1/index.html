@@ -109,6 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -236,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>これは、閾値スイープ質的比較分析(QCA)のRパッケージ <strong>ThSQCA</strong> を学ぶ、入門シリーズの第1回です。QCAを事前に知っている必要はありません。この回の終わりには、閾値スイープを自分で実行して、結果を読めるようになります。</p>
 <section id="知っておくべきひとつの考え方" class="level2">
 <h2 class="anchored" data-anchor-id="知っておくべきひとつの考え方">知っておくべき、ひとつの考え方</h2>
-<p>QCAは、ある結果にとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。</p>
+<p>QCAは、あるアウトカムにとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。</p>
 <p>これを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、<strong>閾値</strong>を選びます。得点が閾値以上なら、その変数で「高い」とします。</p>
 <p>ここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。</p>
 <p>ThSQCAは、<a href="https://cran.r-project.org/package=QCA">QCA</a> パッケージの代わりではありません。閾値ごとに、QCAの <code>truthTable()</code> と <code>minimize()</code> を、毎回同じ設定で呼び出して、結果を集めます。</p>
@@ -283,7 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ステップ3-スイープを実行する" class="level2">
 <h2 class="anchored" data-anchor-id="ステップ3-スイープを実行する">ステップ3: スイープを実行する</h2>
-<p>知りたいのは、<em>「高いロイヤルティ」の基準を上げると、答えがどう変わるか</em>、です。そこで、3つの条件の閾値は7に固定し、結果の閾値を5から8まで動かします。これを<strong>結果の閾値スイープ</strong>と呼び、関数は <code>otSweep()</code> です。</p>
+<p>知りたいのは、<em>「高いロイヤルティ」の基準を上げると、答えがどう変わるか</em>、です。そこで、3つの条件の閾値は7に固定し、アウトカムの閾値を5から8まで動かします。これを<strong>アウトカム閾値スイープ</strong>と呼び、関数は <code>otSweep()</code> です。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">otSweep</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat         =</span> demo,</span>
@@ -308,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>outcome</code></td>
-<td>結果の列</td>
+<td>アウトカムの列</td>
 </tr>
 <tr class="odd">
 <td><code>conditions</code></td>
@@ -316,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>sweep_range</code></td>
-<td>試す結果の閾値。ここでは5、6、7、8</td>
+<td>試すアウトカムの閾値。ここでは5、6、7、8</td>
 </tr>
 <tr class="odd">
 <td><code>thrX</code></td>
@@ -324,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>ここに書いていない設定が2つあります。既定値があるためです。組み合わせが十分と認められる最低の整合度(<code>incl.cut</code>、既定は0.8)と、組み合わせごとの最低の事例数(<code>n.cut</code>、既定は1)です。</p>
+<p>ここに書いていない設定が2つあります。既定値があるためです。組み合わせが十分と認められる最低の一貫性(<code>incl.cut</code>、既定は0.8)と、組み合わせごとの最低の事例数(<code>n.cut</code>、既定は1)です。</p>
 </section>
 <section id="ステップ4-結果を読む" class="level2">
 <h2 class="anchored" data-anchor-id="ステップ4-結果を読む">ステップ4: 結果を読む</h2>
@@ -349,26 +350,26 @@ Results by Threshold:
     8       No solution    NA    NA           0</code></pre>
 </div>
 </div>
-<p>表は、結果の閾値ごとに1行です。列は、次のとおりです。</p>
+<p>表は、アウトカムの閾値ごとに1行です。列は、次のとおりです。</p>
 <ul>
-<li><code>thrY</code>: その行で使った結果の閾値。1行目では、「高いロイヤルティ」は <code>LOY &gt;= 5</code> を意味します。</li>
+<li><code>thrY</code>: その行で使ったアウトカムの閾値。1行目では、「高いロイヤルティ」は <code>LOY &gt;= 5</code> を意味します。</li>
 <li><code>expression</code>: 見つかった十分な組み合わせ。<code>*</code> はAND、<code>+</code> はOR、<code>~</code> はNOTです。</li>
-<li><code>inclS</code>: 解の整合度。解がカバーする事例が、どれだけ確実に、結果の集合に入っているか。高いほどよく、1が完全です。</li>
-<li><code>covS</code>: 解の被覆度。結果をもつ事例のうち、解が説明する割合です。</li>
+<li><code>inclS</code>: 解の一貫性。解がカバーする事例が、どれだけ確実に、アウトカムの集合に入っているか。高いほどよく、1が完全です。</li>
+<li><code>covS</code>: 解のカバレッジ。アウトカムをもつ事例のうち、解が説明する割合です。</li>
 <li><code>n_solutions</code>: 見つかった、等価な最小解の数(ここでは1)。</li>
 </ul>
 <p>では、<code>expression</code> の列を、上から下へ読みましょう。</p>
 <ul>
 <li><code>LOY &gt;= 5</code> と <code>LOY &gt;= 6</code> では、2つの組み合わせが十分です。<code>QUA*SER</code>(品質が高く、サービスが高い)と、<code>QUA*ENV</code>(品質が高く、店舗環境が高い)です。</li>
 <li><code>LOY &gt;= 7</code> では、<code>QUA*SER</code> だけが残ります。</li>
-<li><code>LOY &gt;= 8</code> では、結果は <strong>No solution</strong>(解なし)です。この水準では、3つの条件のどの組み合わせも、必要な整合度に届きませんでした。</li>
+<li><code>LOY &gt;= 8</code> では、結果は <strong>No solution</strong>(解なし)です。この水準では、3つの条件のどの組み合わせも、必要な一貫性に届きませんでした。</li>
 </ul>
-<p>これは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。<code>LOY &gt;= 6</code> だけを分析していたら、道が2つあると報告したでしょう。<code>LOY &gt;= 7</code> だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。</p>
-<p>「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの道が存在しない、という意味ではありません。このデータとこの設定では、QCAが、整合度の条件を満たす最小解を作れなかった、という意味です。</p>
+<p>これは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。<code>LOY &gt;= 6</code> だけを分析していたら、経路が2つあると報告したでしょう。<code>LOY &gt;= 7</code> だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。</p>
+<p>「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの経路が存在しない、という意味ではありません。このデータとこの設定では、QCAが、一貫性の条件を満たす最小解を作れなかった、という意味です。</p>
 </section>
 <section id="次回" class="level2">
 <h2 class="anchored" data-anchor-id="次回">次回</h2>
-<p>次回は、4種類のスイープ(結果、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>
+<p>次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>
 <p>パッケージの完全なチュートリアルは、<a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCAのドキュメント</a>(英語)にあります。手法そのものは、<a href="https://doi.org/10.1007/s11135-026-03092-3">Toyoda (2026), <em>Quality &amp; Quantity</em></a> で説明しています。</p>
 <p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
 
@@ -784,6 +785,7 @@ Results by Threshold:
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
