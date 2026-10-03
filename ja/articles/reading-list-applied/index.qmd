@@ -12,18 +12,18 @@ description: "マーケティングと経営学で QCA が使われた論文と�
 ## 1. マーケティング・サービスでの応用
 
 - Ordanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. *Journal of Service Research*, 17(2), 134-149. [https://doi.org/10.1177/1094670513513337](https://doi.org/10.1177/1094670513513337)
-  高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。
+  - 高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。
 - Frambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. *Journal of Business Research*, 69(4), 1428-1436. [https://doi.org/10.1016/j.jbusres.2015.10.120](https://doi.org/10.1016/j.jbusres.2015.10.120)
-  顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。
+  - 顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。
 
 ## 2. 分析の進め方・報告のしかた(実務ガイド)
 
 - Greckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. *Strategic Organization*, 16(4), 482-495. [https://doi.org/10.1177/1476127018786487](https://doi.org/10.1177/1476127018786487)
-  戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。
+  - 戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。
 - Pappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. *International Journal of Information Management*, 58, Article 102310. [https://doi.org/10.1016/j.ijinfomgt.2021.102310](https://doi.org/10.1016/j.ijinfomgt.2021.102310)
-  情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。
+  - 情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。
 - Park, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. *MIS Quarterly*, 44(4), 1493-1520. [https://doi.org/10.25300/MISQ/2020/13879](https://doi.org/10.25300/MISQ/2020/13879)
-  複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。
+  - 複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。
 
 ## 3. しきい値の選び方を扱った論文
 
