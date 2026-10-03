@@ -4,21 +4,21 @@
     "href": "tools.html",
     "title": "Tools",
     "section": "",
-    "text": "These tools run in your browser. Nothing you enter is sent to a server."
+    "text": "These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data."
   },
   {
     "objectID": "tools.html#qca",
     "href": "tools.html#qca",
     "title": "Tools",
     "section": "QCA",
-    "text": "QCA\n\nQCA Quickstart: creates a first QCA analysis script from the column names of your data.\nSweep Builder: turns that setup into a threshold-sweep script for ThSQCA."
+    "text": "QCA\n\nQCA Quickstart (Japanese / English): creates a first QCA analysis script from the column names of your data.\nSweep Builder (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA."
   },
   {
     "objectID": "tools.html#marketing-research-and-multivariate-analysis",
     "href": "tools.html#marketing-research-and-multivariate-analysis",
     "title": "Tools",
     "section": "Marketing research and multivariate analysis",
-    "text": "Marketing research and multivariate analysis\nThe screens of these seven tools are in Japanese; English versions will be added over time. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer.\n\nPrice sensitivity (Van Westendorp PSM) (Japanese screen): Finds acceptable price ranges from four price questions.\nCluster analysis (Japanese screen): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.\nPrincipal component and factor analysis (Japanese screen): Varimax and promax rotation, matched to R’s stats functions.\nCorrespondence analysis (Japanese screen): Maps rows and columns of a cross table; matches the ca package.\nDecision tree (Japanese screen): Classification and regression trees, matched to rpart (cp = 0).\nConjoint analysis: design (Japanese screen): Builds an orthogonal set of profiles for your attributes and levels.\nConjoint analysis: estimation (Japanese screen): Part-worth utilities and importance, matched to the conjoint package."
+    "text": "Marketing research and multivariate analysis\nEach of these seven tools has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer.\n\nPrice sensitivity (Van Westendorp PSM) (Japanese / English): Finds acceptable price ranges from four price questions.\nCluster analysis (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.\nPrincipal component and factor analysis (Japanese / English): Varimax and promax rotation, matched to R’s stats functions.\nCorrespondence analysis (Japanese / English): Maps rows and columns of a cross table; matches the ca package.\nDecision tree (Japanese / English): Classification and regression trees, matched to rpart (cp = 0).\nConjoint analysis: design (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.\nConjoint analysis: estimation (Japanese / English): Part-worth utilities and importance, matched to the conjoint package."
   },
   {
     "objectID": "tools.html#check-the-results-in-r",
@@ -837,21 +837,21 @@
     "href": "ja/tools.html",
     "title": "ツール",
     "section": "",
-    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nこれらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。"
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nこれらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。ページの閲覧数だけを、Cookieを使わないアクセス解析(GoatCounter)で数えています。入力したデータは、この解析に送られません。"
   },
   {
     "objectID": "ja/tools.html#qca",
     "href": "ja/tools.html#qca",
     "title": "ツール",
     "section": "QCA",
-    "text": "QCA\n\nQCA Quickstart(英語画面): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(英語画面): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。"
+    "text": "QCA\n\nQCA Quickstart(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。"
   },
   {
     "objectID": "ja/tools.html#マーケティング調査多変量解析",
     "href": "ja/tools.html#マーケティング調査多変量解析",
     "title": "ツール",
     "section": "マーケティング調査・多変量解析",
-    "text": "マーケティング調査・多変量解析\n\n価格感度分析(PSM): 4つの価格質問から、受け入れられる価格帯を求めます。\nクラスター分析: 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。\n主成分分析・因子分析: バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。\nコレスポンデンス分析: クロス表の行と列を同じ地図に描きます。ca パッケージと一致。\n決定木: 分類木と回帰木。rpart(cp=0)と同じ計算です。\nコンジョイント分析:直交計画: 属性と水準から、直交するプロファイルの組を作ります。\nコンジョイント分析:効用値の推定: 部分効用値と重要度。conjoint パッケージと一致。"
+    "text": "マーケティング調査・多変量解析\nこの7つのツールは、右上のボタンで、日本語と英語の画面を切り替えられます。\n\n価格感度分析(PSM)(日本語・英語): 4つの価格質問から、受け入れられる価格帯を求めます。\nクラスター分析(日本語・英語): 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。\n主成分分析・因子分析(日本語・英語): バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。\nコレスポンデンス分析(日本語・英語): クロス表の行と列を同じ地図に描きます。ca パッケージと一致。\n決定木(日本語・英語): 分類木と回帰木。rpart(cp=0)と同じ計算です。\nコンジョイント分析:直交計画(日本語・英語): 属性と水準から、直交するプロファイルの組を作ります。\nコンジョイント分析:効用値の推定(日本語・英語): 部分効用値と重要度。conjoint パッケージと一致。"
   },
   {
     "objectID": "ja/tools.html#rで検算できます",

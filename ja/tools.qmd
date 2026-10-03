@@ -7,7 +7,7 @@ description: "QCAとマーケティング調査のための、ブラウザで動
 [日本語版トップ](index.qmd) | [はじめに](start.qmd) | [ツール](tools.qmd) | [ソフトウェア](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
 :::
 
-これらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。
+これらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。ページの閲覧数だけを、Cookieを使わないアクセス解析(GoatCounter)で数えています。入力したデータは、この解析に送られません。
 
 ::: {.callout-note}
 ## 学習用です
@@ -16,18 +16,20 @@ description: "QCAとマーケティング調査のための、ブラウザで動
 
 ## QCA
 
-- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)(英語画面): データの列名から、最初のQCA分析スクリプトを作ります。
-- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)(英語画面): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。
+- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。
+- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。
 
 ## マーケティング調査・多変量解析
 
-- [価格感度分析(PSM)](https://im-research-yt.github.io/analysis-tools/psm.html): 4つの価格質問から、受け入れられる価格帯を求めます。
-- [クラスター分析](https://im-research-yt.github.io/analysis-tools/cluster.html): 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。
-- [主成分分析・因子分析](https://im-research-yt.github.io/analysis-tools/pca.html): バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。
-- [コレスポンデンス分析](https://im-research-yt.github.io/analysis-tools/ca.html): クロス表の行と列を同じ地図に描きます。ca パッケージと一致。
-- [決定木](https://im-research-yt.github.io/analysis-tools/decision_tree.html): 分類木と回帰木。rpart(cp=0)と同じ計算です。
-- [コンジョイント分析:直交計画](https://im-research-yt.github.io/analysis-tools/conjoint_design.html): 属性と水準から、直交するプロファイルの組を作ります。
-- [コンジョイント分析:効用値の推定](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html): 部分効用値と重要度。conjoint パッケージと一致。
+この7つのツールは、右上のボタンで、日本語と英語の画面を切り替えられます。
+
+- [価格感度分析(PSM)](https://im-research-yt.github.io/analysis-tools/psm.html)(日本語・英語): 4つの価格質問から、受け入れられる価格帯を求めます。
+- [クラスター分析](https://im-research-yt.github.io/analysis-tools/cluster.html)(日本語・英語): 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。
+- [主成分分析・因子分析](https://im-research-yt.github.io/analysis-tools/pca.html)(日本語・英語): バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。
+- [コレスポンデンス分析](https://im-research-yt.github.io/analysis-tools/ca.html)(日本語・英語): クロス表の行と列を同じ地図に描きます。ca パッケージと一致。
+- [決定木](https://im-research-yt.github.io/analysis-tools/decision_tree.html)(日本語・英語): 分類木と回帰木。rpart(cp=0)と同じ計算です。
+- [コンジョイント分析:直交計画](https://im-research-yt.github.io/analysis-tools/conjoint_design.html)(日本語・英語): 属性と水準から、直交するプロファイルの組を作ります。
+- [コンジョイント分析:効用値の推定](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html)(日本語・英語): 部分効用値と重要度。conjoint パッケージと一致。
 
 ## Rで検算できます
 
