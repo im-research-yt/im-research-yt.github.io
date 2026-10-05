@@ -60,7 +60,7 @@
     "href": "software.html#learn-it-step-by-step",
     "title": "ThSQCA",
     "section": "Learn it step by step",
-    "text": "Learn it step by step\n\nIntroducing ThSQCA\nThSQCA for beginners, part 1"
+    "text": "Learn it step by step\n\nIntroducing ThSQCA: threshold-sweep QCA in R\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\nThe full reading order is on the Start here page."
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -887,6 +887,13 @@
     "title": "ThSQCA",
     "section": "手法の論文",
     "text": "手法の論文\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "ja/software.html#順に学ぶ",
+    "href": "ja/software.html#順に学ぶ",
+    "title": "ThSQCA",
+    "section": "順に学ぶ",
+    "text": "順に学ぶ\n\nThSQCA の紹介: Rで閾値スイープQCAを行う\nThSQCA 入門 第1回: はじめての閾値スイープ\nThSQCA 入門 第2回: 4つのスイープと、範囲の決め方\nThSQCA 入門 第3回: 解の種類と、複数の解\nThSQCA 入門 第4回: 結果の報告と確認\n\n読む順の全体は、はじめにのページにあります。"
   },
   {
     "objectID": "ja/tools.html",

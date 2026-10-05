@@ -24,5 +24,10 @@ Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical di
 
 ## Learn it step by step
 
-- [Introducing ThSQCA](posts/introducing-thsqca/index.qmd)
-- [ThSQCA for beginners, part 1](posts/thsqca-beginners-1/index.qmd)
+- [Introducing ThSQCA: threshold-sweep QCA in R](posts/introducing-thsqca/index.qmd)
+- [ThSQCA for beginners, part 1: your first threshold sweep](posts/thsqca-beginners-1/index.qmd)
+- [Part 2: the four sweeps and how to choose a range](posts/thsqca-beginners-2/index.qmd)
+- [Part 3: solution types and multiple solutions](posts/thsqca-beginners-3/index.qmd)
+- [Part 4: reporting and checking your results](posts/thsqca-beginners-4/index.qmd)
+
+The full reading order is on the [Start here](start-here.qmd) page.

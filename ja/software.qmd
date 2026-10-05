@@ -24,3 +24,13 @@ library(ThSQCA)
 ## 手法の論文
 
 Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
+
+## 順に学ぶ
+
+- [ThSQCA の紹介: Rで閾値スイープQCAを行う](articles/introducing-thsqca/index.qmd)
+- [ThSQCA 入門 第1回: はじめての閾値スイープ](articles/thsqca-beginners-1/index.qmd)
+- [ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方](articles/thsqca-beginners-2/index.qmd)
+- [ThSQCA 入門 第3回: 解の種類と、複数の解](articles/thsqca-beginners-3/index.qmd)
+- [ThSQCA 入門 第4回: 結果の報告と確認](articles/thsqca-beginners-4/index.qmd)
+
+読む順の全体は、[はじめに](start.qmd)のページにあります。
