@@ -3,7 +3,7 @@ sidebar: false
 title: "ThSQCA for beginners, part 1: your first threshold sweep"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-07"
+date: "2026-10-05"
 categories: [R, ThSQCA, tutorial]
 description: "A step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA."
 ---

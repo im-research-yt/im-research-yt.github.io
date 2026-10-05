@@ -3,7 +3,7 @@ sidebar: false
 title: "ThSQCA for beginners, part 3: solution types and multiple solutions"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-09"
+date: "2026-10-05"
 categories: [R, ThSQCA, tutorial]
 description: "Complex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution."
 ---

@@ -2,7 +2,7 @@
 title: "ThSQCA 入門 第4回: 結果の報告と確認"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-10"
+date: "2026-10-05"
 categories: [ThSQCA, tutorial]
 description: "閾値スイープを報告にまとめます。generate_report()、構成図、QCAパッケージとの照合、報告のための短いチェックリストを扱います。"
 ---

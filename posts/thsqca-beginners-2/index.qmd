@@ -3,7 +3,7 @@ sidebar: false
 title: "ThSQCA for beginners, part 2: the four sweeps and how to choose a range"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-08"
+date: "2026-10-05"
 categories: [R, ThSQCA, tutorial]
 description: "Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend."
 ---

@@ -3,7 +3,7 @@ sidebar: false
 title: "ThSQCA for beginners, part 4: reporting and checking your results"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-10"
+date: "2026-10-05"
 categories: [R, ThSQCA, tutorial]
 description: "Turn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting."
 ---

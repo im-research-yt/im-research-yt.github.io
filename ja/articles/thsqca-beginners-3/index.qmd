@@ -2,7 +2,7 @@
 title: "ThSQCA 入門 第3回: 解の種類と、複数の解"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-09"
+date: "2026-10-05"
 categories: [ThSQCA, tutorial]
 description: "複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。"
 ---

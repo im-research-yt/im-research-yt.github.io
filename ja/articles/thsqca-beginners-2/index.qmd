@@ -2,7 +2,7 @@
 title: "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-08"
+date: "2026-10-05"
 categories: [ThSQCA, tutorial]
 description: "アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。"
 ---

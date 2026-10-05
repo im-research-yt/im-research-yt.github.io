@@ -2,7 +2,7 @@
 title: "ThSQCA 入門 第1回: はじめての閾値スイープ"
 author: "Yuki Toyoda"
 image: thumbnail.png
-date: "2026-10-07"
+date: "2026-10-05"
 categories: [ThSQCA, tutorial]
 description: "Rで閾値スイープQCAを、順を追って学びます。データは要りません。小さな練習用データを作り、ThSQCAで最初のスイープを実行します。"
 ---
