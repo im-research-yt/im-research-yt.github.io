@@ -30,7 +30,7 @@ website:
       - icon: github
         href: https://github.com/im-research-yt
   page-footer:
-    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University\n\nDeveloped with the assistance of Claude (Anthropic)"
+    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University\n\nDeveloped with the assistance of Claude (Anthropic)\n\nPosts about R are also shared via [R-bloggers](https://www.r-bloggers.com/)."
 
 format:
   html:
