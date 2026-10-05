@@ -479,6 +479,35 @@ Results by Threshold:
 </div>
 </div>
 <p>Reading it: at <code>LOY &gt;= 6</code>, every one of the 8 condition definitions gives a solution, usually <code>QUA*SER</code>, and sometimes <code>QUA*SER + QUA*ENV</code>. At <code>LOY &gt;= 7</code>, only two definitions still give a solution, the ones where <code>QUA</code> and <code>SER</code> are both at 7. At <code>LOY &gt;= 8</code>, none do. In this data set, raising the target level is the strongest driver of change.</p>
+<p>A picture makes the same point faster. The next chunk draws the solution coverage of all 24 cells as a heat map. Each row is one definition of the three conditions, each column is one outcome threshold, and “none” marks a cell with no solution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> res_dts<span class="sc">$</span>summary</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">tapply</span>(s<span class="sc">$</span>covS, <span class="fu">list</span>(s<span class="sc">$</span>combo_id, s<span class="sc">$</span>thrY), <span class="cf">function</span>(x) x[<span class="dv">1</span>])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>lab <span class="ot">&lt;-</span> <span class="fu">as.character</span>(s<span class="sc">$</span>thrX[<span class="fu">match</span>(<span class="fu">rownames</span>(m), s<span class="sc">$</span>combo_id)])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="dv">11</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(<span class="at">x =</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(m)), <span class="at">y =</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(m)), <span class="at">z =</span> <span class="fu">t</span>(m),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#FFFFFF"</span>, <span class="st">"#233A9A"</span>))(<span class="dv">50</span>), <span class="at">zlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">xaxt =</span> <span class="st">"n"</span>, <span class="at">yaxt =</span> <span class="st">"n"</span>, <span class="at">xlab =</span> <span class="st">"Outcome threshold (thrY)"</span>, <span class="at">ylab =</span> <span class="st">""</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Solution coverage in the 24 cells"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(m)), <span class="at">labels =</span> <span class="fu">colnames</span>(m))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">at =</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(m)), <span class="at">labels =</span> lab, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">nrow</span>(m))) <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="fu">ncol</span>(m))) {</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(m[i, j])) <span class="fu">text</span>(j, i, <span class="st">"none"</span>, <span class="at">col =</span> <span class="st">"grey50"</span>, <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="fu">text</span>(j, i, <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, m[i, j]), <span class="at">cex =</span> <span class="fl">0.8</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" alt="Heat map with 8 rows (definitions of the three conditions, each at 6 or 7) and 3 columns (outcome thresholds 6, 7, and 8). All 8 cells in the threshold 6 column are filled, with coverage between 0.37 and 0.71. In the threshold 7 column only two cells are filled, both 0.66, for the rows where quality and service are both 7. The threshold 8 column is empty, marked none." width="768"></p>
+<figcaption>Solution coverage in the 24 cells of the dual threshold sweep. Darker cells have higher coverage; cells marked none have no solution.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The column for <code>LOY &gt;= 6</code> is filled in every row, the column for <code>LOY &gt;= 7</code> in only two, and the column for <code>LOY &gt;= 8</code> in none.</p>
 </section>
 <section id="how-big-is-a-sweep" class="level2">
 <h2 class="anchored" data-anchor-id="how-big-is-a-sweep">How big is a sweep?</h2>

@@ -309,6 +309,39 @@ To cite package QCA in publications, please use:
 </div>
 </div>
 <p>左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、<strong>論理残余</strong>です。列 <code>n</code> は、各組み合わせのアカウント数、<code>incl</code> は、それらがどれだけ一貫して更新しているか、<code>OUT</code> は、組み合わせが十分と認められるだけの一貫性があるとき1になります。</p>
+<p>件数を棒グラフにすると、欠けている組み合わせがすぐ分かります。1本の棒が、可能な8通りのうちの1つで、真理表の行と同じ順に並べています。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cells <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">SUP =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">PRC =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">TRU =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)[, <span class="fu">c</span>(<span class="st">"TRU"</span>, <span class="st">"PRC"</span>, <span class="st">"SUP"</span>)]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cells<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">mapply</span>(<span class="cf">function</span>(a, b, c) <span class="fu">sum</span>(bin2<span class="sc">$</span>TRU <span class="sc">==</span> a <span class="sc">&amp;</span> bin2<span class="sc">$</span>PRC <span class="sc">==</span> b <span class="sc">&amp;</span> bin2<span class="sc">$</span>SUP <span class="sc">==</span> c),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                  cells<span class="sc">$</span>TRU, cells<span class="sc">$</span>PRC, cells<span class="sc">$</span>SUP)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cells<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">ifelse</span>(cells<span class="sc">$</span>TRU <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"TRU"</span>, <span class="st">"~TRU"</span>), <span class="st">"*"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(cells<span class="sc">$</span>PRC <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"PRC"</span>, <span class="st">"~PRC"</span>), <span class="st">"*"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">ifelse</span>(cells<span class="sc">$</span>SUP <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"SUP"</span>, <span class="st">"~SUP"</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">4.5</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>n_rev <span class="ot">&lt;-</span> <span class="fu">rev</span>(cells<span class="sc">$</span>n)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">barplot</span>(n_rev, <span class="at">horiz =</span> <span class="cn">TRUE</span>, <span class="at">names.arg =</span> <span class="fu">rev</span>(cells<span class="sc">$</span>label), <span class="at">las =</span> <span class="dv">1</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">col =</span> <span class="st">"#233A9A"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(cells<span class="sc">$</span>n) <span class="sc">*</span> <span class="fl">1.35</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlab =</span> <span class="st">"Number of accounts"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">"Accounts per combination"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(n_rev)) {</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (n_rev[i] <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">text</span>(<span class="dv">0</span>, bp[i], <span class="st">"not observed (remainder)"</span>, <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">col =</span> <span class="st">"#B45309"</span>, <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="at">font =</span> <span class="dv">2</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">text</span>(n_rev[i], bp[i], n_rev[i], <span class="at">pos =</span> <span class="dv">4</span>, <span class="at">cex =</span> <span class="fl">0.9</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="8通りの組み合わせの横棒グラフ。3つとも高くない組み合わせは30アカウント、サポートだけが高いものは7、価格とサポートが高く信頼が高くないものは3、信頼とサポートが高く価格が高くないものは3、信頼と価格が高くサポートが高くないものは4、3つとも高いものは13。価格だけが高い組み合わせと、信頼だけが高い組み合わせは0件で、not observedと表示されている。" width="672"></p>
+<figcaption>信頼、価格、サポートの高低の、可能な8通りの組み合わせごとのアカウント数。2つの組み合わせは観察されていません。</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>アカウントが0件の2つの組み合わせが、残余です。Boolean最小化には、それらを確かめる事例がないので、解の種類ごとに、残余の扱いを決めることになります。</p>
 <p>残余が重要なのは、Boolean最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。</p>
 <table class="caption-top table">
 <colgroup>
@@ -352,29 +385,29 @@ To cite package QCA in publications, please use:
 <h2 class="anchored" data-anchor-id="種類の解を並べる">3種類の解を並べる</h2>
 <p>同じアウトカム閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>thr2  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">TRU =</span> <span class="dv">7</span>, <span class="at">PRC =</span> <span class="dv">7</span>, <span class="at">SUP =</span> <span class="dv">7</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cond2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TRU"</span>, <span class="st">"PRC"</span>, <span class="st">"SUP"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>run2 <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">otSweep</span>(<span class="at">dat =</span> demo2, <span class="at">outcome =</span> <span class="st">"RNW"</span>, <span class="at">conditions =</span> cond2, <span class="at">sweep_range =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">thrX =</span> thr2, <span class="at">incl.cut =</span> <span class="fl">0.8</span>, <span class="at">n.cut =</span> <span class="dv">1</span>, ...)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>res_cx <span class="ot">&lt;-</span> <span class="fu">run2</span>()                                     <span class="co"># complex</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>res_ps <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>)                        <span class="co"># parsimonious</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>thr2  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">TRU =</span> <span class="dv">7</span>, <span class="at">PRC =</span> <span class="dv">7</span>, <span class="at">SUP =</span> <span class="dv">7</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>cond2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TRU"</span>, <span class="st">"PRC"</span>, <span class="st">"SUP"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>run2 <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">otSweep</span>(<span class="at">dat =</span> demo2, <span class="at">outcome =</span> <span class="st">"RNW"</span>, <span class="at">conditions =</span> cond2, <span class="at">sweep_range =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">thrX =</span> thr2, <span class="at">incl.cut =</span> <span class="fl">0.8</span>, <span class="at">n.cut =</span> <span class="dv">1</span>, ...)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>res_cx <span class="ot">&lt;-</span> <span class="fu">run2</span>()                                     <span class="co"># complex</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>res_ps <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>)                        <span class="co"># parsimonious</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res_im <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">dir.exp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))  <span class="co"># intermediate</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY         =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">complex      =</span> res_cx<span class="sc">$</span>summary<span class="sc">$</span>expression,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsimonious =</span> res_ps<span class="sc">$</span>summary<span class="sc">$</span>expression,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">intermediate =</span> res_im<span class="sc">$</span>summary<span class="sc">$</span>expression</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res_im <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">dir.exp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))  <span class="co"># intermediate</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY         =</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">complex      =</span> res_cx<span class="sc">$</span>summary<span class="sc">$</span>expression,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parsimonious =</span> res_ps<span class="sc">$</span>summary<span class="sc">$</span>expression,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">intermediate =</span> res_im<span class="sc">$</span>summary<span class="sc">$</span>expression</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  thrY            complex   parsimonious       intermediate
 1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC
@@ -428,13 +461,13 @@ generate_report() for full analysis.</code></pre>
 <h2 class="anchored" data-anchor-id="つのセルに最小解が複数あるとき">1つのセルに、最小解が複数あるとき</h2>
 <p>Boolean最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(<code>M1</code>)を報告し、解の数を <code>n_solutions</code> に記録します。すべてを見るには、<code>extract_mode = "all"</code> を使います。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res_all <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>res_all <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res_all)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res_all)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OTS Summary
 =========== 
@@ -460,14 +493,14 @@ Note: 1 threshold setting(s) had multiple solutions.
 <p>更新が5のとき、倹約解の分析は、等しく最小な2つの解、<code>TRU + SUP</code> と <code>PRC + SUP</code> を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。</p>
 <p>コンパクトに見たいときは、<code>extract_mode = "essential"</code> を使います。すべての解に含まれる項と、それ以外を分けます。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res_ess <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"essential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>res_ess <span class="ot">&lt;-</span> <span class="fu">run2</span>(<span class="at">include =</span> <span class="st">"?"</span>, <span class="at">extract_mode =</span> <span class="st">"essential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Multiple equivalent solutions exist for thrY = 5 (n_solutions &gt; 1).
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>res_ess<span class="sc">$</span>summary[, <span class="fu">c</span>(<span class="st">"thrY"</span>, <span class="st">"expression"</span>, <span class="st">"selective_terms"</span>,</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"unique_terms"</span>, <span class="st">"n_solutions"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>res_ess<span class="sc">$</span>summary[, <span class="fu">c</span>(<span class="st">"thrY"</span>, <span class="st">"expression"</span>, <span class="st">"selective_terms"</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"unique_terms"</span>, <span class="st">"n_solutions"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  thrY     expression selective_terms   unique_terms n_solutions
 1    5            SUP       TRU + PRC M1:TRU; M2:PRC           2

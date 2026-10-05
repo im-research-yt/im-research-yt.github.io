@@ -367,6 +367,33 @@ Results by Threshold:
 <p>これは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。<code>LOY &gt;= 6</code> だけを分析していたら、経路が2つあると報告したでしょう。<code>LOY &gt;= 7</code> だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。</p>
 <p>「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの経路が存在しない、という意味ではありません。このデータとこの設定では、QCAが、一貫性の条件を満たす最小解を作れなかった、という意味です。</p>
 </section>
+<section id="ステップ5-結果を図で見る" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ5-結果を図で見る">ステップ5: 結果を図で見る</h2>
+<p>表は正確ですが、図にすると、傾向がひと目で分かります。要約の表は普通のデータフレーム(<code>res$summary</code>)なので、基本のRで図にできます。次のチャンクは、アウトカムの閾値ごとに、解のカバレッジと解の一貫性を描きます。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> res<span class="sc">$</span>summary</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tab<span class="sc">$</span>thrY, tab<span class="sc">$</span>covS, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#233A9A"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">4.8</span>, <span class="fl">8.2</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">xaxt =</span> <span class="st">"n"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Outcome threshold (thrY)"</span>, <span class="at">ylab =</span> <span class="st">"Score"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Coverage and consistency by threshold"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> tab<span class="sc">$</span>thrY)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(tab<span class="sc">$</span>thrY, tab<span class="sc">$</span>inclS, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">17</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#F28018"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">8</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"grey60"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">7.9</span>, <span class="fl">0.3</span>, <span class="st">"No solution</span><span class="sc">\n</span><span class="st">at thrY = 8"</span>, <span class="at">adj =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Coverage (covS)"</span>, <span class="st">"Consistency (inclS)"</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#233A9A"</span>, <span class="st">"#F28018"</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">17</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="横軸にアウトカムの閾値(5から8)、縦軸にスコア(0から1)をとった折れ線グラフ。カバレッジは、閾値5の約0.40から、閾値7の約0.66へ上がる。一貫性は、約0.98から約0.89へ下がる。閾値8には点がなく、解なしと注記されている。" width="672"></p>
+<figcaption>アウトカムの閾値ごとの、解のカバレッジ(covS)と解の一貫性(inclS)。thrY = 8 では解が見つかりませんでした。</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>目標が高くなるほど、カバレッジは上がり(解が、高ロイヤルティの顧客のより大きな割合を説明します)、一貫性はゆっくり下がります。<code>thrY = 8</code> では、プロットする解がないので、線がそこで止まります。</p>
+</section>
 <section id="次回" class="level2">
 <h2 class="anchored" data-anchor-id="次回">次回</h2>
 <p>次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>

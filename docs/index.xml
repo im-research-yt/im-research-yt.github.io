@@ -399,6 +399,191 @@ Results by Threshold:
 <p>This is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only <code>LOY &gt;= 6</code>, we would have reported two paths. Had we analyzed only <code>LOY &gt;= 7</code>, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.</p>
 <p>A note on “No solution”: it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement.</p>
 </section>
+<section id="step-5-see-the-result-as-a-picture" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-see-the-result-as-a-picture">Step 5: see the result as a picture</h2>
+<p>A table is precise, but a picture shows the trend at a glance. The summary table is an ordinary data frame (<code>res$summary</code>), so we can plot it with base R. The next chunk draws solution coverage and solution consistency for each outcome threshold.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">tab <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span>
+<span id="cb8-2"></span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY, tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>covS, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>,</span>
+<span id="cb8-4">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.8</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8.2</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>,</span>
+<span id="cb8-5">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Score"</span>,</span>
+<span id="cb8-6">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coverage and consistency by threshold"</span>)</span>
+<span id="cb8-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY)</span>
+<span id="cb8-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lines</span>(tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY, tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>inclS, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>)</span>
+<span id="cb8-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">v =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey60"</span>)</span>
+<span id="cb8-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"No solution</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">at thrY = 8"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">adj =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey40"</span>)</span>
+<span id="cb8-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottomleft"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coverage (covS)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Consistency (inclS)"</span>),</span>
+<span id="cb8-12">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/posts/thsqca-beginners-1/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="Line chart with outcome threshold on the horizontal axis (5 to 8) and score on the vertical axis (0 to 1). Coverage rises from about 0.40 at threshold 5 to about 0.66 at threshold 7. Consistency falls from about 0.98 to about 0.89. There is no point at threshold 8, which is labeled as no solution." width="672"></p>
+<figcaption>Solution coverage (covS) and solution consistency (inclS) at each outcome threshold. No solution was found at thrY = 8.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As the target gets higher, coverage rises (the solution explains a larger share of the high-loyalty customers) while consistency slowly falls. At <code>thrY = 8</code> the line simply stops, because there is no solution to plot.</p>
+</section>
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
 <p>In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.</p>
@@ -967,6 +1152,230 @@ font-style: inherit;">$</span>summary</span></code></pre></div></div>
 </div>
 </div>
 <p>Reading it: at <code>LOY &gt;= 6</code>, every one of the 8 condition definitions gives a solution, usually <code>QUA*SER</code>, and sometimes <code>QUA*SER + QUA*ENV</code>. At <code>LOY &gt;= 7</code>, only two definitions still give a solution, the ones where <code>QUA</code> and <code>SER</code> are both at 7. At <code>LOY &gt;= 8</code>, none do. In this data set, raising the target level is the strongest driver of change.</p>
+<p>A picture makes the same point faster. The next chunk draws the solution coverage of all 24 cells as a heat map. Each row is one definition of the three conditions, each column is one outcome threshold, and “none” marks a cell with no solution.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> res_dts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span>
+<span id="cb14-2">m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tapply</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>covS, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>combo_id, s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) x[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb14-3">lab <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrX[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">match</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rownames</span>(m), s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>combo_id)])</span>
+<span id="cb14-4"></span>
+<span id="cb14-5">op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb14-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">image</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">z =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(m),</span>
+<span id="cb14-7">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colorRampPalette</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FFFFFF"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>))(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">zlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>),</span>
+<span id="cb14-8">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>,</span>
+<span id="cb14-9">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Solution coverage in the 24 cells"</span>)</span>
+<span id="cb14-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(m))</span>
+<span id="cb14-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> lab, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">las =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex.axis =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-12"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m))) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (j <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m))) {</span>
+<span id="cb14-13">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(m[i, j])) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(j, i, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey50"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-14">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(j, i, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%.2f"</span>, m[i, j]), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-15">}</span>
+<span id="cb14-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">box</span>()</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/posts/thsqca-beginners-2/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" alt="Heat map with 8 rows (definitions of the three conditions, each at 6 or 7) and 3 columns (outcome thresholds 6, 7, and 8). All 8 cells in the threshold 6 column are filled, with coverage between 0.37 and 0.71. In the threshold 7 column only two cells are filled, both 0.66, for the rows where quality and service are both 7. The threshold 8 column is empty, marked none." width="768"></p>
+<figcaption>Solution coverage in the 24 cells of the dual threshold sweep. Darker cells have higher coverage; cells marked none have no solution.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span></code></pre></div></div>
+</div>
+<p>The column for <code>LOY &gt;= 6</code> is filled in every row, the column for <code>LOY &gt;= 7</code> in only two, and the column for <code>LOY &gt;= 8</code> in none.</p>
 </section>
 <section id="how-big-is-a-sweep" class="level2">
 <h2 class="anchored" data-anchor-id="how-big-is-a-sweep">How big is a sweep?</h2>
@@ -1306,6 +1715,272 @@ font-style: inherit;">FALSE</span>)</span>
 </div>
 </div>
 <p>Look at the row numbers on the left. Only 6 of the 8 possible combinations appear (rows 3 and 5 are missing), because the data contain no accounts with, for example, high trust alone, or high price evaluation alone. The combinations that are missing are the <strong>logical remainders</strong>. The column <code>n</code> is the number of accounts in each combination, <code>incl</code> is how consistently they renew, and <code>OUT</code> is 1 when the combination is consistent enough to count as sufficient.</p>
+<p>A bar chart of the counts makes the gaps easy to see. Each bar is one of the 8 possible combinations, in the same order as the truth table rows.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">cells <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expand.grid</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SUP =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PRC =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">TRU =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>)]</span>
+<span id="cb8-2">cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mapply</span>(<span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(a, b, c) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> a <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> b <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> c),</span>
+<span id="cb8-3">                  cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU, cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC, cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP)</span>
+<span id="cb8-4">cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>label <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~TRU"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>,</span>
+<span id="cb8-5">                      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~PRC"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>,</span>
+<span id="cb8-6">                      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~SUP"</span>))</span>
+<span id="cb8-7"></span>
+<span id="cb8-8">op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb8-9">n_rev <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n)</span>
+<span id="cb8-10">bp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">barplot</span>(n_rev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">horiz =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names.arg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>label), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">las =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb8-11">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.35</span>),</span>
+<span id="cb8-12">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Number of accounts"</span>,</span>
+<span id="cb8-13">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Accounts per combination"</span>)</span>
+<span id="cb8-14"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_along</span>(n_rev)) {</span>
+<span id="cb8-15">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (n_rev[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) {</span>
+<span id="cb8-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, bp[i], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"not observed (remainder)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#B45309"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">font =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb8-17">  } <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> {</span>
+<span id="cb8-18">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(n_rev[i], bp[i], n_rev[i], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)</span>
+<span id="cb8-19">  }</span>
+<span id="cb8-20">}</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/posts/thsqca-beginners-3/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="Horizontal bar chart of 8 combinations. Not high on any of the three has 30 accounts; support only has 7; price and support without trust has 3; trust and support without price has 3; trust and price without support has 4; all three high has 13. Two combinations, price only and trust only, have no accounts and are labeled not observed." width="672"></p>
+<figcaption>Number of accounts in each of the 8 possible combinations of high and low trust, price, and support. Two combinations are not observed.</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span></code></pre></div></div>
+</div>
+<p>The two combinations with no accounts are the remainders. Boolean minimization has no cases to check them against, so each solution type has to decide what to do with them.</p>
 <p>Remainders matter because Boolean minimization can use them to make a formula shorter, and the three solution types differ in whether, and how, they do that.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1349,7 +2024,7 @@ font-style: inherit;">FALSE</span>)</span>
 <h2 class="anchored" data-anchor-id="the-three-solution-types-side-by-side">The three solution types, side by side</h2>
 <p>We run the same outcome threshold sweep (renewal of 5, 6, 7, and 8) three times, changing only the solution type.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">thr2  <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">thr2  <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1366,7 +2041,7 @@ background-color: null;
 font-style: inherit;">SUP =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>)</span>
-<span id="cb8-2">cond2 <span class="ot" style="color: #003B4F;
+<span id="cb10-2">cond2 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1377,14 +2052,14 @@ background-color: null;
 font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"SUP"</span>)</span>
-<span id="cb8-3"></span>
-<span id="cb8-4">run2 <span class="ot" style="color: #003B4F;
+<span id="cb10-3"></span>
+<span id="cb10-4">run2 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">function</span>(...) {</span>
-<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1403,7 +2078,7 @@ background-color: null;
 font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>,</span>
-<span id="cb8-6">          <span class="at" style="color: #657422;
+<span id="cb10-6">          <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">thrX =</span> thr2, <span class="at" style="color: #657422;
 background-color: null;
@@ -1414,16 +2089,16 @@ background-color: null;
 font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, ...)</span>
-<span id="cb8-7">}</span>
-<span id="cb8-8"></span>
-<span id="cb8-9">res_cx <span class="ot" style="color: #003B4F;
+<span id="cb10-7">}</span>
+<span id="cb10-8"></span>
+<span id="cb10-9">res_cx <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">run2</span>()                                     <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># complex</span></span>
-<span id="cb8-10">res_ps <span class="ot" style="color: #003B4F;
+<span id="cb10-10">res_ps <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1439,7 +2114,7 @@ font-style: inherit;"># parsimonious</span></span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">res_im <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">res_im <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1460,11 +2135,11 @@ background-color: null;
 font-style: inherit;">1</span>))  <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># intermediate</span></span>
-<span id="cb10-2"></span>
-<span id="cb10-3"><span class="fu" style="color: #4758AB;
+<span id="cb12-2"></span>
+<span id="cb12-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(</span>
-<span id="cb10-4">  <span class="at" style="color: #657422;
+<span id="cb12-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">thrY         =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1473,28 +2148,28 @@ background-color: null;
 font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>,</span>
-<span id="cb10-5">  <span class="at" style="color: #657422;
+<span id="cb12-5">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">complex      =</span> res_cx<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression,</span>
-<span id="cb10-6">  <span class="at" style="color: #657422;
+<span id="cb12-6">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">parsimonious =</span> res_ps<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression,</span>
-<span id="cb10-7">  <span class="at" style="color: #657422;
+<span id="cb12-7">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">intermediate =</span> res_im<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression</span>
-<span id="cb10-8">)</span></code></pre></div></div>
+<span id="cb12-8">)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  thrY            complex   parsimonious       intermediate
 1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC
@@ -1548,7 +2223,7 @@ font-style: inherit;">$</span>expression</span>
 <h2 class="anchored" data-anchor-id="when-a-cell-has-more-than-one-minimal-solution">When a cell has more than one minimal solution</h2>
 <p>Boolean minimization can return several equally short solutions for the same truth table. By default ThSQCA reports the first one (<code>M1</code>) and records the number of solutions in <code>n_solutions</code>. To see all of them, use <code>extract_mode = "all"</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">res_all <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">res_all <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1566,7 +2241,7 @@ font-style: inherit;">"all"</span>)</span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">summary</span>(res_all)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
@@ -1594,7 +2269,7 @@ Note: 1 threshold setting(s) had multiple solutions.
 <p>At renewal of 5, the parsimonious analysis finds two minimal solutions of equal length (multiple minimal solutions), <code>TRU + SUP</code> and <code>PRC + SUP</code>. Each of them relies on a different unobserved combination, which is why neither can be preferred on the data alone. ThSQCA prints a note when this happens.</p>
 <p>If you prefer a compact view, use <code>extract_mode = "essential"</code>. It separates the terms that are present in every solution from the rest.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">res_ess <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">res_ess <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1612,7 +2287,7 @@ font-style: inherit;">"essential"</span>)</span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">res_ess<span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">res_ess<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1623,7 +2298,7 @@ background-color: null;
 font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"selective_terms"</span>,</span>
-<span id="cb18-2">                    <span class="st" style="color: #20794D;
+<span id="cb20-2">                    <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"unique_terms"</span>, <span class="st" style="color: #20794D;
 background-color: null;
@@ -1935,7 +2610,7 @@ font-style: inherit;">"</span>)</span></code></pre></div></div>
 
 *(Auto-generated by ThSQCA package)*
 
-**Generated**: 2026-10-05 18:58
+**Generated**: 2026-10-06 00:07
 
 ---
 
@@ -2130,11 +2805,178 @@ font-style: inherit;">"ascii"</span>))</span></code></pre></div></div>
 </table>
 <p><em>O = presence, X = absence, blank = don’t care</em></p>
 </section>
+<section id="how-many-cases-stand-behind-each-threshold" class="level2">
+<h2 class="anchored" data-anchor-id="how-many-cases-stand-behind-each-threshold">How many cases stand behind each threshold?</h2>
+<p>A sweep table gives solutions and fit values, but not the number of cases behind them. A reader should be able to see that, because a result that rests on a handful of cases deserves less trust. For the outcome sweep of part 1, we can count the customers directly from the data, without ThSQCA.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">thr <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span></span>
+<span id="cb12-2">n_out  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(thr, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(t) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>LOY <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> t))</span>
+<span id="cb12-3">n_both <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(thr, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(t) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>LOY <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> t <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>QUA <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SER <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>))</span>
+<span id="cb12-4">cases <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbind</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"High loyalty (LOY &gt;= thrY)"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> n_out,</span>
+<span id="cb12-5">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"... and high on QUA and SER"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> n_both)</span>
+<span id="cb12-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(cases) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> thr</span>
+<span id="cb12-7"></span>
+<span id="cb12-8">bp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">barplot</span>(cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">beside =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>),</span>
+<span id="cb12-9">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cases) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.15</span>),</span>
+<span id="cb12-10">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Number of customers"</span>,</span>
+<span id="cb12-11">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cases behind each threshold"</span>,</span>
+<span id="cb12-12">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.text =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rownames</span>(cases),</span>
+<span id="cb12-13">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">args.legend =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"topright"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>))</span>
+<span id="cb12-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(bp, cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/posts/thsqca-beginners-4/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" alt="Grouped bar chart. At outcome threshold 5, there are 263 customers with high loyalty and 66 of them are high on quality and service. At 6 the counts are 177 and 65, at 7 they are 90 and 59, and at 8 they are 29 and 26." width="672"></p>
+<figcaption>Number of customers with high loyalty at each outcome threshold (blue), and how many of them are also high on both quality and service (orange).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As the target rises, the high-loyalty group shrinks from 263 customers to 29, so the solutions at the strict end of a sweep are built on far fewer cases. Reporting these counts next to the sweep table is a simple way to show how much each row can bear.</p>
+</section>
 <section id="check-a-cell-against-the-qca-package" class="level2">
 <h2 class="anchored" data-anchor-id="check-a-cell-against-the-qca-package">Check a cell against the QCA package</h2>
 <p>ThSQCA does not invent new results. Every cell is an ordinary QCA analysis, so you can reproduce any cell by hand. This is a good way to build trust in the tool, and to answer a reviewer who asks. Here we reproduce the cell at an outcome threshold of 7.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">bin <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">bin <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -2144,13 +2986,13 @@ background-color: null;
 font-style: inherit;">as.integer</span>(x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;=</span> t)</span>
-<span id="cb12-2"></span>
-<span id="cb12-3">d7 <span class="ot" style="color: #003B4F;
+<span id="cb13-2"></span>
+<span id="cb13-3">d7 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(</span>
-<span id="cb12-4">  <span class="at" style="color: #657422;
+<span id="cb13-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">LOY =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2167,7 +3009,7 @@ background-color: null;
 font-style: inherit;">$</span>QUA, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>),</span>
-<span id="cb12-5">  <span class="at" style="color: #657422;
+<span id="cb13-5">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">SER =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2184,9 +3026,9 @@ background-color: null;
 font-style: inherit;">$</span>ENV, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>)</span>
-<span id="cb12-6">)</span>
-<span id="cb12-7"></span>
-<span id="cb12-8">tt  <span class="ot" style="color: #003B4F;
+<span id="cb13-6">)</span>
+<span id="cb13-7"></span>
+<span id="cb13-8">tt  <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2205,7 +3047,7 @@ background-color: null;
 font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"ENV"</span>),</span>
-<span id="cb12-9">                  <span class="at" style="color: #657422;
+<span id="cb13-9">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -2218,12 +3060,12 @@ background-color: null;
 font-style: inherit;">show.cases =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">FALSE</span>)</span>
-<span id="cb12-10">sol <span class="ot" style="color: #003B4F;
+<span id="cb13-10">sol <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">minimize</span>(tt)</span>
-<span id="cb12-11">sol</span></code></pre></div></div>
+<span id="cb13-11">sol</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 M1: QUA*SER -&gt; LOY</code></pre>
@@ -2235,12 +3077,12 @@ M1: QUA*SER -&gt; LOY</code></pre>
 <h2 class="anchored" data-anchor-id="record-your-software-versions">Record your software versions</h2>
 <p>Results can depend on the versions of R and the packages. Print them and keep them with your report:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">R      =</span> R.version.string,</span>
-<span id="cb14-2">  <span class="at" style="color: #657422;
+<span id="cb15-2">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">QCA    =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2249,7 +3091,7 @@ background-color: null;
 font-style: inherit;">packageVersion</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"QCA"</span>)),</span>
-<span id="cb14-3">  <span class="at" style="color: #657422;
+<span id="cb15-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">ThSQCA =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2542,7 +3384,7 @@ font-style: inherit;">"ThSQCA"</span>)))</span></code></pre></div></div>
 <li>the same consistency threshold, frequency threshold, solution type, and directional expectations are applied at every step of the sweep;</li>
 <li>product terms, solution consistency, and coverage are collected into one common format;</li>
 <li>cases with no solution or with multiple minimal solutions are recorded rather than lost;</li>
-<li>results can be shown as tables, configuration charts, trajectory plots, and heatmaps, and written out as a Markdown report.</li>
+<li>results can be shown as tables and configuration charts, and written out as a Markdown report; the summary table can also be plotted with ordinary R graphics.</li>
 </ul>
 </section>
 <section id="four-sweep-functions" class="level2">

@@ -55,6 +55,38 @@ tt2
 
 Look at the row numbers on the left. Only 6 of the 8 possible combinations appear (rows 3 and 5 are missing), because the data contain no accounts with, for example, high trust alone, or high price evaluation alone. The combinations that are missing are the **logical remainders**. The column `n` is the number of accounts in each combination, `incl` is how consistently they renew, and `OUT` is 1 when the combination is consistent enough to count as sufficient.
 
+A bar chart of the counts makes the gaps easy to see. Each bar is one of the 8 possible combinations, in the same order as the truth table rows.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "Number of accounts in each of the 8 possible combinations of high and low trust, price, and support. Two combinations are not observed."
+#| fig-alt: "Horizontal bar chart of 8 combinations. Not high on any of the three has 30 accounts; support only has 7; price and support without trust has 3; trust and support without price has 3; trust and price without support has 4; all three high has 13. Two combinations, price only and trust only, have no accounts and are labeled not observed."
+cells <- expand.grid(SUP = 0:1, PRC = 0:1, TRU = 0:1)[, c("TRU", "PRC", "SUP")]
+cells$n <- mapply(function(a, b, c) sum(bin2$TRU == a & bin2$PRC == b & bin2$SUP == c),
+                  cells$TRU, cells$PRC, cells$SUP)
+cells$label <- paste0(ifelse(cells$TRU == 1, "TRU", "~TRU"), "*",
+                      ifelse(cells$PRC == 1, "PRC", "~PRC"), "*",
+                      ifelse(cells$SUP == 1, "SUP", "~SUP"))
+
+op <- par(mar = c(4.5, 9, 3, 1))
+n_rev <- rev(cells$n)
+bp <- barplot(n_rev, horiz = TRUE, names.arg = rev(cells$label), las = 1,
+              col = "#233A9A", xlim = c(0, max(cells$n) * 1.35),
+              xlab = "Number of accounts",
+              main = "Accounts per combination")
+for (i in seq_along(n_rev)) {
+  if (n_rev[i] == 0) {
+    text(0, bp[i], "not observed (remainder)", pos = 4, col = "#B45309", cex = 0.9, font = 2)
+  } else {
+    text(n_rev[i], bp[i], n_rev[i], pos = 4, cex = 0.9)
+  }
+}
+par(op)
+```
+
+The two combinations with no accounts are the remainders. Boolean minimization has no cases to check them against, so each solution type has to decide what to do with them.
+
 Remainders matter because Boolean minimization can use them to make a formula shorter, and the three solution types differ in whether, and how, they do that.
 
 | Solution type | Remainders used | `include` | `dir.exp` |

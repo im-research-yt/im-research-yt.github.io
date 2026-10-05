@@ -119,6 +119,34 @@ res_dts$summary
 
 読み方です。`LOY >= 6` では、8通りの条件の定義のすべてで解があり、たいていは `QUA*SER` で、ときには `QUA*SER + QUA*ENV` です。`LOY >= 7` では、解が残るのは、`QUA` と `SER` がどちらも7の、2通りだけです。`LOY >= 8` では、どれにも解がありません。このデータでは、目標水準を上げることが、変化のいちばん強い要因です。
 
+図にすると、同じことがもっと早く分かります。次のチャンクは、24セルすべての解のカバレッジを、ヒートマップで描きます。1行が条件の定義ひとつ、1列がアウトカムの閾値ひとつで、「none」は解のないセルです。図の中の語は英語のままです。
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: "二重閾値スイープの24セルにおける、解のカバレッジ。色が濃いほどカバレッジが高く、noneのセルは解がありません。"
+#| fig-alt: "8行(3つの条件の定義、それぞれ6または7)と3列(アウトカムの閾値6、7、8)のヒートマップ。閾値6の列は8セルすべてが塗られ、カバレッジは0.37から0.71。閾値7の列で塗られているのは、品質とサービスがどちらも7の行の2セルだけで、どちらも0.66。閾値8の列はすべて、noneと表示されている。"
+s <- res_dts$summary
+m <- tapply(s$covS, list(s$combo_id, s$thrY), function(x) x[1])
+lab <- as.character(s$thrX[match(rownames(m), s$combo_id)])
+
+op <- par(mar = c(4.5, 11, 3, 1))
+image(x = seq_len(ncol(m)), y = seq_len(nrow(m)), z = t(m),
+      col = colorRampPalette(c("#FFFFFF", "#233A9A"))(50), zlim = c(0, 1),
+      xaxt = "n", yaxt = "n", xlab = "Outcome threshold (thrY)", ylab = "",
+      main = "Solution coverage in the 24 cells")
+axis(1, at = seq_len(ncol(m)), labels = colnames(m))
+axis(2, at = seq_len(nrow(m)), labels = lab, las = 1, cex.axis = 0.8)
+for (i in seq_len(nrow(m))) for (j in seq_len(ncol(m))) {
+  if (is.na(m[i, j])) text(j, i, "none", col = "grey50", cex = 0.8)
+  else text(j, i, sprintf("%.2f", m[i, j]), cex = 0.8)
+}
+box()
+par(op)
+```
+
+`LOY >= 6` の列はすべての行で塗られ、`LOY >= 7` の列は2行だけ、`LOY >= 8` の列はどの行も塗られていません。
+
 ## スイープの大きさ
 
 すべてのセルが、1回分のQCA分析です。そのため、セルの数は、実行時間にも、結果の読みやすさにも関わります。

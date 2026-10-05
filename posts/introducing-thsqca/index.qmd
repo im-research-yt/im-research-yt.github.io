@@ -22,7 +22,7 @@ ThSQCA does not implement its own minimization algorithm. Truth table constructi
 - the same consistency threshold, frequency threshold, solution type, and directional expectations are applied at every step of the sweep;
 - product terms, solution consistency, and coverage are collected into one common format;
 - cases with no solution or with multiple minimal solutions are recorded rather than lost;
-- results can be shown as tables, configuration charts, trajectory plots, and heatmaps, and written out as a Markdown report.
+- results can be shown as tables and configuration charts, and written out as a Markdown report; the summary table can also be plotted with ordinary R graphics.
 
 ## Four sweep functions
 

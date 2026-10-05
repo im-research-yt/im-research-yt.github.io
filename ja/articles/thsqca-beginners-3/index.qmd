@@ -54,6 +54,38 @@ tt2
 
 左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、**論理残余**です。列 `n` は、各組み合わせのアカウント数、`incl` は、それらがどれだけ一貫して更新しているか、`OUT` は、組み合わせが十分と認められるだけの一貫性があるとき1になります。
 
+件数を棒グラフにすると、欠けている組み合わせがすぐ分かります。1本の棒が、可能な8通りのうちの1つで、真理表の行と同じ順に並べています。図の中の語は英語のままです。
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "信頼、価格、サポートの高低の、可能な8通りの組み合わせごとのアカウント数。2つの組み合わせは観察されていません。"
+#| fig-alt: "8通りの組み合わせの横棒グラフ。3つとも高くない組み合わせは30アカウント、サポートだけが高いものは7、価格とサポートが高く信頼が高くないものは3、信頼とサポートが高く価格が高くないものは3、信頼と価格が高くサポートが高くないものは4、3つとも高いものは13。価格だけが高い組み合わせと、信頼だけが高い組み合わせは0件で、not observedと表示されている。"
+cells <- expand.grid(SUP = 0:1, PRC = 0:1, TRU = 0:1)[, c("TRU", "PRC", "SUP")]
+cells$n <- mapply(function(a, b, c) sum(bin2$TRU == a & bin2$PRC == b & bin2$SUP == c),
+                  cells$TRU, cells$PRC, cells$SUP)
+cells$label <- paste0(ifelse(cells$TRU == 1, "TRU", "~TRU"), "*",
+                      ifelse(cells$PRC == 1, "PRC", "~PRC"), "*",
+                      ifelse(cells$SUP == 1, "SUP", "~SUP"))
+
+op <- par(mar = c(4.5, 9, 3, 1))
+n_rev <- rev(cells$n)
+bp <- barplot(n_rev, horiz = TRUE, names.arg = rev(cells$label), las = 1,
+              col = "#233A9A", xlim = c(0, max(cells$n) * 1.35),
+              xlab = "Number of accounts",
+              main = "Accounts per combination")
+for (i in seq_along(n_rev)) {
+  if (n_rev[i] == 0) {
+    text(0, bp[i], "not observed (remainder)", pos = 4, col = "#B45309", cex = 0.9, font = 2)
+  } else {
+    text(n_rev[i], bp[i], n_rev[i], pos = 4, cex = 0.9)
+  }
+}
+par(op)
+```
+
+アカウントが0件の2つの組み合わせが、残余です。Boolean最小化には、それらを確かめる事例がないので、解の種類ごとに、残余の扱いを決めることになります。
+
 残余が重要なのは、Boolean最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。
 
 | 解の種類 | 使う残余 | `include` | `dir.exp` |

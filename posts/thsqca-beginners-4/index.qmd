@@ -94,6 +94,33 @@ If you prefer plain characters, for example for a journal that cannot print the 
 cat(config_chart_from_paths(paths, symbol_set = "ascii"))
 ```
 
+## How many cases stand behind each threshold?
+
+A sweep table gives solutions and fit values, but not the number of cases behind them. A reader should be able to see that, because a result that rests on a handful of cases deserves less trust. For the outcome sweep of part 1, we can count the customers directly from the data, without ThSQCA.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "Number of customers with high loyalty at each outcome threshold (blue), and how many of them are also high on both quality and service (orange)."
+#| fig-alt: "Grouped bar chart. At outcome threshold 5, there are 263 customers with high loyalty and 66 of them are high on quality and service. At 6 the counts are 177 and 65, at 7 they are 90 and 59, and at 8 they are 29 and 26."
+thr <- 5:8
+n_out  <- sapply(thr, function(t) sum(demo$LOY >= t))
+n_both <- sapply(thr, function(t) sum(demo$LOY >= t & demo$QUA >= 7 & demo$SER >= 7))
+cases <- rbind("High loyalty (LOY >= thrY)" = n_out,
+               "... and high on QUA and SER" = n_both)
+colnames(cases) <- thr
+
+bp <- barplot(cases, beside = TRUE, col = c("#233A9A", "#F28018"),
+              ylim = c(0, max(cases) * 1.15),
+              xlab = "Outcome threshold (thrY)", ylab = "Number of customers",
+              main = "Cases behind each threshold",
+              legend.text = rownames(cases),
+              args.legend = list(x = "topright", bty = "n", cex = 0.8))
+text(bp, cases, labels = cases, pos = 3, cex = 0.8)
+```
+
+As the target rises, the high-loyalty group shrinks from 263 customers to 29, so the solutions at the strict end of a sweep are built on far fewer cases. Reporting these counts next to the sweep table is a simple way to show how much each row can bear.
+
 ## Check a cell against the QCA package
 
 ThSQCA does not invent new results. Every cell is an ordinary QCA analysis, so you can reproduce any cell by hand. This is a good way to build trust in the tool, and to answer a reviewer who asks. Here we reproduce the cell at an outcome threshold of 7.

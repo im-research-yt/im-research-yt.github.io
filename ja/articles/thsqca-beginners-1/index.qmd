@@ -106,6 +106,31 @@ summary(res)
 
 「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの経路が存在しない、という意味ではありません。このデータとこの設定では、QCAが、一貫性の条件を満たす最小解を作れなかった、という意味です。
 
+## ステップ5: 結果を図で見る
+
+表は正確ですが、図にすると、傾向がひと目で分かります。要約の表は普通のデータフレーム(`res$summary`)なので、基本のRで図にできます。次のチャンクは、アウトカムの閾値ごとに、解のカバレッジと解の一貫性を描きます。図の中の語は英語のままです。
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "アウトカムの閾値ごとの、解のカバレッジ(covS)と解の一貫性(inclS)。thrY = 8 では解が見つかりませんでした。"
+#| fig-alt: "横軸にアウトカムの閾値(5から8)、縦軸にスコア(0から1)をとった折れ線グラフ。カバレッジは、閾値5の約0.40から、閾値7の約0.66へ上がる。一貫性は、約0.98から約0.89へ下がる。閾値8には点がなく、解なしと注記されている。"
+tab <- res$summary
+
+plot(tab$thrY, tab$covS, type = "b", pch = 19, lwd = 2, col = "#233A9A",
+     xlim = c(4.8, 8.2), ylim = c(0, 1), xaxt = "n",
+     xlab = "Outcome threshold (thrY)", ylab = "Score",
+     main = "Coverage and consistency by threshold")
+axis(1, at = tab$thrY)
+lines(tab$thrY, tab$inclS, type = "b", pch = 17, lwd = 2, col = "#F28018")
+abline(v = 8, lty = 3, col = "grey60")
+text(7.9, 0.3, "No solution\nat thrY = 8", adj = 1, col = "grey40")
+legend("bottomleft", legend = c("Coverage (covS)", "Consistency (inclS)"),
+       col = c("#233A9A", "#F28018"), pch = c(19, 17), lwd = 2, bty = "n")
+```
+
+目標が高くなるほど、カバレッジは上がり(解が、高ロイヤルティの顧客のより大きな割合を説明します)、一貫性はゆっくり下がります。`thrY = 8` では、プロットする解がないので、線がそこで止まります。
+
 ## 次回
 
 次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。

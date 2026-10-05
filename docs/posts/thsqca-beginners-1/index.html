@@ -373,6 +373,33 @@ Results by Threshold:
 <p>This is exactly what the simulation was built to contain, and it shows why a sweep is useful. Had we analyzed only <code>LOY &gt;= 6</code>, we would have reported two paths. Had we analyzed only <code>LOY &gt;= 7</code>, we would have reported one. The sweep shows that the answer depends on how high the target is, and where it stops working altogether.</p>
 <p>A note on “No solution”: it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement.</p>
 </section>
+<section id="step-5-see-the-result-as-a-picture" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-see-the-result-as-a-picture">Step 5: see the result as a picture</h2>
+<p>A table is precise, but a picture shows the trend at a glance. The summary table is an ordinary data frame (<code>res$summary</code>), so we can plot it with base R. The next chunk draws solution coverage and solution consistency for each outcome threshold.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> res<span class="sc">$</span>summary</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tab<span class="sc">$</span>thrY, tab<span class="sc">$</span>covS, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#233A9A"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">4.8</span>, <span class="fl">8.2</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">xaxt =</span> <span class="st">"n"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Outcome threshold (thrY)"</span>, <span class="at">ylab =</span> <span class="st">"Score"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Coverage and consistency by threshold"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> tab<span class="sc">$</span>thrY)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(tab<span class="sc">$</span>thrY, tab<span class="sc">$</span>inclS, <span class="at">type =</span> <span class="st">"b"</span>, <span class="at">pch =</span> <span class="dv">17</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#F28018"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">8</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"grey60"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="fl">7.9</span>, <span class="fl">0.3</span>, <span class="st">"No solution</span><span class="sc">\n</span><span class="st">at thrY = 8"</span>, <span class="at">adj =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"grey40"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Coverage (covS)"</span>, <span class="st">"Consistency (inclS)"</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#233A9A"</span>, <span class="st">"#F28018"</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">17</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="Line chart with outcome threshold on the horizontal axis (5 to 8) and score on the vertical axis (0 to 1). Coverage rises from about 0.40 at threshold 5 to about 0.66 at threshold 7. Consistency falls from about 0.98 to about 0.89. There is no point at threshold 8, which is labeled as no solution." width="672"></p>
+<figcaption>Solution coverage (covS) and solution consistency (inclS) at each outcome threshold. No solution was found at thrY = 8.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>As the target gets higher, coverage rises (the solution explains a larger share of the high-loyalty customers) while consistency slowly falls. At <code>thrY = 8</code> the line simply stops, because there is no solution to plot.</p>
+</section>
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
 <p>In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.</p>

@@ -93,6 +93,33 @@ cat(config_chart_from_paths(paths))
 cat(config_chart_from_paths(paths, symbol_set = "ascii"))
 ```
 
+## 各閾値の背後に、事例はいくつあるか
+
+スイープの表は、解と適合度の値を示しますが、その背後にある事例の数は示しません。読者がそれを確かめられるようにしておくべきです。ごく少数の事例に支えられた結果は、信頼を下げて読むべきだからです。第1回のアウトカム閾値スイープについて、顧客の数は、ThSQCAを使わずに、データから直接数えられます。図の中の語は英語のままです。
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "アウトカムの閾値ごとの、ロイヤルティの高い顧客の数(青)と、そのうち、品質とサービスのどちらも高い顧客の数(オレンジ)。"
+#| fig-alt: "グループ化した棒グラフ。アウトカムの閾値5では、ロイヤルティが高い顧客が263人で、そのうち品質とサービスがどちらも高いのは66人。閾値6では177人と65人、閾値7では90人と59人、閾値8では29人と26人。"
+thr <- 5:8
+n_out  <- sapply(thr, function(t) sum(demo$LOY >= t))
+n_both <- sapply(thr, function(t) sum(demo$LOY >= t & demo$QUA >= 7 & demo$SER >= 7))
+cases <- rbind("High loyalty (LOY >= thrY)" = n_out,
+               "... and high on QUA and SER" = n_both)
+colnames(cases) <- thr
+
+bp <- barplot(cases, beside = TRUE, col = c("#233A9A", "#F28018"),
+              ylim = c(0, max(cases) * 1.15),
+              xlab = "Outcome threshold (thrY)", ylab = "Number of customers",
+              main = "Cases behind each threshold",
+              legend.text = rownames(cases),
+              args.legend = list(x = "topright", bty = "n", cex = 0.8))
+text(bp, cases, labels = cases, pos = 3, cex = 0.8)
+```
+
+目標が高くなるにつれて、ロイヤルティの高い群は263人から29人へ小さくなり、スイープの厳しい側の解は、はるかに少ない事例の上に立っています。この件数を、スイープの表の横に報告しておけば、各行がどこまで支えられるかを、簡単に示せます。
+
 ## QCAパッケージで、セルを確認する
 
 ThSQCAは、新しい結果を作り出すわけではありません。どのセルも、普通のQCA分析なので、どのセルでも、手で再現できます。これは、道具への信頼を築く、よい方法で、査読者に聞かれたときの答えにもなります。ここでは、アウトカム閾値が7のセルを再現します。

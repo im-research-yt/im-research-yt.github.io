@@ -120,6 +120,34 @@ res_dts$summary
 
 Reading it: at `LOY >= 6`, every one of the 8 condition definitions gives a solution, usually `QUA*SER`, and sometimes `QUA*SER + QUA*ENV`. At `LOY >= 7`, only two definitions still give a solution, the ones where `QUA` and `SER` are both at 7. At `LOY >= 8`, none do. In this data set, raising the target level is the strongest driver of change.
 
+A picture makes the same point faster. The next chunk draws the solution coverage of all 24 cells as a heat map. Each row is one definition of the three conditions, each column is one outcome threshold, and "none" marks a cell with no solution.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+#| fig-cap: "Solution coverage in the 24 cells of the dual threshold sweep. Darker cells have higher coverage; cells marked none have no solution."
+#| fig-alt: "Heat map with 8 rows (definitions of the three conditions, each at 6 or 7) and 3 columns (outcome thresholds 6, 7, and 8). All 8 cells in the threshold 6 column are filled, with coverage between 0.37 and 0.71. In the threshold 7 column only two cells are filled, both 0.66, for the rows where quality and service are both 7. The threshold 8 column is empty, marked none."
+s <- res_dts$summary
+m <- tapply(s$covS, list(s$combo_id, s$thrY), function(x) x[1])
+lab <- as.character(s$thrX[match(rownames(m), s$combo_id)])
+
+op <- par(mar = c(4.5, 11, 3, 1))
+image(x = seq_len(ncol(m)), y = seq_len(nrow(m)), z = t(m),
+      col = colorRampPalette(c("#FFFFFF", "#233A9A"))(50), zlim = c(0, 1),
+      xaxt = "n", yaxt = "n", xlab = "Outcome threshold (thrY)", ylab = "",
+      main = "Solution coverage in the 24 cells")
+axis(1, at = seq_len(ncol(m)), labels = colnames(m))
+axis(2, at = seq_len(nrow(m)), labels = lab, las = 1, cex.axis = 0.8)
+for (i in seq_len(nrow(m))) for (j in seq_len(ncol(m))) {
+  if (is.na(m[i, j])) text(j, i, "none", col = "grey50", cex = 0.8)
+  else text(j, i, sprintf("%.2f", m[i, j]), cex = 0.8)
+}
+box()
+par(op)
+```
+
+The column for `LOY >= 6` is filled in every row, the column for `LOY >= 7` in only two, and the column for `LOY >= 8` in none.
+
 ## How big is a sweep?
 
 Every cell is a full QCA analysis, so the number of cells matters for run time and for how readable the results are.

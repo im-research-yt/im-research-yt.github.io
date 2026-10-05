@@ -390,6 +390,191 @@ Results by Threshold:
 <p>これは、シミュレーションに入れておいたとおりの結果で、スイープが役立つ理由も示しています。<code>LOY &gt;= 6</code> だけを分析していたら、経路が2つあると報告したでしょう。<code>LOY &gt;= 7</code> だけなら、1つと報告したでしょう。スイープは、答えが、目標がどれだけ高いかに左右されること、そして、どこで通用しなくなるかを、見せてくれます。</p>
 <p>「No solution」についての注意です。これは技術的な結果で、高いロイヤルティへの経路が存在しない、という意味ではありません。このデータとこの設定では、QCAが、一貫性の条件を満たす最小解を作れなかった、という意味です。</p>
 </section>
+<section id="ステップ5-結果を図で見る" class="level2">
+<h2 class="anchored" data-anchor-id="ステップ5-結果を図で見る">ステップ5: 結果を図で見る</h2>
+<p>表は正確ですが、図にすると、傾向がひと目で分かります。要約の表は普通のデータフレーム(<code>res$summary</code>)なので、基本のRで図にできます。次のチャンクは、アウトカムの閾値ごとに、解のカバレッジと解の一貫性を描きます。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">tab <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span>
+<span id="cb8-2"></span>
+<span id="cb8-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY, tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>covS, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>,</span>
+<span id="cb8-4">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.8</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8.2</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>,</span>
+<span id="cb8-5">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Score"</span>,</span>
+<span id="cb8-6">     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coverage and consistency by threshold"</span>)</span>
+<span id="cb8-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY)</span>
+<span id="cb8-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lines</span>(tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY, tab<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>inclS, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>)</span>
+<span id="cb8-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">v =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lty =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey60"</span>)</span>
+<span id="cb8-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"No solution</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">at thrY = 8"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">adj =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey40"</span>)</span>
+<span id="cb8-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottomleft"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coverage (covS)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Consistency (inclS)"</span>),</span>
+<span id="cb8-12">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pch =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lwd =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/ja/articles/thsqca-beginners-1/index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" alt="横軸にアウトカムの閾値(5から8)、縦軸にスコア(0から1)をとった折れ線グラフ。カバレッジは、閾値5の約0.40から、閾値7の約0.66へ上がる。一貫性は、約0.98から約0.89へ下がる。閾値8には点がなく、解なしと注記されている。" width="672"></p>
+<figcaption>アウトカムの閾値ごとの、解のカバレッジ(covS)と解の一貫性(inclS)。thrY = 8 では解が見つかりませんでした。</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>目標が高くなるほど、カバレッジは上がり(解が、高ロイヤルティの顧客のより大きな割合を説明します)、一貫性はゆっくり下がります。<code>thrY = 8</code> では、プロットする解がないので、線がそこで止まります。</p>
+</section>
 <section id="次回" class="level2">
 <h2 class="anchored" data-anchor-id="次回">次回</h2>
 <p>次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>
@@ -956,6 +1141,230 @@ font-style: inherit;">$</span>summary</span></code></pre></div></div>
 </div>
 </div>
 <p>読み方です。<code>LOY &gt;= 6</code> では、8通りの条件の定義のすべてで解があり、たいていは <code>QUA*SER</code> で、ときには <code>QUA*SER + QUA*ENV</code> です。<code>LOY &gt;= 7</code> では、解が残るのは、<code>QUA</code> と <code>SER</code> がどちらも7の、2通りだけです。<code>LOY &gt;= 8</code> では、どれにも解がありません。このデータでは、目標水準を上げることが、変化のいちばん強い要因です。</p>
+<p>図にすると、同じことがもっと早く分かります。次のチャンクは、24セルすべての解のカバレッジを、ヒートマップで描きます。1行が条件の定義ひとつ、1列がアウトカムの閾値ひとつで、「none」は解のないセルです。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> res_dts<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary</span>
+<span id="cb14-2">m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tapply</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>covS, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>combo_id, s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrY), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) x[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span>
+<span id="cb14-3">lab <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thrX[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">match</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rownames</span>(m), s<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>combo_id)])</span>
+<span id="cb14-4"></span>
+<span id="cb14-5">op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">11</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb14-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">image</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">z =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(m),</span>
+<span id="cb14-7">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colorRampPalette</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#FFFFFF"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>))(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">zlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>),</span>
+<span id="cb14-8">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">yaxt =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>,</span>
+<span id="cb14-9">      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Solution coverage in the 24 cells"</span>)</span>
+<span id="cb14-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(m))</span>
+<span id="cb14-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">axis</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">at =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> lab, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">las =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex.axis =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-12"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(m))) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (j <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_len</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ncol</span>(m))) {</span>
+<span id="cb14-13">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(m[i, j])) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(j, i, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"none"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey50"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-14">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(j, i, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sprintf</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%.2f"</span>, m[i, j]), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span>
+<span id="cb14-15">}</span>
+<span id="cb14-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">box</span>()</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/ja/articles/thsqca-beginners-2/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" alt="8行(3つの条件の定義、それぞれ6または7)と3列(アウトカムの閾値6、7、8)のヒートマップ。閾値6の列は8セルすべてが塗られ、カバレッジは0.37から0.71。閾値7の列で塗られているのは、品質とサービスがどちらも7の行の2セルだけで、どちらも0.66。閾値8の列はすべて、noneと表示されている。" width="768"></p>
+<figcaption>二重閾値スイープの24セルにおける、解のカバレッジ。色が濃いほどカバレッジが高く、noneのセルは解がありません。</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span></code></pre></div></div>
+</div>
+<p><code>LOY &gt;= 6</code> の列はすべての行で塗られ、<code>LOY &gt;= 7</code> の列は2行だけ、<code>LOY &gt;= 8</code> の列はどの行も塗られていません。</p>
 </section>
 <section id="スイープの大きさ" class="level2">
 <h2 class="anchored" data-anchor-id="スイープの大きさ">スイープの大きさ</h2>
@@ -1288,6 +1697,272 @@ font-style: inherit;">FALSE</span>)</span>
 </div>
 </div>
 <p>左側の行番号を見てください。可能な8通りのうち、現れるのは6通りだけです(3行目と5行目がありません)。たとえば、信頼だけが高いアカウントや、価格の評価だけが高いアカウントが、データにないからです。欠けている組み合わせが、<strong>論理残余</strong>です。列 <code>n</code> は、各組み合わせのアカウント数、<code>incl</code> は、それらがどれだけ一貫して更新しているか、<code>OUT</code> は、組み合わせが十分と認められるだけの一貫性があるとき1になります。</p>
+<p>件数を棒グラフにすると、欠けている組み合わせがすぐ分かります。1本の棒が、可能な8通りのうちの1つで、真理表の行と同じ順に並べています。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">cells <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expand.grid</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">SUP =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">PRC =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">TRU =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>)]</span>
+<span id="cb8-2">cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mapply</span>(<span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(a, b, c) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> a <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> b <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> bin2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> c),</span>
+<span id="cb8-3">                  cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU, cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC, cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP)</span>
+<span id="cb8-4">cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>label <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>TRU <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"TRU"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~TRU"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>,</span>
+<span id="cb8-5">                      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>PRC <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~PRC"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>,</span>
+<span id="cb8-6">                      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SUP <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"SUP"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~SUP"</span>))</span>
+<span id="cb8-7"></span>
+<span id="cb8-8">op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>))</span>
+<span id="cb8-9">n_rev <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n)</span>
+<span id="cb8-10">bp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">barplot</span>(n_rev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">horiz =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names.arg =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rev</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>label), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">las =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb8-11">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cells<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.35</span>),</span>
+<span id="cb8-12">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Number of accounts"</span>,</span>
+<span id="cb8-13">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Accounts per combination"</span>)</span>
+<span id="cb8-14"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> (i <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seq_along</span>(n_rev)) {</span>
+<span id="cb8-15">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (n_rev[i] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) {</span>
+<span id="cb8-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, bp[i], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"not observed (remainder)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#B45309"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">font =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb8-17">  } <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> {</span>
+<span id="cb8-18">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(n_rev[i], bp[i], n_rev[i], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>)</span>
+<span id="cb8-19">  }</span>
+<span id="cb8-20">}</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/ja/articles/thsqca-beginners-3/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" alt="8通りの組み合わせの横棒グラフ。3つとも高くない組み合わせは30アカウント、サポートだけが高いものは7、価格とサポートが高く信頼が高くないものは3、信頼とサポートが高く価格が高くないものは3、信頼と価格が高くサポートが高くないものは4、3つとも高いものは13。価格だけが高い組み合わせと、信頼だけが高い組み合わせは0件で、not observedと表示されている。" width="672"></p>
+<figcaption>信頼、価格、サポートの高低の、可能な8通りの組み合わせごとのアカウント数。2つの組み合わせは観察されていません。</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span></code></pre></div></div>
+</div>
+<p>アカウントが0件の2つの組み合わせが、残余です。Boolean最小化には、それらを確かめる事例がないので、解の種類ごとに、残余の扱いを決めることになります。</p>
 <p>残余が重要なのは、Boolean最小化が、式を短くするために、残余を使えるからです。3種類の解は、残余を使うかどうか、どう使うかが違います。</p>
 <table class="caption-top table">
 <colgroup>
@@ -1331,7 +2006,7 @@ font-style: inherit;">FALSE</span>)</span>
 <h2 class="anchored" data-anchor-id="種類の解を並べる">3種類の解を並べる</h2>
 <p>同じアウトカム閾値スイープ(更新が5、6、7、8)を、解の種類だけ変えて、3回実行します。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">thr2  <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">thr2  <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1348,7 +2023,7 @@ background-color: null;
 font-style: inherit;">SUP =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>)</span>
-<span id="cb8-2">cond2 <span class="ot" style="color: #003B4F;
+<span id="cb10-2">cond2 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1359,14 +2034,14 @@ background-color: null;
 font-style: inherit;">"PRC"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"SUP"</span>)</span>
-<span id="cb8-3"></span>
-<span id="cb8-4">run2 <span class="ot" style="color: #003B4F;
+<span id="cb10-3"></span>
+<span id="cb10-4">run2 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">function</span>(...) {</span>
-<span id="cb8-5">  <span class="fu" style="color: #4758AB;
+<span id="cb10-5">  <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
 background-color: null;
@@ -1385,7 +2060,7 @@ background-color: null;
 font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>,</span>
-<span id="cb8-6">          <span class="at" style="color: #657422;
+<span id="cb10-6">          <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">thrX =</span> thr2, <span class="at" style="color: #657422;
 background-color: null;
@@ -1396,16 +2071,16 @@ background-color: null;
 font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, ...)</span>
-<span id="cb8-7">}</span>
-<span id="cb8-8"></span>
-<span id="cb8-9">res_cx <span class="ot" style="color: #003B4F;
+<span id="cb10-7">}</span>
+<span id="cb10-8"></span>
+<span id="cb10-9">res_cx <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">run2</span>()                                     <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># complex</span></span>
-<span id="cb8-10">res_ps <span class="ot" style="color: #003B4F;
+<span id="cb10-10">res_ps <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1421,7 +2096,7 @@ font-style: inherit;"># parsimonious</span></span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">res_im <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">res_im <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1442,11 +2117,11 @@ background-color: null;
 font-style: inherit;">1</span>))  <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># intermediate</span></span>
-<span id="cb10-2"></span>
-<span id="cb10-3"><span class="fu" style="color: #4758AB;
+<span id="cb12-2"></span>
+<span id="cb12-3"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(</span>
-<span id="cb10-4">  <span class="at" style="color: #657422;
+<span id="cb12-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">thrY         =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1455,28 +2130,28 @@ background-color: null;
 font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>,</span>
-<span id="cb10-5">  <span class="at" style="color: #657422;
+<span id="cb12-5">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">complex      =</span> res_cx<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression,</span>
-<span id="cb10-6">  <span class="at" style="color: #657422;
+<span id="cb12-6">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">parsimonious =</span> res_ps<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression,</span>
-<span id="cb10-7">  <span class="at" style="color: #657422;
+<span id="cb12-7">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">intermediate =</span> res_im<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>expression</span>
-<span id="cb10-8">)</span></code></pre></div></div>
+<span id="cb12-8">)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  thrY            complex   parsimonious       intermediate
 1    5      SUP + TRU*PRC      TRU + SUP      SUP + TRU*PRC
@@ -1530,7 +2205,7 @@ font-style: inherit;">$</span>expression</span>
 <h2 class="anchored" data-anchor-id="つのセルに最小解が複数あるとき">1つのセルに、最小解が複数あるとき</h2>
 <p>Boolean最小化は、同じ真理表から、同じ長さの解を複数返すことがあります。既定では、ThSQCAは最初の1つ(<code>M1</code>)を報告し、解の数を <code>n_solutions</code> に記録します。すべてを見るには、<code>extract_mode = "all"</code> を使います。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">res_all <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">res_all <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1548,7 +2223,7 @@ font-style: inherit;">"all"</span>)</span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">summary</span>(res_all)</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
@@ -1576,7 +2251,7 @@ Note: 1 threshold setting(s) had multiple solutions.
 <p>更新が5のとき、倹約解の分析は、等しく最小な2つの解、<code>TRU + SUP</code> と <code>PRC + SUP</code> を見つけます。それぞれが、別の観察されない組み合わせに頼っているので、データだけでは、どちらかを優先できません。ThSQCAは、このようなとき、注意を表示します。</p>
 <p>コンパクトに見たいときは、<code>extract_mode = "essential"</code> を使います。すべての解に含まれる項と、それ以外を分けます。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">res_ess <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">res_ess <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1594,7 +2269,7 @@ font-style: inherit;">"essential"</span>)</span></code></pre></div></div>
 Only the first solution (M1) and its fit metrics are shown. Use
 generate_report() for full analysis.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">res_ess<span class="sc" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">res_ess<span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1605,7 +2280,7 @@ background-color: null;
 font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"selective_terms"</span>,</span>
-<span id="cb18-2">                    <span class="st" style="color: #20794D;
+<span id="cb20-2">                    <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"unique_terms"</span>, <span class="st" style="color: #20794D;
 background-color: null;
@@ -1915,7 +2590,7 @@ font-style: inherit;">"</span>)</span></code></pre></div></div>
 
 *(Auto-generated by ThSQCA package)*
 
-**Generated**: 2026-10-05 18:58
+**Generated**: 2026-10-06 00:09
 
 ---
 
@@ -2110,11 +2785,178 @@ font-style: inherit;">"ascii"</span>))</span></code></pre></div></div>
 </table>
 <p><em>O = presence, X = absence, blank = don’t care</em></p>
 </section>
+<section id="各閾値の背後に事例はいくつあるか" class="level2">
+<h2 class="anchored" data-anchor-id="各閾値の背後に事例はいくつあるか">各閾値の背後に、事例はいくつあるか</h2>
+<p>スイープの表は、解と適合度の値を示しますが、その背後にある事例の数は示しません。読者がそれを確かめられるようにしておくべきです。ごく少数の事例に支えられた結果は、信頼を下げて読むべきだからです。第1回のアウトカム閾値スイープについて、顧客の数は、ThSQCAを使わずに、データから直接数えられます。図の中の語は英語のままです。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">thr <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span></span>
+<span id="cb12-2">n_out  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(thr, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(t) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>LOY <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> t))</span>
+<span id="cb12-3">n_both <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(thr, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(t) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>LOY <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> t <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>QUA <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> demo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>SER <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>))</span>
+<span id="cb12-4">cases <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rbind</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"High loyalty (LOY &gt;= thrY)"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> n_out,</span>
+<span id="cb12-5">               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"... and high on QUA and SER"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> n_both)</span>
+<span id="cb12-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(cases) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> thr</span>
+<span id="cb12-7"></span>
+<span id="cb12-8">bp <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">barplot</span>(cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">beside =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#233A9A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F28018"</span>),</span>
+<span id="cb12-9">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cases) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.15</span>),</span>
+<span id="cb12-10">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Outcome threshold (thrY)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylab =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Number of customers"</span>,</span>
+<span id="cb12-11">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">main =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cases behind each threshold"</span>,</span>
+<span id="cb12-12">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.text =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rownames</span>(cases),</span>
+<span id="cb12-13">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">args.legend =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"topright"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bty =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>))</span>
+<span id="cb12-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">text</span>(bp, cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> cases, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pos =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cex =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/ja/articles/thsqca-beginners-4/index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" alt="グループ化した棒グラフ。アウトカムの閾値5では、ロイヤルティが高い顧客が263人で、そのうち品質とサービスがどちらも高いのは66人。閾値6では177人と65人、閾値7では90人と59人、閾値8では29人と26人。" width="672"></p>
+<figcaption>アウトカムの閾値ごとの、ロイヤルティの高い顧客の数(青)と、そのうち、品質とサービスのどちらも高い顧客の数(オレンジ)。</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>目標が高くなるにつれて、ロイヤルティの高い群は263人から29人へ小さくなり、スイープの厳しい側の解は、はるかに少ない事例の上に立っています。この件数を、スイープの表の横に報告しておけば、各行がどこまで支えられるかを、簡単に示せます。</p>
+</section>
 <section id="qcaパッケージでセルを確認する" class="level2">
 <h2 class="anchored" data-anchor-id="qcaパッケージでセルを確認する">QCAパッケージで、セルを確認する</h2>
 <p>ThSQCAは、新しい結果を作り出すわけではありません。どのセルも、普通のQCA分析なので、どのセルでも、手で再現できます。これは、道具への信頼を築く、よい方法で、査読者に聞かれたときの答えにもなります。ここでは、アウトカム閾値が7のセルを再現します。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">bin <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">bin <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -2124,13 +2966,13 @@ background-color: null;
 font-style: inherit;">as.integer</span>(x <span class="sc" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;=</span> t)</span>
-<span id="cb12-2"></span>
-<span id="cb12-3">d7 <span class="ot" style="color: #003B4F;
+<span id="cb13-2"></span>
+<span id="cb13-3">d7 <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">data.frame</span>(</span>
-<span id="cb12-4">  <span class="at" style="color: #657422;
+<span id="cb13-4">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">LOY =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2147,7 +2989,7 @@ background-color: null;
 font-style: inherit;">$</span>QUA, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>),</span>
-<span id="cb12-5">  <span class="at" style="color: #657422;
+<span id="cb13-5">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">SER =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2164,9 +3006,9 @@ background-color: null;
 font-style: inherit;">$</span>ENV, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">7</span>)</span>
-<span id="cb12-6">)</span>
-<span id="cb12-7"></span>
-<span id="cb12-8">tt  <span class="ot" style="color: #003B4F;
+<span id="cb13-6">)</span>
+<span id="cb13-7"></span>
+<span id="cb13-8">tt  <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2185,7 +3027,7 @@ background-color: null;
 font-style: inherit;">"SER"</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"ENV"</span>),</span>
-<span id="cb12-9">                  <span class="at" style="color: #657422;
+<span id="cb13-9">                  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -2198,12 +3040,12 @@ background-color: null;
 font-style: inherit;">show.cases =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
 font-style: inherit;">FALSE</span>)</span>
-<span id="cb12-10">sol <span class="ot" style="color: #003B4F;
+<span id="cb13-10">sol <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">minimize</span>(tt)</span>
-<span id="cb12-11">sol</span></code></pre></div></div>
+<span id="cb13-11">sol</span></code></pre></div></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 M1: QUA*SER -&gt; LOY</code></pre>
@@ -2215,12 +3057,12 @@ M1: QUA*SER -&gt; LOY</code></pre>
 <h2 class="anchored" data-anchor-id="ソフトウェアのバージョンを記録する">ソフトウェアのバージョンを記録する</h2>
 <p>結果は、Rやパッケージのバージョンに左右されることがあります。表示して、レポートと一緒に保管してください。</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">c</span>(<span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">R      =</span> R.version.string,</span>
-<span id="cb14-2">  <span class="at" style="color: #657422;
+<span id="cb15-2">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">QCA    =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2229,7 +3071,7 @@ background-color: null;
 font-style: inherit;">packageVersion</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"QCA"</span>)),</span>
-<span id="cb14-3">  <span class="at" style="color: #657422;
+<span id="cb15-3">  <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">ThSQCA =</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -2518,7 +3360,7 @@ font-style: inherit;">"ThSQCA"</span>)))</span></code></pre></div></div>
 <li>一貫性閾値、頻度閾値、解の種類、方向性の期待を、スイープのすべての段階で同じにします。</li>
 <li>項、解の一貫性、カバレッジを、共通の形式にまとめます。</li>
 <li>解がない場合や、最小解が複数ある場合も、失わずに記録します。</li>
-<li>結果は、表、構成図、軌跡の図、ヒートマップで示せます。Markdown 形式のレポートとしても書き出せます。</li>
+<li>結果は、表と構成図で示せます。Markdown 形式のレポートとしても書き出せます。結果の表は、R の通常のグラフ機能で図にすることもできます。</li>
 </ul>
 </section>
 <section id="つのスイープ関数" class="level2">

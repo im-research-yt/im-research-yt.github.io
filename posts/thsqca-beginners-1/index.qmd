@@ -107,6 +107,31 @@ This is exactly what the simulation was built to contain, and it shows why a swe
 
 A note on "No solution": it is a technical result, not a statement that no route to high loyalty exists. It means that, for these data and these settings, QCA could not produce a minimal solution that meets the consistency requirement.
 
+## Step 5: see the result as a picture
+
+A table is precise, but a picture shows the trend at a glance. The summary table is an ordinary data frame (`res$summary`), so we can plot it with base R. The next chunk draws solution coverage and solution consistency for each outcome threshold.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-cap: "Solution coverage (covS) and solution consistency (inclS) at each outcome threshold. No solution was found at thrY = 8."
+#| fig-alt: "Line chart with outcome threshold on the horizontal axis (5 to 8) and score on the vertical axis (0 to 1). Coverage rises from about 0.40 at threshold 5 to about 0.66 at threshold 7. Consistency falls from about 0.98 to about 0.89. There is no point at threshold 8, which is labeled as no solution."
+tab <- res$summary
+
+plot(tab$thrY, tab$covS, type = "b", pch = 19, lwd = 2, col = "#233A9A",
+     xlim = c(4.8, 8.2), ylim = c(0, 1), xaxt = "n",
+     xlab = "Outcome threshold (thrY)", ylab = "Score",
+     main = "Coverage and consistency by threshold")
+axis(1, at = tab$thrY)
+lines(tab$thrY, tab$inclS, type = "b", pch = 17, lwd = 2, col = "#F28018")
+abline(v = 8, lty = 3, col = "grey60")
+text(7.9, 0.3, "No solution\nat thrY = 8", adj = 1, col = "grey40")
+legend("bottomleft", legend = c("Coverage (covS)", "Consistency (inclS)"),
+       col = c("#233A9A", "#F28018"), pch = c(19, 17), lwd = 2, bty = "n")
+```
+
+As the target gets higher, coverage rises (the solution explains a larger share of the high-loyalty customers) while consistency slowly falls. At `thrY = 8` the line simply stops, because there is no solution to plot.
+
 ## What comes next
 
 In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.
