@@ -333,7 +333,7 @@ Results by Threshold:
 
 
 
-<p>In <a href="../thsqca-beginners-1/index.html">part 1</a> we ran an outcome threshold sweep and read its result. ThSQCA has four sweep functions in total. This post runs all four on the same practice data, and ends with practical advice on choosing the range of thresholds.</p>
+<p>In <a href="https://im-research-yt.github.io/posts/thsqca-beginners-1/">part 1</a> we ran an outcome threshold sweep and read its result. ThSQCA has four sweep functions in total. This post runs all four on the same practice data, and ends with practical advice on choosing the range of thresholds.</p>
 <section id="the-four-sweeps-at-a-glance" class="level2">
 <h2 class="anchored" data-anchor-id="the-four-sweeps-at-a-glance">The four sweeps at a glance</h2>
 <table class="caption-top table">
@@ -929,7 +929,7 @@ font-style: inherit;">$</span>summary</span></code></pre></div></div>
 </section>
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
-<p>In <a href="../thsqca-beginners-3/index.html">part 3</a> we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.</p>
+<p>In <a href="https://im-research-yt.github.io/posts/thsqca-beginners-3/">part 3</a> we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.</p>
 <p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.</em></p>
 
 
@@ -953,7 +953,7 @@ font-style: inherit;">$</span>summary</span></code></pre></div></div>
 
 
 
-<p>In <a href="../thsqca-beginners-2/index.html">part 2</a> we ran all four sweeps. Two questions remain for a careful analysis. First, QCA can produce three kinds of solution (complex, parsimonious, and intermediate); which should you use? Second, what if a cell has more than one minimal solution? This post answers both with a second, smaller practice data set.</p>
+<p>In <a href="https://im-research-yt.github.io/posts/thsqca-beginners-2/">part 2</a> we ran all four sweeps. Two questions remain for a careful analysis. First, QCA can produce three kinds of solution (complex, parsimonious, and intermediate); which should you use? Second, what if a cell has more than one minimal solution? This post answers both with a second, smaller practice data set.</p>
 <section id="a-second-practice-data-set" class="level2">
 <h2 class="anchored" data-anchor-id="a-second-practice-data-set">A second practice data set</h2>
 <p>We simulate 60 business software accounts. Each has a renewal score (<code>RNW</code>) and three evaluations: trust (<code>TRU</code>), price (<code>PRC</code>), and support (<code>SUP</code>), all from 0 to 10. In this simulated world, renewal is high when trust is high and either price or support is high. The three evaluations are strongly correlated, which will leave some combinations of conditions unobserved. That is deliberate, because unobserved combinations are exactly what the three solution types treat differently.</p>
@@ -1573,7 +1573,7 @@ font-style: inherit;">"n_solutions"</span>)]</span></code></pre></div></div>
 </section>
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
-<p>In <a href="../thsqca-beginners-4/index.html">part 4</a>, the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.</p>
+<p>In <a href="https://im-research-yt.github.io/posts/thsqca-beginners-4/">part 4</a>, the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.</p>
 <p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.</em></p>
 
 
