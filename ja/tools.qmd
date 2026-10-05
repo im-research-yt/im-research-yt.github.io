@@ -1,6 +1,7 @@
 ---
 title: "分析ツール"
 description: "QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール。"
+image: /thumbnail-tools.png
 ---
 
 ::: {.ja-nav}
@@ -15,6 +16,8 @@ description: "QCA、マーケティング調査、多変量解析のための、
 :::
 
 ## QCA
+
+下の2つのツールは、Rパッケージ [ThSQCA](software.qmd) の入口になります。ThSQCAは、1つの閾値だけでQCAを行うのではなく、閾値を少しずつ動かして、結果の変わり方を調べます(CRANで公開中)。
 
 - [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。
 - [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。

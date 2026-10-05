@@ -11,7 +11,7 @@
     "href": "tools.html#qca",
     "title": "Analysis tools",
     "section": "QCA",
-    "text": "QCA\n\nQCA Quickstart (Japanese / English): creates a first QCA analysis script from the column names of your data.\nSweep Builder (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.\n\nEach of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer."
+    "text": "QCA\nThe two tools below are companions to the R package ThSQCA, which runs QCA over a range of thresholds (a threshold sweep) instead of a single cutoff. ThSQCA is available on CRAN.\n\nQCA Quickstart (Japanese / English): creates a first QCA analysis script from the column names of your data.\nSweep Builder (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.\n\nEach of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer."
   },
   {
     "objectID": "tools.html#marketing-research",
@@ -900,7 +900,7 @@
     "href": "ja/tools.html#qca",
     "title": "分析ツール",
     "section": "QCA",
-    "text": "QCA\n\nQCA Quickstart(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。\n\n次の7つのツール(マーケティング調査と多変量解析)は、右上のボタンで、日本語と英語の画面を切り替えられます。"
+    "text": "QCA\n下の2つのツールは、Rパッケージ ThSQCA の入口になります。ThSQCAは、1つの閾値だけでQCAを行うのではなく、閾値を少しずつ動かして、結果の変わり方を調べます(CRANで公開中)。\n\nQCA Quickstart(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。\n\n次の7つのツール(マーケティング調査と多変量解析)は、右上のボタンで、日本語と英語の画面を切り替えられます。"
   },
   {
     "objectID": "ja/tools.html#マーケティング調査",
