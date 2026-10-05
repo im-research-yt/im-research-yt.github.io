@@ -28,4 +28,48 @@ Notes on the **ThSQCA** R package, qualitative comparative analysis, and hands-o
 [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA){.btn .btn-outline-primary .btn-sm}
 :::
 
-## Latest posts
+<style>
+/* The automatic listing below is kept only to build the R feed. Hide it. */
+.quarto-listing, .quarto-listing-category { display: none; }
+.toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.1rem; margin: 1rem 0 2rem 0; }
+.toc-card { display: flex; flex-direction: column; text-decoration: none !important; color: inherit !important; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; transition: box-shadow 0.2s; background: transparent; border: 1px solid #d9dde8; }
+.toc-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.16); }
+.toc-card img { width: 100%; height: 150px; object-fit: cover; }
+.toc-body { padding: 0.8rem 1rem 1rem 1rem; }
+.toc-num { display: inline-block; min-width: 1.7rem; text-align: center; background: #233A9A; color: #fff; border-radius: 999px; font-weight: 700; font-size: 0.85rem; padding: 0.05rem 0.5rem; margin-bottom: 0.4rem; }
+.toc-title { font-weight: 700; font-size: 1.02rem; line-height: 1.35; margin-bottom: 0.3rem; }
+.toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
+</style>
+
+The ten articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
+
+## 1. Get to know QCA and the threshold idea
+
+No R needed. Why QCA suits decisions, why the threshold matters, and the package that makes it an object of analysis.
+
+<div class="toc-grid">
+<a class="toc-card" href="posts/welcome/index.html"><img src="posts/welcome/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">1</span><div class="toc-title">Welcome</div><p>Notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.</p></div></a>
+<a class="toc-card" href="posts/why-qca-decisions/index.html"><img src="posts/why-qca-decisions/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">2</span><div class="toc-title">Why QCA suits decision-making: looking for &quot;recipes&quot; instead of single effects</div><p>Marketing actions work in combination. Qualitative comparative analysis (QCA) looks for the recipes that are enough for an outcome. Here is how it differs from regression, and what to watch for.</p></div></a>
+<a class="toc-card" href="posts/qca-for-marketers/index.html"><img src="posts/qca-for-marketers/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">3</span><div class="toc-title">Is &quot;good enough&quot; the same goal as &quot;loved&quot;? A marketer&#x27;s guide to threshold-sweep QCA</div><p>A brand manager&#x27;s target level changes which strengths matter. Threshold-sweep QCA shows how the winning combination changes as the bar rises.</p></div></a>
+<a class="toc-card" href="posts/introducing-thsqca/index.html"><img src="posts/introducing-thsqca/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">4</span><div class="toc-title">Introducing ThSQCA: threshold-sweep QCA in R</div><p>ThSQCA is an R package that reruns a QCA analysis across a range of thresholds and records how the sufficiency solutions change.</p></div></a>
+</div>
+
+## 2. Learn ThSQCA in R
+
+A four-part series for beginners, using practice data and running code. Read it in order.
+
+<div class="toc-grid">
+<a class="toc-card" href="posts/thsqca-beginners-1/index.html"><img src="posts/thsqca-beginners-1/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">5</span><div class="toc-title">ThSQCA for beginners, part 1: your first threshold sweep</div><p>A step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA.</p></div></a>
+<a class="toc-card" href="posts/thsqca-beginners-2/index.html"><img src="posts/thsqca-beginners-2/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">6</span><div class="toc-title">ThSQCA for beginners, part 2: the four sweeps and how to choose a range</div><p>Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.</p></div></a>
+<a class="toc-card" href="posts/thsqca-beginners-3/index.html"><img src="posts/thsqca-beginners-3/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">7</span><div class="toc-title">ThSQCA for beginners, part 3: solution types and multiple solutions</div><p>Complex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution.</p></div></a>
+<a class="toc-card" href="posts/thsqca-beginners-4/index.html"><img src="posts/thsqca-beginners-4/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">8</span><div class="toc-title">ThSQCA for beginners, part 4: reporting and checking your results</div><p>Turn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting.</p></div></a>
+</div>
+
+## 3. Reading lists
+
+Where to read next: the standard readings for learning QCA, then papers that use it in marketing and management.
+
+<div class="toc-grid">
+<a class="toc-card" href="posts/reading-list-basics/index.html"><img src="posts/reading-list-basics/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">9</span><div class="toc-title">Papers and books for getting to know QCA: six to read first (basics)</div><p>A short, goal-based list of the papers and books worth reading first if you want to understand how QCA thinks.</p></div></a>
+<a class="toc-card" href="posts/reading-list-applied/index.html"><img src="posts/reading-list-applied/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">10</span><div class="toc-title">QCA in marketing and management: ten papers to read first (applications)</div><p>Papers that use QCA in marketing and management, the theoretical background from management and organization research, practical guides, and papers on the threshold.</p></div></a>
+</div>

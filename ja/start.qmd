@@ -9,20 +9,28 @@ description: "初めての方への、読む順序の案内です。"
 
 このブログは、**質的比較分析(QCA)**、Rパッケージ **ThSQCA**、マーケティング調査やデータ分析のための実用的なツールを扱います。初めての方は、次の順に読むのがおすすめです。
 
-## QCAを初めて知る方へ
+## 記事を、読む順に
 
-1. [なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析](articles/why-qca-decisions/index.qmd)
-2. [「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA](articles/qca-for-marketers/index.qmd)
-3. [QCA を知るための論文と本: 最初に読む 6 点(基礎編)](articles/reading-list-basics/index.qmd)
-4. [マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)](articles/reading-list-applied/index.qmd)
+[日本語版トップ](index.qmd)にも、同じ並びで、画像つきの一覧があります。
 
-## Rで閾値スイープを試したい方へ
+### 1. QCA と「閾値」の考え方を知る
 
-1. [ThSQCA の紹介: Rで閾値スイープQCAを行う](articles/introducing-thsqca/index.qmd)
-2. [ThSQCA 入門 第1回: はじめての閾値スイープ](articles/thsqca-beginners-1/index.qmd)
-3. [第2回: 4つのスイープと、範囲の決め方](articles/thsqca-beginners-2/index.qmd)
-4. [第3回: 解の種類と、複数の解](articles/thsqca-beginners-3/index.qmd)
-5. [第4回: 結果の報告と確認](articles/thsqca-beginners-4/index.qmd)
+1. [ようこそ](articles/welcome/index.qmd)
+2. [なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析](articles/why-qca-decisions/index.qmd)
+3. [「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA](articles/qca-for-marketers/index.qmd)
+4. [ThSQCA の紹介: Rで閾値スイープQCAを行う](articles/introducing-thsqca/index.qmd)
+
+### 2. R で ThSQCA を使ってみる
+
+5. [ThSQCA 入門 第1回: はじめての閾値スイープ](articles/thsqca-beginners-1/index.qmd)
+6. [第2回: 4つのスイープと、範囲の決め方](articles/thsqca-beginners-2/index.qmd)
+7. [第3回: 解の種類と、複数の解](articles/thsqca-beginners-3/index.qmd)
+8. [第4回: 結果の報告と確認](articles/thsqca-beginners-4/index.qmd)
+
+### 3. 文献リスト
+
+9. [QCA を知るための論文と本: 最初に読む 6 点(基礎編)](articles/reading-list-basics/index.qmd)
+10. [マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)](articles/reading-list-applied/index.qmd)
 
 ## ツールから始めたい方へ
 

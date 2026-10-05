@@ -16,7 +16,7 @@ website:
     left:
       - text: "Start here"
         href: start-here.qmd
-      - text: "Blog"
+      - text: "Articles"
         href: index.qmd
       - text: "Tools"
         href: tools.qmd

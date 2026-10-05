@@ -154,13 +154,15 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 <link rel="alternate" type="application/rss+xml" title="Yuki Toyoda's Blog" href="index.xml" data-external="1"><meta property="og:title" content="Yuki Toyoda のブログ(日本語版) – Yuki Toyoda’s Blog">
 <meta property="og:description" content="法政大学 | QCA、マーケティング・サイエンス、データ分析ツール">
-<meta property="og:image" content="https://im-research-yt.github.io/ja/articles/reading-list-applied/thumbnail.png">
+<meta property="og:image" content="https://im-research-yt.github.io/ja/articles/welcome/thumbnail.png">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
+<meta property="og:image:alt" content="">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Yuki Toyoda のブログ(日本語版) – Yuki Toyoda’s Blog">
 <meta name="twitter:description" content="法政大学 | QCA、マーケティング・サイエンス、データ分析ツール">
-<meta name="twitter:image" content="https://im-research-yt.github.io/ja/articles/reading-list-applied/thumbnail.png">
+<meta name="twitter:image" content="https://im-research-yt.github.io/ja/articles/welcome/thumbnail.png">
+<meta name="twitter:image:alt" content="">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
 <meta name="twitter:card" content="summary_large_image">
@@ -193,7 +195,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Blog</span></a>
+<span class="menu-text">Articles</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../tools.html"> 
@@ -263,8 +265,139 @@ window.Quarto = {
 <p><strong>ThSQCA</strong> パッケージ、質的比較分析(QCA)、マーケティング調査のためのWebツールについて書いています。</p>
 <p><a href="../ja/start.html" class="btn btn-primary btn-sm">はじめての方へ</a> <a href="../ja/tools.html" class="btn btn-outline-primary btn-sm">ツール</a> <a href="../index.html" class="btn btn-outline-primary btn-sm">English</a></p>
 </div>
-<section id="新着記事" class="level2">
-<h2 class="anchored" data-anchor-id="新着記事">新着記事</h2>
+<style>
+/* The automatic listing below is kept only to build the R feed. Hide it. */
+.quarto-listing, .quarto-listing-category { display: none; }
+.toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.1rem; margin: 1rem 0 2rem 0; }
+.toc-card { display: flex; flex-direction: column; text-decoration: none !important; color: inherit !important; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); overflow: hidden; transition: box-shadow 0.2s; background: transparent; border: 1px solid #d9dde8; }
+.toc-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.16); }
+.toc-card img { width: 100%; height: 150px; object-fit: cover; }
+.toc-body { padding: 0.8rem 1rem 1rem 1rem; }
+.toc-num { display: inline-block; min-width: 1.7rem; text-align: center; background: #233A9A; color: #fff; border-radius: 999px; font-weight: 700; font-size: 0.85rem; padding: 0.05rem 0.5rem; margin-bottom: 0.4rem; }
+.toc-title { font-weight: 700; font-size: 1.02rem; line-height: 1.35; margin-bottom: 0.3rem; }
+.toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
+</style>
+<p>下の記事が、このサイトの中心です。読む順に並べてあります。上から順に読んでください。</p>
+<section id="qca-と閾値の考え方を知る" class="level2">
+<h2 class="anchored" data-anchor-id="qca-と閾値の考え方を知る">1. QCA と「閾値」の考え方を知る</h2>
+<p>R は要りません。なぜ QCA が意思決定に向くのか、なぜ閾値が大切なのか、そして、閾値を分析の対象にするパッケージを紹介します。</p>
+<div class="toc-grid">
+<a class="toc-card" href="articles/welcome/index.html"><img src="articles/welcome/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">1</span>
+<div class="toc-title">
+ようこそ
+</div>
+<p>
+閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたブログです。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/why-qca-decisions/index.html"><img src="articles/why-qca-decisions/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">2</span>
+<div class="toc-title">
+なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析
+</div>
+<p>
+施策は組み合わせで動かします。質的比較分析(QCA)は、成果に十分な「レシピ」を探す分析です。回帰分析との違いと、使うときの注意点を整理します。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/qca-for-marketers/index.html"><img src="articles/qca-for-marketers/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">3</span>
+<div class="toc-title">
+「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA
+</div>
+<p>
+ブランド・マネージャーの目標水準によって、効く強みは変わります。閾値スイープ QCA で、基準を上げたときに勝ちパターンがどう変わるかを見ます。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/introducing-thsqca/index.html"><img src="articles/introducing-thsqca/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">4</span>
+<div class="toc-title">
+ThSQCA の紹介: Rで閾値スイープQCAを行う
+</div>
+<p>
+ThSQCA は、QCA の分析を閾値の範囲全体で繰り返し、十分条件の解がどう変わるかを記録する R パッケージです。
+</p>
+</div>
+</a><p><a class="toc-card" href="articles/introducing-thsqca/index.html"></a></p>
+</div>
+</section>
+<section id="r-で-thsqca-を使ってみる" class="level2">
+<h2 class="anchored" data-anchor-id="r-で-thsqca-を使ってみる">2. R で ThSQCA を使ってみる</h2>
+<p>初心者向けの全4回です。練習用データで、実際にコードを動かします。順に読んでください。</p>
+<div class="toc-grid">
+<a class="toc-card" href="articles/thsqca-beginners-1/index.html"><img src="articles/thsqca-beginners-1/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">5</span>
+<div class="toc-title">
+ThSQCA 入門 第1回: はじめての閾値スイープ
+</div>
+<p>
+Rで閾値スイープQCAを、順を追って学びます。データは要りません。小さな練習用データを作り、ThSQCAで最初のスイープを実行します。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/thsqca-beginners-2/index.html"><img src="articles/thsqca-beginners-2/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">6</span>
+<div class="toc-title">
+ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方
+</div>
+<p>
+アウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/thsqca-beginners-3/index.html"><img src="articles/thsqca-beginners-3/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">7</span>
+<div class="toc-title">
+ThSQCA 入門 第3回: 解の種類と、複数の解
+</div>
+<p>
+複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/thsqca-beginners-4/index.html"><img src="articles/thsqca-beginners-4/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">8</span>
+<div class="toc-title">
+ThSQCA 入門 第4回: 結果の報告と確認
+</div>
+<p>
+閾値スイープを報告にまとめます。generate_report()、構成図、QCAパッケージとの照合、報告のための短いチェックリストを扱います。
+</p>
+</div>
+</a><p><a class="toc-card" href="articles/thsqca-beginners-4/index.html"></a></p>
+</div>
+</section>
+<section id="文献リスト" class="level2">
+<h2 class="anchored" data-anchor-id="文献リスト">3. 文献リスト</h2>
+<p>次に読むもの: QCA を学ぶための基本文献と、マーケティング・経営学での応用例です。</p>
+<div class="toc-grid">
+<a class="toc-card" href="articles/reading-list-basics/index.html"><img src="articles/reading-list-basics/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">9</span>
+<div class="toc-title">
+QCA を知るための論文と本: 最初に読む 6 点(基礎編)
+</div>
+<p>
+QCA の考え方をつかむために、最初に読む価値のある論文と本を、目的別に紹介します。
+</p>
+</div>
+</a> <a class="toc-card" href="articles/reading-list-applied/index.html"><img src="articles/reading-list-applied/thumbnail.png" alt="">
+<div class="toc-body">
+<span class="toc-num">10</span>
+<div class="toc-title">
+マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)
+</div>
+<p>
+マーケティングと経営学で QCA が使われた論文、経営・組織研究の理論的な背景、実務ガイド、しきい値の扱いを、目的別に紹介します。
+</p>
+</div>
+</a><p><a class="toc-card" href="articles/reading-list-applied/index.html"></a></p>
+</div>
 
 
 
@@ -526,7 +659,7 @@ Oct 2, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1790951067992" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="10">
+<div class="g-col-1" data-index="9" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1791167300000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="11">
 <a href="../ja/articles/welcome/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">

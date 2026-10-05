@@ -6,20 +6,28 @@ description: "A suggested reading order for new visitors."
 
 This blog is about **qualitative comparative analysis (QCA)**, the **ThSQCA** R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order.
 
-## If you are new to QCA
+## The ten core articles, in reading order
 
-1. [Why QCA suits decision-making: looking for "recipes" instead of single effects](posts/why-qca-decisions/index.qmd)
-2. [Is "good enough" the same goal as "loved"? A marketer's guide to threshold-sweep QCA](posts/qca-for-marketers/index.qmd)
-3. [Papers and books for getting to know QCA: six to read first (basics)](posts/reading-list-basics/index.qmd)
-4. [QCA in marketing and management: ten papers to read first (applications)](posts/reading-list-applied/index.qmd)
+The [home page](index.qmd) shows the same list with pictures.
 
-## If you want to try threshold-sweep QCA in R
+### 1. Get to know QCA and the threshold idea
 
-1. [Introducing ThSQCA: threshold-sweep QCA in R](posts/introducing-thsqca/index.qmd)
-2. [ThSQCA for beginners, part 1: your first threshold sweep](posts/thsqca-beginners-1/index.qmd)
-3. [Part 2: the four sweeps and how to choose a range](posts/thsqca-beginners-2/index.qmd)
-4. [Part 3: solution types and multiple solutions](posts/thsqca-beginners-3/index.qmd)
-5. [Part 4: reporting and checking your results](posts/thsqca-beginners-4/index.qmd)
+1. [Welcome](posts/welcome/index.qmd)
+2. [Why QCA suits decision-making: looking for "recipes" instead of single effects](posts/why-qca-decisions/index.qmd)
+3. [Is "good enough" the same goal as "loved"? A marketer's guide to threshold-sweep QCA](posts/qca-for-marketers/index.qmd)
+4. [Introducing ThSQCA: threshold-sweep QCA in R](posts/introducing-thsqca/index.qmd)
+
+### 2. Learn ThSQCA in R
+
+5. [ThSQCA for beginners, part 1: your first threshold sweep](posts/thsqca-beginners-1/index.qmd)
+6. [Part 2: the four sweeps and how to choose a range](posts/thsqca-beginners-2/index.qmd)
+7. [Part 3: solution types and multiple solutions](posts/thsqca-beginners-3/index.qmd)
+8. [Part 4: reporting and checking your results](posts/thsqca-beginners-4/index.qmd)
+
+### 3. Reading lists
+
+9. [Papers and books for getting to know QCA: six to read first (basics)](posts/reading-list-basics/index.qmd)
+10. [QCA in marketing and management: ten papers to read first (applications)](posts/reading-list-applied/index.qmd)
 
 ## If you prefer to start from a tool
 

@@ -60,7 +60,7 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome",
     "section": "",
-    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nTechnical posts with reproducible R code will follow."
+    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
   },
   {
     "objectID": "posts/thsqca-beginners-3/index.html",
@@ -245,18 +245,11 @@
     "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\nこのブログは、質的比較分析(QCA)、Rパッケージ ThSQCA、マーケティング調査やデータ分析のための実用的なツールを扱います。初めての方は、次の順に読むのがおすすめです。"
   },
   {
-    "objectID": "ja/start.html#qcaを初めて知る方へ",
-    "href": "ja/start.html#qcaを初めて知る方へ",
+    "objectID": "ja/start.html#記事を読む順に",
+    "href": "ja/start.html#記事を読む順に",
     "title": "はじめに",
-    "section": "QCAを初めて知る方へ",
-    "text": "QCAを初めて知る方へ\n\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)"
-  },
-  {
-    "objectID": "ja/start.html#rで閾値スイープを試したい方へ",
-    "href": "ja/start.html#rで閾値スイープを試したい方へ",
-    "title": "はじめに",
-    "section": "Rで閾値スイープを試したい方へ",
-    "text": "Rで閾値スイープを試したい方へ\n\nThSQCA の紹介: Rで閾値スイープQCAを行う\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認"
+    "section": "記事を、読む順に",
+    "text": "記事を、読む順に\n日本語版トップにも、同じ並びで、画像つきの一覧があります。\n\n1. QCA と「閾値」の考え方を知る\n\nようこそ\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\n\n2. R で ThSQCA を使ってみる\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認\n\n\n\n3. 文献リスト\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)"
   },
   {
     "objectID": "ja/start.html#ツールから始めたい方へ",
@@ -277,21 +270,35 @@
     "href": "ja/index.html",
     "title": "Yuki Toyoda のブログ(日本語版)",
     "section": "",
-    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English"
+    "text": "日本語版トップ | はじめに | ツール | ソフトウェア | 紹介 | English\n下の記事が、このサイトの中心です。読む順に並べてあります。上から順に読んでください。"
   },
   {
-    "objectID": "ja/index.html#新着記事",
-    "href": "ja/index.html#新着記事",
+    "objectID": "ja/index.html#qca-と閾値の考え方を知る",
+    "href": "ja/index.html#qca-と閾値の考え方を知る",
     "title": "Yuki Toyoda のブログ(日本語版)",
-    "section": "新着記事",
-    "text": "新着記事"
+    "section": "1. QCA と「閾値」の考え方を知る",
+    "text": "1. QCA と「閾値」の考え方を知る\nR は要りません。なぜ QCA が意思決定に向くのか、なぜ閾値が大切なのか、そして、閾値を分析の対象にするパッケージを紹介します。\n\n\n\n1\n\nようこそ\n\n\n閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたブログです。\n\n\n \n\n2\n\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n\n\n施策は組み合わせで動かします。質的比較分析(QCA)は、成果に十分な「レシピ」を探す分析です。回帰分析との違いと、使うときの注意点を整理します。\n\n\n \n\n3\n\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\n\n\nブランド・マネージャーの目標水準によって、効く強みは変わります。閾値スイープ QCA で、基準を上げたときに勝ちパターンがどう変わるかを見ます。\n\n\n \n\n4\n\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\nThSQCA は、QCA の分析を閾値の範囲全体で繰り返し、十分条件の解がどう変わるかを記録する R パッケージです。"
+  },
+  {
+    "objectID": "ja/index.html#r-で-thsqca-を使ってみる",
+    "href": "ja/index.html#r-で-thsqca-を使ってみる",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "2. R で ThSQCA を使ってみる",
+    "text": "2. R で ThSQCA を使ってみる\n初心者向けの全4回です。練習用データで、実際にコードを動かします。順に読んでください。\n\n\n\n5\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n\n\nRで閾値スイープQCAを、順を追って学びます。データは要りません。小さな練習用データを作り、ThSQCAで最初のスイープを実行します。\n\n\n \n\n6\n\nThSQCA 入門 第2回: 4つのスイープと、範囲の決め方\n\n\nアウトカム、1つの条件、複数の条件、その両方をスイープします。練習用データで4つのスイープをすべて実行し、擁護できる閾値の範囲の決め方を考えます。\n\n\n \n\n7\n\nThSQCA 入門 第3回: 解の種類と、複数の解\n\n\n複雑解、倹約解、中間解を小さな例で説明します。1つの閾値に最小解が複数あるときの扱いも見ます。\n\n\n \n\n8\n\nThSQCA 入門 第4回: 結果の報告と確認\n\n\n閾値スイープを報告にまとめます。generate_report()、構成図、QCAパッケージとの照合、報告のための短いチェックリストを扱います。"
+  },
+  {
+    "objectID": "ja/index.html#文献リスト",
+    "href": "ja/index.html#文献リスト",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "3. 文献リスト",
+    "text": "3. 文献リスト\n次に読むもの: QCA を学ぶための基本文献と、マーケティング・経営学での応用例です。\n\n\n\n9\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\n\n\nQCA の考え方をつかむために、最初に読む価値のある論文と本を、目的別に紹介します。\n\n\n \n\n10\n\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)\n\n\nマーケティングと経営学で QCA が使われた論文、経営・組織研究の理論的な背景、実務ガイド、しきい値の扱いを、目的別に紹介します。"
   },
   {
     "objectID": "ja/articles/welcome/index.html",
     "href": "ja/articles/welcome/index.html",
     "title": "ようこそ",
     "section": "",
-    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを2つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。\n再現できるRのコードを載せた、技術的な記事が、このあと続きます。"
+    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを2つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。\n記事は、日本語版トップに、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-3/index.html",
@@ -473,14 +480,28 @@
     "href": "index.html",
     "title": "Yuki Toyoda’s Blog",
     "section": "",
-    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here 日本語の方はこちら ThSQCA on CRAN"
+    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here 日本語の方はこちら ThSQCA on CRAN\nThe ten articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)"
   },
   {
-    "objectID": "index.html#latest-posts",
-    "href": "index.html#latest-posts",
+    "objectID": "index.html#get-to-know-qca-and-the-threshold-idea",
+    "href": "index.html#get-to-know-qca-and-the-threshold-idea",
     "title": "Yuki Toyoda’s Blog",
-    "section": "Latest posts",
-    "text": "Latest posts"
+    "section": "1. Get to know QCA and the threshold idea",
+    "text": "1. Get to know QCA and the threshold idea\nNo R needed. Why QCA suits decisions, why the threshold matters, and the package that makes it an object of analysis.\n\n\n\n1\n\nWelcome\n\n\nNotes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\n\n\n \n\n2\n\nWhy QCA suits decision-making: looking for \"recipes\" instead of single effects\n\n\nMarketing actions work in combination. Qualitative comparative analysis (QCA) looks for the recipes that are enough for an outcome. Here is how it differs from regression, and what to watch for.\n\n\n \n\n3\n\nIs \"good enough\" the same goal as \"loved\"? A marketer's guide to threshold-sweep QCA\n\n\nA brand manager's target level changes which strengths matter. Threshold-sweep QCA shows how the winning combination changes as the bar rises.\n\n\n \n\n4\n\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\nThSQCA is an R package that reruns a QCA analysis across a range of thresholds and records how the sufficiency solutions change."
+  },
+  {
+    "objectID": "index.html#learn-thsqca-in-r",
+    "href": "index.html#learn-thsqca-in-r",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "2. Learn ThSQCA in R",
+    "text": "2. Learn ThSQCA in R\nA four-part series for beginners, using practice data and running code. Read it in order.\n\n\n\n5\n\nThSQCA for beginners, part 1: your first threshold sweep\n\n\nA step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA.\n\n\n \n\n6\n\nThSQCA for beginners, part 2: the four sweeps and how to choose a range\n\n\nSweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend.\n\n\n \n\n7\n\nThSQCA for beginners, part 3: solution types and multiple solutions\n\n\nComplex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution.\n\n\n \n\n8\n\nThSQCA for beginners, part 4: reporting and checking your results\n\n\nTurn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting."
+  },
+  {
+    "objectID": "index.html#reading-lists",
+    "href": "index.html#reading-lists",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "3. Reading lists",
+    "text": "3. Reading lists\nWhere to read next: the standard readings for learning QCA, then papers that use it in marketing and management.\n\n\n\n9\n\nPapers and books for getting to know QCA: six to read first (basics)\n\n\nA short, goal-based list of the papers and books worth reading first if you want to understand how QCA thinks.\n\n\n \n\n10\n\nQCA in marketing and management: ten papers to read first (applications)\n\n\nPapers that use QCA in marketing and management, the theoretical background from management and organization research, practical guides, and papers on the threshold."
   },
   {
     "objectID": "glossary.html",
@@ -1092,18 +1113,11 @@
     "text": "This blog is about qualitative comparative analysis (QCA), the ThSQCA R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order."
   },
   {
-    "objectID": "start-here.html#if-you-are-new-to-qca",
-    "href": "start-here.html#if-you-are-new-to-qca",
+    "objectID": "start-here.html#the-ten-core-articles-in-reading-order",
+    "href": "start-here.html#the-ten-core-articles-in-reading-order",
     "title": "Start here",
-    "section": "If you are new to QCA",
-    "text": "If you are new to QCA\n\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)"
-  },
-  {
-    "objectID": "start-here.html#if-you-want-to-try-threshold-sweep-qca-in-r",
-    "href": "start-here.html#if-you-want-to-try-threshold-sweep-qca-in-r",
-    "title": "Start here",
-    "section": "If you want to try threshold-sweep QCA in R",
-    "text": "If you want to try threshold-sweep QCA in R\n\nIntroducing ThSQCA: threshold-sweep QCA in R\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results"
+    "section": "The ten core articles, in reading order",
+    "text": "The ten core articles, in reading order\nThe home page shows the same list with pictures.\n\n1. Get to know QCA and the threshold idea\n\nWelcome\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\n\n2. Learn ThSQCA in R\n\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\n\n\n3. Reading lists\n\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)"
   },
   {
     "objectID": "start-here.html#if-you-prefer-to-start-from-a-tool",
