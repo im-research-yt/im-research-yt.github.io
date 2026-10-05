@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="知っておくべきひとつの考え方" class="level2">
 <h2 class="anchored" data-anchor-id="知っておくべきひとつの考え方">知っておくべき、ひとつの考え方</h2>
 <p>QCAは、あるアウトカムにとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。</p>
-<p>これを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、<strong>閾値</strong>を選びます。得点が閾値以上なら、その変数で「高い」とします。</p>
+<p>これを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、<strong>閾値</strong>を選びます。得点が閾値以上なら、その変数で「高い」とします。このシリーズでは、得点を閾値で「高い」と「高くない」の2つに分ける、二値(crisp-set)QCA を使います。</p>
 <p>ここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。</p>
 <p>ThSQCAは、<a href="https://cran.r-project.org/package=QCA">QCA</a> パッケージの代わりではありません。閾値ごとに、QCAの <code>truthTable()</code> と <code>minimize()</code> を、毎回同じ設定で呼び出して、結果を集めます。</p>
 </section>
@@ -371,7 +371,7 @@ Results by Threshold:
 <h2 class="anchored" data-anchor-id="次回">次回</h2>
 <p>次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。</p>
 <p>パッケージの完全なチュートリアルは、<a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCAのドキュメント</a>(英語)にあります。手法そのものは、<a href="https://doi.org/10.1007/s11135-026-03092-3">Toyoda (2026), <em>Quality &amp; Quantity</em></a> で説明しています。</p>
-<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8</em></p>
+<p><em>使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9</em></p>
 
 
 </section>
@@ -785,7 +785,7 @@ Results by Threshold:
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
-<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

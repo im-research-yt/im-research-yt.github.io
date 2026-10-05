@@ -102,7 +102,7 @@
     "href": "posts/thsqca-beginners-3/index.html#what-comes-next",
     "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
     "section": "What comes next",
-    "text": "What comes next\nIn part 4, the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+    "text": "What comes next\nIn part 4, the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
     "objectID": "posts/thsqca-beginners-1/index.html",
@@ -116,7 +116,7 @@
     "href": "posts/thsqca-beginners-1/index.html#the-one-idea-you-need",
     "title": "ThSQCA for beginners, part 1: your first threshold sweep",
     "section": "The one idea you need",
-    "text": "The one idea you need\nQCA looks for combinations of conditions that are sufficient for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.\nTo do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a threshold: a customer is “high” on a variable when the score is greater than or equal to the threshold.\nHere is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.\nThSQCA does not replace the QCA package. For every threshold, it calls QCA’s truthTable() and minimize() for you, with identical settings each time, and collects the results."
+    "text": "The one idea you need\nQCA looks for combinations of conditions that are sufficient for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.\nTo do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a threshold: a customer is “high” on a variable when the score is greater than or equal to the threshold. In this series, each score is split at the threshold into “high” and “not high” (crisp-set QCA).\nHere is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.\nThSQCA does not replace the QCA package. For every threshold, it calls QCA’s truthTable() and minimize() for you, with identical settings each time, and collects the results."
   },
   {
     "objectID": "posts/thsqca-beginners-1/index.html#step-1-install-the-packages",
@@ -151,35 +151,42 @@
     "href": "posts/thsqca-beginners-1/index.html#what-comes-next",
     "title": "ThSQCA for beginners, part 1: your first threshold sweep",
     "section": "What comes next",
-    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+    "text": "What comes next\nIn the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.\nThe full package tutorial is available in the ThSQCA documentation, and the methodology is described in Toyoda (2026), Quality & Quantity.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
     "objectID": "posts/reading-list-applied/index.html",
     "href": "posts/reading-list-applied/index.html",
-    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "title": "QCA in marketing and management: ten papers to read first (applications)",
     "section": "",
-    "text": "The basics list introduced the readings that explain how QCA thinks. The next question is probably “How is it actually used in research?” Here are papers from marketing and management that are worth reading as models for your own work, grouped by purpose.\nAs in the basics list, the summaries stay within what the publishers’ abstracts say."
+    "text": "The basics list introduced the standard readings for learning QCA. The next question is probably “How is it actually used in research?” Here are papers from marketing and management that are worth reading as models for your own work, together with the theoretical background from management and organization research, grouped by purpose.\nAs in the basics list, the summaries stay within what the publishers’ abstracts say."
   },
   {
     "objectID": "posts/reading-list-applied/index.html#applications-in-marketing-and-services",
     "href": "posts/reading-list-applied/index.html#applications-in-marketing-and-services",
-    "title": "QCA in marketing and management: five papers to read first (applications)",
+    "title": "QCA in marketing and management: ten papers to read first (applications)",
     "section": "1. Applications in marketing and services",
-    "text": "1. Applications in marketing and services\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337\n\nStudies luxury hotel services and uses QCA to examine which combinations of attributes lead to the adoption of a new service. An application that looks not only at individual attributes but at how they are combined.\n\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120\n\nCombines customer orientation with other strategic orientations, strategy types, and market environments, and uses fsQCA to find the configurations that go with high firm performance. An application that considers the role of customer orientation through its combinations with other conditions."
+    "text": "1. Applications in marketing and services\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337 Studies luxury hotel services and uses QCA to examine which combinations of attributes lead to the adoption of a new service. An application that looks not only at individual attributes but at how they are combined.\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120 Combines customer orientation with other strategic orientations, strategy types, and market environments, and uses fsQCA to find the configurations that go with high firm performance. An application that considers the role of customer orientation through its combinations with other conditions."
+  },
+  {
+    "objectID": "posts/reading-list-applied/index.html#theoretical-background-in-management-and-organization-research",
+    "href": "posts/reading-list-applied/index.html#theoretical-background-in-management-and-organization-research",
+    "title": "QCA in marketing and management: ten papers to read first (applications)",
+    "section": "2. Theoretical background in management and organization research",
+    "text": "2. Theoretical background in management and organization research\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092 Treats an organization as a combination of elements and argues for analyzing the link between those combinations and outcomes with set theory. A foundation for thinking about several combinations that lead to the same outcome.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120 Analyzes organizational typologies with fuzzy sets and examines the combinations of conditions that lead to an outcome. Important for understanding that the causes can be asymmetric between the presence and the absence of an outcome.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021 Alongside the effects of single variables in multiple regression, it proposes an analysis that looks at combinations of conditions and at causal asymmetry. It discusses how to analyze data and build theory, using regression and fsQCA on the same data.\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252 Reviews how QCA has developed in management and organization research and sets out a “neo-configurational perspective” for capturing causal complexity. It links set membership, necessity and sufficiency, and counterfactual analysis to theoretical viewpoints."
   },
   {
     "objectID": "posts/reading-list-applied/index.html#how-to-run-and-report-an-analysis-practical-guides",
     "href": "posts/reading-list-applied/index.html#how-to-run-and-report-an-analysis-practical-guides",
-    "title": "QCA in marketing and management: five papers to read first (applications)",
-    "section": "2. How to run and report an analysis (practical guides)",
-    "text": "2. How to run and report an analysis (practical guides)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487\n\nSets out practical guidelines for QCA in strategy and organization research. It covers the whole course of a study, from model building and case selection to calibration, analysis, reporting, and interpretation.\n\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310\n\nA practical guide to using fsQCA in information systems and marketing research. It explains the procedure with data from earlier studies and also touches on checking predictive validity and combining fsQCA with methods such as SEM.\n\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879\n\nFor digital phenomena that involve several theoretical perspectives and combinations of conditions, it offers a framework that ties QCA to theory building. Through examples, it explains how to apply QCA to deductive theory testing and to inductive theory building."
+    "title": "QCA in marketing and management: ten papers to read first (applications)",
+    "section": "3. How to run and report an analysis (practical guides)",
+    "text": "3. How to run and report an analysis (practical guides)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487 Sets out practical guidelines for QCA in strategy and organization research. It covers the whole course of a study, from model building and case selection to calibration, analysis, reporting, and interpretation.\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310 A practical guide to using fsQCA in information systems and marketing research. It explains the procedure with data from earlier studies and also touches on checking predictive validity and combining fsQCA with methods such as SEM.\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879 For digital phenomena that involve several theoretical perspectives and combinations of conditions, it offers a framework that ties QCA to theory building. Through examples, it explains how to apply QCA to deductive theory testing and to inductive theory building."
   },
   {
     "objectID": "posts/reading-list-applied/index.html#choosing-the-threshold",
     "href": "posts/reading-list-applied/index.html#choosing-the-threshold",
-    "title": "QCA in marketing and management: five papers to read first (applications)",
-    "section": "3. Choosing the threshold",
-    "text": "3. Choosing the threshold\nOn how the placement of the threshold changes the results, see also Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3."
+    "title": "QCA in marketing and management: ten papers to read first (applications)",
+    "section": "4. Choosing the threshold",
+    "text": "4. Choosing the threshold\n\nKrogslund, C., Choi, D. D., & Poertner, M. (2015). Fuzzy sets on shaky ground: Parameter sensitivity and confirmation bias in fsQCA. Political Analysis, 23(1), 21-41. https://doi.org/10.1093/pan/mpu016 Argues that fsQCA results can change with small changes in the parameters a user chooses, and that combinations containing randomly generated variables are often found to be sufficient for an outcome. It re-analyzes three existing studies and uses sensitivity analyses and Monte Carlo simulations.\n\nOn how the placement of the threshold changes the results, see also Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3."
   },
   {
     "objectID": "posts/introducing-thsqca/index.html",
@@ -214,7 +221,7 @@
     "href": "posts/introducing-thsqca/index.html#getting-started",
     "title": "Introducing ThSQCA: threshold-sweep QCA in R",
     "section": "Getting started",
-    "text": "Getting started\ninstall.packages(\"ThSQCA\")\nlibrary(ThSQCA)\nA minimal outcome-threshold sweep looks like this (dat is your data frame, with a 0 to 10 outcome Y and conditions A, B, C):\nres &lt;- otSweep(\n  dat = dat,\n  outcome = \"Y\",\n  conditions = c(\"A\", \"B\", \"C\"),\n  sweep_range = 6:9,\n  thrX = c(A = 7, B = 7, C = 7),\n  incl.cut = 0.8,\n  n.cut = 1,\n  include = \"?\",\n  dir.exp = c(1, 1, 1),\n  return_details = TRUE\n)\nres$summary\nThe package vignette covers all four functions with worked examples."
+    "text": "Getting started\ninstall.packages(\"ThSQCA\")\nlibrary(ThSQCA)\nThe package includes a small example data set, sample_data, with an outcome Y and three conditions X1, X2, and X3, all scored from 0 to 10. The following is a minimal outcome-threshold sweep that runs as it is:\nlibrary(ThSQCA)\n\nhead(sample_data)\n\nres &lt;- otSweep(\n  dat         = sample_data,\n  outcome     = \"Y\",\n  conditions  = c(\"X1\", \"X2\", \"X3\"),\n  sweep_range = 6:9,\n  thrX        = c(X1 = 7, X2 = 7, X3 = 7)\n)\n\nsummary(res)\nThis sweep asks how the sufficiency solution changes when “high outcome” is defined as Y &gt;= 6, Y &gt;= 7, Y &gt;= 8, and Y &gt;= 9. Each condition counts as “high” when its score is 7 or above. If you want a slower, step-by-step explanation of every row and of how to read the result table, see part 1 of the beginner’s series.\nRunning it prints a table like this (only the result part is shown):\n thrY                  expression inclS  covS n_solutions\n    6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1\n    7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1\n    8                 No solution    NA    NA           0\n    9                 No solution    NA    NA           0\nEach row is one outcome threshold. In the expression column, * means AND, + means OR, and ~ means NOT. At Y &gt;= 6 and Y &gt;= 7, the same three sufficient paths appear. At Y &gt;= 8 and Y &gt;= 9, no solution meets the consistency requirement. A single-threshold analysis cannot show where an answer stops holding; a sweep can.\nThe package vignette covers all four functions with worked examples."
   },
   {
     "objectID": "posts/introducing-thsqca/index.html#a-note-on-use",
@@ -242,7 +249,7 @@
     "href": "ja/start.html#qcaを初めて知る方へ",
     "title": "はじめに",
     "section": "QCAを初めて知る方へ",
-    "text": "QCAを初めて知る方へ\n\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)"
+    "text": "QCAを初めて知る方へ\n\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)"
   },
   {
     "objectID": "ja/start.html#rで閾値スイープを試したい方へ",
@@ -326,7 +333,7 @@
     "href": "ja/articles/thsqca-beginners-3/index.html#次回",
     "title": "ThSQCA 入門 第3回: 解の種類と、複数の解",
     "section": "次回",
-    "text": "次回\n最終回の第4回では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+    "text": "次回\n最終回の第4回では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-1/index.html",
@@ -340,7 +347,7 @@
     "href": "ja/articles/thsqca-beginners-1/index.html#知っておくべきひとつの考え方",
     "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
     "section": "知っておくべき、ひとつの考え方",
-    "text": "知っておくべき、ひとつの考え方\nQCAは、あるアウトカムにとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。\nこれを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、閾値を選びます。得点が閾値以上なら、その変数で「高い」とします。\nここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。\nThSQCAは、QCA パッケージの代わりではありません。閾値ごとに、QCAの truthTable() と minimize() を、毎回同じ設定で呼び出して、結果を集めます。"
+    "text": "知っておくべき、ひとつの考え方\nQCAは、あるアウトカムにとって「十分」な条件の組み合わせを探します。顧客ロイヤルティを例にしましょう。「品質が高く、かつサービスが高い」という組み合わせは、それをもつ顧客のほぼ全員が、ロイヤルティも高いなら、ロイヤルティが高いことに十分です。\nこれを行うために、QCAはまず、「高い」とは誰のことかを決めなければなりません。0〜10点の調査の得点なら、閾値を選びます。得点が閾値以上なら、その変数で「高い」とします。このシリーズでは、得点を閾値で「高い」と「高くない」の2つに分ける、二値(crisp-set)QCA を使います。\nここに落とし穴があります。閾値7も閾値8も、どちらも妥当ですが、答えが変わることがあります。通常のQCA分析は、閾値を1つ選んで、答えを1つ報告します。ThSQCAは、同じ分析を、閾値の範囲全体で繰り返し、すべての答えを1つの表にまとめます。答えが保たれるところと、変わるところが、見えるようになります。\nThSQCAは、QCA パッケージの代わりではありません。閾値ごとに、QCAの truthTable() と minimize() を、毎回同じ設定で呼び出して、結果を集めます。"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-1/index.html#ステップ1-パッケージをインストールする",
@@ -375,35 +382,42 @@
     "href": "ja/articles/thsqca-beginners-1/index.html#次回",
     "title": "ThSQCA 入門 第1回: はじめての閾値スイープ",
     "section": "次回",
-    "text": "次回\n次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。\nパッケージの完全なチュートリアルは、ThSQCAのドキュメント(英語)にあります。手法そのものは、Toyoda (2026), Quality & Quantity で説明しています。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+    "text": "次回\n次回は、4種類のスイープ(アウトカム、1つの条件、複数の条件、その両方)を、もう少し詳しく見ます。あわせて、擁護できる閾値の範囲の決め方を扱います。\nパッケージの完全なチュートリアルは、ThSQCAのドキュメント(英語)にあります。手法そのものは、Toyoda (2026), Quality & Quantity で説明しています。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
     "objectID": "ja/articles/reading-list-applied/index.html",
     "href": "ja/articles/reading-list-applied/index.html",
-    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)",
     "section": "",
-    "text": "基礎編では、QCA の考え方をつかむ文献を紹介しました。次に出てくる疑問は、「実際にどんな研究で使われているのか」でしょう。ここでは、マーケティングと経営学の分野で、自分の研究の手本にするために読む価値のある論文を、目的別に紹介します。"
+    "text": "基礎編では、QCA を学ぶときの標準的な文献を紹介しました。次に出てくる疑問は、「実際にどんな研究で使われているのか」でしょう。ここでは、マーケティングと経営学の分野で、自分の研究の手本にするために読む価値のある論文と、経営・組織研究での理論的な背景を、目的別に紹介します。"
   },
   {
     "objectID": "ja/articles/reading-list-applied/index.html#マーケティングサービスでの応用",
     "href": "ja/articles/reading-list-applied/index.html#マーケティングサービスでの応用",
-    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)",
     "section": "1. マーケティング・サービスでの応用",
-    "text": "1. マーケティング・サービスでの応用\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337\n\n高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。\n\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120\n\n顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。"
+    "text": "1. マーケティング・サービスでの応用\n\nOrdanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. Journal of Service Research, 17(2), 134-149. https://doi.org/10.1177/1094670513513337 高級ホテルのサービスを対象に、新しいサービスの採用につながる属性の組み合わせを、QCA で検討しています。個々の属性だけでなく、それらがどう組み合わされるかに注目する応用例です。\nFrambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. Journal of Business Research, 69(4), 1428-1436. https://doi.org/10.1016/j.jbusres.2015.10.120 顧客志向を、他の戦略的志向、戦略タイプ、市場環境と組み合わせ、高い企業業績につながる構成を fsQCA で検討しています。顧客志向の役割を、他の条件との組み合わせから考える応用例です。"
+  },
+  {
+    "objectID": "ja/articles/reading-list-applied/index.html#経営組織研究での理論的な背景",
+    "href": "ja/articles/reading-list-applied/index.html#経営組織研究での理論的な背景",
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)",
+    "section": "2. 経営・組織研究での理論的な背景",
+    "text": "2. 経営・組織研究での理論的な背景\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092 組織を複数の要素の組み合わせとして捉え、その組み合わせと成果の関係を、集合論的に分析する意義を論じています。同じ成果に至る複数の組み合わせを考えるための、基礎となる論文です。\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120 組織の類型をファジィ集合で分析し、成果につながる条件の組み合わせを検討しています。成果の有無で、因果が非対称になりうることを理解するうえで重要な論文です。\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021 重回帰分析による各変数の効果の検討に加え、条件の組み合わせと因果の非対称性に注目する分析を提案しています。同じデータを用いた重回帰分析と fsQCA の例を通じて、分析と理論構築の考え方を論じています。\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252 経営・組織研究における QCA の展開をレビューし、因果の複雑さを捉える「新しいコンフィギュレーションの視点」を整理しています。集合への所属、必要・十分関係、反実仮想分析などを、理論的な視点と結びつけています。"
   },
   {
     "objectID": "ja/articles/reading-list-applied/index.html#分析の進め方報告のしかた実務ガイド",
     "href": "ja/articles/reading-list-applied/index.html#分析の進め方報告のしかた実務ガイド",
-    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
-    "section": "2. 分析の進め方・報告のしかた(実務ガイド)",
-    "text": "2. 分析の進め方・報告のしかた(実務ガイド)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487\n\n戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。\n\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310\n\n情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。\n\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879\n\n複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。"
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)",
+    "section": "3. 分析の進め方・報告のしかた(実務ガイド)",
+    "text": "3. 分析の進め方・報告のしかた(実務ガイド)\n\nGreckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. Strategic Organization, 16(4), 482-495. https://doi.org/10.1177/1476127018786487 戦略・組織研究における QCA の実践上の指針を整理しています。モデル構築、事例の選定、キャリブレーション、分析、報告、結果の解釈まで、研究全体の進め方を確認するのに役立ちます。\nPappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. International Journal of Information Management, 58, Article 102310. https://doi.org/10.1016/j.ijinfomgt.2021.102310 情報システムとマーケティングの研究で、fsQCA を用いるための実践的なガイドです。既存研究のデータを用いて分析手順を説明し、予測妥当性の検討や、SEM などの手法との併用にも触れています。\nPark, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. MIS Quarterly, 44(4), 1493-1520. https://doi.org/10.25300/MISQ/2020/13879 複数の理論的視点や条件の組み合わせが関わるデジタル現象について、QCA を理論構築に結びつける枠組みを示しています。実例を通じて、演繹的な理論検証と帰納的な理論構築への適用手順を説明しています。"
   },
   {
     "objectID": "ja/articles/reading-list-applied/index.html#しきい値の選び方を扱った論文",
     "href": "ja/articles/reading-list-applied/index.html#しきい値の選び方を扱った論文",
-    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 5 本(応用編)",
-    "section": "3. しきい値の選び方を扱った論文",
-    "text": "3. しきい値の選び方を扱った論文\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。"
+    "title": "マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)",
+    "section": "4. しきい値の選び方を扱った論文",
+    "text": "4. しきい値の選び方を扱った論文\n\nKrogslund, C., Choi, D. D., & Poertner, M. (2015). Fuzzy sets on shaky ground: Parameter sensitivity and confirmation bias in fsQCA. Political Analysis, 23(1), 21-41. https://doi.org/10.1093/pan/mpu016 fsQCA の結果が、利用者が選ぶパラメータのわずかな変更に左右されうること、そして、ランダムに作った変数を含む組み合わせも、十分条件として見つかりやすいことを論じています。既存の3つの研究を再分析し、感度分析とモンテカルロ・シミュレーションで示しています。\n\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。"
   },
   {
     "objectID": "ja/articles/introducing-thsqca/index.html",
@@ -592,7 +606,7 @@
     "href": "ja/articles/qca-for-marketers/index.html",
     "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
     "section": "",
-    "text": "前回は、なぜ QCA が意思決定に向くのかを説明しました。最後に残った疑問は、「高い」を分ける基準をどこに置くか、です。今回は、その問題に取り組みます。\n同じ会社の2人のマネージャーが、同じ顧客調査を見ています。\n1人目は顧客層を広げたいと考えています。ブランドを「使ってもよい」と思う人を、できるだけ増やしたいのです。2人目はファンを育てたいと考えています。「ぜひ使いたい」と心から思う顧客を、つくりたいのです。2人とも、同じ問いを立てます。「顧客をそこに連れていくには、ブランドのどんな強みを組み合わせればよいのか」。\nここに、困った点があります。標準的な分析は、この問いに1つの基準でしか答えを出しません。「高い」を7点以上と決めれば、答えは1つです。8点にしていたら、別の答えになったかもしれません。両方を報告する人はいないので、ファンを育てたい人と、顧客層を広げたい人が、同じ施策をとるべきなのかどうかは、誰にも分かりません。"
+    "text": "前回は、なぜ QCA が意思決定に向くのかを説明しました。最後に残った疑問は、「高い」を分ける基準をどこに置くか、です。今回は、その問題に取り組みます。\n同じ会社の2人のマネージャーが、同じ顧客調査を見ています。\n1人目は顧客層を広げたいと考えています。ブランドを「使ってもよい」と思う人を、できるだけ増やしたいのです。2人目はファンを育てたいと考えています。「ぜひ使いたい」と心から思う顧客を、つくりたいのです。2人とも、同じ問いを立てます。「顧客をそこに連れていくには、ブランドのどんな強みを組み合わせればよいのか」。\nここに、困った点があります。標準的な分析は、この問いに1つの基準でしか答えを出しません。「高い」を7点以上と決めれば、答えは1つです。8点にしていたら、別の答えになったかもしれません。複数の基準にわたる結果が、体系的に報告されるとは限りません。そのため、ファンを育てたい人と、顧客層を広げたい人が、同じ施策をとるべきなのかどうかは、1つの基準の分析だけでは分かりません。"
   },
   {
     "objectID": "ja/articles/qca-for-marketers/index.html#基準は変えてみるもの",
@@ -606,14 +620,14 @@
     "href": "ja/articles/qca-for-marketers/index.html#小さな例模擬データ",
     "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
     "section": "小さな例(模擬データ)",
-    "text": "小さな例(模擬データ)\n実際の顧客データを使わずに考え方を示すため、あるカフェブランドの顧客400人を、シミュレーションで作りました。顧客はそれぞれ、ブランドの品質、サービス、店舗環境を0〜10点で評価し、ロイヤルティも0〜10点で答えています。ここで、次のように問います。「高い」評価(7点以上)をどう組み合わせれば、顧客は、それぞれのロイヤルティの目標に届くのか。\n\n\n\n\n\n\n\n\n\nロイヤルティの目標\n顧客をそこへ導く経路\n確からしさ\n目標の顧客のうち説明できる割合\n\n\n\n\n5点以上\n品質とサービス、または品質と店舗環境\n0.98\n40%\n\n\n6点以上\n品質とサービス、または品質と店舗環境\n0.93\n57%\n\n\n7点以上\n品質とサービスのみ\n0.89\n66%\n\n\n8点以上\n3つの強みのどの組み合わせでも、十分に確かではない\nなし\nなし\n\n\n\n基準が上がるにつれて、表を下に読んでください。\n\nほどほどの目標には、選択肢があります。 経路は2つあるので、マネージャーは、費用の少ない方を選べます。品質とサービスを高めるか、品質と店舗を高めるか、です。\n厳しい目標には、選択肢が少なくなります。 7点以上では、品質とサービスの経路だけが残ります。店舗環境は、入口ではなくなります。\n非常に厳しい目標は、データの説明力を超えることがあります。 8点以上では、3つの強みの、単独でも組み合わせでも、足りませんでした。これは、経路が存在しない証拠ではありません。この3つのてこでは、最上位の顧客を説明できないので、ほかのてこを探すべきだ、という意味です。\n\n「7点以上」だけの分析では、1人目のマネージャーに、誤解を招く答えを伝えてしまいます。品質とサービスが唯一の経路だと言ってしまうのですが、広い目標では、もう1つの経路があるのです。"
+    "text": "小さな例(模擬データ)\n実際の顧客データを使わずに考え方を示すため、あるカフェブランドの顧客400人を、シミュレーションで作りました。顧客はそれぞれ、ブランドの品質、サービス、店舗環境を0〜10点で評価し、ロイヤルティも0〜10点で答えています。ここでは、得点を「7点以上か、そうでないか」の2つに分ける、二値(crisp-set)QCA の例で説明します。次のように問います。「高い」評価(7点以上)をどう組み合わせれば、顧客は、それぞれのロイヤルティの目標に届くのか。\n\n\n\n\n\n\n\n\n\nロイヤルティの目標\n顧客をそこへ導く経路\n確からしさ\n目標の顧客のうち説明できる割合\n\n\n\n\n5点以上\n品質とサービス、または品質と店舗環境\n0.98\n40%\n\n\n6点以上\n品質とサービス、または品質と店舗環境\n0.93\n57%\n\n\n7点以上\n品質とサービスのみ\n0.89\n66%\n\n\n8点以上\n3つの強みのどの組み合わせでも、十分に確かではない\nなし\nなし\n\n\n\n基準が上がるにつれて、表を下に読んでください。\n\nほどほどの目標には、選択肢があります。 経路は2つあるので、マネージャーは、費用の少ない方を選べます。品質とサービスを高めるか、品質と店舗を高めるか、です。\n厳しい目標には、選択肢が少なくなります。 7点以上では、品質とサービスの経路だけが残ります。店舗環境は、入口ではなくなります。\n非常に厳しい目標は、データの説明力を超えることがあります。 8点以上では、3つの強みの、単独でも組み合わせでも、足りませんでした。これは、経路が存在しない証拠ではありません。この3つの強みでは、最上位の顧客を説明できない、ということです。追加の条件、測定、事例数、分析設定を再検討する手がかりになります。\n\n「7点以上」だけの分析では、1人目のマネージャーに、誤解を招く答えを伝えてしまいます。品質とサービスが唯一の経路だと言ってしまうのですが、広い目標では、もう1つの経路があるのです。"
   },
   {
     "objectID": "ja/articles/qca-for-marketers/index.html#どんな問いに役立つか",
     "href": "ja/articles/qca-for-marketers/index.html#どんな問いに役立つか",
     "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
     "section": "どんな問いに役立つか",
-    "text": "どんな問いに役立つか\n\n満足度、NPS、購入意向: 「満足」のレシピは、「感動」のレシピと同じでしょうか。\nセグメントの定義: 「ヘビーユーザー」を年10回購入とするか、20回とするかで、要因は変わるでしょうか。\nキャンペーンの目標: 顧客を「検討する」から「選ぶ」へ動かすには、何が必要でしょうか。\n報告: 1つの基準を弁護する代わりに、範囲を見せて、答えが基準にどれだけ左右されるかを、読み手に示せます。"
+    "text": "どんな問いに役立つか\n\n満足度、推奨意向(NPSの質問項目など)、購入意向: 「満足」のレシピは、「感動」のレシピと同じでしょうか。\nセグメントの定義: 「ヘビーユーザー」を年10回購入とするか、20回とするかで、要因は変わるでしょうか。\nキャンペーンの目標: 顧客を「検討する」から「選ぶ」へ動かすには、何が必要でしょうか。\n報告: 1つの基準を弁護する代わりに、範囲を見せて、答えが基準にどれだけ左右されるかを、読み手に示せます。"
   },
   {
     "objectID": "ja/articles/qca-for-marketers/index.html#つの正直な注意点",
@@ -634,28 +648,21 @@
     "href": "ja/articles/reading-list-basics/index.html",
     "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
     "section": "",
-    "text": "前回までは、QCA が意思決定に向く理由と、基準の置き方を説明しました。ここでは、QCA の考え方をつかむために、最初に読む価値のある文献を、目的別に紹介します。"
+    "text": "前回までは、QCA が意思決定に向く理由と、基準の置き方を説明しました。ここでは、QCA を学ぶときに、分野を問わず最初に読まれる標準的な文献を、目的別に紹介します。"
   },
   {
-    "objectID": "ja/articles/reading-list-basics/index.html#考え方をつかむ論文",
-    "href": "ja/articles/reading-list-basics/index.html#考え方をつかむ論文",
+    "objectID": "ja/articles/reading-list-basics/index.html#考え方と測り方論文",
+    "href": "ja/articles/reading-list-basics/index.html#考え方と測り方論文",
     "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
-    "section": "1. 考え方をつかむ(論文)",
-    "text": "1. 考え方をつかむ(論文)\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092\n\n組織を複数の要素の組み合わせとして捉え、その組み合わせと成果の関係を、集合論的に分析する意義を論じています。同じ成果に至る複数の組み合わせを考えるための、基礎となる論文です。\n\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120\n\n組織の類型をファジィ集合で分析し、成果につながる条件の組み合わせを検討しています。成果の有無で、因果が非対称になりうることを理解するうえで重要な論文です。\n\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021\n\n重回帰分析による各変数の効果の検討に加え、条件の組み合わせと因果の非対称性に注目する分析を提案しています。同じデータを用いた重回帰分析と fsQCA の例を通じて、分析と理論構築の考え方を論じています。\n\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252\n\n経営・組織研究における QCA の展開をレビューし、因果の複雑さを捉える「新しいコンフィギュレーションの視点」を整理しています。集合への所属、必要・十分関係、反実仮想分析などを、理論的な視点と結びつけています。"
+    "section": "1. 考え方と測り方(論文)",
+    "text": "1. 考え方と測り方(論文)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 QCA とファジィ集合を用いるときの、標準的な良い実践(good practice)を整理した論文です。分析を始める前に、守るべき手続きを確認するのに役立ちます。"
   },
   {
     "objectID": "ja/articles/reading-list-basics/index.html#手法を体系的に学ぶ本",
     "href": "ja/articles/reading-list-basics/index.html#手法を体系的に学ぶ本",
     "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
     "section": "2. 手法を体系的に学ぶ(本)",
-    "text": "2. 手法を体系的に学ぶ(本)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\n\n集合論的な分析と従来の量的研究を対比しながら、キャリブレーション、条件の組み合わせ、因果の複雑さを解説しています。QCA の手順だけでなく、その背後にある研究の考え方を学ぶための本です。\n\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244\n\n集合論の基礎から QCA の実践までを、体系的に解説した教科書です。分析上の注意点や陥りやすい問題も扱い、手順と判断の根拠をあわせて理解するのに役立ちます。"
-  },
-  {
-    "objectID": "ja/articles/reading-list-basics/index.html#しきい値の選び方を扱った論文",
-    "href": "ja/articles/reading-list-basics/index.html#しきい値の選び方を扱った論文",
-    "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
-    "section": "3. しきい値の選び方を扱った論文",
-    "text": "3. しきい値の選び方を扱った論文\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。\n次の記事では、マーケティング・経営学で QCA を使った論文(応用編)を紹介します。"
+    "text": "2. 手法を体系的に学ぶ(本)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press. 集合論的な分析と従来の量的研究を対比しながら、キャリブレーション、条件の組み合わせ、因果の複雑さを解説しています。QCA の手順だけでなく、その背後にある研究の考え方を学ぶための本です。\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244 集合論の基礎から QCA の実践までを、体系的に解説した教科書です。分析上の注意点や陥りやすい問題も扱い、手順と判断の根拠をあわせて理解するのに役立ちます。\nOana, I.-E., Schneider, C. Q., & Thomann, E. (2021). Qualitative Comparative Analysis Using R: A Beginner’s Guide. Cambridge University Press. https://doi.org/10.1017/9781009006781 QCA を R で行うための、初学者向けの入門書です。R で分析を進めたい読者が、基本の操作を確認するのに向いています。\n\n次の記事では、マーケティング・経営学で QCA を使った論文と、経営・組織研究での理論的な背景(応用編)を紹介します。"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-2/index.html",
@@ -683,7 +690,7 @@
     "href": "ja/articles/thsqca-beginners-2/index.html#スイープ1-ctsweeps-で1つの条件を動かす",
     "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
     "section": "スイープ1: ctSweepS() で、1つの条件を動かす",
-    "text": "スイープ1: ctSweepS() で、1つの条件を動かす\n「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。アウトカムを LOY &gt;= 7 に固定し、ほかの条件を7に固定して、SER の閾値を5から9まで動かします。\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\n新しい引数は、sweep_var(閾値を動かす条件)、thrY(固定するアウトカムの閾値)、thrX_default(ほかのすべての条件の、固定する閾値)です。\n表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は QUA*SER です。9では、解に3つ目の要素が加わって QUA*SER*~ENV になり、カバレッジは、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)\n\n[1] 16\n\n\nその水準で、両方の条件を満たす顧客は、400人のうち16人だけです。そこでの結果は、ごく少数の事例に支えられています。これは役に立つ習慣です。解が格子の端にしか現れないときは、その背後にある事例の数を確かめてください。"
+    "text": "スイープ1: ctSweepS() で、1つの条件を動かす\n「サービスが高い」の線をどこに引くか、迷っているとします。6で十分でしょうか。7でしょうか。9でしょうか。アウトカムを LOY &gt;= 7 に固定し、ほかの条件を7に固定して、SER の閾値を5から9まで動かします。\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\n新しい引数は、sweep_var(閾値を動かす条件)、thrY(固定するアウトカムの閾値)、thrX_default(ほかのすべての条件の、固定する閾値)です。\n表を上から下へ読みます。「サービスが高い」を5または6と定義すると、解はありません。定義がゆるすぎて、「サービスを十分に受けた」顧客の集団が、もはや確実にはロイヤルではなくなるからです。7と8では、解は QUA*SER です。9では、解に3つ目の要素が加わって QUA*SER*~ENV になり、カバレッジは、7での0.656から、9での0.122へと、大きく下がります。いちばん厳しい定義の背後に、顧客が何人いるかを数えると、理由が分かります。\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)                 # 品質とサービスの両方が高い顧客\n\n[1] 16\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9 & demo$ENV &lt; 7)  # 解 QUA*SER*~ENV を満たす顧客\n\n[1] 12\n\n\nその水準で、品質とサービスの両方が高い顧客は、400人のうち16人です。そのうち、店舗環境が7未満で、解 QUA*SER*~ENV を満たす顧客は、12人だけです。そこでの結果は、ごく少数の事例に支えられています。これは役に立つ習慣です。解が格子の端にしか現れないときは、その背後にある事例の数を確かめてください。"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-2/index.html#スイープ2-ctsweepm-で複数の条件を動かす",
@@ -718,7 +725,7 @@
     "href": "ja/articles/thsqca-beginners-2/index.html#次回",
     "title": "ThSQCA 入門 第2回: 4つのスイープと、範囲の決め方",
     "section": "次回",
-    "text": "次回\n第3回では、3種類の解(複雑解、倹約解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+    "text": "次回\n第3回では、3種類の解(複雑解、倹約解、中間解)と、1つのセルに最小解が複数あるときの対処を扱います。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-4/index.html",
@@ -732,14 +739,14 @@
     "href": "ja/articles/thsqca-beginners-4/index.html#スイープ全体を記録するレポート",
     "title": "ThSQCA 入門 第4回: 結果の報告と確認",
     "section": "スイープ全体を記録するレポート",
-    "text": "スイープ全体を記録するレポート\nスイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。generate_report() は、それをMarkdownファイルに書き出します。形式は2つあります。\n\n\"simple\" は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。\n\"full\" は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\n書き出されたファイルの、最初の数行です。自分のコンピュータでは、\"ots_report_simple.md\" のような、きちんとした名前を付けると、作業フォルダにファイルができます。\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-03 18:04\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\n知っておくと便利なオプションがあります。\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+    "text": "スイープ全体を記録するレポート\nスイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。generate_report() は、それをMarkdownファイルに書き出します。形式は2つあります。\n\n\"simple\" は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。\n\"full\" は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\n書き出されたファイルの、最初の数行です。自分のコンピュータでは、\"ots_report_simple.md\" のような、きちんとした名前を付けると、作業フォルダにファイルができます。\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-05 18:38\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\n知っておくと便利なオプションがあります。\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-4/index.html#構成図",
     "href": "ja/articles/thsqca-beginners-4/index.html#構成図",
     "title": "ThSQCA 入門 第4回: 結果の報告と確認",
     "section": "構成図",
-    "text": "構成図\nQCAの論文では、解を図で示すことがよくあります。経路ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、「関係ない」は空白にします。経路のリストから、config_chart_from_paths() で描けます。\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\n円の記号を印刷できない雑誌などのために、普通の文字がよいなら、ASCII版を使います。\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
+    "text": "構成図\nQCAの論文では、解を図で示すことがよくあります。経路ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、その経路で条件の存在・不在を限定しないときは、空白にします。経路のリストから、config_chart_from_paths() で描けます。\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\n円の記号を印刷できない雑誌などのために、普通の文字がよいなら、ASCII版を使います。\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-4/index.html#qcaパッケージでセルを確認する",
@@ -767,7 +774,7 @@
     "href": "ja/articles/thsqca-beginners-4/index.html#ここから先",
     "title": "ThSQCA 入門 第4回: 結果の報告と確認",
     "section": "ここから先",
-    "text": "ここから先\nこれで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。\n\nThSQCAのドキュメントとチュートリアル(英語)\nCRANのThSQCA\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nブラウザのツール: QCA Quickstart、Sweep Builder\n\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8"
+    "text": "ここから先\nこれで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。\n\nThSQCAのドキュメントとチュートリアル(英語)\nCRANのThSQCA\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nブラウザのツール: QCA Quickstart、Sweep Builder\n\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
     "objectID": "ja/articles/why-qca-decisions/index.html",
@@ -781,21 +788,21 @@
     "href": "ja/articles/why-qca-decisions/index.html#意思決定にとって魅力的な理由",
     "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
     "section": "意思決定にとって魅力的な理由",
-    "text": "意思決定にとって魅力的な理由\n\n1. 施策は、単独ではなく組み合わせで動かす\n店舗の改装、接客の強化、価格の見直しは、たいてい一緒に実行されます。QCA は、「品質が高く、かつサービスが高い」のように、条件の組み合わせ(レシピ)を単位に、結果を見ます。\n\n\n2. 成功への経路は、1つとは限らない\n同じ成果に、複数の経路があることがあります(等結果性)。QCA は、その経路を、すべて見つけます。経営者は、予算や強みに合わせて、どの経路が自社に合うかを選べます。\n\n\n3. 成功の理由は、失敗の理由の裏返しとは限らない\nロイヤルティが高い顧客を生む条件と、離反する顧客を生む条件は、別の分析が必要なことがあります(非対称性)。QCA は、高い場合と低い場合を、別々に分析します。\n\n\n4. 事例が少なくても、使える\n店舗、ブランド、キャンペーン、法人顧客のように、事例が数十から数百の単位でも、事例の中身を見ながら分析できます。統計が使いにくい規模の問題に、向いています。\n\n\n5. 結果が「もし〜なら」の形で読める\n結果は、「品質が高く、かつサービスが高い」という、短い規則として出ます。会議で説明しやすく、現場でも、何をすればよいかが伝わります。\n\n\n6. 「必須」と「十分」を区別できる\n「これがなければ成功しない」(必要条件)と、「これがあれば成功する」(十分条件)を、区別して扱えます。「外せない施策」と「勝ち筋」を、分けて考えられます。"
+    "text": "意思決定にとって魅力的な理由\n\n1. 施策は、単独ではなく組み合わせで動かす\n店舗の改装、接客の強化、価格の見直しは、たいてい一緒に実行されます。QCA は、「品質が高く、かつサービスが高い」のように、条件の組み合わせ(レシピ)を単位に、結果を見ます。\n\n\n2. 成功への経路は、1つとは限らない\n同じ成果に、複数の経路があることがあります(等結果性)。QCA は、選んだ条件と分析設定のもとで、成果に結びつく複数の経路を特定できます。経営者は、予算や強みに合わせて、どの経路が自社に合うかを選べます。\n\n\n3. 成功の理由は、失敗の理由の裏返しとは限らない\nロイヤルティが高い顧客を生む条件と、離反する顧客を生む条件は、別の分析が必要なことがあります(非対称性)。QCA は、高い場合と低い場合を、別々に分析します。\n\n\n4. 小〜中規模の事例でも、使える\n店舗、ブランド、キャンペーン、法人顧客のように、事例が数十から数百の単位でも、事例の中身を見ながら分析できます。小〜中規模の事例比較にも使えます。ただし、条件の数に対して事例が少ないと、論理残余(データにない条件の組み合わせ)が多くなります。\n\n\n5. 結果が「もし〜なら」の形で読める\n結果は、「品質が高く、かつサービスが高い」という、短い規則として出ます。会議で説明しやすく、現場でも、何をすればよいかが伝わります。\n\n\n6. 「必須」と「十分」を区別できる\n「これがなければ成功しない」(必要条件)と、「これがあれば成功する」(十分条件)を、区別して扱えます。「外せない施策」と「勝ち筋」を、分けて考えられます。"
   },
   {
     "objectID": "ja/articles/why-qca-decisions/index.html#回帰分析との違いざっくり",
     "href": "ja/articles/why-qca-decisions/index.html#回帰分析との違いざっくり",
     "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
     "section": "回帰分析との違い(ざっくり)",
-    "text": "回帰分析との違い(ざっくり)\n\n\n\n\n\n\n\n\n観点\n回帰分析\nQCA\n\n\n\n\n問い\n他の条件を一定にしたとき、1つの要因が単独でどれだけ効くか\nどの組み合わせが、成果に十分か\n\n\n見る単位\n1つ1つの変数\n条件の組み合わせ\n\n\n複数の経路\n想定しにくい\n見つけられる\n\n\n結果の読み方\n係数、有意性\n「AかつB」という規則\n\n\n得意な規模\n大きなサンプル\n数十から数百の事例\n\n\n\nどちらが優れているということではありません。問いによって、使い分けます。"
+    "text": "回帰分析との違い(ざっくり)\n\n\n\n\n\n\n\n\n観点\n回帰分析\nQCA\n\n\n\n\n問い\n他の条件を一定にしたとき、1つの要因が単独でどれだけ効くか\nどの組み合わせが、成果に十分か\n\n\n見る単位\n1つ1つの変数\n条件の組み合わせ\n\n\n複数の経路\n交互作用や非線形性を、モデルに組み込む必要がある\n組み合わせとして特定できる\n\n\n結果の読み方\n係数、有意性\n「AかつB」という規則\n\n\n得意な規模\n大きなサンプル\n数十から数百の事例\n\n\n\nどちらが優れているということではありません。問いによって、使い分けます。"
   },
   {
     "objectID": "ja/articles/why-qca-decisions/index.html#qca-にできないことと他の分析にも言えること",
     "href": "ja/articles/why-qca-decisions/index.html#qca-にできないことと他の分析にも言えること",
     "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
     "section": "QCA にできないこと(と、他の分析にも言えること)",
-    "text": "QCA にできないこと(と、他の分析にも言えること)\n\n因果関係を、QCA だけが証明できないわけではありません。 観察データの分析は、回帰分析を含めて、因果関係を証明しきれません。X が Y に影響していると言えることと、X を動かしたときに Y が連動するかは、別の話です。多くの場合、前者を「因果関係」と呼んでいます。QCA が示す十分条件は、因果構造の候補を与えるものとして読むのが適切です。\n理論と事例の知識が必要です。 条件の選び方や、どこから「高い」とするかは、分析する人が決めます。"
+    "text": "QCA にできないこと(と、他の分析にも言えること)\n\n因果関係を、QCA だけが証明できないわけではありません。 観察データの分析は、回帰分析を含めて、因果関係を証明しきれません。QCA で得られた十分条件の解だけから、施策を実施した場合の因果効果が保証されるわけではありません。因果的に解釈するには、研究設計、時間的順序、理論、事例知識などによる裏づけが必要です。結果は、施策候補や検証すべき仮説を考える材料として活用できます。\n理論と事例の知識が必要です。 条件の選び方や、どこから「高い」とするかは、分析する人が決めます。"
   },
   {
     "objectID": "ja/articles/why-qca-decisions/index.html#落とし穴は基準にある",
@@ -809,7 +816,7 @@
     "href": "ja/articles/why-qca-decisions/index.html#参考文献",
     "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
     "section": "参考文献",
-    "text": "参考文献\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. Journal of Business Research, 66(4), 463-472."
+    "text": "参考文献\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472."
   },
   {
     "objectID": "ja/software.html",
@@ -865,7 +872,7 @@
     "href": "posts/qca-for-marketers/index.html",
     "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
     "section": "",
-    "text": "The previous post explained why QCA suits decision-making. One question was left open: where should the line between “high” and “low” go? This post takes it up.\nTwo managers in the same company are looking at the same customer survey.\nThe first wants to widen the base: get as many customers as possible to say the brand is acceptable to use. The second wants to build fans: create customers who really want to use the brand. Both ask the same question: “What combination of brand strengths gets customers there?”\nHere is the uncomfortable part. A standard analysis answers that question for one cutoff. If you define “high” as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Nobody reports both, so nobody knows whether the manager who wants fans and the manager who wants a wider base should be doing the same thing."
+    "text": "The previous post explained why QCA suits decision-making. One question was left open: where should the line between “high” and “low” go? This post takes it up.\nTwo managers in the same company are looking at the same customer survey.\nThe first wants to widen the base: get as many customers as possible to say the brand is acceptable to use. The second wants to build fans: create customers who really want to use the brand. Both ask the same question: “What combination of brand strengths gets customers there?”\nHere is the uncomfortable part. A standard analysis answers that question for one cutoff. If you define “high” as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Results across several cutoffs are not always reported systematically, so a single analysis cannot tell us whether the manager who wants fans and the manager who wants a wider base should be doing the same thing."
   },
   {
     "objectID": "posts/qca-for-marketers/index.html#the-cutoff-is-something-to-vary",
@@ -879,14 +886,14 @@
     "href": "posts/qca-for-marketers/index.html#a-small-example-simulated-data",
     "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
     "section": "A small example (simulated data)",
-    "text": "A small example (simulated data)\nTo show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on quality, service, and store environment, and also gave a loyalty score from 0 to 10. We then asked: which combinations of “high” ratings (7 or above) are enough for customers to reach each loyalty target?\n\n\n\n\n\n\n\n\n\nLoyalty target\nRoutes that get customers there\nHow reliably\nShare of target customers explained\n\n\n\n\n5 or above\nquality and service, or quality and store environment\n0.98\n40%\n\n\n6 or above\nquality and service, or quality and store environment\n0.93\n57%\n\n\n7 or above\nquality and service only\n0.89\n66%\n\n\n8 or above\nno combination of the three is reliable enough\nn/a\nn/a\n\n\n\nRead down the table as the bar rises.\n\nA modest goal has options. There are two routes, so a manager can choose the cheaper one: improve quality and service, or improve quality and the store.\nA demanding goal has fewer options. At 7 or above, only the quality and service route remains. The store environment stops being a way in.\nA very demanding goal can outrun the data. At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three levers do not explain the very top, and you should look for other ones.\n\nA single analysis at “7 or above” would have told the first manager something misleading: that quality and service is the only route, when for a broader goal there is a second one."
+    "text": "A small example (simulated data)\nTo show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on quality, service, and store environment, and also gave a loyalty score from 0 to 10. To keep things simple, we treat each rating as a yes/no split at 7 (crisp-set QCA). We then asked: which combinations of “high” ratings (7 or above) are enough for customers to reach each loyalty target?\n\n\n\n\n\n\n\n\n\nLoyalty target\nRoutes that get customers there\nHow reliably\nShare of target customers explained\n\n\n\n\n5 or above\nquality and service, or quality and store environment\n0.98\n40%\n\n\n6 or above\nquality and service, or quality and store environment\n0.93\n57%\n\n\n7 or above\nquality and service only\n0.89\n66%\n\n\n8 or above\nno combination of the three is reliable enough\nn/a\nn/a\n\n\n\nRead down the table as the bar rises.\n\nA modest goal has options. There are two routes, so a manager can choose the cheaper one: improve quality and service, or improve quality and the store.\nA demanding goal has fewer options. At 7 or above, only the quality and service route remains. The store environment stops being a way in.\nA very demanding goal can outrun the data. At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three strengths do not explain the very top. It is a cue to revisit additional conditions, measurement, the number of cases, and the analysis settings.\n\nA single analysis at “7 or above” would have told the first manager something misleading: that quality and service is the only route, when for a broader goal there is a second one."
   },
   {
     "objectID": "posts/qca-for-marketers/index.html#questions-where-this-helps",
     "href": "posts/qca-for-marketers/index.html#questions-where-this-helps",
     "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
     "section": "Questions where this helps",
-    "text": "Questions where this helps\n\nSatisfaction, NPS, or purchase intent: does the recipe for “satisfied” equal the recipe for “delighted”?\nSegment definitions: if “heavy user” means 10 purchases a year versus 20, do the drivers change?\nCampaign targets: what does it take to move customers from “consider” to “prefer”?\nReporting: instead of defending one cutoff, show the range and let readers see how much depends on it."
+    "text": "Questions where this helps\n\nSatisfaction, recommendation intent (such as the NPS question), or purchase intent: does the recipe for “satisfied” equal the recipe for “delighted”?\nSegment definitions: if “heavy user” means 10 purchases a year versus 20, do the drivers change?\nCampaign targets: what does it take to move customers from “consider” to “prefer”?\nReporting: instead of defending one cutoff, show the range and let readers see how much depends on it."
   },
   {
     "objectID": "posts/qca-for-marketers/index.html#two-honest-cautions",
@@ -907,28 +914,21 @@
     "href": "posts/reading-list-basics/index.html",
     "title": "Papers and books for getting to know QCA: six to read first (basics)",
     "section": "",
-    "text": "The earlier posts explained why QCA suits decision-making and why the placement of the threshold matters. Here is a short list of what to read first if you want to grasp how QCA thinks, grouped by purpose.\nThe summaries below stay within what the publishers’ abstracts and descriptions say. They are not evaluations based on a full reading."
+    "text": "The earlier posts explained why QCA suits decision-making and why the placement of the threshold matters. Here is a short list of the standard readings that people in any field tend to start with when they learn QCA, grouped by purpose.\nThe summaries below stay within what the publishers’ abstracts and descriptions say. They are not evaluations based on a full reading."
   },
   {
-    "objectID": "posts/reading-list-basics/index.html#getting-the-idea-papers",
-    "href": "posts/reading-list-basics/index.html#getting-the-idea-papers",
+    "objectID": "posts/reading-list-basics/index.html#getting-the-idea-and-the-measures-papers",
+    "href": "posts/reading-list-basics/index.html#getting-the-idea-and-the-measures-papers",
     "title": "Papers and books for getting to know QCA: six to read first (basics)",
-    "section": "1. Getting the idea (papers)",
-    "text": "1. Getting the idea (papers)\n\nFiss, P. C. (2007). A set-theoretic approach to organizational configurations. Academy of Management Review, 32(4), 1180-1198. https://doi.org/10.5465/amr.2007.26586092\n\nTreats an organization as a combination of elements and argues for analyzing the link between those combinations and outcomes with set theory. A foundation for thinking about several combinations that lead to the same outcome.\n\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420. https://doi.org/10.5465/amj.2011.60263120\n\nAnalyzes organizational typologies with fuzzy sets and examines the combinations of conditions that lead to an outcome. Important for understanding that the causes can be asymmetric between the presence and the absence of an outcome.\n\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472. https://doi.org/10.1016/j.jbusres.2012.12.021\n\nAlongside the effects of single variables in multiple regression, it proposes an analysis that looks at combinations of conditions and at causal asymmetry. It discusses how to analyze data and build theory, using regression and fsQCA on the same data.\n\nMisangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. Journal of Management, 43(1), 255-282. https://doi.org/10.1177/0149206316679252\n\nReviews how QCA has developed in management and organization research and sets out a “neo-configurational perspective” for capturing causal complexity. It links set membership, necessity and sufficiency, and counterfactual analysis to theoretical viewpoints."
+    "section": "1. Getting the idea and the measures (papers)",
+    "text": "1. Getting the idea and the measures (papers)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to.\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis."
   },
   {
     "objectID": "posts/reading-list-basics/index.html#learning-the-method-systematically-books",
     "href": "posts/reading-list-basics/index.html#learning-the-method-systematically-books",
     "title": "Papers and books for getting to know QCA: six to read first (basics)",
     "section": "2. Learning the method systematically (books)",
-    "text": "2. Learning the method systematically (books)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\n\nContrasts set-theoretic analysis with conventional quantitative research and explains calibration, combinations of conditions, and causal complexity. A book for learning the way of thinking behind QCA, not only its procedure.\n\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244\n\nA textbook that runs from the basics of set theory to the practice of QCA. It also covers cautions and common problems, which helps you understand the procedure together with the reasons behind each judgment."
-  },
-  {
-    "objectID": "posts/reading-list-basics/index.html#choosing-the-threshold",
-    "href": "posts/reading-list-basics/index.html#choosing-the-threshold",
-    "title": "Papers and books for getting to know QCA: six to read first (basics)",
-    "section": "3. Choosing the threshold",
-    "text": "3. Choosing the threshold\nOn how the placement of the threshold changes the results, see also Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3.\nThe next post introduces papers that use QCA in marketing and management (applications)."
+    "text": "2. Learning the method systematically (books)\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press. Contrasts set-theoretic analysis with conventional quantitative research and explains calibration, combinations of conditions, and causal complexity. A book for learning the way of thinking behind QCA, not only its procedure.\nSchneider, C. Q., & Wagemann, C. (2012). Set-Theoretic Methods for the Social Sciences: A Guide to Qualitative Comparative Analysis. Cambridge University Press. https://doi.org/10.1017/CBO9781139004244 A textbook that runs from the basics of set theory to the practice of QCA. It also covers cautions and common problems, which helps you understand the procedure together with the reasons behind each judgment.\nOana, I.-E., Schneider, C. Q., & Thomann, E. (2021). Qualitative Comparative Analysis Using R: A Beginner’s Guide. Cambridge University Press. https://doi.org/10.1017/9781009006781 A beginner’s guide to running QCA in R. A good fit for readers who want to carry out the analysis in R and check the basic operations.\n\nThe next post introduces papers that use QCA in marketing and management, together with the theoretical background from management and organization research (applications)."
   },
   {
     "objectID": "posts/thsqca-beginners-2/index.html",
@@ -956,7 +956,7 @@
     "href": "posts/thsqca-beginners-2/index.html#sweep-1-one-condition-with-ctsweeps",
     "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
     "section": "Sweep 1: one condition with ctSweepS()",
-    "text": "Sweep 1: one condition with ctSweepS()\nSuppose you are unsure where to draw the line for “high service delivery”. Is 6 high enough? 7? 9? Fix the outcome at LOY &gt;= 7, fix the other conditions at 7, and sweep the threshold of SER from 5 to 9.\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\nThe new arguments are sweep_var (the condition whose threshold is swept), thrY (the fixed outcome threshold), and thrX_default (the fixed threshold for all other conditions).\nReading the table from top to bottom: when “high service” is defined as 5 or 6, there is no solution, because the definition is so loose that the group of “highly served” customers is no longer reliably loyal. At 7 and 8 the solution is QUA*SER. At 9 the solution gains a third element, QUA*SER*~ENV, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)\n\n[1] 16\n\n\nOnly 16 of the 400 customers satisfy both conditions at that level, so the result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it."
+    "text": "Sweep 1: one condition with ctSweepS()\nSuppose you are unsure where to draw the line for “high service delivery”. Is 6 high enough? 7? 9? Fix the outcome at LOY &gt;= 7, fix the other conditions at 7, and sweep the threshold of SER from 5 to 9.\n\nres_cts &lt;- ctSweepS(\n  dat          = demo,\n  outcome      = \"LOY\",\n  conditions   = c(\"QUA\", \"SER\", \"ENV\"),\n  sweep_var    = \"SER\",\n  sweep_range  = 5:9,\n  thrY         = 7,\n  thrX_default = 7\n)\n\nsummary(res_cts)\n\nCTS (single) Summary\n==================== \n\nAnalysis Parameters:\n  Outcome: LOY \n  Conditions: QUA, SER, ENV \n  Consistency cutoff: 0.8 \n  Frequency cutoff: 1 \n\nResults by Threshold:\n\n threshold   expression inclS  covS n_solutions\n         5  No solution    NA    NA           0\n         6  No solution    NA    NA           0\n         7      QUA*SER 0.894 0.656           1\n         8      QUA*SER 0.909 0.333           1\n         9 QUA*SER*~ENV 0.917 0.122           1\n\n\nThe new arguments are sweep_var (the condition whose threshold is swept), thrY (the fixed outcome threshold), and thrX_default (the fixed threshold for all other conditions).\nReading the table from top to bottom: when “high service” is defined as 5 or 6, there is no solution, because the definition is so loose that the group of “highly served” customers is no longer reliably loyal. At 7 and 8 the solution is QUA*SER. At 9 the solution gains a third element, QUA*SER*~ENV, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9)                 # customers high on both quality and service\n\n[1] 16\n\nsum(demo$QUA &gt;= 7 & demo$SER &gt;= 9 & demo$ENV &lt; 7)  # customers satisfying the solution QUA*SER*~ENV\n\n[1] 12\n\n\nOf the 400 customers, 16 are high on both quality and service, and only 12 of them also have a store-environment score below 7, which is what the solution QUA*SER*~ENV requires. The result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it."
   },
   {
     "objectID": "posts/thsqca-beginners-2/index.html#sweep-2-several-conditions-with-ctsweepm",
@@ -991,7 +991,7 @@
     "href": "posts/thsqca-beginners-2/index.html#what-comes-next",
     "title": "ThSQCA for beginners, part 2: the four sweeps and how to choose a range",
     "section": "What comes next",
-    "text": "What comes next\nIn part 3 we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+    "text": "What comes next\nIn part 3 we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
     "objectID": "posts/thsqca-beginners-4/index.html",
@@ -1005,14 +1005,14 @@
     "href": "posts/thsqca-beginners-4/index.html#a-report-that-records-the-whole-sweep",
     "title": "ThSQCA for beginners, part 4: reporting and checking your results",
     "section": "A report that records the whole sweep",
-    "text": "A report that records the whole sweep\nA sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. generate_report() writes this into a Markdown file. It comes in two formats.\n\n\"simple\" is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.\n\"full\" is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\nHere are the first lines of the file it wrote. On your own computer, give the file a real name, such as \"ots_report_simple.md\", and it will appear in your working folder.\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-02 23:25\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\nA few options are worth knowing:\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+    "text": "A report that records the whole sweep\nA sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. generate_report() writes this into a Markdown file. It comes in two formats.\n\n\"simple\" is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.\n\"full\" is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\nHere are the first lines of the file it wrote. On your own computer, give the file a real name, such as \"ots_report_simple.md\", and it will appear in your working folder.\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-05 18:40\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\nA few options are worth knowing:\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
   },
   {
     "objectID": "posts/thsqca-beginners-4/index.html#configuration-charts",
     "href": "posts/thsqca-beginners-4/index.html#configuration-charts",
     "title": "ThSQCA for beginners, part 4: reporting and checking your results",
     "section": "Configuration charts",
-    "text": "Configuration charts\nQCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for “present”, a crossed circle for “absent”, and a blank for “does not matter”. You can draw one from a list of paths with config_chart_from_paths().\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\nIf you prefer plain characters, for example for a journal that cannot print the circle symbols, use the ASCII version:\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
+    "text": "Configuration charts\nQCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for “present”, a crossed circle for “absent”, and a blank where the path does not restrict the condition (neither presence nor absence is required). You can draw one from a list of paths with config_chart_from_paths().\npaths &lt;- c(\"A*B*~C\", \"A*D\", \"B*E\")\ncat(config_chart_from_paths(paths))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\n●\n●\n\n\n\nB\n●\n\n●\n\n\nC\n⊗\n\n\n\n\nD\n\n●\n\n\n\nE\n\n\n●\n\n\n\n● = presence, ⊗ = absence, blank = don’t care\nIf you prefer plain characters, for example for a journal that cannot print the circle symbols, use the ASCII version:\ncat(config_chart_from_paths(paths, symbol_set = \"ascii\"))\n\n\n\nCondition\nT1\nT2\nT3\n\n\n\n\nA\nO\nO\n\n\n\nB\nO\n\nO\n\n\nC\nX\n\n\n\n\nD\n\nO\n\n\n\nE\n\n\nO\n\n\n\nO = presence, X = absence, blank = don’t care"
   },
   {
     "objectID": "posts/thsqca-beginners-4/index.html#check-a-cell-against-the-qca-package",
@@ -1040,7 +1040,7 @@
     "href": "posts/thsqca-beginners-4/index.html#where-to-go-from-here",
     "title": "ThSQCA for beginners, part 4: reporting and checking your results",
     "section": "Where to go from here",
-    "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools: QCA Quickstart and Sweep Builder\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8."
+    "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools: QCA Quickstart and Sweep Builder\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
     "objectID": "posts/why-qca-decisions/index.html",
@@ -1054,21 +1054,21 @@
     "href": "posts/why-qca-decisions/index.html#why-qca-is-attractive-for-decisions",
     "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
     "section": "Why QCA is attractive for decisions",
-    "text": "Why QCA is attractive for decisions\n\n1. Actions are taken in combination, not alone\nStore renovation, better service, and a price review are usually carried out together. QCA takes the combination (the recipe) as its unit, for example “high quality and high service”, and asks what happens to the outcome.\n\n\n2. There may be more than one road to success\nThe same outcome can be reached in several ways (equifinality). QCA finds all of those roads, so a manager can choose the one that fits the budget and the company’s strengths.\n\n\n3. The reasons for success are not always the mirror image of the reasons for failure\nThe conditions that produce loyal customers and the conditions that produce customers who leave may need separate analyses (asymmetry). QCA analyzes the high case and the low case separately.\n\n\n4. It works even with few cases\nWith stores, brands, campaigns, or corporate customers, you may have only dozens or a few hundred cases. QCA lets you analyze them while keeping an eye on what is inside each case, which suits problems of a size where statistics are hard to apply.\n\n\n5. The result reads as an “if … then” rule\nA result comes out as a short rule, such as “high quality and high service”. It is easy to explain in a meeting, and it tells people on the front line what to do.\n\n\n6. It separates “necessary” from “sufficient”\nYou can treat “without this, success does not happen” (a necessary condition) differently from “with this, success happens” (a sufficient condition). That lets you think separately about the actions you cannot skip and the actions that win."
+    "text": "Why QCA is attractive for decisions\n\n1. Actions are taken in combination, not alone\nStore renovation, better service, and a price review are usually carried out together. QCA takes the combination (the recipe) as its unit, for example “high quality and high service”, and asks what happens to the outcome.\n\n\n2. There may be more than one road to success\nThe same outcome can be reached in several ways (equifinality). Under the conditions and analysis settings you choose, QCA can identify several routes to the same outcome, so a manager can choose the one that fits the budget and the company’s strengths.\n\n\n3. The reasons for success are not always the mirror image of the reasons for failure\nThe conditions that produce loyal customers and the conditions that produce customers who leave may need separate analyses (asymmetry). QCA analyzes the high case and the low case separately.\n\n\n4. It can be used with small to medium numbers of cases\nWith stores, brands, campaigns, or corporate customers, you may have only dozens or a few hundred cases. QCA lets you analyze them while keeping an eye on what is inside each case, It can be used for small to medium comparative case sets. When there are few cases relative to the number of conditions, however, many logical remainders arise (combinations of conditions that no case shows).\n\n\n5. The result reads as an “if … then” rule\nA result comes out as a short rule, such as “high quality and high service”. It is easy to explain in a meeting, and it tells people on the front line what to do.\n\n\n6. It separates “necessary” from “sufficient”\nYou can treat “without this, success does not happen” (a necessary condition) differently from “with this, success happens” (a sufficient condition). That lets you think separately about the actions you cannot skip and the actions that win."
   },
   {
     "objectID": "posts/why-qca-decisions/index.html#how-it-differs-from-regression-roughly",
     "href": "posts/why-qca-decisions/index.html#how-it-differs-from-regression-roughly",
     "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
     "section": "How it differs from regression (roughly)",
-    "text": "How it differs from regression (roughly)\n\n\n\n\n\n\n\n\nPoint of view\nRegression\nQCA\n\n\n\n\nThe question\nHow much does one factor matter on its own, with the others held constant?\nWhich combinations are enough for the outcome?\n\n\nUnit of analysis\nEach variable\nCombinations of conditions\n\n\nMultiple roads\nHard to anticipate\nCan be found\n\n\nHow results read\nCoefficients and significance\nRules such as “A and B”\n\n\nTypical scale\nLarge samples\nDozens to a few hundred cases\n\n\n\nNeither is better than the other. You choose according to the question."
+    "text": "How it differs from regression (roughly)\n\n\n\n\n\n\n\n\nPoint of view\nRegression\nQCA\n\n\n\n\nThe question\nHow much does one factor matter on its own, with the others held constant?\nWhich combinations are enough for the outcome?\n\n\nUnit of analysis\nEach variable\nCombinations of conditions\n\n\nMultiple roads\nInteractions and nonlinearity must be built into the model\nCan be identified as combinations\n\n\nHow results read\nCoefficients and significance\nRules such as “A and B”\n\n\nTypical scale\nLarge samples\nDozens to a few hundred cases\n\n\n\nNeither is better than the other. You choose according to the question."
   },
   {
     "objectID": "posts/why-qca-decisions/index.html#what-qca-cannot-do-and-what-is-also-true-of-other-methods",
     "href": "posts/why-qca-decisions/index.html#what-qca-cannot-do-and-what-is-also-true-of-other-methods",
     "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
     "section": "What QCA cannot do (and what is also true of other methods)",
-    "text": "What QCA cannot do (and what is also true of other methods)\n\nQCA is not the only method that cannot prove causation. Analyses of observational data, regression included, cannot fully establish causation. Saying that X influences Y is one thing; whether Y moves when you move X is another. Most of the time, the former is what people call “causation”. The sufficient conditions QCA reports are best read as candidates for a causal structure.\nIt needs theory and knowledge of the cases. The analyst decides which conditions to include and where “high” begins."
+    "text": "What QCA cannot do (and what is also true of other methods)\n\nQCA is not the only method that cannot prove causation. Analyses of observational data, regression included, cannot fully establish causation. A sufficiency solution from QCA does not, by itself, guarantee the causal effect of carrying out an intervention. A causal reading needs support from research design, temporal order, theory, and case knowledge. The results are best used as material for thinking about candidate interventions and hypotheses to test.\nIt needs theory and knowledge of the cases. The analyst decides which conditions to include and where “high” begins."
   },
   {
     "objectID": "posts/why-qca-decisions/index.html#the-pitfall-is-the-threshold",
@@ -1082,7 +1082,7 @@
     "href": "posts/why-qca-decisions/index.html#references",
     "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
     "section": "References",
-    "text": "References\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms. Journal of Business Research, 66(4), 463-472."
+    "text": "References\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472."
   },
   {
     "objectID": "start-here.html",
@@ -1096,7 +1096,7 @@
     "href": "start-here.html#if-you-are-new-to-qca",
     "title": "Start here",
     "section": "If you are new to QCA",
-    "text": "If you are new to QCA\n\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: five papers to read first (applications)"
+    "text": "If you are new to QCA\n\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)"
   },
   {
     "objectID": "start-here.html#if-you-want-to-try-threshold-sweep-qca-in-r",

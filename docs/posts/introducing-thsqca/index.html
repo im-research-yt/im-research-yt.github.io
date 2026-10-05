@@ -293,20 +293,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ThSQCA"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThSQCA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A minimal outcome-threshold sweep looks like this (<code>dat</code> is your data frame, with a 0 to 10 outcome <code>Y</code> and conditions <code>A</code>, <code>B</code>, <code>C</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">otSweep</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat =</span> dat,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome =</span> <span class="st">"Y"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrX =</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="dv">7</span>, <span class="at">B =</span> <span class="dv">7</span>, <span class="at">C =</span> <span class="dv">7</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">incl.cut =</span> <span class="fl">0.8</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n.cut =</span> <span class="dv">1</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">include =</span> <span class="st">"?"</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir.exp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">return_details =</span> <span class="cn">TRUE</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The package includes a small example data set, <code>sample_data</code>, with an outcome <code>Y</code> and three conditions <code>X1</code>, <code>X2</code>, and <code>X3</code>, all scored from 0 to 10. The following is a minimal outcome-threshold sweep that runs as it is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ThSQCA)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_data)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">otSweep</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat         =</span> sample_data,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome     =</span> <span class="st">"Y"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions  =</span> <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>, <span class="st">"X3"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrX        =</span> <span class="fu">c</span>(<span class="at">X1 =</span> <span class="dv">7</span>, <span class="at">X2 =</span> <span class="dv">7</span>, <span class="at">X3 =</span> <span class="dv">7</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This sweep asks how the sufficiency solution changes when “high outcome” is defined as <code>Y &gt;= 6</code>, <code>Y &gt;= 7</code>, <code>Y &gt;= 8</code>, and <code>Y &gt;= 9</code>. Each condition counts as “high” when its score is 7 or above. If you want a slower, step-by-step explanation of every row and of how to read the result table, see <a href="../thsqca-beginners-1/index.html">part 1 of the beginner’s series</a>.</p>
+<p>Running it prints a table like this (only the result part is shown):</p>
+<pre><code> thrY                  expression inclS  covS n_solutions
+    6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1
+    7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1
+    8                 No solution    NA    NA           0
+    9                 No solution    NA    NA           0</code></pre>
+<p>Each row is one outcome threshold. In the <code>expression</code> column, <code>*</code> means AND, <code>+</code> means OR, and <code>~</code> means NOT. At <code>Y &gt;= 6</code> and <code>Y &gt;= 7</code>, the same three sufficient paths appear. At <code>Y &gt;= 8</code> and <code>Y &gt;= 9</code>, no solution meets the consistency requirement. A single-threshold analysis cannot show where an answer stops holding; a sweep can.</p>
 <p>The package vignette covers all four functions with worked examples.</p>
 </section>
 <section id="a-note-on-use" class="level2">
@@ -735,7 +743,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
-<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

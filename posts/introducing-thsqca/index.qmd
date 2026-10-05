@@ -40,23 +40,37 @@ install.packages("ThSQCA")
 library(ThSQCA)
 ```
 
-A minimal outcome-threshold sweep looks like this (`dat` is your data frame, with a 0 to 10 outcome `Y` and conditions `A`, `B`, `C`):
+The package includes a small example data set, `sample_data`, with an outcome `Y` and three conditions `X1`, `X2`, and `X3`, all scored from 0 to 10. The following is a minimal outcome-threshold sweep that runs as it is:
 
 ```r
+library(ThSQCA)
+
+head(sample_data)
+
 res <- otSweep(
-  dat = dat,
-  outcome = "Y",
-  conditions = c("A", "B", "C"),
+  dat         = sample_data,
+  outcome     = "Y",
+  conditions  = c("X1", "X2", "X3"),
   sweep_range = 6:9,
-  thrX = c(A = 7, B = 7, C = 7),
-  incl.cut = 0.8,
-  n.cut = 1,
-  include = "?",
-  dir.exp = c(1, 1, 1),
-  return_details = TRUE
+  thrX        = c(X1 = 7, X2 = 7, X3 = 7)
 )
-res$summary
+
+summary(res)
 ```
+
+This sweep asks how the sufficiency solution changes when "high outcome" is defined as `Y >= 6`, `Y >= 7`, `Y >= 8`, and `Y >= 9`. Each condition counts as "high" when its score is 7 or above. If you want a slower, step-by-step explanation of every row and of how to read the result table, see [part 1 of the beginner's series](../thsqca-beginners-1/index.html).
+
+Running it prints a table like this (only the result part is shown):
+
+```
+ thrY                  expression inclS  covS n_solutions
+    6 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.853           1
+    7 ~X1*X3 + ~X2*X3 + X1*X2*~X3 0.906 0.879           1
+    8                 No solution    NA    NA           0
+    9                 No solution    NA    NA           0
+```
+
+Each row is one outcome threshold. In the `expression` column, `*` means AND, `+` means OR, and `~` means NOT. At `Y >= 6` and `Y >= 7`, the same three sufficient paths appear. At `Y >= 8` and `Y >= 9`, no solution meets the consistency requirement. A single-threshold analysis cannot show where an answer stops holding; a sweep can.
 
 The package vignette covers all four functions with worked examples.
 

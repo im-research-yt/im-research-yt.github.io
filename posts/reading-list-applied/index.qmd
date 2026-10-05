@@ -1,33 +1,47 @@
 ---
 sidebar: false
-title: "QCA in marketing and management: five papers to read first (applications)"
+title: "QCA in marketing and management: ten papers to read first (applications)"
 author: "Yuki Toyoda"
 image: thumbnail.png
 date: "2026-10-06"
 categories: [QCA, marketing, notes]
-description: "Papers that use QCA in marketing and management, and practical guides on how to run and report an analysis."
+description: "Papers that use QCA in marketing and management, the theoretical background from management and organization research, practical guides, and papers on the threshold."
 ---
 
-The [basics list](../reading-list-basics/index.qmd) introduced the readings that explain how QCA thinks. The next question is probably "How is it actually used in research?" Here are papers from marketing and management that are worth reading as models for your own work, grouped by purpose.
+The [basics list](../reading-list-basics/index.qmd) introduced the standard readings for learning QCA. The next question is probably "How is it actually used in research?" Here are papers from marketing and management that are worth reading as models for your own work, together with the theoretical background from management and organization research, grouped by purpose.
 
 As in the basics list, the summaries stay within what the publishers' abstracts say.
 
 ## 1. Applications in marketing and services
 
 - Ordanini, A., Parasuraman, A., & Rubera, G. (2014). When the recipe is more important than the ingredients: A qualitative comparative analysis (QCA) of service innovation configurations. *Journal of Service Research*, 17(2), 134-149. [https://doi.org/10.1177/1094670513513337](https://doi.org/10.1177/1094670513513337)
-  - Studies luxury hotel services and uses QCA to examine which combinations of attributes lead to the adoption of a new service. An application that looks not only at individual attributes but at how they are combined.
+  Studies luxury hotel services and uses QCA to examine which combinations of attributes lead to the adoption of a new service. An application that looks not only at individual attributes but at how they are combined.
 - Frambach, R. T., Fiss, P. C., & Ingenbleek, P. T. M. (2016). How important is customer orientation for firm performance? A fuzzy set analysis of orientations, strategies, and environments. *Journal of Business Research*, 69(4), 1428-1436. [https://doi.org/10.1016/j.jbusres.2015.10.120](https://doi.org/10.1016/j.jbusres.2015.10.120)
-  - Combines customer orientation with other strategic orientations, strategy types, and market environments, and uses fsQCA to find the configurations that go with high firm performance. An application that considers the role of customer orientation through its combinations with other conditions.
+  Combines customer orientation with other strategic orientations, strategy types, and market environments, and uses fsQCA to find the configurations that go with high firm performance. An application that considers the role of customer orientation through its combinations with other conditions.
 
-## 2. How to run and report an analysis (practical guides)
+## 2. Theoretical background in management and organization research
+
+- Fiss, P. C. (2007). A set-theoretic approach to organizational configurations. *Academy of Management Review*, 32(4), 1180-1198. [https://doi.org/10.5465/amr.2007.26586092](https://doi.org/10.5465/amr.2007.26586092)
+  Treats an organization as a combination of elements and argues for analyzing the link between those combinations and outcomes with set theory. A foundation for thinking about several combinations that lead to the same outcome.
+- Fiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. *Academy of Management Journal*, 54(2), 393-420. [https://doi.org/10.5465/amj.2011.60263120](https://doi.org/10.5465/amj.2011.60263120)
+  Analyzes organizational typologies with fuzzy sets and examines the combinations of conditions that lead to an outcome. Important for understanding that the causes can be asymmetric between the presence and the absence of an outcome.
+- Woodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. *Journal of Business Research*, 66(4), 463-472. [https://doi.org/10.1016/j.jbusres.2012.12.021](https://doi.org/10.1016/j.jbusres.2012.12.021)
+  Alongside the effects of single variables in multiple regression, it proposes an analysis that looks at combinations of conditions and at causal asymmetry. It discusses how to analyze data and build theory, using regression and fsQCA on the same data.
+- Misangyi, V. F., Greckhamer, T., Furnari, S., Fiss, P. C., Crilly, D., & Aguilera, R. (2017). Embracing causal complexity: The emergence of a neo-configurational perspective. *Journal of Management*, 43(1), 255-282. [https://doi.org/10.1177/0149206316679252](https://doi.org/10.1177/0149206316679252)
+  Reviews how QCA has developed in management and organization research and sets out a "neo-configurational perspective" for capturing causal complexity. It links set membership, necessity and sufficiency, and counterfactual analysis to theoretical viewpoints.
+
+## 3. How to run and report an analysis (practical guides)
 
 - Greckhamer, T., Furnari, S., Fiss, P. C., & Aguilera, R. V. (2018). Studying configurations with qualitative comparative analysis: Best practices in strategy and organization research. *Strategic Organization*, 16(4), 482-495. [https://doi.org/10.1177/1476127018786487](https://doi.org/10.1177/1476127018786487)
-  - Sets out practical guidelines for QCA in strategy and organization research. It covers the whole course of a study, from model building and case selection to calibration, analysis, reporting, and interpretation.
+  Sets out practical guidelines for QCA in strategy and organization research. It covers the whole course of a study, from model building and case selection to calibration, analysis, reporting, and interpretation.
 - Pappas, I. O., & Woodside, A. G. (2021). Fuzzy-set qualitative comparative analysis (fsQCA): Guidelines for research practice in information systems and marketing. *International Journal of Information Management*, 58, Article 102310. [https://doi.org/10.1016/j.ijinfomgt.2021.102310](https://doi.org/10.1016/j.ijinfomgt.2021.102310)
-  - A practical guide to using fsQCA in information systems and marketing research. It explains the procedure with data from earlier studies and also touches on checking predictive validity and combining fsQCA with methods such as SEM.
+  A practical guide to using fsQCA in information systems and marketing research. It explains the procedure with data from earlier studies and also touches on checking predictive validity and combining fsQCA with methods such as SEM.
 - Park, Y., Fiss, P. C., & El Sawy, O. A. (2020). Theorizing the multiplicity of digital phenomena: The ecology of configurations, causal recipes, and guidelines for applying QCA. *MIS Quarterly*, 44(4), 1493-1520. [https://doi.org/10.25300/MISQ/2020/13879](https://doi.org/10.25300/MISQ/2020/13879)
-  - For digital phenomena that involve several theoretical perspectives and combinations of conditions, it offers a framework that ties QCA to theory building. Through examples, it explains how to apply QCA to deductive theory testing and to inductive theory building.
+  For digital phenomena that involve several theoretical perspectives and combinations of conditions, it offers a framework that ties QCA to theory building. Through examples, it explains how to apply QCA to deductive theory testing and to inductive theory building.
 
-## 3. Choosing the threshold
+## 4. Choosing the threshold
+
+- Krogslund, C., Choi, D. D., & Poertner, M. (2015). Fuzzy sets on shaky ground: Parameter sensitivity and confirmation bias in fsQCA. *Political Analysis*, 23(1), 21-41. [https://doi.org/10.1093/pan/mpu016](https://doi.org/10.1093/pan/mpu016)
+  Argues that fsQCA results can change with small changes in the parameters a user chooses, and that combinations containing randomly generated variables are often found to be sufficient for an outcome. It re-analyzes three existing studies and uses sensitivity analyses and Monte Carlo simulations.
 
 On how the placement of the threshold changes the results, see also Toyoda (2026), *Quality & Quantity*, [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3).

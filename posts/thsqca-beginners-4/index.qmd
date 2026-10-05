@@ -8,11 +8,6 @@ categories: [R, ThSQCA, tutorial]
 description: "Turn a threshold sweep into a report: generate_report(), configuration charts, a check against the QCA package, and a short checklist for reporting."
 ---
 
-```{r}
-#| include: false
-.libPaths(c("D:/R_cran_lib", .libPaths()))
-```
-
 In the first three parts we ran sweeps and learned to read them. In this last part we turn a sweep into something you can report and defend: a written record of what was explored, a chart of the configurations, and a check that the numbers agree with the QCA package.
 
 ```{r}
@@ -84,7 +79,7 @@ generate_report(res_ots, "r.md", dat = demo, include_raw_output = FALSE)   # omi
 
 ## Configuration charts
 
-QCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for "present", a crossed circle for "absent", and a blank for "does not matter". You can draw one from a list of paths with `config_chart_from_paths()`.
+QCA papers often show solutions as a chart: one column per path, one row per condition, a filled circle for "present", a crossed circle for "absent", and a blank where the path does not restrict the condition (neither presence nor absence is required). You can draw one from a list of paths with `config_chart_from_paths()`.
 
 ```{r}
 #| results: asis
@@ -151,4 +146,4 @@ You now know the whole workflow: choose a sweep, set a defensible range, run it,
 - Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
 - Browser tools: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) and [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
 
-*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.*

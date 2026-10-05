@@ -11,7 +11,7 @@ This blog is about **qualitative comparative analysis (QCA)**, the **ThSQCA** R 
 1. [Why QCA suits decision-making: looking for "recipes" instead of single effects](posts/why-qca-decisions/index.qmd)
 2. [Is "good enough" the same goal as "loved"? A marketer's guide to threshold-sweep QCA](posts/qca-for-marketers/index.qmd)
 3. [Papers and books for getting to know QCA: six to read first (basics)](posts/reading-list-basics/index.qmd)
-4. [QCA in marketing and management: five papers to read first (applications)](posts/reading-list-applied/index.qmd)
+4. [QCA in marketing and management: ten papers to read first (applications)](posts/reading-list-applied/index.qmd)
 
 ## If you want to try threshold-sweep QCA in R
 

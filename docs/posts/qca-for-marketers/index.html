@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The previous post explained <a href="../../posts/why-qca-decisions/index.html">why QCA suits decision-making</a>. One question was left open: where should the line between “high” and “low” go? This post takes it up.</p>
 <p>Two managers in the same company are looking at the same customer survey.</p>
 <p>The first wants to <strong>widen the base</strong>: get as many customers as possible to say the brand is acceptable to use. The second wants to <strong>build fans</strong>: create customers who really want to use the brand. Both ask the same question: “What combination of brand strengths gets customers there?”</p>
-<p>Here is the uncomfortable part. A standard analysis answers that question for <strong>one</strong> cutoff. If you define “high” as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Nobody reports both, so nobody knows whether the manager who wants fans and the manager who wants a wider base should be doing the same thing.</p>
+<p>Here is the uncomfortable part. A standard analysis answers that question for <strong>one</strong> cutoff. If you define “high” as a score of 7 or above, you get one answer. If you had chosen 8, you might have gotten a different one. Results across several cutoffs are not always reported systematically, so a single analysis cannot tell us whether the manager who wants fans and the manager who wants a wider base should be doing the same thing.</p>
 <section id="the-cutoff-is-something-to-vary" class="level2">
 <h2 class="anchored" data-anchor-id="the-cutoff-is-something-to-vary">The cutoff is something to vary</h2>
 <p>Threshold-sweep QCA (ThSQCA) does not fix the cutoff in advance. It tries several. You run the same analysis at several cutoffs, with everything else held constant, and line the answers up in one table. You see where the answer holds steady, where it changes shape, and where it disappears.</p>
@@ -212,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="a-small-example-simulated-data" class="level2">
 <h2 class="anchored" data-anchor-id="a-small-example-simulated-data">A small example (simulated data)</h2>
-<p>To show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on <strong>quality</strong>, <strong>service</strong>, and <strong>store environment</strong>, and also gave a <strong>loyalty</strong> score from 0 to 10. We then asked: which combinations of “high” ratings (7 or above) are enough for customers to reach each loyalty target?</p>
+<p>To show the idea without using real customer data, we simulated 400 customers of a café brand. Each customer rated the brand from 0 to 10 on <strong>quality</strong>, <strong>service</strong>, and <strong>store environment</strong>, and also gave a <strong>loyalty</strong> score from 0 to 10. To keep things simple, we treat each rating as a yes/no split at 7 (crisp-set QCA). We then asked: which combinations of “high” ratings (7 or above) are enough for customers to reach each loyalty target?</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -259,14 +259,14 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><strong>A modest goal has options.</strong> There are two routes, so a manager can choose the cheaper one: improve quality and service, or improve quality and the store.</li>
 <li><strong>A demanding goal has fewer options.</strong> At 7 or above, only the quality and service route remains. The store environment stops being a way in.</li>
-<li><strong>A very demanding goal can outrun the data.</strong> At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three levers do not explain the very top, and you should look for other ones.</li>
+<li><strong>A very demanding goal can outrun the data.</strong> At 8 or above, none of the three strengths, alone or in combination, was enough. That is not proof that no route exists; it tells you that these three strengths do not explain the very top. It is a cue to revisit additional conditions, measurement, the number of cases, and the analysis settings.</li>
 </ul>
 <p>A single analysis at “7 or above” would have told the first manager something misleading: that quality and service is the only route, when for a broader goal there is a second one.</p>
 </section>
 <section id="questions-where-this-helps" class="level2">
 <h2 class="anchored" data-anchor-id="questions-where-this-helps">Questions where this helps</h2>
 <ul>
-<li><strong>Satisfaction, NPS, or purchase intent:</strong> does the recipe for “satisfied” equal the recipe for “delighted”?</li>
+<li><strong>Satisfaction, recommendation intent (such as the NPS question), or purchase intent:</strong> does the recipe for “satisfied” equal the recipe for “delighted”?</li>
 <li><strong>Segment definitions:</strong> if “heavy user” means 10 purchases a year versus 20, do the drivers change?</li>
 <li><strong>Campaign targets:</strong> what does it take to move customers from “consider” to “prefer”?</li>
 <li><strong>Reporting:</strong> instead of defending one cutoff, show the range and let readers see how much depends on it.</li>
@@ -701,7 +701,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
-<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

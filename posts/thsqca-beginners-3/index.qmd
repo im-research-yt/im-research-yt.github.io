@@ -8,11 +8,6 @@ categories: [R, ThSQCA, tutorial]
 description: "Complex, parsimonious, and intermediate solutions explained with a small example, and what to do when a threshold yields more than one minimal solution."
 ---
 
-```{r}
-#| include: false
-.libPaths(c("D:/R_cran_lib", .libPaths()))
-```
-
 In [part 2](../thsqca-beginners-2/index.html) we ran all four sweeps. Two questions remain for a careful analysis. First, QCA can produce three kinds of solution (complex, parsimonious, and intermediate); which should you use? Second, what if a cell has more than one minimal solution? This post answers both with a second, smaller practice data set.
 
 ## A second practice data set
@@ -140,4 +135,4 @@ ThSQCA records the alternatives, but deciding which one to prioritize is a theor
 
 In [part 4](../thsqca-beginners-4/index.html), the last part, we turn the results into something you can report: a Markdown report, a configuration chart, and a check against the QCA package.
 
-*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.*

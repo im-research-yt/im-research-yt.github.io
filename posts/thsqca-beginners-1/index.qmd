@@ -8,18 +8,13 @@ categories: [R, ThSQCA, tutorial]
 description: "A step-by-step introduction to threshold-sweep QCA in R. No data needed: we simulate a small data set and run a first sweep with ThSQCA."
 ---
 
-```{r}
-#| include: false
-.libPaths(c("D:/R_cran_lib", .libPaths()))
-```
-
 This is the first part of a beginner's series on **ThSQCA**, an R package for threshold-sweep qualitative comparative analysis (QCA). You do not need to know QCA beforehand. By the end of this post you will have run a threshold sweep yourself and read its result.
 
 ## The one idea you need
 
 QCA looks for combinations of conditions that are *sufficient* for an outcome. Suppose we study customer loyalty. A combination such as "high quality AND high service" is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.
 
-To do this, QCA first has to decide who counts as "high". With survey scores from 0 to 10, we pick a **threshold**: a customer is "high" on a variable when the score is greater than or equal to the threshold.
+To do this, QCA first has to decide who counts as "high". With survey scores from 0 to 10, we pick a **threshold**: a customer is "high" on a variable when the score is greater than or equal to the threshold. In this series, each score is split at the threshold into "high" and "not high" (crisp-set QCA).
 
 Here is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.
 
@@ -118,4 +113,4 @@ In the next part we will look more closely at the four kinds of sweeps (outcome,
 
 The full package tutorial is available in the [ThSQCA documentation](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html), and the methodology is described in [Toyoda (2026), *Quality & Quantity*](https://doi.org/10.1007/s11135-026-03092-3).
 
-*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.*

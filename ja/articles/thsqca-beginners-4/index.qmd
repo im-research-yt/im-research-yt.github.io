@@ -7,11 +7,6 @@ categories: [ThSQCA, tutorial]
 description: "閾値スイープを報告にまとめます。generate_report()、構成図、QCAパッケージとの照合、報告のための短いチェックリストを扱います。"
 ---
 
-```{r}
-#| include: false
-.libPaths(c("D:/R_cran_lib", .libPaths()))
-```
-
 最初の3回では、スイープを実行して、読み方を学びました。最終回では、スイープを、報告でき、擁護できる形にします。何を探索したかの記録、構成図、そして、数値がQCAパッケージと一致することの確認です。
 
 ```{r}
@@ -83,7 +78,7 @@ generate_report(res_ots, "r.md", dat = demo, include_raw_output = FALSE)   # omi
 
 ## 構成図
 
-QCAの論文では、解を図で示すことがよくあります。経路ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、「関係ない」は空白にします。経路のリストから、`config_chart_from_paths()` で描けます。
+QCAの論文では、解を図で示すことがよくあります。経路ごとに1列、条件ごとに1行で、「あり」は塗りつぶした円、「なし」は斜線を入れた円、その経路で条件の存在・不在を限定しないときは、空白にします。経路のリストから、`config_chart_from_paths()` で描けます。
 
 ```{r}
 #| results: asis
@@ -150,4 +145,4 @@ c(R      = R.version.string,
 - Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
 - ブラウザのツール: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)、[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
 
-*使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.8*
+*使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9*

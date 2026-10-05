@@ -8,11 +8,6 @@ categories: [R, ThSQCA, tutorial]
 description: "Sweep the outcome, one condition, several conditions, or both. We run all four sweeps on a practice data set and discuss how to choose a threshold range you can defend."
 ---
 
-```{r}
-#| include: false
-.libPaths(c("D:/R_cran_lib", .libPaths()))
-```
-
 In [part 1](../thsqca-beginners-1/index.html) we ran an outcome threshold sweep and read its result. ThSQCA has four sweep functions in total. This post runs all four on the same practice data, and ends with practical advice on choosing the range of thresholds.
 
 ## The four sweeps at a glance
@@ -72,10 +67,11 @@ The new arguments are `sweep_var` (the condition whose threshold is swept), `thr
 Reading the table from top to bottom: when "high service" is defined as 5 or 6, there is no solution, because the definition is so loose that the group of "highly served" customers is no longer reliably loyal. At 7 and 8 the solution is `QUA*SER`. At 9 the solution gains a third element, `QUA*SER*~ENV`, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:
 
 ```{r}
-sum(demo$QUA >= 7 & demo$SER >= 9)
+sum(demo$QUA >= 7 & demo$SER >= 9)                 # customers high on both quality and service
+sum(demo$QUA >= 7 & demo$SER >= 9 & demo$ENV < 7)  # customers satisfying the solution QUA*SER*~ENV
 ```
 
-Only 16 of the 400 customers satisfy both conditions at that level, so the result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it.
+Of the 400 customers, 16 are high on both quality and service, and only 12 of them also have a store-environment score below 7, which is what the solution `QUA*SER*~ENV` requires. The result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it.
 
 ## Sweep 2: several conditions with `ctSweepM()`
 
@@ -150,4 +146,4 @@ A sweep is easy to run, which is exactly why it needs discipline. Trying many th
 
 In [part 3](../thsqca-beginners-3/index.html) we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.
 
-*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.*
+*Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.*

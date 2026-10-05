@@ -344,29 +344,33 @@ Results by Threshold:
 <p>The new arguments are <code>sweep_var</code> (the condition whose threshold is swept), <code>thrY</code> (the fixed outcome threshold), and <code>thrX_default</code> (the fixed threshold for all other conditions).</p>
 <p>Reading the table from top to bottom: when “high service” is defined as 5 or 6, there is no solution, because the definition is so loose that the group of “highly served” customers is no longer reliably loyal. At 7 and 8 the solution is <code>QUA*SER</code>. At 9 the solution gains a third element, <code>QUA*SER*~ENV</code>, and coverage falls sharply, from 0.656 at 7 to 0.122 at 9. You can see why by counting how many customers are behind the strictest definition:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(demo<span class="sc">$</span>QUA <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>SER <span class="sc">&gt;=</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(demo<span class="sc">$</span>QUA <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>SER <span class="sc">&gt;=</span> <span class="dv">9</span>)                 <span class="co"># customers high on both quality and service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(demo<span class="sc">$</span>QUA <span class="sc">&gt;=</span> <span class="dv">7</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>SER <span class="sc">&gt;=</span> <span class="dv">9</span> <span class="sc">&amp;</span> demo<span class="sc">$</span>ENV <span class="sc">&lt;</span> <span class="dv">7</span>)  <span class="co"># customers satisfying the solution QUA*SER*~ENV</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
 </div>
-<p>Only 16 of the 400 customers satisfy both conditions at that level, so the result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it.</p>
+</div>
+<p>Of the 400 customers, 16 are high on both quality and service, and only 12 of them also have a store-environment score below 7, which is what the solution <code>QUA*SER*~ENV</code> requires. The result there rests on very few cases. This is a useful habit: when a solution appears only at the edge of the grid, check how many cases are behind it.</p>
 </section>
 <section id="sweep-2-several-conditions-with-ctsweepm" class="level2">
 <h2 class="anchored" data-anchor-id="sweep-2-several-conditions-with-ctsweepm">Sweep 2: several conditions with <code>ctSweepM()</code></h2>
 <p>Now let the thresholds of all three conditions vary at once: each of <code>QUA</code>, <code>SER</code>, and <code>ENV</code> is tried at 6, 7, and 8. That is 3 x 3 x 3 = 27 combinations. The outcome stays at <code>LOY &gt;= 7</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>res_mcts <span class="ot">&lt;-</span> <span class="fu">ctSweepM</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat        =</span> demo,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"LOY"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY       =</span> <span class="dv">7</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>res_mcts <span class="ot">&lt;-</span> <span class="fu">ctSweepM</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat        =</span> demo,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome    =</span> <span class="st">"LOY"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">thrY       =</span> <span class="dv">7</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The output has 27 rows. To keep it readable, show only the combinations that produced a solution:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> res_mcts<span class="sc">$</span>summary</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>n_solutions <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> res_mcts<span class="sc">$</span>summary</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tab[tab<span class="sc">$</span>n_solutions <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   combo_id           threshold                  expression     inclS      covS
 5         5 QUA=7, SER=7, ENV=6                     QUA*SER 0.8939394 0.6555556
@@ -412,15 +416,15 @@ Results by Threshold:
 <h2 class="anchored" data-anchor-id="sweep-3-the-outcome-and-the-conditions-together-with-dtsweep">Sweep 3: the outcome and the conditions together with <code>dtSweep()</code></h2>
 <p>The dual threshold sweep combines the two ideas: it varies the target level of the outcome and the conditions’ definitions at the same time. Here we use 3 outcome thresholds (6, 7, 8) and 8 condition combinations (<code>QUA</code>, <code>SER</code>, <code>ENV</code> each at 6 or 7), so 24 cells.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res_dts <span class="ot">&lt;-</span> <span class="fu">dtSweep</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat           =</span> demo,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome       =</span> <span class="st">"LOY"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions    =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list_X  =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range_Y =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>res_dts<span class="sc">$</span>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res_dts <span class="ot">&lt;-</span> <span class="fu">dtSweep</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">dat           =</span> demo,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">outcome       =</span> <span class="st">"LOY"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">conditions    =</span> <span class="fu">c</span>(<span class="st">"QUA"</span>, <span class="st">"SER"</span>, <span class="st">"ENV"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_list_X  =</span> <span class="fu">list</span>(<span class="at">QUA =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">SER =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">ENV =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">7</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sweep_range_Y =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>res_dts<span class="sc">$</span>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   combo_id thrY                thrX        expression     inclS      covS
 1         1    6 QUA=6, SER=6, ENV=6           QUA*SER 0.8630137 0.7118644
@@ -531,7 +535,7 @@ Results by Threshold:
 <section id="what-comes-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
 <p>In <a href="../thsqca-beginners-3/index.html">part 3</a> we look at the three solution types (complex, parsimonious, and intermediate) and at what to do when a cell has more than one minimal solution.</p>
-<p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.</em></p>
+<p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.</em></p>
 
 
 </section>
@@ -945,7 +949,7 @@ Results by Threshold:
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
-<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

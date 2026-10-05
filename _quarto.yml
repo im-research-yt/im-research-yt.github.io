@@ -30,7 +30,7 @@ website:
       - icon: github
         href: https://github.com/im-research-yt
   page-footer:
-    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University\n\nDeveloped with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作"
+    center: "© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University\n\nDeveloped with the assistance of Claude (Anthropic)"
 
 format:
   html:

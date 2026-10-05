@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-one-idea-you-need" class="level2">
 <h2 class="anchored" data-anchor-id="the-one-idea-you-need">The one idea you need</h2>
 <p>QCA looks for combinations of conditions that are <em>sufficient</em> for an outcome. Suppose we study customer loyalty. A combination such as “high quality AND high service” is sufficient for high loyalty if (almost) every customer who has both also has high loyalty.</p>
-<p>To do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a <strong>threshold</strong>: a customer is “high” on a variable when the score is greater than or equal to the threshold.</p>
+<p>To do this, QCA first has to decide who counts as “high”. With survey scores from 0 to 10, we pick a <strong>threshold</strong>: a customer is “high” on a variable when the score is greater than or equal to the threshold. In this series, each score is split at the threshold into “high” and “not high” (crisp-set QCA).</p>
 <p>Here is the catch. A threshold of 7 and a threshold of 8 are both reasonable, but they can lead to different answers. A normal QCA analysis picks one threshold and reports one answer. ThSQCA reruns the same analysis for a whole range of thresholds and puts all the answers in one table, so you can see where the answer holds and where it changes.</p>
 <p>ThSQCA does not replace the <a href="https://cran.r-project.org/package=QCA">QCA</a> package. For every threshold, it calls QCA’s <code>truthTable()</code> and <code>minimize()</code> for you, with identical settings each time, and collects the results.</p>
 </section>
@@ -377,7 +377,7 @@ Results by Threshold:
 <h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
 <p>In the next part we will look more closely at the four kinds of sweeps (outcome, one condition, several conditions, and both together), and at how to choose the range of thresholds in a way you can defend.</p>
 <p>The full package tutorial is available in the <a href="https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html">ThSQCA documentation</a>, and the methodology is described in <a href="https://doi.org/10.1007/s11135-026-03092-3">Toyoda (2026), <em>Quality &amp; Quantity</em></a>.</p>
-<p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.8.</em></p>
+<p><em>Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.</em></p>
 
 
 </section>
@@ -791,7 +791,7 @@ Results by Threshold:
     </div>   
     <div class="nav-footer-center">
 <p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
-<p>Developed with the assistance of Claude (Anthropic) | Claude(Anthropic)の支援を受けて制作</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
