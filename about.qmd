@@ -17,7 +17,7 @@ Posts tagged **R** are also distributed through [R-bloggers](https://www.r-blogg
 ## Where to go next
 
 - New here? Read [Start here](start-here.qmd).
-- Want the package? See [Software](software.qmd).
+- Want the package? See [ThSQCA](software.qmd).
 - Want to cite something? See [How to cite](how-to-cite.qmd).
 - Something unclear or wrong? See [Contact](contact.qmd).
 - Unfamiliar word? See the [Glossary](glossary.qmd).

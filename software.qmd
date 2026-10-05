@@ -1,6 +1,6 @@
 ---
 sidebar: false
-title: "Software"
+title: "ThSQCA"
 description: "ThSQCA: an R package for threshold-sweep QCA."
 ---
 

@@ -31,8 +31,8 @@ The [home page](index.qmd) shows the same list with pictures.
 
 ## If you prefer to start from a tool
 
-- [Tools](tools.qmd): browser-based tools for QCA and marketing research
-- [Software](software.qmd): the ThSQCA package, with links to CRAN, GitHub, and the documentation
+- [Analysis tools](tools.qmd): browser-based tools for QCA, marketing research, and multivariate analysis
+- [ThSQCA](software.qmd): the R package, with links to CRAN, GitHub, and the documentation
 
 ## Japanese version
 

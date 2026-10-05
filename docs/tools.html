@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Browser-based tools for QCA and marketing research.">
+<meta name="description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
 
-<title>Tools – Yuki Toyoda’s Blog</title>
+<title>Analysis tools – Yuki Toyoda’s Blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -76,11 +76,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Tools – Yuki Toyoda’s Blog">
-<meta property="og:description" content="Browser-based tools for QCA and marketing research.">
+<meta property="og:title" content="Analysis tools – Yuki Toyoda’s Blog">
+<meta property="og:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
-<meta name="twitter:title" content="Tools – Yuki Toyoda’s Blog">
-<meta name="twitter:description" content="Browser-based tools for QCA and marketing research.">
+<meta name="twitter:title" content="Analysis tools – Yuki Toyoda’s Blog">
+<meta name="twitter:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -115,11 +115,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./tools.html" aria-current="page"> 
-<span class="menu-text">Tools</span></a>
+<span class="menu-text">Analysis tools</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./software.html"> 
-<span class="menu-text">Software</span></a>
+<span class="menu-text">ThSQCA</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
@@ -153,12 +153,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tools</h1>
+<h1 class="title">Analysis tools</h1>
 </div>
 
 <div>
   <div class="description">
-    Browser-based tools for QCA and marketing research.
+    Browser-based tools for QCA, marketing research, and multivariate analysis.
   </div>
 </div>
 
@@ -175,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.</p>
+<p>Nine tools in three groups: QCA, marketing research, and multivariate analysis. These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -195,18 +195,23 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> (Japanese / English): creates a first QCA analysis script from the column names of your data.</li>
 <li><a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.</li>
 </ul>
+<p>Each of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an <strong>R script that repeats the same calculation with your data embedded</strong>, so you can check the result on your own computer.</p>
 </section>
-<section id="marketing-research-and-multivariate-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="marketing-research-and-multivariate-analysis">Marketing research and multivariate analysis</h2>
-<p>Each of these seven tools has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an <strong>R script that repeats the same calculation with your data embedded</strong>, so you can check the result on your own computer.</p>
+<section id="marketing-research" class="level2">
+<h2 class="anchored" data-anchor-id="marketing-research">Marketing research</h2>
 <ul>
 <li><a href="https://im-research-yt.github.io/analysis-tools/psm.html">Price sensitivity (Van Westendorp PSM)</a> (Japanese / English): Finds acceptable price ranges from four price questions.</li>
+<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_design.html">Conjoint analysis: design</a> (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.</li>
+<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html">Conjoint analysis: estimation</a> (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.</li>
+</ul>
+</section>
+<section id="multivariate-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="multivariate-analysis">Multivariate analysis</h2>
+<ul>
 <li><a href="https://im-research-yt.github.io/analysis-tools/cluster.html">Cluster analysis</a> (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.</li>
 <li><a href="https://im-research-yt.github.io/analysis-tools/pca.html">Principal component and factor analysis</a> (Japanese / English): Varimax and promax rotation, matched to R’s stats functions.</li>
 <li><a href="https://im-research-yt.github.io/analysis-tools/ca.html">Correspondence analysis</a> (Japanese / English): Maps rows and columns of a cross table; matches the ca package.</li>
 <li><a href="https://im-research-yt.github.io/analysis-tools/decision_tree.html">Decision tree</a> (Japanese / English): Classification and regression trees, matched to rpart (cp = 0).</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_design.html">Conjoint analysis: design</a> (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html">Conjoint analysis: estimation</a> (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.</li>
 </ul>
 </section>
 <section id="check-the-results-in-r" class="level2">

@@ -18,9 +18,9 @@ website:
         href: start-here.qmd
       - text: "Articles"
         href: index.qmd
-      - text: "Tools"
+      - text: "Analysis tools"
         href: tools.qmd
-      - text: "Software"
+      - text: "ThSQCA"
         href: software.qmd
       - text: "About"
         href: about.qmd

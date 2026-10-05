@@ -4,7 +4,7 @@ description: "筆者とこのブログについて。"
 ---
 
 ::: {.ja-nav}
-[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [ツール](tools.qmd) | [ソフトウェア](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
+[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [分析ツール](tools.qmd) | [ThSQCA](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
 :::
 
 **豊田裕貴(Yuki Toyoda)** です。法政大学経営大学院イノベーション・マネジメント研究科の教授で、MBAで、ビジネス・データ分析、リサーチ・メソドロジー、マーケティング・サイエンスなどを教えています。研究では、質的比較分析(QCA)の方法論と、そのマーケティング・経営への応用を扱っています。

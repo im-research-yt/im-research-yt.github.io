@@ -17,14 +17,14 @@ listing:
 ---
 
 ::: {.ja-nav}
-[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [ツール](tools.qmd) | [ソフトウェア](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
+[日本語版トップ](index.qmd) | [はじめに](start.qmd) | [分析ツール](tools.qmd) | [ThSQCA](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
 :::
 
 ::: {.intro}
 **ThSQCA** パッケージ、質的比較分析(QCA)、マーケティング調査のためのWebツールについて書いています。
 
 [はじめての方へ](start.qmd){.btn .btn-primary .btn-sm}
-[ツール](tools.qmd){.btn .btn-outline-primary .btn-sm}
+[分析ツール](tools.qmd){.btn .btn-outline-primary .btn-sm}
 [English](../index.html){.btn .btn-outline-primary .btn-sm}
 :::
 

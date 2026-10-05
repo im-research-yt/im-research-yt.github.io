@@ -1,10 +1,10 @@
 ---
 sidebar: false
-title: "Tools"
-description: "Browser-based tools for QCA and marketing research."
+title: "Analysis tools"
+description: "Browser-based tools for QCA, marketing research, and multivariate analysis."
 ---
 
-These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.
+Nine tools in three groups: QCA, marketing research, and multivariate analysis. These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.
 
 ::: {.callout-note}
 ## For learning use
@@ -16,17 +16,20 @@ Developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Managemen
 - [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) (Japanese / English): creates a first QCA analysis script from the column names of your data.
 - [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.
 
-## Marketing research and multivariate analysis
+Each of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an **R script that repeats the same calculation with your data embedded**, so you can check the result on your own computer.
 
-Each of these seven tools has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an **R script that repeats the same calculation with your data embedded**, so you can check the result on your own computer.
+## Marketing research
 
 - [Price sensitivity (Van Westendorp PSM)](https://im-research-yt.github.io/analysis-tools/psm.html) (Japanese / English): Finds acceptable price ranges from four price questions.
+- [Conjoint analysis: design](https://im-research-yt.github.io/analysis-tools/conjoint_design.html) (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.
+- [Conjoint analysis: estimation](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html) (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.
+
+## Multivariate analysis
+
 - [Cluster analysis](https://im-research-yt.github.io/analysis-tools/cluster.html) (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R's hclust.
 - [Principal component and factor analysis](https://im-research-yt.github.io/analysis-tools/pca.html) (Japanese / English): Varimax and promax rotation, matched to R's stats functions.
 - [Correspondence analysis](https://im-research-yt.github.io/analysis-tools/ca.html) (Japanese / English): Maps rows and columns of a cross table; matches the ca package.
 - [Decision tree](https://im-research-yt.github.io/analysis-tools/decision_tree.html) (Japanese / English): Classification and regression trees, matched to rpart (cp = 0).
-- [Conjoint analysis: design](https://im-research-yt.github.io/analysis-tools/conjoint_design.html) (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.
-- [Conjoint analysis: estimation](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html) (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.
 
 ## Check the results in R
 
