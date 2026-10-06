@@ -9,6 +9,6 @@ description: "Notes on threshold-sweep QCA, the ThSQCA R package, and data analy
 
 This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.
 
-Two browser tools are already available for generating R code: the [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) for a first `truthTable()` and `minimize()` script, and the [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) for turning a fixed-threshold QCA setup into ThSQCA sweep code.
+Browser tools for generating R code (a QCA Quickstart for a first `truthTable()` and `minimize()` script, and a Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code) are temporarily unavailable while they are being redesigned.
 
 The articles are arranged in reading order on the [home page](../../index.qmd). If you are new, start from the top. Technical posts with reproducible R code are in the beginner's series for ThSQCA.

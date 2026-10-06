@@ -1,39 +1,13 @@
 ---
 sidebar: false
 title: "Analysis tools"
-description: "Browser-based tools for QCA, marketing research, and multivariate analysis."
+description: "Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable)."
 image: /thumbnail-tools.png
 ---
 
-Nine tools in three groups: QCA, marketing research, and multivariate analysis. These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.
-
 ::: {.callout-note}
-## For learning use
-Developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University. These tools are intended for learning. They may contain calculation errors, so please verify the results with other software before using them in research or business.
+## Temporarily unavailable
+The browser tools are not available at the moment. I am redesigning them (calculation checks, explanations, and warnings for users) before making them public again. Thank you for your patience.
 :::
 
-## QCA
-
-The two tools below are companions to the R package [ThSQCA](https://im-research-yt.github.io/software.html), which runs QCA over a range of thresholds (a threshold sweep) instead of a single cutoff. ThSQCA is available on CRAN.
-
-- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) (Japanese / English): creates a first QCA analysis script from the column names of your data.
-- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.
-
-Each of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an **R script that repeats the same calculation with your data embedded**, so you can check the result on your own computer.
-
-## Marketing research
-
-- [Price sensitivity (Van Westendorp PSM)](https://im-research-yt.github.io/analysis-tools/psm.html) (Japanese / English): Finds acceptable price ranges from four price questions.
-- [Conjoint analysis: design](https://im-research-yt.github.io/analysis-tools/conjoint_design.html) (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.
-- [Conjoint analysis: estimation](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html) (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.
-
-## Multivariate analysis
-
-- [Cluster analysis](https://im-research-yt.github.io/analysis-tools/cluster.html) (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R's hclust.
-- [Principal component and factor analysis](https://im-research-yt.github.io/analysis-tools/pca.html) (Japanese / English): Varimax and promax rotation, matched to R's stats functions.
-- [Correspondence analysis](https://im-research-yt.github.io/analysis-tools/ca.html) (Japanese / English): Maps rows and columns of a cross table; matches the ca package.
-- [Decision tree](https://im-research-yt.github.io/analysis-tools/decision_tree.html) (Japanese / English): Classification and regression trees, matched to rpart (cp = 0).
-
-## Check the results in R
-
-Every marketing and multivariate tool has a button that creates an R script with your data and settings. Run it in RStudio to confirm the numbers. Packages needed: pricesensitivitymeter (price sensitivity), rpart (decision tree), ca (correspondence analysis), conjoint (conjoint analysis). The other tools use base R only.
+In the meantime, you can learn threshold-sweep QCA with the R package [ThSQCA](software.qmd), or follow the suggested reading order on the [Start here](start-here.qmd) page.

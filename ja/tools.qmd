@@ -1,6 +1,6 @@
 ---
 title: "分析ツール"
-description: "QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール。"
+description: "QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。"
 image: /thumbnail-tools.png
 ---
 
@@ -8,35 +8,9 @@ image: /thumbnail-tools.png
 [日本語版トップ](index.qmd) | [はじめに](start.qmd) | [分析ツール](tools.qmd) | [ThSQCA](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
 :::
 
-9つのツールを、QCA、マーケティング調査、多変量解析の3つに分けています。これらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。ページの閲覧数だけを、Cookieを使わないアクセス解析(GoatCounter)で数えています。入力したデータは、この解析に送られません。
-
 ::: {.callout-note}
-## 学習用です
-法政大学経営大学院イノベーション・マネジメント研究科 豊田裕貴研究室で開発しています。学習用のツールで、計算に誤りが含まれる可能性があります。研究やビジネスに使う前に、別のソフトで結果を確認してください。
+## 公開を休止しています
+ブラウザで動くツールは、現在、公開を休止しています。計算の確認、説明、利用者への注意書きを、設計から見直しているためです。準備ができたら、あらためて公開します。
 :::
 
-## QCA
-
-下の2つのツールは、Rパッケージ [ThSQCA](software.qmd) の入口になります。ThSQCAは、1つの閾値だけでQCAを行うのではなく、閾値を少しずつ動かして、結果の変わり方を調べます(CRANで公開中)。
-
-- [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。
-- [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。
-
-次の7つのツール(マーケティング調査と多変量解析)は、右上のボタンで、日本語と英語の画面を切り替えられます。
-
-## マーケティング調査
-
-- [価格感度分析(PSM)](https://im-research-yt.github.io/analysis-tools/psm.html)(日本語・英語): 4つの価格質問から、受け入れられる価格帯を求めます。
-- [コンジョイント分析:直交計画](https://im-research-yt.github.io/analysis-tools/conjoint_design.html)(日本語・英語): 属性と水準から、直交するプロファイルの組を作ります。
-- [コンジョイント分析:効用値の推定](https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html)(日本語・英語): 部分効用値と重要度。conjoint パッケージと一致。
-
-## 多変量解析
-
-- [クラスター分析](https://im-research-yt.github.io/analysis-tools/cluster.html)(日本語・英語): 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。
-- [主成分分析・因子分析](https://im-research-yt.github.io/analysis-tools/pca.html)(日本語・英語): バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。
-- [コレスポンデンス分析](https://im-research-yt.github.io/analysis-tools/ca.html)(日本語・英語): クロス表の行と列を同じ地図に描きます。ca パッケージと一致。
-- [決定木](https://im-research-yt.github.io/analysis-tools/decision_tree.html)(日本語・英語): 分類木と回帰木。rpart(cp=0)と同じ計算です。
-
-## Rで検算できます
-
-どのツールにも、入力したデータと設定を埋め込んだ**Rスクリプト**を作るボタンがあります。RStudioで実行すれば、同じ結果になるかを自分で確かめられます。必要なパッケージは、pricesensitivitymeter(価格感度分析)、rpart(決定木)、ca(コレスポンデンス分析)、conjoint(コンジョイント分析)です。そのほかは、Rの標準機能だけで動きます。
+それまでの間は、Rパッケージ [ThSQCA](software.qmd) で、閾値スイープQCAを学べます。読む順の案内は、[はじめに](start.qmd)のページにあります。

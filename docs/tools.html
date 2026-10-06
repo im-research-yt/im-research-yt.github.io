@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
+<meta name="description" content="Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable).">
 
 <title>Analysis tools – Yuki Toyoda’s Blog</title>
 <style>
@@ -77,13 +77,13 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Analysis tools – Yuki Toyoda’s Blog">
-<meta property="og:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
+<meta property="og:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable).">
 <meta property="og:image" content="https://im-research-yt.github.io/thumbnail-tools.png">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Analysis tools – Yuki Toyoda’s Blog">
-<meta name="twitter:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis.">
+<meta name="twitter:description" content="Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable).">
 <meta name="twitter:image" content="https://im-research-yt.github.io/thumbnail-tools.png">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Browser-based tools for QCA, marketing research, and multivariate analysis.
+    Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable).
   </div>
 </div>
 
@@ -181,52 +181,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Nine tools in three groups: QCA, marketing research, and multivariate analysis. These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>For learning use
+<span class="screen-reader-only">Note</span>Temporarily unavailable
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Developed at the Yuki Toyoda Laboratory, Graduate School of Innovation Management, Hosei University. These tools are intended for learning. They may contain calculation errors, so please verify the results with other software before using them in research or business.</p>
+<p>The browser tools are not available at the moment. I am redesigning them (calculation checks, explanations, and warnings for users) before making them public again. Thank you for your patience.</p>
 </div>
 </div>
-<section id="qca" class="level2">
-<h2 class="anchored" data-anchor-id="qca">QCA</h2>
-<p>The two tools below are companions to the R package <a href="https://im-research-yt.github.io/software.html">ThSQCA</a>, which runs QCA over a range of thresholds (a threshold sweep) instead of a single cutoff. ThSQCA is available on CRAN.</p>
-<ul>
-<li><a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> (Japanese / English): creates a first QCA analysis script from the column names of your data.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.</li>
-</ul>
-<p>Each of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an <strong>R script that repeats the same calculation with your data embedded</strong>, so you can check the result on your own computer.</p>
-</section>
-<section id="marketing-research" class="level2">
-<h2 class="anchored" data-anchor-id="marketing-research">Marketing research</h2>
-<ul>
-<li><a href="https://im-research-yt.github.io/analysis-tools/psm.html">Price sensitivity (Van Westendorp PSM)</a> (Japanese / English): Finds acceptable price ranges from four price questions.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_design.html">Conjoint analysis: design</a> (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/conjoint_analysis.html">Conjoint analysis: estimation</a> (Japanese / English): Part-worth utilities and importance, matched to the conjoint package.</li>
-</ul>
-</section>
-<section id="multivariate-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="multivariate-analysis">Multivariate analysis</h2>
-<ul>
-<li><a href="https://im-research-yt.github.io/analysis-tools/cluster.html">Cluster analysis</a> (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/pca.html">Principal component and factor analysis</a> (Japanese / English): Varimax and promax rotation, matched to R’s stats functions.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/ca.html">Correspondence analysis</a> (Japanese / English): Maps rows and columns of a cross table; matches the ca package.</li>
-<li><a href="https://im-research-yt.github.io/analysis-tools/decision_tree.html">Decision tree</a> (Japanese / English): Classification and regression trees, matched to rpart (cp = 0).</li>
-</ul>
-</section>
-<section id="check-the-results-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="check-the-results-in-r">Check the results in R</h2>
-<p>Every marketing and multivariate tool has a button that creates an R script with your data and settings. Run it in RStudio to confirm the numbers. Packages needed: pricesensitivitymeter (price sensitivity), rpart (decision tree), ca (correspondence analysis), conjoint (conjoint analysis). The other tools use base R only.</p>
+<p>In the meantime, you can learn threshold-sweep QCA with the R package <a href="./software.html">ThSQCA</a>, or follow the suggested reading order on the <a href="./start-here.html">Start here</a> page.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

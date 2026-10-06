@@ -56,8 +56,8 @@ description: "ブランド・マネージャーの目標水準によって、効
 
 ゼロからコードを書く必要はありません。
 
-1. [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) が、手元のデータの列名から、最初の分析スクリプトを作ります。
-2. [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html) が、その設定を、閾値スイープのスクリプトに変換します。
+1. QCA Quickstart が、手元のデータの列名から、最初の分析スクリプトを作ります(現在は公開を休止中)。
+2. Sweep Builder が、その設定を、閾値スイープのスクリプトに変換します(現在は公開を休止中)。
 3. スクリプトを R に貼り付けます。パッケージは無料です(`install.packages("ThSQCA")`)。
 
 同じ考え方を、もう少しゆっくり学びたい方には、初心者向けシリーズがあります。練習用データを使って、1行ずつ説明しています。手法そのものは、Toyoda (2026) の論文「Threshold-sweep QCA: threshold dependence as an analytical dimension」(*Quality & Quantity*)で解説しています。パッケージは [CRAN](https://cran.r-project.org/package=ThSQCA) にあります。

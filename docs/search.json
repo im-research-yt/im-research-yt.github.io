@@ -4,35 +4,7 @@
     "href": "tools.html",
     "title": "Analysis tools",
     "section": "",
-    "text": "Nine tools in three groups: QCA, marketing research, and multivariate analysis. These tools run in your browser. Nothing you enter is sent to a server. Page views are counted with a cookie-free analytics service (GoatCounter), which does not receive your data."
-  },
-  {
-    "objectID": "tools.html#qca",
-    "href": "tools.html#qca",
-    "title": "Analysis tools",
-    "section": "QCA",
-    "text": "QCA\nThe two tools below are companions to the R package ThSQCA, which runs QCA over a range of thresholds (a threshold sweep) instead of a single cutoff. ThSQCA is available on CRAN.\n\nQCA Quickstart (Japanese / English): creates a first QCA analysis script from the column names of your data.\nSweep Builder (Japanese / English): turns that setup into a threshold-sweep script for ThSQCA.\n\nEach of the seven tools below (marketing research and multivariate analysis) has a Japanese and an English screen; switch with the buttons at the top right. Each tool can also output an R script that repeats the same calculation with your data embedded, so you can check the result on your own computer."
-  },
-  {
-    "objectID": "tools.html#marketing-research",
-    "href": "tools.html#marketing-research",
-    "title": "Analysis tools",
-    "section": "Marketing research",
-    "text": "Marketing research\n\nPrice sensitivity (Van Westendorp PSM) (Japanese / English): Finds acceptable price ranges from four price questions.\nConjoint analysis: design (Japanese / English): Builds an orthogonal set of profiles for your attributes and levels.\nConjoint analysis: estimation (Japanese / English): Part-worth utilities and importance, matched to the conjoint package."
-  },
-  {
-    "objectID": "tools.html#multivariate-analysis",
-    "href": "tools.html#multivariate-analysis",
-    "title": "Analysis tools",
-    "section": "Multivariate analysis",
-    "text": "Multivariate analysis\n\nCluster analysis (Japanese / English): Hierarchical clustering with dendrogram, using the same algorithms as R’s hclust.\nPrincipal component and factor analysis (Japanese / English): Varimax and promax rotation, matched to R’s stats functions.\nCorrespondence analysis (Japanese / English): Maps rows and columns of a cross table; matches the ca package.\nDecision tree (Japanese / English): Classification and regression trees, matched to rpart (cp = 0)."
-  },
-  {
-    "objectID": "tools.html#check-the-results-in-r",
-    "href": "tools.html#check-the-results-in-r",
-    "title": "Analysis tools",
-    "section": "Check the results in R",
-    "text": "Check the results in R\nEvery marketing and multivariate tool has a button that creates an R script with your data and settings. Run it in RStudio to confirm the numbers. Packages needed: pricesensitivitymeter (price sensitivity), rpart (decision tree), ca (correspondence analysis), conjoint (conjoint analysis). The other tools use base R only."
+    "text": "NoteTemporarily unavailable\n\n\n\nThe browser tools are not available at the moment. I am redesigning them (calculation checks, explanations, and warnings for users) before making them public again. Thank you for your patience.\n\n\nIn the meantime, you can learn threshold-sweep QCA with the R package ThSQCA, or follow the suggested reading order on the Start here page."
   },
   {
     "objectID": "software.html",
@@ -67,7 +39,7 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome",
     "section": "",
-    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
+    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nBrowser tools for generating R code (a QCA Quickstart for a first truthTable() and minimize() script, and a Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code) are temporarily unavailable while they are being redesigned.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
   },
   {
     "objectID": "posts/thsqca-beginners-3/index.html",
@@ -249,7 +221,7 @@
     "href": "posts/introducing-thsqca/index.html#links",
     "title": "Introducing ThSQCA: threshold-sweep QCA in R",
     "section": "Links",
-    "text": "Links\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nPackage on CRAN: ThSQCA\nSource code: GitHub\nDocumentation: im-research-yt.github.io/ThSQCA\nBrowser tools: QCA Quickstart and Sweep Builder"
+    "text": "Links\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nPackage on CRAN: ThSQCA\nSource code: GitHub\nDocumentation: im-research-yt.github.io/ThSQCA\nBrowser tools (QCA Quickstart and Sweep Builder): temporarily unavailable while they are being redesigned"
   },
   {
     "objectID": "ja/start.html",
@@ -312,7 +284,7 @@
     "href": "ja/articles/welcome/index.html",
     "title": "ようこそ",
     "section": "",
-    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを2つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。\n記事は、日本語版トップに、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。"
+    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツール(QCA Quickstart と Sweep Builder)は、設計の見直しのため、現在は公開を休止しています。\n記事は、日本語版トップに、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-3/index.html",
@@ -494,7 +466,7 @@
     "href": "ja/articles/introducing-thsqca/index.html#リンク",
     "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
     "section": "リンク",
-    "text": "リンク\n\n論文: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nCRAN のパッケージ: ThSQCA\nソースコード: GitHub\nドキュメント(英語): im-research-yt.github.io/ThSQCA\nブラウザのツール: QCA Quickstart、Sweep Builder"
+    "text": "リンク\n\n論文: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nCRAN のパッケージ: ThSQCA\nソースコード: GitHub\nドキュメント(英語): im-research-yt.github.io/ThSQCA\nブラウザのツール(QCA Quickstart、Sweep Builder): 設計の見直しのため、現在は公開を休止しています"
   },
   {
     "objectID": "index.html",
@@ -683,7 +655,7 @@
     "href": "ja/articles/qca-for-marketers/index.html#自分の調査で試す",
     "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
     "section": "自分の調査で試す",
-    "text": "自分の調査で試す\nゼロからコードを書く必要はありません。\n\nQCA Quickstart が、手元のデータの列名から、最初の分析スクリプトを作ります。\nSweep Builder が、その設定を、閾値スイープのスクリプトに変換します。\nスクリプトを R に貼り付けます。パッケージは無料です(install.packages(\"ThSQCA\"))。\n\n同じ考え方を、もう少しゆっくり学びたい方には、初心者向けシリーズがあります。練習用データを使って、1行ずつ説明しています。手法そのものは、Toyoda (2026) の論文「Threshold-sweep QCA: threshold dependence as an analytical dimension」(Quality & Quantity)で解説しています。パッケージは CRAN にあります。"
+    "text": "自分の調査で試す\nゼロからコードを書く必要はありません。\n\nQCA Quickstart が、手元のデータの列名から、最初の分析スクリプトを作ります(現在は公開を休止中)。\nSweep Builder が、その設定を、閾値スイープのスクリプトに変換します(現在は公開を休止中)。\nスクリプトを R に貼り付けます。パッケージは無料です(install.packages(\"ThSQCA\"))。\n\n同じ考え方を、もう少しゆっくり学びたい方には、初心者向けシリーズがあります。練習用データを使って、1行ずつ説明しています。手法そのものは、Toyoda (2026) の論文「Threshold-sweep QCA: threshold dependence as an analytical dimension」(Quality & Quantity)で解説しています。パッケージは CRAN にあります。"
   },
   {
     "objectID": "ja/articles/reading-list-basics/index.html",
@@ -781,7 +753,7 @@
     "href": "ja/articles/thsqca-beginners-4/index.html#スイープ全体を記録するレポート",
     "title": "ThSQCA 入門 第4回: 結果の報告と確認",
     "section": "スイープ全体を記録するレポート",
-    "text": "スイープ全体を記録するレポート\nスイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。generate_report() は、それをMarkdownファイルに書き出します。形式は2つあります。\n\n\"simple\" は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。\n\"full\" は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\n書き出されたファイルの、最初の数行です。自分のコンピュータでは、\"ots_report_simple.md\" のような、きちんとした名前を付けると、作業フォルダにファイルができます。\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-06 00:09\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\n知っておくと便利なオプションがあります。\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+    "text": "スイープ全体を記録するレポート\nスイープは、たくさんの結果を作ります。読み手は、どの範囲を、どの設定で探索し、閾値ごとに何が出たかを、知る必要があります。generate_report() は、それをMarkdownファイルに書き出します。形式は2つあります。\n\n\"simple\" は、本文や付録のための、短いレポートです。要約の表、閾値ごとの解、QCAパッケージで結果を確かめるためのコードが入ります。\n\"full\" は、補足資料のためのものです。分析の概要(スイープの範囲と基準値)、記述統計に加えて、閾値ごとに、真理表、解の適合度、項ごとの指標、構成図、QCAパッケージの出力、再現に必要な設定が入ります。そのあとに、閾値どうしの比較が続きます。\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\n書き出されたファイルの、最初の数行です。自分のコンピュータでは、\"ots_report_simple.md\" のような、きちんとした名前を付けると、作業フォルダにファイルができます。\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-06 19:24\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\n知っておくと便利なオプションがあります。\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-4/index.html#構成図",
@@ -823,7 +795,7 @@
     "href": "ja/articles/thsqca-beginners-4/index.html#ここから先",
     "title": "ThSQCA 入門 第4回: 結果の報告と確認",
     "section": "ここから先",
-    "text": "ここから先\nこれで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。\n\nThSQCAのドキュメントとチュートリアル(英語)\nCRANのThSQCA\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nブラウザのツール: QCA Quickstart、Sweep Builder\n\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
+    "text": "ここから先\nこれで、全体の流れが分かりました。スイープを選び、擁護できる範囲を決め、実行し、読み、報告する、という流れです。さらに学びたい方は、パッケージのドキュメントに、追加の例を含む完全なチュートリアルがあり、手法は論文で説明しています。\n\nThSQCAのドキュメントとチュートリアル(英語)\nCRANのThSQCA\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nブラウザのツール(QCA Quickstart、Sweep Builder): 設計の見直しのため、現在は公開を休止しています\n\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
     "objectID": "ja/articles/why-qca-decisions/index.html",
@@ -900,35 +872,7 @@
     "href": "ja/tools.html",
     "title": "分析ツール",
     "section": "",
-    "text": "日本語版トップ | はじめに | 分析ツール | ThSQCA | 紹介 | English\n9つのツールを、QCA、マーケティング調査、多変量解析の3つに分けています。これらのツールは、ブラウザの中だけで動きます。入力したデータが、サーバーに送られることはありません。ページの閲覧数だけを、Cookieを使わないアクセス解析(GoatCounter)で数えています。入力したデータは、この解析に送られません。"
-  },
-  {
-    "objectID": "ja/tools.html#qca",
-    "href": "ja/tools.html#qca",
-    "title": "分析ツール",
-    "section": "QCA",
-    "text": "QCA\n下の2つのツールは、Rパッケージ ThSQCA の入口になります。ThSQCAは、1つの閾値だけでQCAを行うのではなく、閾値を少しずつ動かして、結果の変わり方を調べます(CRANで公開中)。\n\nQCA Quickstart(日本語・英語): データの列名から、最初のQCA分析スクリプトを作ります。\nSweep Builder(日本語・英語): その設定を、ThSQCAの閾値スイープ用スクリプトに変えます。\n\n次の7つのツール(マーケティング調査と多変量解析)は、右上のボタンで、日本語と英語の画面を切り替えられます。"
-  },
-  {
-    "objectID": "ja/tools.html#マーケティング調査",
-    "href": "ja/tools.html#マーケティング調査",
-    "title": "分析ツール",
-    "section": "マーケティング調査",
-    "text": "マーケティング調査\n\n価格感度分析(PSM)(日本語・英語): 4つの価格質問から、受け入れられる価格帯を求めます。\nコンジョイント分析:直交計画(日本語・英語): 属性と水準から、直交するプロファイルの組を作ります。\nコンジョイント分析:効用値の推定(日本語・英語): 部分効用値と重要度。conjoint パッケージと一致。"
-  },
-  {
-    "objectID": "ja/tools.html#多変量解析",
-    "href": "ja/tools.html#多変量解析",
-    "title": "分析ツール",
-    "section": "多変量解析",
-    "text": "多変量解析\n\nクラスター分析(日本語・英語): 階層クラスター分析。Rの hclust と同じ計算で、樹形図まで出します。\n主成分分析・因子分析(日本語・英語): バリマックス・プロマックス回転に対応。Rの stats と同じ計算です。\nコレスポンデンス分析(日本語・英語): クロス表の行と列を同じ地図に描きます。ca パッケージと一致。\n決定木(日本語・英語): 分類木と回帰木。rpart(cp=0)と同じ計算です。"
-  },
-  {
-    "objectID": "ja/tools.html#rで検算できます",
-    "href": "ja/tools.html#rで検算できます",
-    "title": "分析ツール",
-    "section": "Rで検算できます",
-    "text": "Rで検算できます\nどのツールにも、入力したデータと設定を埋め込んだRスクリプトを作るボタンがあります。RStudioで実行すれば、同じ結果になるかを自分で確かめられます。必要なパッケージは、pricesensitivitymeter(価格感度分析)、rpart(決定木)、ca(コレスポンデンス分析)、conjoint(コンジョイント分析)です。そのほかは、Rの標準機能だけで動きます。"
+    "text": "日本語版トップ | はじめに | 分析ツール | ThSQCA | 紹介 | English\n\n\n\n\n\n\n\nNote公開を休止しています\n\n\n\nブラウザで動くツールは、現在、公開を休止しています。計算の確認、説明、利用者への注意書きを、設計から見直しているためです。準備ができたら、あらためて公開します。\n\n\nそれまでの間は、Rパッケージ ThSQCA で、閾値スイープQCAを学べます。読む順の案内は、はじめにのページにあります。"
   },
   {
     "objectID": "posts/qca-for-marketers/index.html",
@@ -970,7 +914,7 @@
     "href": "posts/qca-for-marketers/index.html#try-it-on-your-own-survey",
     "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
     "section": "Try it on your own survey",
-    "text": "Try it on your own survey\nYou do not need to write code from scratch.\n\nQCA Quickstart creates a first analysis script from the names of your columns.\nSweep Builder turns that setup into a threshold-sweep script.\nPaste the script into R. The package is free: install.packages(\"ThSQCA\").\n\nIf you would like a gentler walk through the same ideas, the beginner’s series explains every line with a practice data set. The method itself is described in Toyoda (2026), Threshold-sweep QCA: threshold dependence as an analytical dimension, Quality & Quantity, and the package is on CRAN."
+    "text": "Try it on your own survey\nYou do not need to write code from scratch.\n\nQCA Quickstart creates a first analysis script from the names of your columns (temporarily unavailable).\nSweep Builder turns that setup into a threshold-sweep script (temporarily unavailable).\nPaste the script into R. The package is free: install.packages(\"ThSQCA\").\n\nIf you would like a gentler walk through the same ideas, the beginner’s series explains every line with a practice data set. The method itself is described in Toyoda (2026), Threshold-sweep QCA: threshold dependence as an analytical dimension, Quality & Quantity, and the package is on CRAN."
   },
   {
     "objectID": "posts/reading-list-basics/index.html",
@@ -1068,7 +1012,7 @@
     "href": "posts/thsqca-beginners-4/index.html#a-report-that-records-the-whole-sweep",
     "title": "ThSQCA for beginners, part 4: reporting and checking your results",
     "section": "A report that records the whole sweep",
-    "text": "A report that records the whole sweep\nA sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. generate_report() writes this into a Markdown file. It comes in two formats.\n\n\"simple\" is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.\n\"full\" is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\nHere are the first lines of the file it wrote. On your own computer, give the file a real name, such as \"ots_report_simple.md\", and it will appear in your working folder.\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-06 00:07\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\nA few options are worth knowing:\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
+    "text": "A report that records the whole sweep\nA sweep produces many results, and a reader needs to know what range was explored, under which settings, and what came out at each threshold. generate_report() writes this into a Markdown file. It comes in two formats.\n\n\"simple\" is a short report for the main text or an appendix. It has a summary table, the solution at each threshold, and code for checking the result with the QCA package.\n\"full\" is for supplementary material. It adds an overview of the analysis (the sweep range and the cutoffs), descriptive statistics, and, for every threshold, the truth table, the solution fit, per-term metrics, a configuration chart, the QCA package output, and the settings needed to reproduce it. A comparison across thresholds follows.\n\n\nreport_file &lt;- tempfile(fileext = \".md\")\ngenerate_report(res_ots, report_file, dat = demo, format = \"simple\")\n\nHere are the first lines of the file it wrote. On your own computer, give the file a real name, such as \"ots_report_simple.md\", and it will appear in your working folder.\n\ncat(head(readLines(report_file), 25), sep = \"\\n\")\n\n# QCA Analysis Report\n\n*(Auto-generated by ThSQCA package)*\n\n**Generated**: 2026-10-06 19:24\n\n---\n\n## Summary\n\n| thrY | expression | inclS | covS | n_solutions |\n|---|---|---|---|---|\n| 5 | QUA\\*SER + QUA\\*ENV | 0.981 | 0.403 | 1 |\n| 6 | QUA\\*SER + QUA\\*ENV | 0.926 | 0.565 | 1 |\n| 7 | QUA\\*SER | 0.894 | 0.656 | 1 |\n| 8 | No solution | NA | NA | 0 |\n\n\n---\n\n## Solutions Overview\n\n### LOY &gt;= 5\n\n**Solution**: QUA\\*SER + QUA\\*ENV -&gt; LOY\n\n\nA few options are worth knowing:\n\ngenerate_report(res_ots, \"r.md\", dat = demo, format = \"full\")              # more detail\ngenerate_report(res_ots, \"r.md\", dat = demo, include_chart = FALSE)        # no charts\ngenerate_report(res_ots, \"r.md\", dat = demo, chart_symbol_set = \"latex\")   # LaTeX symbols\ngenerate_report(res_ots, \"r.md\", dat = demo, include_raw_output = FALSE)   # omit QCA output"
   },
   {
     "objectID": "posts/thsqca-beginners-4/index.html#configuration-charts",
@@ -1110,7 +1054,7 @@
     "href": "posts/thsqca-beginners-4/index.html#where-to-go-from-here",
     "title": "ThSQCA for beginners, part 4: reporting and checking your results",
     "section": "Where to go from here",
-    "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools: QCA Quickstart and Sweep Builder\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
+    "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools (QCA Quickstart and Sweep Builder): temporarily unavailable while they are being redesigned\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
     "objectID": "posts/why-qca-decisions/index.html",

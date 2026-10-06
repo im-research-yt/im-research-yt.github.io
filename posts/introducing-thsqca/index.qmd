@@ -84,4 +84,4 @@ ThSQCA is not a device for finding the threshold that gives the most appealing r
 - Package on CRAN: [ThSQCA](https://cran.r-project.org/package=ThSQCA)
 - Source code: [GitHub](https://github.com/im-research-yt/ThSQCA)
 - Documentation: [im-research-yt.github.io/ThSQCA](https://im-research-yt.github.io/ThSQCA/)
-- Browser tools: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) and [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
+- Browser tools (QCA Quickstart and Sweep Builder): temporarily unavailable while they are being redesigned
