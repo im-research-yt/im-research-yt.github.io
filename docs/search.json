@@ -53,7 +53,7 @@
     "href": "posts/welcome/index.html",
     "title": "Welcome",
     "section": "",
-    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nTwo browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, and the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
+    "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nThree browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code, and the Scale Maker for building a scale from survey items step by step, together with the matching R script.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
   },
   {
     "objectID": "posts/thsqca-beginners-3/index.html",
@@ -935,7 +935,7 @@
     "href": "ja/articles/welcome/index.html",
     "title": "ようこそ",
     "section": "",
-    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを2つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。\n記事は、日本語版トップに、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。"
+    "text": "このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。\nRのコードを生成する、ブラウザのツールを3つ公開しています。QCA Quickstart は、最初の truthTable() と minimize() のスクリプトを作ります。Sweep Builder は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。Scale Maker は、アンケートの項目から尺度を作る手順を、Rのスクリプトとあわせて示します。\n記事は、日本語版トップに、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。"
   },
   {
     "objectID": "ja/index.html",

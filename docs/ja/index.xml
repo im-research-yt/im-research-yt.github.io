@@ -4528,7 +4528,7 @@ font-style: inherit;">summary</span>(res)</span></code></pre></div></div>
 
 
 <p>このブログは、閾値スイープQCA、Rパッケージ ThSQCA、マーケティング研究のためのデータ分析について、ノートを集めたものです。</p>
-<p>Rのコードを生成する、ブラウザのツールを2つ公開しています。<a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> は、最初の <code>truthTable()</code> と <code>minimize()</code> のスクリプトを作ります。<a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。</p>
+<p>Rのコードを生成する、ブラウザのツールを3つ公開しています。<a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html">QCA Quickstart</a> は、最初の <code>truthTable()</code> と <code>minimize()</code> のスクリプトを作ります。<a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html">Sweep Builder</a> は、閾値を固定したQCAの設定を、ThSQCAのスイープのコードに変えます。<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html">Scale Maker</a> は、アンケートの項目から尺度を作る手順を、Rのスクリプトとあわせて示します。</p>
 <p>記事は、<a href="../../../ja/index.html">日本語版トップ</a>に、読む順に並べてあります。初めての方は、上から読んでください。再現できるRのコードを載せた技術的な記事は、ThSQCA 入門シリーズにあります。</p>
 
 
