@@ -171,6 +171,6 @@ You now know the whole workflow: choose a sweep, set a defensible range, run it,
 - [ThSQCA documentation and tutorial](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html)
 - [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA)
 - Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
-- Browser tools (QCA Quickstart and Sweep Builder): temporarily unavailable while they are being redesigned
+- Browser tools: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html) and [Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
 
 *Software used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9.*

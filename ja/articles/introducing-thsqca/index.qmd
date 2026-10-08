@@ -84,4 +84,4 @@ ThSQCA は、いちばん魅力的な結果を出す閾値を探すための道�
 - CRAN のパッケージ: [ThSQCA](https://cran.r-project.org/package=ThSQCA)
 - ソースコード: [GitHub](https://github.com/im-research-yt/ThSQCA)
 - ドキュメント(英語): [im-research-yt.github.io/ThSQCA](https://im-research-yt.github.io/ThSQCA/)
-- ブラウザのツール(QCA Quickstart、Sweep Builder): 設計の見直しのため、現在は公開を休止しています
+- ブラウザのツール: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)、[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)

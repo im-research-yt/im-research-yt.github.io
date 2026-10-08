@@ -170,6 +170,6 @@ c(R      = R.version.string,
 - [ThSQCAのドキュメントとチュートリアル](https://im-research-yt.github.io/ThSQCA/articles/ThSQCA_Tutorial_EN.html)(英語)
 - [CRANのThSQCA](https://cran.r-project.org/package=ThSQCA)
 - Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. [https://doi.org/10.1007/s11135-026-03092-3](https://doi.org/10.1007/s11135-026-03092-3)
-- ブラウザのツール(QCA Quickstart、Sweep Builder): 設計の見直しのため、現在は公開を休止しています
+- ブラウザのツール: [QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)、[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)
 
 *使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9*

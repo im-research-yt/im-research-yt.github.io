@@ -57,8 +57,8 @@ A single analysis at "7 or above" would have told the first manager something mi
 
 You do not need to write code from scratch.
 
-1. **QCA Quickstart** creates a first analysis script from the names of your columns (temporarily unavailable).
-2. **Sweep Builder** turns that setup into a threshold-sweep script (temporarily unavailable).
+1. **[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html)** creates a first analysis script from the names of your columns.
+2. **[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html)** turns that setup into a threshold-sweep script.
 3. Paste the script into R. The package is free: `install.packages("ThSQCA")`.
 
 If you would like a gentler walk through the same ideas, the [beginner's series](../thsqca-beginners-1/index.qmd) explains every line with a practice data set. The method itself is described in Toyoda (2026), [Threshold-sweep QCA: threshold dependence as an analytical dimension](https://doi.org/10.1007/s11135-026-03092-3), *Quality & Quantity*, and the package is on [CRAN](https://cran.r-project.org/package=ThSQCA).
