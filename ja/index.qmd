@@ -24,6 +24,7 @@ listing:
 **ThSQCA** パッケージ、質的比較分析(QCA)、マーケティング調査のためのWebツールについて書いています。
 
 [はじめての方へ](start.qmd){.btn .btn-primary .btn-sm}
+[ようこそ](articles/welcome/index.qmd){.btn .btn-outline-primary .btn-sm}
 [分析ツール](tools.qmd){.btn .btn-outline-primary .btn-sm}
 [English](../index.html){.btn .btn-outline-primary .btn-sm}
 :::

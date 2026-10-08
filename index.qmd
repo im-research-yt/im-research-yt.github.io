@@ -24,6 +24,7 @@ listing:
 Notes on the **ThSQCA** R package, qualitative comparative analysis, and hands-on web tools for marketing research.
 
 [New here? Start here](start-here.qmd){.btn .btn-primary .btn-sm}
+[About this blog: Welcome](posts/welcome/index.qmd){.btn .btn-outline-primary .btn-sm}
 [日本語の方はこちら](ja/index.qmd){.btn .btn-outline-primary .btn-sm}
 [ThSQCA on CRAN](https://cran.r-project.org/package=ThSQCA){.btn .btn-outline-primary .btn-sm}
 :::
