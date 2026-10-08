@@ -17,7 +17,1010 @@
 <width>144</width>
 </image>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Sun, 04 Oct 2026 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 07 Oct 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>From survey items to a scale, then on to regression and QCA: a step-by-step guide</title>
+  <dc:creator>Yuki Toyoda</dc:creator>
+  <link>https://im-research-yt.github.io/posts/scale-to-regression/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="How this article, the app, and the R script fit together">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How this article, the app, and the R script fit together
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The step-by-step articles on this blog come with an app (a tool that runs in your browser) that lets you try the same procedure. The three have different roles:</p>
+<ul>
+<li><strong>The article</strong> explains the ideas and the procedure. The calculations are shown as R code.</li>
+<li><strong>The app (<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>)</strong> reads your data (CSV) and shows the same calculations as the article on screen. You can learn the flow of the procedure and the meaning of the numbers without using R.</li>
+<li><strong>The R script</strong>: the app can produce an R script that reproduces the results of your settings on screen. You can run it in R and confirm that the numbers match the app. In research, you can also keep the script as a record of your analysis.</li>
+</ul>
+<p>If you use R, start from the code in the article. If you learn with the app, read the article while looking at the numbers in the app first, and then reproduce them with the R script when you are comfortable.</p>
+</div>
+</div>
+<section id="the-question-this-article-answers" class="level2">
+<h2 class="anchored" data-anchor-id="the-question-this-article-answers">The question this article answers</h2>
+<p>Research in marketing and management deals with concepts such as brand trust, perceived quality, customer satisfaction, and price sensitivity, which are hard to measure with a single question. These concepts are called <strong>constructs</strong>, and we measure them with several questionnaire items.</p>
+<p>Suppose we measure brand trust with these three items:</p>
+<ul>
+<li>Q1: This brand is sincere</li>
+<li>Q2: I think this brand keeps its promises</li>
+<li>Q3: I feel secure using this brand</li>
+</ul>
+<p>What we want to know is not the effect of Q1, Q2, or Q3 separately. We want to know how brand trust, the three items taken together, relates to outcomes such as purchase intention. We also often want to use such constructs in later analyses: regression, logistic regression, QCA, cluster analysis, decision trees, and so on.</p>
+<p>Structural equation modeling (SEM) is a wonderful method, but you do not have to start with it (and if you use it without understanding its characteristics, it can do more harm than good). What matters is not which method is more advanced, but <strong>how you measure the constructs of your research, and how you analyze them in the way that best fits your research question</strong>.</p>
+<p>This article presents a procedure that works well for MBA research and empirical studies, with an example in R. The example data are generated with random numbers (they are not real survey data).</p>
+<section id="scope-of-this-article" class="level3">
+<h3 class="anchored" data-anchor-id="scope-of-this-article">Scope of this article</h3>
+<ul>
+<li><p>We deal with <strong>constructs that you define in advance from theory and measure with several items</strong>. This does not deny the value of exploratory studies that look for constructs in the data.</p></li>
+<li><p>We deal with measurement like brand trust, where we assume that <strong>one underlying construct drives the answers to several items in common</strong>. A person with high brand trust answers high on Q1, Q2, and Q3 alike. Therefore, the items are expected to correlate with one another (this kind of measurement is called reflective measurement).</p>
+<p>A different case is building a “customer behavior index” by combining purchase frequency, purchase amount, and years of use. A person who buys often does not necessarily spend a lot. The items need not correlate strongly, so the factor analysis and alpha procedure shown here does not apply as it is. It is not true that “for any index, you can raise alpha and take the average.”</p></li>
+</ul>
+</section>
+</section>
+<section id="the-overall-flow" class="level2">
+<h2 class="anchored" data-anchor-id="the-overall-flow">The overall flow</h2>
+<ol type="1">
+<li>Define the construct from theory and prior research</li>
+<li>Prepare several questionnaire items for each construct</li>
+<li>Use exploratory factor analysis (EFA) to examine, in an exploratory way, whether the item groupings you expected are consistent with the data</li>
+<li>Align the direction of reverse-keyed items</li>
+<li>Check internal consistency (Cronbach’s alpha)</li>
+<li>Build subscales by averaging items</li>
+<li>Use the subscales in regression and QCA</li>
+</ol>
+<p>Let us go through them in order.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="For readers who learn with the app (this article)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>For readers who learn with the app (this article)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Example 3” in the app (<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>) uses the same data as this article. Steps 2 to 7 in the app correspond to steps 3 to 6 in this article. Regression and QCA are done in R. The app’s calculation is the same as R’s standard <code>promax</code>. Depending on the version of psych, the third decimal place of the factor loadings can differ slightly.</p>
+</div>
+</div>
+</section>
+<section id="step-1-define-the-construct-from-theory-before-factor-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-define-the-construct-from-theory-before-factor-analysis">Step 1: Define the construct from theory (before factor analysis)</h2>
+<p>This is the most important step. Before factor analysis, the researcher has to decide what to measure. Concepts such as “brand trust” and “perceived quality” are not things that statistical software finds for you automatically.</p>
+<p>The approach to avoid looks like this:</p>
+<blockquote class="blockquote">
+<p>“Let’s ask 20 questions for now, run a factor analysis, and name the factors that come out.”</p>
+</blockquote>
+<p>This is a misunderstanding that beginners especially tend to fall into. The preferred order is as follows.</p>
+<p>From prior research and theory, define what brand trust is, and think about the questionnaire items needed to observe it. When you prepared Q1 to Q3 above, you already held a theoretical expectation before the survey began: “these three items should be measuring one construct, brand trust.” You then run a factor analysis to check whether <strong>these three items actually move in the same direction in the real response data</strong>.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Btheory%7D%20%5Crightarrow%20%5Ctext%7Bconstruct%20definition%7D%20%5Crightarrow%20%5Ctext%7Bitem%20design%7D%20%5Crightarrow%20%5Ctext%7Bdata%20collection%7D%20%5Crightarrow%20%5Ctext%7Bconsistency%20check%20by%20factor%20analysis%7D%0A"></p>
+<p>We do not build theory from factor analysis; we examine, in an exploratory way, whether the data are consistent with a measurement structure that we assumed from theory. This is why research on prior studies and theory beforehand is so important.</p>
+<section id="factor-analysis-is-not-a-machine-that-sorts-items-automatically" class="level3">
+<h3 class="anchored" data-anchor-id="factor-analysis-is-not-a-machine-that-sorts-items-automatically">Factor analysis is not a machine that sorts items automatically</h3>
+<p>Suppose you run a factor analysis on 20 items and get four factors. That alone does not let you say that “human attitudes consist of four constructs.” What factor analysis shows is only the statistical fact that “in this sample, the correlation structure of this item set can be summarized fairly well by about four common factors.”</p>
+<p>Whether those four factors are brand trust, quality evaluation, or brand attachment is not decided by the statistical result. You have to interpret them using prior research, the content of the items, the definition of the construct, and the purpose of the research. Please avoid giving plausible-sounding names to whatever factors come out.</p>
+</section>
+<section id="statistical-grouping-and-theoretical-validity-are-different-things" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-grouping-and-theoretical-validity-are-different-things">Statistical grouping and theoretical validity are different things</h3>
+<p>Suppose four items, “high quality,” “good design,” “reasonably priced,” and “a well-known brand,” group into one factor statistically. That alone does not mean you may call the factor “brand value.” There are several possible reasons why items group statistically:</p>
+<ul>
+<li>They really measure the same construct</li>
+<li>Respondents tend to rate everything high</li>
+<li>There is a halo effect</li>
+<li>The item wordings are similar</li>
+<li>There is a method effect from the same response format</li>
+</ul>
+<p>A high factor loading does not prove that the items belong to the same concept in theory.</p>
+</section>
+</section>
+<section id="step-2-prepare-several-items-for-each-construct" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-several-items-for-each-construct">Step 2: Prepare several items for each construct</h2>
+<p>As a rule, prepare several items for each construct. Do not line up items that merely rephrase the same sentence. Items with the same meaning tend to raise Cronbach’s alpha, but this does not mean that the construct is covered adequately. It is desirable for the items to represent different aspects of the construct appropriately.</p>
+<p>For example, compare these two ways of measuring brand trust.</p>
+<p><strong>An example of rephrasing</strong></p>
+<ul>
+<li>This brand is trustworthy</li>
+<li>This brand is reliable</li>
+<li>This brand is dependable</li>
+</ul>
+<p>All three ask almost the same thing. The answers will be similar, so alpha will be high. But if you duplicate content to raise alpha, you can no longer tell whether the necessary aspects of brand trust are covered. Whether they are covered has to be examined separately. Note that when the concept you want to measure is narrow, items with close meanings can be appropriate, and they can also help average out errors caused by differences in wording.</p>
+<p><strong>An example of different aspects</strong></p>
+<ul>
+<li>I think this brand keeps its promises (the aspect of fulfilling promises)</li>
+<li>This brand is sincere (the aspect of caring about the other party)</li>
+<li>I feel secure using this brand (the aspect of reassurance in use)</li>
+</ul>
+<p>All three are part of “brand trust,” but each looks at a different aspect, so the concept is captured more broadly. However, if you vary the aspects too much, the correlations among items fall and the items no longer form one factor. In light of the definition of the construct, choose items within the range where you can say they are “different aspects of the same concept.”</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="A questionnaire tip: labeling the options of a 7-point scale">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A questionnaire tip: labeling the options of a 7-point scale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two main ways to label the options.</p>
+<ul>
+<li><strong>Put a verbal label on all seven options</strong>: the meaning of each option is clear. On the other hand, words such as “very,” “extremely,” and “quite” feel different in strength to different people.</li>
+<li><strong>Label only the two ends and leave only numbers in between</strong>: this makes it easier to avoid differences in how strongly the words are felt.</li>
+</ul>
+<pre><code>Disagree  1 - 2 - 3 - 4 - 5 - 6 - 7  Agree</code></pre>
+<p>Which one to use depends on the purpose of the research and on the format of the existing scale you use. What deserves attention is that, in either form, <strong>treating the scores as equally spaced numbers is the analyst’s assumption (a simplification)</strong>. The way of labeling does not guarantee equal spacing. In this article, we treat responses as numbers under this assumption.</p>
+</div>
+</div>
+<p>If a scale has been used widely in prior research, using the existing scale is often better than writing items from scratch, because its validity has been examined and it is easy to compare with other studies. This does not mean, however, that “the existing study used three items, so we can use them as they are.” If the industry, culture, respondents, or purpose of the survey differ, the same factor structure may not be reproduced. Even with an existing scale, it is worth checking the structure in your own data.</p>
+</section>
+<section id="example-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-data">Example data</h2>
+<p>From here we follow the steps in R. Suppose we measured nine items on a 7-point scale. The theoretical expectation is the following three constructs.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Construct</th>
+<th>Item</th>
+<th>Wording (example)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Brand trust</td>
+<td>Q1</td>
+<td>This brand is sincere</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q2</td>
+<td>I think this brand keeps its promises</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q3</td>
+<td>I feel secure using this brand</td>
+</tr>
+<tr class="even">
+<td>Perceived quality</td>
+<td>Q4</td>
+<td>This brand’s products are of high quality</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q5</td>
+<td>This brand’s products perform well</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q6 (reverse-keyed)</td>
+<td>The quality of this brand’s products varies</td>
+</tr>
+<tr class="odd">
+<td>Price sensitivity</td>
+<td>Q7</td>
+<td>I notice even small price differences</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q8</td>
+<td>I am tempted to buy when there is a discount</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q9</td>
+<td>If products are similar, I choose the cheaper one</td>
+</tr>
+</tbody>
+</table>
+<p>The wordings are examples (the data are generated with random numbers, and no actual survey corresponds to these wordings).</p>
+<p>The outcome variable Y is purchase intention (one item on a 7-point scale).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this article, we treat 7-point responses as numbers and use Pearson correlation and linear regression. This is a common simplification in practice. If the response distributions are strongly skewed, you can also consider treating them as ordinal. For example, in factor analysis you can use polychoric correlations (<code>fa(..., cor = "poly")</code>). If purchase intention is measured with a single item, you can choose ordinal logistic regression instead of linear regression.</p>
+</div>
+</div>
+<p>The following code creates the example data (the random seed is fixed, so you get the same data).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>)</span>
+<span id="cb2-2">n   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">300</span></span>
+<span id="cb2-3">Phi <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>,</span>
+<span id="cb2-4">                <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>,</span>
+<span id="cb2-5">               <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span>,<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.1</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">byrow =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># correlations among the 3 constructs</span></span>
+<span id="cb2-6">Fm  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>), n) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">chol</span>(Phi)</span>
+<span id="cb2-7">lam <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">80</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">75</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">70</span>,  .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">78</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">72</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">68</span>,  .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">75</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">70</span>,.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">65</span>)       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># item loadings (the "true" values)</span></span>
+<span id="cb2-8">fac <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span>
+<span id="cb2-9">to7 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(z) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cut</span>(z, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>,<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.6</span>,<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>,<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.4</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.0</span>,<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.6</span>,<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">Inf</span>)))  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make 7-point responses</span></span>
+<span id="cb2-10">X <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(j) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">to7</span>(lam[j] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> Fm[, fac[j]] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> lam[j]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n)))</span>
+<span id="cb2-11">X[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>] <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>L <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> X[, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>]                                    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># record Q6 as a reverse-keyed item</span></span>
+<span id="cb2-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(X) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>)</span>
+<span id="cb2-13">b <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">45</span>, .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>)                       <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># effects of the 3 constructs on purchase intention</span></span>
+<span id="cb2-14">v <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">drop</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(b) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> Phi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> b)                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># variance of the signal part (including correlations among the constructs)</span></span>
+<span id="cb2-15">Y <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">to7</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">drop</span>(Fm <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%*%</span> b) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> v) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rnorm</span>(n))   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># add error so that the total variance is 1</span></span>
+<span id="cb2-16">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(X, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Y =</span> Y)</span>
+<span id="cb2-17"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(dat)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Y
+1  5  5  3  3  3  3  4  4  6 6
+2  2  4  2  3  3  5  5  4  5 3
+3  4  4  3  3  4  5  5  6  3 4
+4  5  4  4  4  5  1  5  4  4 3
+5  4  4  4  4  2  7  3  4  4 4
+6  2  1  1  2  2  6  4  5  5 1</code></pre>
+</div>
+</div>
+</section>
+<section id="step-3-examine-how-the-items-group-with-exploratory-factor-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-examine-how-the-items-group-with-exploratory-factor-analysis">Step 3: Examine how the items group, with exploratory factor analysis</h2>
+<p>Once the items are ready, examine how they group by using exploratory factor analysis (EFA). The role we expect of EFA here is not “to invent constructs from a state of knowing nothing.” It is <strong>to examine, in an exploratory way, whether the item structure we assumed from theory is consistent with the actual data</strong>. EFA is different from confirmatory factor analysis (CFA), which specifies in advance as a model which item measures which factor and tests it. The result of EFA is material for judging consistency with your expectation; it does not mean that the measurement structure has been verified.</p>
+<p>First, as a guide to the number of factors, look at the eigenvalues of the correlation matrix and at parallel analysis. The count of eigenvalues of 1 or more is only a rough guide. Parallel analysis compares the eigenvalues of the real data with those obtained from random data, and uses the comparison as a clue to the number of factors. Decide the number of factors together with your theoretical expectation. Then extract three factors by principal axis factoring with promax rotation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(psych)</span>
+<span id="cb4-2">items <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q"</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>)</span>
+<span id="cb4-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">eigen</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(dat[, items]))<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>values, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.918 1.921 1.107 0.640 0.584 0.528 0.490 0.462 0.350</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">set.seed</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2026</span>)</span>
+<span id="cb6-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fa.parallel</span>(dat[, items], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fa =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fa"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fm =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pa"</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># parallel analysis (a figure appears)</span></span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://im-research-yt.github.io/posts/scale-to-regression/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  3  and the number of components =  NA </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">fa3 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">fa</span>(dat[, items], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nfactors =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fm =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pa"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rotate =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Promax"</span>,</span>
+<span id="cb8-2">          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">min.err =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e-8</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">max.iter =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>)   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># strict convergence criteria for the iterations</span></span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: GPArotation</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(fa3<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>loadings, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cutoff =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+   PA1    PA3    PA2   
+Q1         0.731       
+Q2         0.724       
+Q3         0.582       
+Q4  0.769              
+Q5  0.775              
+Q6 -0.632              
+Q7                0.695
+Q8                0.674
+Q9                0.639
+
+                PA1   PA3   PA2
+SS loadings    1.62 1.430 1.350
+Proportion Var 0.18 0.159 0.150
+Cumulative Var 0.18 0.339 0.489</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(fa3<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Phi, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     PA1   PA3   PA2
+PA1 1.00  0.54  0.01
+PA3 0.54  1.00 -0.20
+PA2 0.01 -0.20  1.00</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To make the results easy to reproduce, this article uses <code>rotate = "Promax"</code> (with a capital P). The lowercase <code>"promax"</code> is not wrong, but its internal normalization differs, so the values change slightly.</p>
+<p><code>min.err = 1e-8, max.iter = 1000</code> makes the iterations of principal axis factoring converge under strict criteria. The default criteria are loose, so the extraction can differ slightly around the third decimal place. To make the results match, this article uses the strict criteria.</p>
+<p>Note also that the promax rotation calculation differs a little between versions of psych, and the third decimal place of the loadings can change (we confirmed a difference of at most 0.003 between psych 2.4.1 and 2.6.5). The extraction (principal axis factoring) gives the same result. The interpretation does not change.</p>
+</div>
+</div>
+<p>Here is what to look at.</p>
+<ul>
+<li><strong>Number of factors</strong>: Look at the eigenvalues (the number of those at 1 or more) and the parallel analysis figure (the number of factors whose real-data eigenvalues exceed those from random data), and check whether they are consistent with the three factors we expected from theory.</li>
+<li><strong>Item groupings</strong>: Check whether Q1 to Q3, Q4 to Q6, and Q7 to Q9 load on the same factor, as expected. (Labels such as <code>PA1</code> only indicate the order. Read the meaning of a factor from the items that load on it.)</li>
+<li><strong>The negative loading of Q6</strong>: Q6 has the opposite sign to Q4 and Q5 within the same factor. This is a clue that Q6 may be a reverse-keyed item. However, the sign is only a guide (the sign of a whole factor can be flipped). Whether an item is reverse-keyed is decided by the meaning of the wording.</li>
+<li><strong>Whether any item loads strongly on several factors (cross-loading)</strong>.</li>
+</ul>
+<p>For example, if only Q3 loaded strongly on the perceived quality factor, consider the following before deleting it:</p>
+<ul>
+<li>Was the wording of Q3 appropriate?</li>
+<li>Are brand trust and perceived quality conceptually too close?</li>
+<li>Is there a problem with the translation or the phrasing?</li>
+<li>Did respondents read it with a meaning different from the one we expected?</li>
+</ul>
+<p>Use the result of EFA not as a “keep or delete verdict,” but as <strong>material for understanding the gap between the measurement model assumed from theory and the actual response behavior</strong>. If you mechanically delete a content-wise important item only because its loading is a little low, you may damage content validity.</p>
+</section>
+<section id="step-4-align-the-direction-of-reverse-keyed-items" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-align-the-direction-of-reverse-keyed-items">Step 4: Align the direction of reverse-keyed items</h2>
+<p>Q6 is a reverse-keyed item. In practice, it is easier to follow if you decide the reverse-keyed items from the meaning of the wording before the analysis and align their direction in advance. In this article, we ran the EFA first, to show that a negative loading can be a clue. Use the minimum and maximum of the scale (here 1 and 7) and compute (minimum + maximum) − original value, that is, <code>8 - Q6</code>. For 1 to 7, use <code>8 - Q6</code>; for 1 to 5, use <code>6 - Q6</code>. The same formula also works for a scale whose minimum is not 1 (for example, 0 to 10). Use the ends of the scale on the questionnaire (1 and 7 for a 7-point scale), not the minimum and maximum observed in the data. Whether an item is reverse-keyed is decided by the meaning of the wording (theory).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Q6r <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Q6</span></code></pre></div></div>
+</div>
+</section>
+<section id="step-5-check-internal-consistency-cronbachs-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-check-internal-consistency-cronbachs-alpha">Step 5: Check internal consistency (Cronbach’s alpha)</h2>
+<p>Once you have examined the factor structure, check the internal consistency of each item group. A typical index is Cronbach’s alpha. For example, <img src="https://latex.codecogs.com/png.latex?%5Calpha%20=%20.84"> indicates that the item group has relatively high internal consistency.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1">a_trust   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">alpha</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q3"</span>)],  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">check.keys =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb15-2">a_quality <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">alpha</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q4"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q6r"</span>)], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">check.keys =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb15-3">a_price   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">alpha</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q7"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q8"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q9"</span>)],  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">check.keys =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb15-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trust   =</span> a_trust<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raw_alpha,</span>
+<span id="cb15-5">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">quality =</span> a_quality<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raw_alpha,</span>
+<span id="cb15-6">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">price   =</span> a_price<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>total<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>raw_alpha), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  trust quality   price 
+  0.731   0.774   0.705 </code></pre>
+</div>
+</div>
+<p>There are two points to note.</p>
+<ul>
+<li><strong>A high alpha does not prove a one-factor structure.</strong> Alpha is an index of internal consistency, not an index for verifying factor structure. Also, <strong>alpha alone cannot tell you about reliability in general or about validity.</strong> The order is: examine the structure by factor analysis, then check the internal consistency of that item group.</li>
+<li>Alpha tends to rise as the number of items grows. If needed, you may use McDonald’s omega alongside it.</li>
+</ul>
+</section>
+<section id="step-6-build-the-subscales" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-build-the-subscales">Step 6: Build the subscales</h2>
+<p>Once you have examined the structure and checked the internal consistency, build a subscale for each construct. Usually the simple mean of the items is the default.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BTrust%7D%20=%20%5Cfrac%7BQ_1%20+%20Q_2%20+%20Q_3%7D%7B3%7D,%20%5Cqquad%0A%5Ctext%7BQuality%7D%20=%20%5Cfrac%7BQ_4%20+%20Q_5%20+%20Q_%7B6r%7D%7D%7B3%7D%0A"></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Trust   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rowMeans</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q1"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q2"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q3"</span>)])</span>
+<span id="cb17-2">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Quality <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rowMeans</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q4"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q5"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q6r"</span>)])</span>
+<span id="cb17-3">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>Price   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rowMeans</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q7"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q8"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Q9"</span>)])</span>
+<span id="cb17-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cor</span>(dat[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Trust"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Quality"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Price"</span>)]), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Trust Quality Price
+Trust    1.00    0.43 -0.14
+Quality  0.43    1.00  0.01
+Price   -0.14    0.01  1.00</code></pre>
+</div>
+</div>
+<p>A scale built from a simple mean still contains measurement error. An ordinary regression that uses such a scale does not model the measurement error explicitly. Therefore, the coefficients you obtain are not necessarily the same as the relationships among the latent constructs themselves. With low reliability, this effect can be larger. In multiple regression especially, the effect of measurement error also depends on the correlations among the predictors, so you cannot judge the effect on the coefficients from reliability alone.</p>
+<p>A simple mean has the following advantages:</p>
+<ul>
+<li>The calculation is clear and highly reproducible</li>
+<li>It depends relatively little on the sample</li>
+<li>The unit of the original response scale is kept, so it is easy to interpret</li>
+<li>It can be used in both regression and QCA</li>
+</ul>
+<section id="why-not-use-factor-scores" class="level3">
+<h3 class="anchored" data-anchor-id="why-not-use-factor-scores">Why not use factor scores?</h3>
+<p>Using factor scores is not wrong in itself. However, factor scores have problems: the weights depend on the sample, the values change with the estimation method, the meaning of the score itself is hard to grasp, and the scale may not be the same in another sample. Unless there is a special reason, a policy of using simple-mean scales whose reliability has been checked is quite reasonable for MBA-level research.</p>
+</section>
+<section id="where-does-confirmatory-factor-analysis-cfa-come-in" class="level3">
+<h3 class="anchored" data-anchor-id="where-does-confirmatory-factor-analysis-cfa-come-in">Where does confirmatory factor analysis (CFA) come in?</h3>
+<p>In exploratory MBA research, it is practical to build simple-mean scales based on the content of the items, the EFA results, and internal consistency. However, that alone does not mean that the validity of the measurement has been fully established.</p>
+<p>How far to verify depends on the track record of verification of an existing scale, the extent of your changes, and the strength of the claim the research needs to make. When you want to verify the measurement structure explicitly, or when you have built a new scale or changed one substantially, consider additional verification such as CFA. In CFA, you specify in advance, as a model, which item measures which factor. If an existing measurement model is clear, you can also start with CFA without going through EFA. So there is no fixed order of “always do CFA after EFA.”</p>
+<p>If your sample is large enough, a better approach is to split the sample, running EFA on one part for exploration and CFA on the other for verification. Even if you do run CFA, you do not necessarily have to use the CFA factor scores afterward.</p>
+</section>
+</section>
+<section id="step-7-use-the-subscales-in-regression-and-qca" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-use-the-subscales-in-regression-and-qca">Step 7: Use the subscales in regression and QCA</h2>
+<section id="regression" class="level3">
+<h3 class="anchored" data-anchor-id="regression">Regression</h3>
+<p>Once you have the subscales, you can run an ordinary regression.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%5Cbeta_0%20+%20%5Cbeta_1%20%5Ctext%7BTrust%7D%20+%20%5Cbeta_2%20%5Ctext%7BQuality%7D%20+%20%5Cbeta_3%20%5Ctext%7BPrice%7D%20+%20%5Cvarepsilon%0A"></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(Y <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> Trust <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> Quality <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> Price, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dat))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Trust + Quality + Price, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.11817 -0.87767  0.06223  0.76259  2.85718 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.42862    0.37338   3.826 0.000159 ***
+Trust        0.57160    0.06622   8.632 3.78e-16 ***
+Quality      0.36507    0.05991   6.093 3.44e-09 ***
+Price       -0.27133    0.05812  -4.668 4.61e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.157 on 296 degrees of freedom
+Multiple R-squared:  0.4399,    Adjusted R-squared:  0.4342 
+F-statistic: 77.49 on 3 and 296 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="qca" class="level3">
+<h3 class="anchored" data-anchor-id="qca">QCA</h3>
+<p>QCA needs a value of each condition for each case. In this example, the subscales of brand trust, perceived quality, and price sensitivity can be used as conditions. In fuzzy-set QCA (fsQCA), you <strong>calibrate</strong> each of them into set membership (values from 0 to 1). The outcome, purchase intention Y, is also calibrated into the set “high purchase intention.”</p>
+<p>Then, for example, for the combination “high brand trust, high perceived quality, and low price sensitivity,” we examine a sufficiency relation such as the following (<code>~</code> is negation and <code>*</code> is logical AND).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7BTRUST%7D%20*%20%5Cmathrm%7BQUALITY%7D%20*%20%7B%5Csim%7D%5Cmathrm%7BPRICE%7D%20%5Crightarrow%20%5Cmathrm%7BPURCHASE%7D%0A"></p>
+<p>Points to note:</p>
+<ul>
+<li>This expression is not an analysis result. It is an <strong>example</strong> of a combination to examine.</li>
+<li>Decide the calibration anchors (full membership, full non-membership, and the crossover point) from the meaning of the set, not by mechanically converting the scale mean to a 0 to 1 range.</li>
+<li>Y in the example measures purchase “intention.” Please write it separately from actual purchase “behavior.”</li>
+</ul>
+<p>For the calibration and the analysis in practice, see the <a href="../../posts/thsqca-beginners-1/index.html">ThSQCA for beginners series</a>.</p>
+</section>
+<section id="what-it-means-to-use-regression-and-qca-together" class="level3">
+<h3 class="anchored" data-anchor-id="what-it-means-to-use-regression-and-qca-together">What it means to use regression and QCA together</h3>
+<p>If you run regression and QCA on the same subscales, you can look at the same phenomenon from different viewpoints. Regression looks at the <strong>average association</strong> when the other variables are held constant. QCA looks at <strong>which combinations of conditions lead to the outcome</strong>. The two are better seen as complementary methods with different viewpoints than as competing methods. If you use common subscales, the measurement is unified across the two analyses.</p>
+</section>
+</section>
+<section id="what-to-report" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-report">What to report</h2>
+<p>In a paper or report, writing at least the following lets readers follow your procedure:</p>
+<ul>
+<li>The definition of each construct and the source of the items (an existing scale, or one you created)</li>
+<li>The sample size and how missing values were handled (for example, only complete cases were used)</li>
+<li>The estimation method of the factor analysis (such as principal axis factoring), the rotation (promax), and the basis for the number of factors</li>
+<li>The reverse-keyed items</li>
+<li>The number of items and the alpha of each subscale</li>
+<li>How the subscales were built (the simple mean of the items)</li>
+</ul>
+</section>
+<section id="the-whole-procedure-in-a-few-words" class="level2">
+<h2 class="anchored" data-anchor-id="the-whole-procedure-in-a-few-words">The whole procedure in a few words</h2>
+<p>A standard practical procedure has the following 11 stages. Steps 1 to 7 of this article rearrange these stages, except CFA (8) and SEM (11), in the order of building a scale (with a check of reverse-keyed items added).</p>
+<ol type="1">
+<li>Define the construct from prior research</li>
+<li>Prepare several questionnaire items for each construct</li>
+<li>Hold in advance a theoretical expectation of “which item measures which construct”</li>
+<li>Use EFA to examine, in an exploratory way, whether that expectation is consistent with the actual data structure</li>
+<li>Examine the items from both theoretical and statistical viewpoints</li>
+<li>Check internal consistency with Cronbach’s alpha (and McDonald’s omega if needed)</li>
+<li>Build subscales by simple means</li>
+<li>Verify the measurement structure further with CFA, if needed</li>
+<li>Use the subscales in regression and similar analyses</li>
+<li>In QCA, calibrate the subscales and use them</li>
+<li>If the structure among latent variables is itself the research aim, consider SEM</li>
+</ol>
+<p>The most important point is not “collect data and then look for meaning by factor analysis,” but “define the meaning from theory, and use factor analysis to examine, in an exploratory way, whether that meaning also holds in the data.”</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7Btheory%7D%20%5Crightarrow%20%5Ctext%7Bconstruct%7D%20%5Crightarrow%20%5Ctext%7Bitems%7D%20%5Crightarrow%20%5Ctext%7Bexamination%20of%20the%20measurement%20structure%7D%20%5Crightarrow%20%5Ctext%7Bscaling%7D%20%5Crightarrow%20%5Ctext%7Bhypothesis%20tests%20by%20regression,%20QCA,%20etc.%7D%0A"></p>
+<p>You do not need to decide mechanically that “we use constructs, so we use SEM.” What matters is that <strong>the research question, the theory, the measurement, the way of building scales, and the method of analysis are consistent with one another</strong>.</p>
+<p>This article does not cover why you might not use SEM, or how SEM compares. I plan to write about that in a separate article (Notes).</p>
+</section>
+<section id="what-to-read-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-read-next">What to read next</h2>
+<p>The subscales you built in this article can also be used in QCA. While regression looks at the average association when the other variables are held constant, QCA looks for <strong>which combinations of conditions lead to the outcome</strong>. ThSQCA is an R package that shows how those combinations change when you move the target level (the threshold) of the outcome.</p>
+<ul>
+<li><a href="../../posts/why-qca-decisions/index.html">Why QCA suits decision-making: looking for “recipes” instead of single effects</a></li>
+<li><a href="../../posts/introducing-thsqca/index.html">Introducing ThSQCA: threshold-sweep QCA in R</a></li>
+<li><a href="../../posts/thsqca-beginners-1/index.html">ThSQCA for beginners, part 1: your first threshold sweep</a></li>
+<li><a href="../../index.html">Home page</a>: all articles, in reading order</li>
+</ul>
+</section>
+<section id="r-environment-for-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="r-environment-for-this-page">R environment for this page</h2>
+<p>The results were checked in the following environment. A fixed seed produces the same data, but results can change slightly with different versions of R or of the packages.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1">R.version.string</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R version 4.6.1 (2026-06-24 ucrt)"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">packageVersion</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"psych"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] '2.6.5'</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>marketing</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/scale-to-regression/</guid>
+  <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/scale-to-regression/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>QCA in marketing and management: ten papers to read first (applications)</title>
   <dc:creator>Yuki Toyoda</dc:creator>

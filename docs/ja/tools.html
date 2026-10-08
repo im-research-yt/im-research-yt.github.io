@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。">
+<meta name="description" content="QCAと、アンケートの尺度づくりのための、ブラウザで動くツール。ほかのツールは、設計から見直しています。">
 
 <title>分析ツール – Yuki Toyoda’s Blog</title>
 <style>
@@ -77,13 +77,13 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="分析ツール – Yuki Toyoda’s Blog">
-<meta property="og:description" content="QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。">
+<meta property="og:description" content="QCAと、アンケートの尺度づくりのための、ブラウザで動くツール。ほかのツールは、設計から見直しています。">
 <meta property="og:image" content="https://im-research-yt.github.io/thumbnail-tools.png">
 <meta property="og:site_name" content="Yuki Toyoda’s Blog">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="分析ツール – Yuki Toyoda’s Blog">
-<meta name="twitter:description" content="QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。">
+<meta name="twitter:description" content="QCAと、アンケートの尺度づくりのための、ブラウザで動くツール。ほかのツールは、設計から見直しています。">
 <meta name="twitter:image" content="https://im-research-yt.github.io/thumbnail-tools.png">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
@@ -164,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。
+    QCAと、アンケートの尺度づくりのための、ブラウザで動くツール。ほかのツールは、設計から見直しています。
   </div>
 </div>
 
@@ -184,22 +184,31 @@ ul.task-list li input[type="checkbox"] {
 <div class="ja-nav">
 <p><a href="../ja/index.html">日本語版トップ</a> | <a href="../ja/start.html">はじめに</a> | <a href="../ja/tools.html">分析ツール</a> | <a href="../ja/software.html">ThSQCA</a> | <a href="../ja/about.html">紹介</a> | <a href="../index.html">English</a></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>公開を休止しています
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>ブラウザで動くツールは、現在、公開を休止しています。計算の確認、説明、利用者への注意書きを、設計から見直しているためです。準備ができたら、あらためて公開します。</p>
-</div>
-</div>
+<p>ブラウザで動くツールです。どのツールも、Rのコード(またはRスクリプト)を出すので、結果をRで確かめられます。</p>
+<section id="公開中のツール" class="level2">
+<h2 class="anchored" data-anchor-id="公開中のツール">公開中のツール</h2>
+<section id="qca" class="level3">
+<h3 class="anchored" data-anchor-id="qca">QCA</h3>
+<ul>
+<li><strong><a href="https://im-research-yt.github.io/analysis-tools/qca-quickstart.html" target="_blank">QCA Quickstart</a></strong>: 変数名と設定から、最初のQCAのスクリプト(<code>truthTable()</code> のあと <code>minimize()</code>)を書きます。データは、すでにキャリブレーション済みであることを前提にしています。</li>
+<li><strong><a href="https://im-research-yt.github.io/analysis-tools/sweep-builder.html" target="_blank">Sweep Builder</a></strong>: 閾値を1つに決めたQCAの設定を、ThSQCAのスイープのコードに変えます。閾値の範囲で、解がどう変わるかを見られます。<a href="../ja/articles/thsqca-beginners-1/index.html">ThSQCA 入門のシリーズ</a>と組みになっています。</li>
+</ul>
+</section>
+<section id="アンケートの尺度" class="level3">
+<h3 class="anchored" data-anchor-id="アンケートの尺度">アンケートの尺度</h3>
+<ul>
+<li><strong><a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a></strong>: アンケートの項目から、下位尺度を、順を追って作ります。因子数、因子分析(主因子法・プロマックス回転)、項目の割り当て、逆転項目、Cronbachのα、下位尺度得点を扱います。同じ計算を再現するRスクリプトも出せます。手順は、記事<a href="../ja/articles/scale-to-regression/index.html">アンケートから尺度を作り、回帰分析・QCAに進む手順</a>で説明しています。</li>
+</ul>
+<p>Sweep Builder と Scale Maker は、名前が似ていますが、役割が違います。Sweep Builder は閾値スイープQCAのコードを書き、Scale Maker はアンケートの項目から尺度を作ります。</p>
+</section>
+</section>
+<section id="設計から見直しているツール" class="level2">
+<h2 class="anchored" data-anchor-id="設計から見直しているツール">設計から見直しているツール</h2>
+<p>次のツールは、計算の確認、説明、利用者への注意書きを見直すため、公開を休止しています。価格感度分析(Van Westendorp PSM)、コンジョイント分析(設計と推定)、クラスター分析、主成分分析・因子分析、コレスポンデンス分析、決定木です。準備ができたら、あらためて公開します。</p>
 <p>それまでの間は、Rパッケージ <a href="../ja/software.html">ThSQCA</a> で、閾値スイープQCAを学べます。読む順の案内は、<a href="../ja/start.html">はじめに</a>のページにあります。</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

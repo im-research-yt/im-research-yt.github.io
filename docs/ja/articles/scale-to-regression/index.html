@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuki Toyoda">
+<meta name="dcterms.date" content="2026-10-08">
+<meta name="description" content="「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。">
+
+<title>アンケートから尺度を作り、回帰分析・QCAに進む手順 – Yuki Toyoda’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-b886970056a1d13a9646ddbc21f6bb82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+<meta property="og:title" content="アンケートから尺度を作り、回帰分析・QCAに進む手順 – Yuki Toyoda’s Blog">
+<meta property="og:description" content="「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。">
+<meta property="og:image" content="https://im-research-yt.github.io/ja/articles/scale-to-regression/thumbnail.png">
+<meta property="og:site_name" content="Yuki Toyoda’s Blog">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="アンケートから尺度を作り、回帰分析・QCAに進む手順 – Yuki Toyoda’s Blog">
+<meta name="twitter:description" content="「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。">
+<meta name="twitter:image" content="https://im-research-yt.github.io/ja/articles/scale-to-regression/thumbnail.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../../logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../../../logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Yuki Toyoda’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../start-here.html"> 
+<span class="menu-text">Start here</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../tools.html"> 
+<span class="menu-text">Analysis tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../software.html"> 
+<span class="menu-text">ThSQCA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../ja/index.html"> 
+<span class="menu-text">日本語</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/im-research-yt"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">アンケートから尺度を作り、回帰分析・QCAに進む手順</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">marketing</div>
+    <div class="quarto-category">tutorial</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuki Toyoda </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 8, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="この記事、アプリ、Rスクリプトの関係">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>この記事、アプリ、Rスクリプトの関係
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>このブログの手順記事には、同じ手順を試せるアプリ(ブラウザで動くツール)があります。3つの役割は、次のとおりです。</p>
+<ul>
+<li><strong>記事</strong>: 考え方と手順を説明します。計算は、Rのコードで示します。</li>
+<li><strong>アプリ(<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>)</strong>: データ(CSV)を読み込むと、記事と同じ計算の結果が、画面で見られます。Rを使わなくても、手順の流れと、数値の意味を学べます。</li>
+<li><strong>Rスクリプト</strong>: アプリは、画面での設定どおりの結果を再現するRスクリプトを出せます。Rで実行して、アプリの数値と一致することを確かめられます。研究では、このスクリプトを、分析の記録としても使えます。</li>
+</ul>
+<p>Rを使う方は、記事のコードから読んでください。アプリで学ぶ方は、まずアプリの数値を見ながら記事を読み、慣れたらRスクリプトで再現してください。</p>
+</div>
+</div>
+<section id="この記事の問い" class="level2">
+<h2 class="anchored" data-anchor-id="この記事の問い">この記事の問い</h2>
+<p>マーケティングや経営学の研究では、「ブランド信頼」「知覚品質」「顧客満足」「価格感度」のように、1つの質問だけでは測りにくい概念を扱います。こうした概念は<strong>構成概念</strong>と呼ばれ、複数の質問項目で測ります。</p>
+<p>たとえば「ブランド信頼」を、次の3項目で測るとします。</p>
+<ul>
+<li>Q1: このブランドは誠実である</li>
+<li>Q2: このブランドは約束を守ると思う</li>
+<li>Q3: このブランドは安心して利用できる</li>
+</ul>
+<p>知りたいのは、Q1、Q2、Q3それぞれの効果ではありません。3つを合わせた「ブランド信頼」が、購買意向などとどう関係するかです。さらに、そうした概念を、回帰分析、ロジスティック回帰、QCA、クラスター分析、決定木など、あとの分析で使いたいことも多くあります。</p>
+<p>なお、共分散構造分析(SEM)は素晴らしい手法ですが、最初から使う必要はありません(使う場合には、SEMの特徴をしっかり理解して使わないと、かえって危険です)。大切なのは、「どの手法が高度か」ではなく、<strong>研究上の構成概念をどう測り、研究質問にいちばん合う形でどう分析するか</strong>です。</p>
+<p>この記事では、MBAの研究や実証研究で使いやすい手順を、Rの例で示します。例題のデータは、乱数で作ったものです(本物の調査データではありません)。</p>
+<section id="この記事の範囲" class="level3">
+<h3 class="anchored" data-anchor-id="この記事の範囲">この記事の範囲</h3>
+<ul>
+<li><p><strong>理論的に想定した構成概念を、複数項目で測る場合</strong>を扱います。データから構成概念を探す探索的な研究を、否定するものではありません。</p></li>
+<li><p>ブランド信頼のように、「<strong>背後に1つの概念があり、それが複数の項目への回答を共通に動かしている</strong>」と考えられる測定を扱います。ブランド信頼が高い人は、Q1もQ2もQ3も高く答える、という関係です。そのため、項目どうしが相関することが前提になります(このような測定を、反映的な測定と呼びます)。</p>
+<p>一方、購入頻度・購入金額・利用年数を組み合わせて、「顧客の行動指標」を作るような場合は違います。頻度が高い人が、金額も高いとは限りません。項目が互いに強く相関するとは限らないので、ここで示す因子分析とαの手順は、そのまま当てはまりません。「どんな指標でも、αを高くして平均すればよい」わけではないのです。</p></li>
+</ul>
+</section>
+</section>
+<section id="全体の流れ" class="level2">
+<h2 class="anchored" data-anchor-id="全体の流れ">全体の流れ</h2>
+<ol type="1">
+<li>理論と先行研究から、構成概念を定義する</li>
+<li>構成概念ごとに、複数の質問項目を用意する</li>
+<li>探索的因子分析(EFA)で、想定した項目のまとまりと、データとの整合性を探索的に検討する</li>
+<li>逆転項目の向きをそろえる</li>
+<li>内的一貫性(Cronbachのα)を確認する</li>
+<li>項目の平均で、下位尺度を作る</li>
+<li>下位尺度を、回帰分析やQCAに使う</li>
+</ol>
+<p>順番に説明します。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="アプリで学ぶ方へ(この記事の場合)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>アプリで学ぶ方へ(この記事の場合)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>アプリ(<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>)の「例題3」が、この記事と同じデータです。アプリの手順2〜7が、この記事の手順3〜6にあたります。回帰分析とQCAは、Rで行います。アプリの計算は、Rの標準の <code>promax</code> と同じです。psych のバージョンによっては、因子負荷量の小数第3位が、少しずれることがあります。</p>
+</div>
+</div>
+</section>
+<section id="手順1-理論で構成概念を定義する因子分析の前にやること" class="level2">
+<h2 class="anchored" data-anchor-id="手順1-理論で構成概念を定義する因子分析の前にやること">手順1: 理論で構成概念を定義する(因子分析の前にやること)</h2>
+<p>ここがいちばん大切です。因子分析の前に、「何を測りたいのか」を研究者自身が決めておく必要があります。「ブランド信頼」や「知覚品質」は、統計ソフトが自動的に見つけてくれる概念ではありません。</p>
+<p>避けたいのは、次の進め方です。</p>
+<blockquote class="blockquote">
+<p>「とりあえず20問聞いて、因子分析をして、出てきた因子に名前をつけよう」</p>
+</blockquote>
+<p>特に初学者が陥りやすい誤解です。望ましい順序は、次のとおりです。</p>
+<p>先行研究や理論から「ブランド信頼とは何か」を定義し、その概念を観測するために必要な質問項目を考えます。上のQ1〜Q3を用意した時点で、研究者は調査を始める前から、「この3項目は、ブランド信頼という1つの構成概念を測っているはずだ」という理論的な想定を持っています。そのうえで因子分析を行い、<strong>実際の回答データでも、その3項目が同じ方向にまとまっているか</strong>を確かめます。</p>
+<p><span class="math display">\[
+\text{理論} \rightarrow \text{構成概念の定義} \rightarrow \text{測定項目の設計} \rightarrow \text{データ収集} \rightarrow \text{因子分析による整合性の検討}
+\]</span></p>
+<p>因子分析から理論を作るのではなく、理論的に想定した測定構造と、実際のデータとの整合性を、探索的に検討します。そのためにも、事前の先行研究や理論のリサーチは、非常に重要です。</p>
+<section id="因子分析は項目を自動で分類する機械ではない" class="level3">
+<h3 class="anchored" data-anchor-id="因子分析は項目を自動で分類する機械ではない">因子分析は「項目を自動で分類する機械」ではない</h3>
+<p>20項目を因子分析して、4つの因子が得られたとします。それだけでは、「人間の態度は4つの構成概念から成り立っている」とは言えません。因子分析が示すのは、「このサンプルでは、この項目群の相関構造を、4つほどの共通因子で整理すると、比較的うまく説明できる」という統計的な事実だけです。</p>
+<p>その4因子が、ブランド信頼なのか、品質評価なのか、ブランド愛着なのかは、統計の結果からは決まりません。先行研究、質問項目の内容、概念の定義、研究目的を踏まえて、解釈する必要があります。出てきた因子に、もっともらしい名前をつける方法は避けてください。</p>
+</section>
+<section id="統計的なまとまりと理論上の妥当性は別のもの" class="level3">
+<h3 class="anchored" data-anchor-id="統計的なまとまりと理論上の妥当性は別のもの">統計的なまとまりと、理論上の妥当性は別のもの</h3>
+<p>「品質が高い」「デザインが良い」「価格が手頃」「有名ブランドである」の4項目が、統計的に1つの因子にまとまったとします。それだけで、その因子を「ブランド価値」と呼んでよいとは限りません。統計的にまとまる理由には、次のような可能性があります。</p>
+<ul>
+<li>本当に同じ構成概念を測っている</li>
+<li>回答者が全体に高く評価する傾向がある</li>
+<li>ハロー効果がある</li>
+<li>質問文の表現が似ている</li>
+<li>同じ尺度形式による、方法の影響(method effect)がある</li>
+</ul>
+<p>因子負荷量が高いことは、理論上も同じ概念であることの証明にはなりません。</p>
+</section>
+</section>
+<section id="手順2-構成概念ごとに複数の項目を用意する" class="level2">
+<h2 class="anchored" data-anchor-id="手順2-構成概念ごとに複数の項目を用意する">手順2: 構成概念ごとに、複数の項目を用意する</h2>
+<p>原則として、1つの構成概念に複数の項目を用意します。このとき、同じ文章を言い換えただけの項目を並べないでください。意味が同じ項目を並べると、Cronbachのαは高くなりやすいのですが、それは、構成概念の必要な側面を十分にカバーしていることを意味しません。項目は、構成概念の異なる側面を、適切に表すものであることが望ましいです。</p>
+<p>たとえば、ブランド信頼を測る項目として、次の2通りを比べてみます。</p>
+<p><strong>言い換えを並べた例</strong></p>
+<ul>
+<li>このブランドは信頼できる</li>
+<li>このブランドは頼りになる</li>
+<li>このブランドは信用できる</li>
+</ul>
+<p>3つとも、ほぼ同じことを聞いています。回答は似通うので、αは高くなります。しかし、αを高くするために内容を重複させると、ブランド信頼の必要な側面を十分にカバーしているかが、分からなくなります。カバーしているかどうかは、別に検討する必要があります。なお、測定したい概念が狭い場合は、意味の近い項目が適切なこともあります。表現の違いによる誤差を、平均化する役割もあります。</p>
+<p><strong>異なる側面を表す例</strong></p>
+<ul>
+<li>このブランドは約束を守ると思う(約束を果たす、という側面)</li>
+<li>このブランドは誠実である(相手のことを考える、という側面)</li>
+<li>このブランドは安心して利用できる(使うときの安心感、という側面)</li>
+</ul>
+<p>3つとも「ブランド信頼」の一部ですが、見ている側面が違います。ブランド信頼という概念を、より幅広く捉えられます。ただし、側面を変えすぎると、項目どうしの相関が下がり、1つの因子にまとまらなくなります。概念の定義に照らして、「同じ概念の別の側面」と言える範囲で選びます。</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="調査票のコツ: 7件法の選択肢のつけ方">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>調査票のコツ: 7件法の選択肢のつけ方
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>選択肢のラベルの付け方には、主に2つの方法があります。</p>
+<ul>
+<li><strong>7つすべてに、言葉のラベルを付ける</strong>: 各選択肢の意味が明確になります。一方で、「とても」「非常に」「かなり」のような言葉は、受け取る人によって強さの感じ方が違います。</li>
+<li><strong>両端にだけラベルを付け、間は数字だけにする</strong>: 言葉の強さの感じ方の違いを、避けやすくなります。</li>
+</ul>
+<pre><code>あてはまらない  1 － 2 － 3 － 4 － 5 － 6 － 7  あてはまる</code></pre>
+<p>どちらを使うかは、研究の目的と、使う既存尺度の形式に合わせて決めます。注意したいのは、どちらの形でも、<strong>得点を等間隔の数値として扱うことは、分析者の前提(簡略化)である</strong>点です。ラベルの付け方で、等間隔性が保証されるわけではありません。この記事では、この前提のもとで、回答を数値として扱います。</p>
+</div>
+</div>
+<p>先行研究で十分に使われている尺度があるなら、一から項目を作るよりも、既存尺度を使うほうがよいことが多くあります。妥当性が検討されていて、他の研究と比べやすいからです。ただし、「既存研究で3項目だから、そのまま使えばよい」という意味ではありません。産業、文化、回答者、調査目的が違えば、同じ因子構造が再現されないこともあります。既存尺度でも、今回のデータで構造を確かめる意味があります。</p>
+</section>
+<section id="例題データ" class="level2">
+<h2 class="anchored" data-anchor-id="例題データ">例題データ</h2>
+<p>ここからは、Rで手順を追います。9項目を、7件法で測ったとします。理論的な想定は、次の3つです。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>構成概念</th>
+<th>項目</th>
+<th>質問文(例)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ブランド信頼</td>
+<td>Q1</td>
+<td>このブランドは誠実である</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q2</td>
+<td>このブランドは約束を守ると思う</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q3</td>
+<td>このブランドは安心して利用できる</td>
+</tr>
+<tr class="even">
+<td>知覚品質</td>
+<td>Q4</td>
+<td>このブランドの商品は品質が高い</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q5</td>
+<td>このブランドの商品は性能が優れている</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q6(逆転項目)</td>
+<td>このブランドの商品は品質にばらつきがある</td>
+</tr>
+<tr class="odd">
+<td>価格感度</td>
+<td>Q7</td>
+<td>少しの価格差でも気になる</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q8</td>
+<td>値引きがあると買いたくなる</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q9</td>
+<td>同じような商品なら、安い方を選ぶ</td>
+</tr>
+</tbody>
+</table>
+<p>質問文は、例です(データは乱数で作ったもので、質問文に対応する調査があるわけではありません)。</p>
+<p>結果の変数 Y は、購買意向(7件法の1項目)とします。</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>この記事では、7件法の回答を数値として扱い、ピアソンの相関と、線形の回帰分析を使います。実務では、よく使われる簡略化です。回答の分布が強く偏る場合などは、順序尺度として扱う方法も検討できます。たとえば、因子分析では、ポリコリック相関を使う方法(<code>fa(..., cor = "poly")</code>)があります。購買意向を1項目で測っている場合は、線形回帰のほかに、順序ロジスティック回帰も選べます。</p>
+</div>
+</div>
+<p>次のコードで、例題のデータを作ります(乱数のシードを固定してあるので、同じデータになります)。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.1</span>,  <span class="fl">1.0</span>), <span class="dv">3</span>, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)   <span class="co"># 3つの概念の相関</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Fm  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> <span class="dv">3</span>), n) <span class="sc">%*%</span> <span class="fu">chol</span>(Phi)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>lam <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">80</span>,.<span class="dv">75</span>,.<span class="dv">70</span>,  .<span class="dv">78</span>,.<span class="dv">72</span>,.<span class="dv">68</span>,  .<span class="dv">75</span>,.<span class="dv">70</span>,.<span class="dv">65</span>)       <span class="co"># 各項目の負荷量(理想の値)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fac <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>to7 <span class="ot">&lt;-</span> <span class="cf">function</span>(z) <span class="fu">as.integer</span>(<span class="fu">cut</span>(z, <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,<span class="sc">-</span><span class="fl">1.6</span>,<span class="sc">-</span><span class="fl">1.0</span>,<span class="sc">-</span><span class="fl">0.4</span>,<span class="fl">0.4</span>,<span class="fl">1.0</span>,<span class="fl">1.6</span>,<span class="cn">Inf</span>)))  <span class="co"># 7件法にする</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="cf">function</span>(j) <span class="fu">to7</span>(lam[j] <span class="sc">*</span> Fm[, fac[j]] <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> lam[j]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">rnorm</span>(n)))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>X[, <span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>L <span class="sc">-</span> X[, <span class="dv">6</span>]                                    <span class="co"># Q6は逆転項目として記録する</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Q"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">45</span>, .<span class="dv">30</span>, <span class="sc">-</span>.<span class="dv">20</span>)                       <span class="co"># 3つの概念から購買意向への効果</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">drop</span>(<span class="fu">t</span>(b) <span class="sc">%*%</span> Phi <span class="sc">%*%</span> b)                <span class="co"># 信号部分の分散(概念どうしの相関を含む)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">to7</span>(<span class="fu">drop</span>(Fm <span class="sc">%*%</span> b) <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> v) <span class="sc">*</span> <span class="fu">rnorm</span>(n))   <span class="co"># 全体の分散が1になるように、誤差を足す</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(X, <span class="at">Y =</span> Y)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Y
+1  5  5  3  3  3  3  4  4  6 6
+2  2  4  2  3  3  5  5  4  5 3
+3  4  4  3  3  4  5  5  6  3 4
+4  5  4  4  4  5  1  5  4  4 3
+5  4  4  4  4  2  7  3  4  4 4
+6  2  1  1  2  2  6  4  5  5 1</code></pre>
+</div>
+</div>
+</section>
+<section id="手順3-探索的因子分析で想定した項目のまとまりを検討する" class="level2">
+<h2 class="anchored" data-anchor-id="手順3-探索的因子分析で想定した項目のまとまりを検討する">手順3: 探索的因子分析で、想定した項目のまとまりを検討する</h2>
+<p>項目を用意したら、それらがどうまとまっているかを、探索的因子分析(EFA)で検討します。ここでEFAに期待する役割は、「何も分からない状態から、構成概念を発明すること」ではありません。<strong>理論的に想定した項目構造と、実際のデータが整合しているかを、探索的に検討すること</strong>です。EFAは、「どの項目がどの因子を測るか」を事前にモデルとして指定して検証する方法(確証的因子分析、CFA)とは違います。EFAの結果は、想定との整合性を見る材料であり、測定構造が検証されたという意味ではありません。</p>
+<p>まず、因子数の目安として、相関行列の固有値と、平行分析を見ます。固有値1以上の数は、あくまで目安です。平行分析は、実データの固有値を、乱数のデータから得た固有値と比べて、因子数の手がかりにする方法です。理論上の想定とあわせて、因子数を決めます。そのうえで、主因子法・プロマックス回転で、3因子を求めます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Q"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">eigen</span>(<span class="fu">cor</span>(dat[, items]))<span class="sc">$</span>values, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.918 1.921 1.107 0.640 0.584 0.528 0.490 0.462 0.350</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(dat[, items], <span class="at">fa =</span> <span class="st">"fa"</span>, <span class="at">fm =</span> <span class="st">"pa"</span>)   <span class="co"># 平行分析(図が出ます)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  3  and the number of components =  NA </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fa3 <span class="ot">&lt;-</span> <span class="fu">fa</span>(dat[, items], <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">fm =</span> <span class="st">"pa"</span>, <span class="at">rotate =</span> <span class="st">"Promax"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">min.err =</span> <span class="fl">1e-8</span>, <span class="at">max.iter =</span> <span class="dv">1000</span>)   <span class="co"># 反復計算の収束条件を、厳しくしています</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: GPArotation</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fa3<span class="sc">$</span>loadings, <span class="at">cutoff =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+   PA1    PA3    PA2   
+Q1         0.731       
+Q2         0.724       
+Q3         0.582       
+Q4  0.769              
+Q5  0.775              
+Q6 -0.632              
+Q7                0.695
+Q8                0.674
+Q9                0.639
+
+                PA1   PA3   PA2
+SS loadings    1.62 1.430 1.350
+Proportion Var 0.18 0.159 0.150
+Cumulative Var 0.18 0.339 0.489</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(fa3<span class="sc">$</span>Phi, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     PA1   PA3   PA2
+PA1 1.00  0.54  0.01
+PA3 0.54  1.00 -0.20
+PA2 0.01 -0.20  1.00</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>この記事では、結果を再現しやすいように、<code>rotate = "Promax"</code>(先頭が大文字)を使っています。小文字の <code>"promax"</code> でも誤りではありませんが、計算の途中の正規化が異なるため、値が少し変わります。</p>
+<p><code>min.err = 1e-8, max.iter = 1000</code> は、主因子法の反復計算を、厳しい条件で収束させる指定です。初期設定の条件は緩いため、因子の抽出の結果が、小数第3位あたりで少しずれることがあります。この記事では、結果をそろえるために、厳しい条件を使っています。</p>
+<p>なお、psych のバージョンによって、プロマックス回転の計算が少し異なり、因子負荷量の小数第3位が変わることがあります(psych 2.4.1 と 2.6.5 で、最大0.003の差を確認しました)。因子の抽出(主因子法)の結果は、同じです。解釈は変わりません。</p>
+</div>
+</div>
+<p>見る場所は、次のとおりです。</p>
+<ul>
+<li><strong>因子数</strong>: 固有値(1以上の数)と、平行分析の図(実データの固有値が、乱数データの固有値を上回る数)を見て、理論上の想定の3因子と整合しているかを確かめます。</li>
+<li><strong>項目のまとまり</strong>: Q1〜Q3、Q4〜Q6、Q7〜Q9が、想定どおり同じ因子に載っているか。(<code>PA1</code> などの記号は、並び順を表すだけです。因子の中身は、載っている項目で読みます。)</li>
+<li><strong>Q6の負荷量が負になっている点</strong>: 同じ因子の中で、Q4・Q5と符号が逆です。Q6が逆転項目である可能性を示す手がかりです。ただし、符号は目安です(因子全体の符号は、向きを反転できます)。逆転項目かどうかは、質問文の意味で決めます。</li>
+<li><strong>複数の因子に大きく載る項目(cross-loading)がないか</strong>。</li>
+</ul>
+<p>たとえば、Q3だけが知覚品質の因子に強く載った場合は、削除する前に、次のことを検討します。</p>
+<ul>
+<li>Q3の表現は適切だったか</li>
+<li>ブランド信頼と知覚品質が、概念的に近すぎないか</li>
+<li>翻訳や言い回しに、問題がないか</li>
+<li>回答者が、想定とは違う意味に受け取っていないか</li>
+</ul>
+<p>EFAの結果は、「採用・削除の判定」ではなく、<strong>理論的に想定した測定モデルと、実際の回答行動とのズレを理解する材料</strong>として使います。因子負荷量が少し低いという理由だけで、内容上重要な項目を機械的に削除すると、かえって内容的妥当性が損なわれることがあります。</p>
+</section>
+<section id="手順4-逆転項目の向きをそろえる" class="level2">
+<h2 class="anchored" data-anchor-id="手順4-逆転項目の向きをそろえる">手順4: 逆転項目の向きをそろえる</h2>
+<p>Q6は逆転項目です。実務では、分析の前に、質問文の意味から逆転項目を決めて、向きをそろえておくほうが分かりやすいでしょう。この記事では、負の負荷量が手がかりになることを見せるために、先にEFAを行いました。尺度の最小値と最大値(ここでは1と7)を使い、(最小値 + 最大値) − 元の値、つまり <code>8 - Q6</code> で向きをそろえます。1〜7なら <code>8 - Q6</code>、1〜5なら <code>6 - Q6</code> です。最小値が1でない尺度(たとえば0〜10)でも、同じ式で逆転できます。最小値と最大値は、データの最小値・最大値ではなく、調査票の尺度の端(7件法なら1と7)を使ってください。逆転項目かどうかは、質問文の意味(理論)で決めます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Q6r <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> dat<span class="sc">$</span>Q6</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="手順5-内的一貫性cronbachのαを確認する" class="level2">
+<h2 class="anchored" data-anchor-id="手順5-内的一貫性cronbachのαを確認する">手順5: 内的一貫性(Cronbachのα)を確認する</h2>
+<p>因子構造を検討したら、項目群ごとに内的一貫性を確認します。代表的な指標がCronbachのαです。たとえば <span class="math inline">\(\alpha = .84\)</span> なら、その項目群には、比較的高い内的一貫性があると言えます。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a_trust   <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>)],  <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>a_quality <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q4"</span>, <span class="st">"Q5"</span>, <span class="st">"Q6r"</span>)], <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>a_price   <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q7"</span>, <span class="st">"Q8"</span>, <span class="st">"Q9"</span>)],  <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">trust   =</span> a_trust<span class="sc">$</span>total<span class="sc">$</span>raw_alpha,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">quality =</span> a_quality<span class="sc">$</span>total<span class="sc">$</span>raw_alpha,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">price   =</span> a_price<span class="sc">$</span>total<span class="sc">$</span>raw_alpha), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  trust quality   price 
+  0.731   0.774   0.705 </code></pre>
+</div>
+</div>
+<p>注意点が2つあります。</p>
+<ul>
+<li><strong>αが高くても、1因子構造が証明されたわけではありません。</strong> αは内的一貫性の指標であって、因子構造を検証する指標ではありません。また、<strong>αだけで、信頼性全般や妥当性を判断することはできません。</strong> 順序は、「因子分析で構造を検討する → その項目群の内的一貫性を確認する」です。</li>
+<li>αは、項目数が多いほど高くなりやすい指標です。必要に応じて、McDonaldのωを併用してもかまいません。</li>
+</ul>
+</section>
+<section id="手順6-下位尺度を作る" class="level2">
+<h2 class="anchored" data-anchor-id="手順6-下位尺度を作る">手順6: 下位尺度を作る</h2>
+<p>構造を検討し、内的一貫性を確認したら、構成概念ごとに下位尺度を作ります。通常は、項目の単純平均を基本とします。</p>
+<p><span class="math display">\[
+\text{Trust} = \frac{Q_1 + Q_2 + Q_3}{3}, \qquad
+\text{Quality} = \frac{Q_4 + Q_5 + Q_{6r}}{3}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Trust   <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>)])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Quality <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q4"</span>, <span class="st">"Q5"</span>, <span class="st">"Q6r"</span>)])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Price   <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q7"</span>, <span class="st">"Q8"</span>, <span class="st">"Q9"</span>)])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(dat[, <span class="fu">c</span>(<span class="st">"Trust"</span>, <span class="st">"Quality"</span>, <span class="st">"Price"</span>)]), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Trust Quality Price
+Trust    1.00    0.43 -0.14
+Quality  0.43    1.00  0.01
+Price   -0.14    0.01  1.00</code></pre>
+</div>
+</div>
+<p>単純平均で作った尺度にも、測定誤差は残ります。その尺度を使う通常の回帰分析は、測定誤差を明示的にモデル化していません。そのため、得られた係数は、潜在的な構成概念どうしの関係そのものとは、同じとは限りません。信頼性が低いと、この影響は大きくなりえます。特に重回帰では、測定誤差の影響は説明変数どうしの相関にも左右されるため、係数への影響を、信頼性だけから判断することはできません。</p>
+<p>単純平均には、次の利点があります。</p>
+<ul>
+<li>算出方法が明確で、再現性が高い</li>
+<li>サンプルへの依存が、比較的小さい</li>
+<li>元の質問尺度の単位が保たれ、解釈しやすい</li>
+<li>回帰分析にも、QCAにも使える</li>
+</ul>
+<section id="因子得点は使わないのか" class="level3">
+<h3 class="anchored" data-anchor-id="因子得点は使わないのか">因子得点は使わないのか</h3>
+<p>因子得点を使うこと自体が、誤りというわけではありません。ただし、因子得点には、重みがサンプルに依存する、推定方法によって値が変わる、得点そのものの意味が分かりにくい、別のサンプルでは同じ尺度にならない可能性がある、という問題があります。特別な理由がなければ、MBAレベルの研究では、信頼性を確かめた単純平均の尺度を基本にする方針は、十分に合理的です。</p>
+</section>
+<section id="確証的因子分析cfaはどこで使うのか" class="level3">
+<h3 class="anchored" data-anchor-id="確証的因子分析cfaはどこで使うのか">確証的因子分析(CFA)はどこで使うのか</h3>
+<p>MBAの探索的な研究では、項目の内容、EFAの結果、内的一貫性を踏まえて、単純平均の尺度を作る進め方は、実用的です。ただし、それだけで、測定の妥当性が十分に確立したとは言えません。</p>
+<p>どこまで検証するかは、既存尺度の検証の実績、今回の変更の程度、研究で求める主張の強さで決まります。測定構造を明示的に検証したいときや、尺度を新しく作った、あるいは大きく変更したときは、CFAなどによる追加の検証を検討します。CFAでは、どの項目がどの因子を測るかを、事前にモデルとして指定します。既存の測定モデルがはっきりしているなら、EFAを経ずに、CFAから始める選択もあります。したがって、「EFAのあとに、必ずCFAを行う」という固定した順序ではありません。</p>
+<p>標本数に余裕があるなら、探索用と検証用に標本を分け、探索用でEFA、検証用でCFAを行うのが、より望ましい方法です。ただし、CFAを行ったからといって、そのあと必ずCFAの因子得点を使わなければならないわけではありません。</p>
+</section>
+</section>
+<section id="手順7-下位尺度を回帰分析とqcaに使う" class="level2">
+<h2 class="anchored" data-anchor-id="手順7-下位尺度を回帰分析とqcaに使う">手順7: 下位尺度を、回帰分析とQCAに使う</h2>
+<section id="回帰分析" class="level3">
+<h3 class="anchored" data-anchor-id="回帰分析">回帰分析</h3>
+<p>下位尺度ができたら、通常の回帰分析ができます。</p>
+<p><span class="math display">\[
+Y = \beta_0 + \beta_1 \text{Trust} + \beta_2 \text{Quality} + \beta_3 \text{Price} + \varepsilon
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> Trust <span class="sc">+</span> Quality <span class="sc">+</span> Price, <span class="at">data =</span> dat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Trust + Quality + Price, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.11817 -0.87767  0.06223  0.76259  2.85718 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.42862    0.37338   3.826 0.000159 ***
+Trust        0.57160    0.06622   8.632 3.78e-16 ***
+Quality      0.36507    0.05991   6.093 3.44e-09 ***
+Price       -0.27133    0.05812  -4.668 4.61e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.157 on 296 degrees of freedom
+Multiple R-squared:  0.4399,    Adjusted R-squared:  0.4342 
+F-statistic: 77.49 on 3 and 296 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="qca" class="level3">
+<h3 class="anchored" data-anchor-id="qca">QCA</h3>
+<p>QCAでは、ケースごとに条件の値が必要です。この例なら、ブランド信頼、知覚品質、価格感度の下位尺度を、条件として使えます。ファジィセットQCA(fsQCA)では、それぞれを、集合のメンバーシップ(0から1の値)へ<strong>キャリブレーション</strong>します。結果の購買意向 Y も、「購買意向が高い」という集合へ、キャリブレーションします。</p>
+<p>そのうえで、たとえば「ブランド信頼が高く、知覚品質が高く、価格感度が低い」という組み合わせについて、次のような十分条件の関係を検討します(<code>~</code> は否定、<code>*</code> は論理積です)。</p>
+<p><span class="math display">\[
+\mathrm{TRUST} * \mathrm{QUALITY} * {\sim}\mathrm{PRICE} \rightarrow \mathrm{PURCHASE}
+\]</span></p>
+<p>注意点は、次のとおりです。</p>
+<ul>
+<li>この式は、分析の結果ではありません。検討する組み合わせの<strong>例</strong>です。</li>
+<li>キャリブレーションの基準(完全に含まれる、完全に含まれない、どちらでもない点)は、尺度の平均を、機械的に0から1へ変換するのではなく、集合の意味に基づいて決めます。</li>
+<li>例題の Y は、購買「意向」を測ったものです。実際の購買「行動」とは、区別して書いてください。</li>
+</ul>
+<p>キャリブレーションと分析の実際は、<a href="../../../ja/articles/thsqca-beginners-1/index.html">ThSQCA 入門のシリーズ</a>を見てください。</p>
+</section>
+<section id="回帰分析とqcaを併用する意味" class="level3">
+<h3 class="anchored" data-anchor-id="回帰分析とqcaを併用する意味">回帰分析とQCAを併用する意味</h3>
+<p>同じ下位尺度で回帰分析とQCAを行うと、同じ現象を、別の観点から見られます。回帰分析では、他の変数を一定としたときの<strong>平均的な関連</strong>を見ます。QCAでは、<strong>どの条件の組み合わせが結果につながるか</strong>を見ます。両者は、競合する方法というより、異なる観点を持つ、補完的な方法として位置づけられます。共通の下位尺度を使えば、測定を、2つの分析で統一できます。</p>
+</section>
+</section>
+<section id="報告に書くこと" class="level2">
+<h2 class="anchored" data-anchor-id="報告に書くこと">報告に書くこと</h2>
+<p>論文や報告書には、少なくとも次を書いておくと、読者が手順をたどれます。</p>
+<ul>
+<li>構成概念の定義と、項目の出典(既存尺度か、自作か)</li>
+<li>標本数と、欠損値の扱い(完全なケースだけを使った、など)</li>
+<li>因子分析の推定法(主因子法など)、回転(プロマックス)、因子数の根拠</li>
+<li>逆転項目</li>
+<li>下位尺度ごとの項目数と、α</li>
+<li>下位尺度の作り方(項目の単純平均)</li>
+</ul>
+</section>
+<section id="この手順を一言でまとめると" class="level2">
+<h2 class="anchored" data-anchor-id="この手順を一言でまとめると">この手順を、一言でまとめると</h2>
+<p>実務的な標準手順は、次の11段階です。この記事の手順1〜7は、このうち、CFA(8)とSEM(11)を除く部分を、尺度づくりの順に並べ直したものです(逆転項目の確認を加えています)。</p>
+<ol type="1">
+<li>先行研究から、構成概念を定義する</li>
+<li>各構成概念について、複数の質問項目を準備する</li>
+<li>「どの項目が、どの構成概念を測るか」という理論的想定を、事前に持つ</li>
+<li>EFAで、その想定と実際のデータ構造との整合性を、探索的に検討する</li>
+<li>理論と統計の両面から、項目を検討する</li>
+<li>内的一貫性として、Cronbachのα(必要ならMcDonaldのω)を確認する</li>
+<li>単純平均で、下位尺度を作る</li>
+<li>必要に応じて、CFAで測定構造を追加検証する</li>
+<li>下位尺度を、回帰分析などに使う</li>
+<li>QCAでは、下位尺度をキャリブレーションして使う</li>
+<li>潜在変数間の構造そのものが研究目的なら、SEMを検討する</li>
+</ol>
+<p>最も大切なのは、「データを取ってから、因子分析で意味を探す」のではなく、「理論的に意味を定義し、その意味がデータ上でも整合しているかを、因子分析で探索的に検討する」ことです。</p>
+<p><span class="math display">\[
+\text{理論} \rightarrow \text{構成概念} \rightarrow \text{測定項目} \rightarrow \text{測定構造の検討} \rightarrow \text{尺度化} \rightarrow \text{回帰・QCAなどによる仮説検証}
+\]</span></p>
+<p>構成概念を使うからSEMを使う、という機械的な判断をする必要はありません。重要なのは、<strong>研究質問、理論、測定方法、尺度の作り方、分析方法が一貫していること</strong>です。</p>
+<p>なお、SEMを使わない理由や、SEMとの比べ方は、この記事では扱いません。別の記事(Notes)で書く予定です。</p>
+</section>
+<section id="次に読むもの" class="level2">
+<h2 class="anchored" data-anchor-id="次に読むもの">次に読むもの</h2>
+<p>この記事で作った下位尺度は、QCAにも使えます。回帰分析が、他の変数を一定としたときの平均的な関連を見るのに対し、QCAは、<strong>どの条件の組み合わせが結果につながるか</strong>を探します。ThSQCA は、結果の目標水準(閾値)を動かしたときに、その組み合わせがどう変わるかを調べるRパッケージです。</p>
+<ul>
+<li><a href="../../../ja/articles/why-qca-decisions/index.html">なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析</a></li>
+<li><a href="../../../ja/articles/introducing-thsqca/index.html">ThSQCA の紹介: Rで閾値スイープQCAを行う</a></li>
+<li><a href="../../../ja/articles/thsqca-beginners-1/index.html">ThSQCA 入門 第1回: はじめての閾値スイープ</a></li>
+<li><a href="../../../ja/index.html">日本語版トップページ</a>: すべての記事を、読む順に並べています</li>
+</ul>
+</section>
+<section id="このページのrの環境" class="level2">
+<h2 class="anchored" data-anchor-id="このページのrの環境">このページのRの環境</h2>
+<p>結果は、次の環境で確かめたものです。固定したシードで同じデータが作られますが、Rやパッケージのバージョンが違うと、結果が少し変わることがあります。</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R version 4.6.1 (2026-06-24 ucrt)"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"psych"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] '2.6.5'</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/im-research-yt\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
+<p>Posts about R are also shared via <a href="https://www.r-bloggers.com/">R-bloggers</a>.</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

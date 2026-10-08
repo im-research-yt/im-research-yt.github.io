@@ -73,3 +73,11 @@ R は要りません。なぜ QCA が意思決定に向くのか、なぜ閾値�
 <a class="toc-card" href="articles/reading-list-basics/index.html"><img src="articles/reading-list-basics/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">9</span><div class="toc-title">QCA を知るための論文と本: 最初に読む 6 点(基礎編)</div><p>QCA の考え方をつかむために、最初に読む価値のある論文と本を、目的別に紹介します。</p></div></a>
 <a class="toc-card" href="articles/reading-list-applied/index.html"><img src="articles/reading-list-applied/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">10</span><div class="toc-title">マーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)</div><p>マーケティングと経営学で QCA が使われた論文、経営・組織研究の理論的な背景、実務ガイド、しきい値の扱いを、目的別に紹介します。</p></div></a>
 </div>
+
+## 4. リサーチ手法と手順ガイド
+
+調査から分析までの手順を、Rの例で1本ずつ示します。今後、ほかの手法も加えていきます。
+
+<div class="toc-grid">
+<a class="toc-card" href="articles/scale-to-regression/index.html"><img src="articles/scale-to-regression/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">11</span><div class="toc-title">アンケートから尺度を作り、回帰分析・QCAに進む手順</div><p>「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。</p></div></a>
+</div>

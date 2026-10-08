@@ -41,7 +41,7 @@ Notes on the **ThSQCA** R package, qualitative comparative analysis, and hands-o
 .toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
 </style>
 
-The ten articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
+The eleven articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
 
 ## 1. Get to know QCA and the threshold idea
 
@@ -72,4 +72,12 @@ Where to read next: the standard readings for learning QCA, then papers that use
 <div class="toc-grid">
 <a class="toc-card" href="posts/reading-list-basics/index.html"><img src="posts/reading-list-basics/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">9</span><div class="toc-title">Papers and books for getting to know QCA: six to read first (basics)</div><p>A short, goal-based list of the papers and books worth reading first if you want to understand how QCA thinks.</p></div></a>
 <a class="toc-card" href="posts/reading-list-applied/index.html"><img src="posts/reading-list-applied/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">10</span><div class="toc-title">QCA in marketing and management: ten papers to read first (applications)</div><p>Papers that use QCA in marketing and management, the theoretical background from management and organization research, practical guides, and papers on the threshold.</p></div></a>
+</div>
+
+## 4. Research methods, step by step
+
+Procedures from survey to analysis, one article at a time, with examples in R. More methods will be added over time.
+
+<div class="toc-grid">
+<a class="toc-card" href="posts/scale-to-regression/index.html"><img src="posts/scale-to-regression/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">11</span><div class="toc-title">From survey items to a scale, then on to regression and QCA: a step-by-step guide</div><p>How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.</p></div></a>
 </div>

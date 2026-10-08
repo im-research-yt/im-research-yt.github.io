@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuki Toyoda">
+<meta name="dcterms.date" content="2026-10-08">
+<meta name="description" content="How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.">
+
+<title>From survey items to a scale, then on to regression and QCA: a step-by-step guide – Yuki Toyoda’s Blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b886970056a1d13a9646ddbc21f6bb82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script data-goatcounter="https://yuki-toyoda.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="From survey items to a scale, then on to regression and QCA: a step-by-step guide – Yuki Toyoda’s Blog">
+<meta property="og:description" content="How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.">
+<meta property="og:image" content="https://im-research-yt.github.io/posts/scale-to-regression/thumbnail.png">
+<meta property="og:site_name" content="Yuki Toyoda’s Blog">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta name="twitter:title" content="From survey items to a scale, then on to regression and QCA: a step-by-step guide – Yuki Toyoda’s Blog">
+<meta name="twitter:description" content="How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.">
+<meta name="twitter:image" content="https://im-research-yt.github.io/posts/scale-to-regression/thumbnail.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../../logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Yuki Toyoda’s Blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../start-here.html"> 
+<span class="menu-text">Start here</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../tools.html"> 
+<span class="menu-text">Analysis tools</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">ThSQCA</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../ja/index.html"> 
+<span class="menu-text">日本語</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/im-research-yt"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">From survey items to a scale, then on to regression and QCA: a step-by-step guide</h1>
+                  <div>
+        <div class="description">
+          How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">marketing</div>
+                <div class="quarto-category">tutorial</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Yuki Toyoda </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 8, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="How this article, the app, and the R script fit together">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How this article, the app, and the R script fit together
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The step-by-step articles on this blog come with an app (a tool that runs in your browser) that lets you try the same procedure. The three have different roles:</p>
+<ul>
+<li><strong>The article</strong> explains the ideas and the procedure. The calculations are shown as R code.</li>
+<li><strong>The app (<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>)</strong> reads your data (CSV) and shows the same calculations as the article on screen. You can learn the flow of the procedure and the meaning of the numbers without using R.</li>
+<li><strong>The R script</strong>: the app can produce an R script that reproduces the results of your settings on screen. You can run it in R and confirm that the numbers match the app. In research, you can also keep the script as a record of your analysis.</li>
+</ul>
+<p>If you use R, start from the code in the article. If you learn with the app, read the article while looking at the numbers in the app first, and then reproduce them with the R script when you are comfortable.</p>
+</div>
+</div>
+<section id="the-question-this-article-answers" class="level2">
+<h2 class="anchored" data-anchor-id="the-question-this-article-answers">The question this article answers</h2>
+<p>Research in marketing and management deals with concepts such as brand trust, perceived quality, customer satisfaction, and price sensitivity, which are hard to measure with a single question. These concepts are called <strong>constructs</strong>, and we measure them with several questionnaire items.</p>
+<p>Suppose we measure brand trust with these three items:</p>
+<ul>
+<li>Q1: This brand is sincere</li>
+<li>Q2: I think this brand keeps its promises</li>
+<li>Q3: I feel secure using this brand</li>
+</ul>
+<p>What we want to know is not the effect of Q1, Q2, or Q3 separately. We want to know how brand trust, the three items taken together, relates to outcomes such as purchase intention. We also often want to use such constructs in later analyses: regression, logistic regression, QCA, cluster analysis, decision trees, and so on.</p>
+<p>Structural equation modeling (SEM) is a wonderful method, but you do not have to start with it (and if you use it without understanding its characteristics, it can do more harm than good). What matters is not which method is more advanced, but <strong>how you measure the constructs of your research, and how you analyze them in the way that best fits your research question</strong>.</p>
+<p>This article presents a procedure that works well for MBA research and empirical studies, with an example in R. The example data are generated with random numbers (they are not real survey data).</p>
+<section id="scope-of-this-article" class="level3">
+<h3 class="anchored" data-anchor-id="scope-of-this-article">Scope of this article</h3>
+<ul>
+<li><p>We deal with <strong>constructs that you define in advance from theory and measure with several items</strong>. This does not deny the value of exploratory studies that look for constructs in the data.</p></li>
+<li><p>We deal with measurement like brand trust, where we assume that <strong>one underlying construct drives the answers to several items in common</strong>. A person with high brand trust answers high on Q1, Q2, and Q3 alike. Therefore, the items are expected to correlate with one another (this kind of measurement is called reflective measurement).</p>
+<p>A different case is building a “customer behavior index” by combining purchase frequency, purchase amount, and years of use. A person who buys often does not necessarily spend a lot. The items need not correlate strongly, so the factor analysis and alpha procedure shown here does not apply as it is. It is not true that “for any index, you can raise alpha and take the average.”</p></li>
+</ul>
+</section>
+</section>
+<section id="the-overall-flow" class="level2">
+<h2 class="anchored" data-anchor-id="the-overall-flow">The overall flow</h2>
+<ol type="1">
+<li>Define the construct from theory and prior research</li>
+<li>Prepare several questionnaire items for each construct</li>
+<li>Use exploratory factor analysis (EFA) to examine, in an exploratory way, whether the item groupings you expected are consistent with the data</li>
+<li>Align the direction of reverse-keyed items</li>
+<li>Check internal consistency (Cronbach’s alpha)</li>
+<li>Build subscales by averaging items</li>
+<li>Use the subscales in regression and QCA</li>
+</ol>
+<p>Let us go through them in order.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="For readers who learn with the app (this article)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>For readers who learn with the app (this article)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>“Example 3” in the app (<a href="https://im-research-yt.github.io/analysis-tools/scale_maker.html" target="_blank">Scale Maker</a>) uses the same data as this article. Steps 2 to 7 in the app correspond to steps 3 to 6 in this article. Regression and QCA are done in R. The app’s calculation is the same as R’s standard <code>promax</code>. Depending on the version of psych, the third decimal place of the factor loadings can differ slightly.</p>
+</div>
+</div>
+</section>
+<section id="step-1-define-the-construct-from-theory-before-factor-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-define-the-construct-from-theory-before-factor-analysis">Step 1: Define the construct from theory (before factor analysis)</h2>
+<p>This is the most important step. Before factor analysis, the researcher has to decide what to measure. Concepts such as “brand trust” and “perceived quality” are not things that statistical software finds for you automatically.</p>
+<p>The approach to avoid looks like this:</p>
+<blockquote class="blockquote">
+<p>“Let’s ask 20 questions for now, run a factor analysis, and name the factors that come out.”</p>
+</blockquote>
+<p>This is a misunderstanding that beginners especially tend to fall into. The preferred order is as follows.</p>
+<p>From prior research and theory, define what brand trust is, and think about the questionnaire items needed to observe it. When you prepared Q1 to Q3 above, you already held a theoretical expectation before the survey began: “these three items should be measuring one construct, brand trust.” You then run a factor analysis to check whether <strong>these three items actually move in the same direction in the real response data</strong>.</p>
+<p><span class="math display">\[
+\text{theory} \rightarrow \text{construct definition} \rightarrow \text{item design} \rightarrow \text{data collection} \rightarrow \text{consistency check by factor analysis}
+\]</span></p>
+<p>We do not build theory from factor analysis; we examine, in an exploratory way, whether the data are consistent with a measurement structure that we assumed from theory. This is why research on prior studies and theory beforehand is so important.</p>
+<section id="factor-analysis-is-not-a-machine-that-sorts-items-automatically" class="level3">
+<h3 class="anchored" data-anchor-id="factor-analysis-is-not-a-machine-that-sorts-items-automatically">Factor analysis is not a machine that sorts items automatically</h3>
+<p>Suppose you run a factor analysis on 20 items and get four factors. That alone does not let you say that “human attitudes consist of four constructs.” What factor analysis shows is only the statistical fact that “in this sample, the correlation structure of this item set can be summarized fairly well by about four common factors.”</p>
+<p>Whether those four factors are brand trust, quality evaluation, or brand attachment is not decided by the statistical result. You have to interpret them using prior research, the content of the items, the definition of the construct, and the purpose of the research. Please avoid giving plausible-sounding names to whatever factors come out.</p>
+</section>
+<section id="statistical-grouping-and-theoretical-validity-are-different-things" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-grouping-and-theoretical-validity-are-different-things">Statistical grouping and theoretical validity are different things</h3>
+<p>Suppose four items, “high quality,” “good design,” “reasonably priced,” and “a well-known brand,” group into one factor statistically. That alone does not mean you may call the factor “brand value.” There are several possible reasons why items group statistically:</p>
+<ul>
+<li>They really measure the same construct</li>
+<li>Respondents tend to rate everything high</li>
+<li>There is a halo effect</li>
+<li>The item wordings are similar</li>
+<li>There is a method effect from the same response format</li>
+</ul>
+<p>A high factor loading does not prove that the items belong to the same concept in theory.</p>
+</section>
+</section>
+<section id="step-2-prepare-several-items-for-each-construct" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-several-items-for-each-construct">Step 2: Prepare several items for each construct</h2>
+<p>As a rule, prepare several items for each construct. Do not line up items that merely rephrase the same sentence. Items with the same meaning tend to raise Cronbach’s alpha, but this does not mean that the construct is covered adequately. It is desirable for the items to represent different aspects of the construct appropriately.</p>
+<p>For example, compare these two ways of measuring brand trust.</p>
+<p><strong>An example of rephrasing</strong></p>
+<ul>
+<li>This brand is trustworthy</li>
+<li>This brand is reliable</li>
+<li>This brand is dependable</li>
+</ul>
+<p>All three ask almost the same thing. The answers will be similar, so alpha will be high. But if you duplicate content to raise alpha, you can no longer tell whether the necessary aspects of brand trust are covered. Whether they are covered has to be examined separately. Note that when the concept you want to measure is narrow, items with close meanings can be appropriate, and they can also help average out errors caused by differences in wording.</p>
+<p><strong>An example of different aspects</strong></p>
+<ul>
+<li>I think this brand keeps its promises (the aspect of fulfilling promises)</li>
+<li>This brand is sincere (the aspect of caring about the other party)</li>
+<li>I feel secure using this brand (the aspect of reassurance in use)</li>
+</ul>
+<p>All three are part of “brand trust,” but each looks at a different aspect, so the concept is captured more broadly. However, if you vary the aspects too much, the correlations among items fall and the items no longer form one factor. In light of the definition of the construct, choose items within the range where you can say they are “different aspects of the same concept.”</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="A questionnaire tip: labeling the options of a 7-point scale">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>A questionnaire tip: labeling the options of a 7-point scale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two main ways to label the options.</p>
+<ul>
+<li><strong>Put a verbal label on all seven options</strong>: the meaning of each option is clear. On the other hand, words such as “very,” “extremely,” and “quite” feel different in strength to different people.</li>
+<li><strong>Label only the two ends and leave only numbers in between</strong>: this makes it easier to avoid differences in how strongly the words are felt.</li>
+</ul>
+<pre><code>Disagree  1 - 2 - 3 - 4 - 5 - 6 - 7  Agree</code></pre>
+<p>Which one to use depends on the purpose of the research and on the format of the existing scale you use. What deserves attention is that, in either form, <strong>treating the scores as equally spaced numbers is the analyst’s assumption (a simplification)</strong>. The way of labeling does not guarantee equal spacing. In this article, we treat responses as numbers under this assumption.</p>
+</div>
+</div>
+<p>If a scale has been used widely in prior research, using the existing scale is often better than writing items from scratch, because its validity has been examined and it is easy to compare with other studies. This does not mean, however, that “the existing study used three items, so we can use them as they are.” If the industry, culture, respondents, or purpose of the survey differ, the same factor structure may not be reproduced. Even with an existing scale, it is worth checking the structure in your own data.</p>
+</section>
+<section id="example-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-data">Example data</h2>
+<p>From here we follow the steps in R. Suppose we measured nine items on a 7-point scale. The theoretical expectation is the following three constructs.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Construct</th>
+<th>Item</th>
+<th>Wording (example)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Brand trust</td>
+<td>Q1</td>
+<td>This brand is sincere</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q2</td>
+<td>I think this brand keeps its promises</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q3</td>
+<td>I feel secure using this brand</td>
+</tr>
+<tr class="even">
+<td>Perceived quality</td>
+<td>Q4</td>
+<td>This brand’s products are of high quality</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q5</td>
+<td>This brand’s products perform well</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q6 (reverse-keyed)</td>
+<td>The quality of this brand’s products varies</td>
+</tr>
+<tr class="odd">
+<td>Price sensitivity</td>
+<td>Q7</td>
+<td>I notice even small price differences</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Q8</td>
+<td>I am tempted to buy when there is a discount</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Q9</td>
+<td>If products are similar, I choose the cheaper one</td>
+</tr>
+</tbody>
+</table>
+<p>The wordings are examples (the data are generated with random numbers, and no actual survey corresponds to these wordings).</p>
+<p>The outcome variable Y is purchase intention (one item on a 7-point scale).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In this article, we treat 7-point responses as numbers and use Pearson correlation and linear regression. This is a common simplification in practice. If the response distributions are strongly skewed, you can also consider treating them as ordinal. For example, in factor analysis you can use polychoric correlations (<code>fa(..., cor = "poly")</code>). If purchase intention is measured with a single item, you can choose ordinal logistic regression instead of linear regression.</p>
+</div>
+</div>
+<p>The following code creates the example data (the random seed is fixed, so you get the same data).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n   <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Phi <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.2</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                <span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.1</span>,  <span class="fl">1.0</span>), <span class="dv">3</span>, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)   <span class="co"># correlations among the 3 constructs</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Fm  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> <span class="dv">3</span>), n) <span class="sc">%*%</span> <span class="fu">chol</span>(Phi)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>lam <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">80</span>,.<span class="dv">75</span>,.<span class="dv">70</span>,  .<span class="dv">78</span>,.<span class="dv">72</span>,.<span class="dv">68</span>,  .<span class="dv">75</span>,.<span class="dv">70</span>,.<span class="dv">65</span>)       <span class="co"># item loadings (the "true" values)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fac <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>to7 <span class="ot">&lt;-</span> <span class="cf">function</span>(z) <span class="fu">as.integer</span>(<span class="fu">cut</span>(z, <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>,<span class="sc">-</span><span class="fl">1.6</span>,<span class="sc">-</span><span class="fl">1.0</span>,<span class="sc">-</span><span class="fl">0.4</span>,<span class="fl">0.4</span>,<span class="fl">1.0</span>,<span class="fl">1.6</span>,<span class="cn">Inf</span>)))  <span class="co"># make 7-point responses</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="cf">function</span>(j) <span class="fu">to7</span>(lam[j] <span class="sc">*</span> Fm[, fac[j]] <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> lam[j]<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">rnorm</span>(n)))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>X[, <span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="dv">8</span>L <span class="sc">-</span> X[, <span class="dv">6</span>]                                    <span class="co"># record Q6 as a reverse-keyed item</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Q"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">45</span>, .<span class="dv">30</span>, <span class="sc">-</span>.<span class="dv">20</span>)                       <span class="co"># effects of the 3 constructs on purchase intention</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">drop</span>(<span class="fu">t</span>(b) <span class="sc">%*%</span> Phi <span class="sc">%*%</span> b)                <span class="co"># variance of the signal part (including correlations among the constructs)</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">to7</span>(<span class="fu">drop</span>(Fm <span class="sc">%*%</span> b) <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> v) <span class="sc">*</span> <span class="fu">rnorm</span>(n))   <span class="co"># add error so that the total variance is 1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(X, <span class="at">Y =</span> Y)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Y
+1  5  5  3  3  3  3  4  4  6 6
+2  2  4  2  3  3  5  5  4  5 3
+3  4  4  3  3  4  5  5  6  3 4
+4  5  4  4  4  5  1  5  4  4 3
+5  4  4  4  4  2  7  3  4  4 4
+6  2  1  1  2  2  6  4  5  5 1</code></pre>
+</div>
+</div>
+</section>
+<section id="step-3-examine-how-the-items-group-with-exploratory-factor-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-examine-how-the-items-group-with-exploratory-factor-analysis">Step 3: Examine how the items group, with exploratory factor analysis</h2>
+<p>Once the items are ready, examine how they group by using exploratory factor analysis (EFA). The role we expect of EFA here is not “to invent constructs from a state of knowing nothing.” It is <strong>to examine, in an exploratory way, whether the item structure we assumed from theory is consistent with the actual data</strong>. EFA is different from confirmatory factor analysis (CFA), which specifies in advance as a model which item measures which factor and tests it. The result of EFA is material for judging consistency with your expectation; it does not mean that the measurement structure has been verified.</p>
+<p>First, as a guide to the number of factors, look at the eigenvalues of the correlation matrix and at parallel analysis. The count of eigenvalues of 1 or more is only a rough guide. Parallel analysis compares the eigenvalues of the real data with those obtained from random data, and uses the comparison as a clue to the number of factors. Decide the number of factors together with your theoretical expectation. Then extract three factors by principal axis factoring with promax rotation.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Q"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">eigen</span>(<span class="fu">cor</span>(dat[, items]))<span class="sc">$</span>values, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.918 1.921 1.107 0.640 0.584 0.528 0.490 0.462 0.350</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(dat[, items], <span class="at">fa =</span> <span class="st">"fa"</span>, <span class="at">fm =</span> <span class="st">"pa"</span>)   <span class="co"># parallel analysis (a figure appears)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  3  and the number of components =  NA </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fa3 <span class="ot">&lt;-</span> <span class="fu">fa</span>(dat[, items], <span class="at">nfactors =</span> <span class="dv">3</span>, <span class="at">fm =</span> <span class="st">"pa"</span>, <span class="at">rotate =</span> <span class="st">"Promax"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">min.err =</span> <span class="fl">1e-8</span>, <span class="at">max.iter =</span> <span class="dv">1000</span>)   <span class="co"># strict convergence criteria for the iterations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required namespace: GPArotation</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fa3<span class="sc">$</span>loadings, <span class="at">cutoff =</span> <span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+   PA1    PA3    PA2   
+Q1         0.731       
+Q2         0.724       
+Q3         0.582       
+Q4  0.769              
+Q5  0.775              
+Q6 -0.632              
+Q7                0.695
+Q8                0.674
+Q9                0.639
+
+                PA1   PA3   PA2
+SS loadings    1.62 1.430 1.350
+Proportion Var 0.18 0.159 0.150
+Cumulative Var 0.18 0.339 0.489</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(fa3<span class="sc">$</span>Phi, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     PA1   PA3   PA2
+PA1 1.00  0.54  0.01
+PA3 0.54  1.00 -0.20
+PA2 0.01 -0.20  1.00</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To make the results easy to reproduce, this article uses <code>rotate = "Promax"</code> (with a capital P). The lowercase <code>"promax"</code> is not wrong, but its internal normalization differs, so the values change slightly.</p>
+<p><code>min.err = 1e-8, max.iter = 1000</code> makes the iterations of principal axis factoring converge under strict criteria. The default criteria are loose, so the extraction can differ slightly around the third decimal place. To make the results match, this article uses the strict criteria.</p>
+<p>Note also that the promax rotation calculation differs a little between versions of psych, and the third decimal place of the loadings can change (we confirmed a difference of at most 0.003 between psych 2.4.1 and 2.6.5). The extraction (principal axis factoring) gives the same result. The interpretation does not change.</p>
+</div>
+</div>
+<p>Here is what to look at.</p>
+<ul>
+<li><strong>Number of factors</strong>: Look at the eigenvalues (the number of those at 1 or more) and the parallel analysis figure (the number of factors whose real-data eigenvalues exceed those from random data), and check whether they are consistent with the three factors we expected from theory.</li>
+<li><strong>Item groupings</strong>: Check whether Q1 to Q3, Q4 to Q6, and Q7 to Q9 load on the same factor, as expected. (Labels such as <code>PA1</code> only indicate the order. Read the meaning of a factor from the items that load on it.)</li>
+<li><strong>The negative loading of Q6</strong>: Q6 has the opposite sign to Q4 and Q5 within the same factor. This is a clue that Q6 may be a reverse-keyed item. However, the sign is only a guide (the sign of a whole factor can be flipped). Whether an item is reverse-keyed is decided by the meaning of the wording.</li>
+<li><strong>Whether any item loads strongly on several factors (cross-loading)</strong>.</li>
+</ul>
+<p>For example, if only Q3 loaded strongly on the perceived quality factor, consider the following before deleting it:</p>
+<ul>
+<li>Was the wording of Q3 appropriate?</li>
+<li>Are brand trust and perceived quality conceptually too close?</li>
+<li>Is there a problem with the translation or the phrasing?</li>
+<li>Did respondents read it with a meaning different from the one we expected?</li>
+</ul>
+<p>Use the result of EFA not as a “keep or delete verdict,” but as <strong>material for understanding the gap between the measurement model assumed from theory and the actual response behavior</strong>. If you mechanically delete a content-wise important item only because its loading is a little low, you may damage content validity.</p>
+</section>
+<section id="step-4-align-the-direction-of-reverse-keyed-items" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-align-the-direction-of-reverse-keyed-items">Step 4: Align the direction of reverse-keyed items</h2>
+<p>Q6 is a reverse-keyed item. In practice, it is easier to follow if you decide the reverse-keyed items from the meaning of the wording before the analysis and align their direction in advance. In this article, we ran the EFA first, to show that a negative loading can be a clue. Use the minimum and maximum of the scale (here 1 and 7) and compute (minimum + maximum) − original value, that is, <code>8 - Q6</code>. For 1 to 7, use <code>8 - Q6</code>; for 1 to 5, use <code>6 - Q6</code>. The same formula also works for a scale whose minimum is not 1 (for example, 0 to 10). Use the ends of the scale on the questionnaire (1 and 7 for a 7-point scale), not the minimum and maximum observed in the data. Whether an item is reverse-keyed is decided by the meaning of the wording (theory).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Q6r <span class="ot">&lt;-</span> <span class="dv">8</span> <span class="sc">-</span> dat<span class="sc">$</span>Q6</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-5-check-internal-consistency-cronbachs-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-check-internal-consistency-cronbachs-alpha">Step 5: Check internal consistency (Cronbach’s alpha)</h2>
+<p>Once you have examined the factor structure, check the internal consistency of each item group. A typical index is Cronbach’s alpha. For example, <span class="math inline">\(\alpha = .84\)</span> indicates that the item group has relatively high internal consistency.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a_trust   <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>)],  <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>a_quality <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q4"</span>, <span class="st">"Q5"</span>, <span class="st">"Q6r"</span>)], <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>a_price   <span class="ot">&lt;-</span> <span class="fu">alpha</span>(dat[, <span class="fu">c</span>(<span class="st">"Q7"</span>, <span class="st">"Q8"</span>, <span class="st">"Q9"</span>)],  <span class="at">check.keys =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">trust   =</span> a_trust<span class="sc">$</span>total<span class="sc">$</span>raw_alpha,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">quality =</span> a_quality<span class="sc">$</span>total<span class="sc">$</span>raw_alpha,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">price   =</span> a_price<span class="sc">$</span>total<span class="sc">$</span>raw_alpha), <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  trust quality   price 
+  0.731   0.774   0.705 </code></pre>
+</div>
+</div>
+<p>There are two points to note.</p>
+<ul>
+<li><strong>A high alpha does not prove a one-factor structure.</strong> Alpha is an index of internal consistency, not an index for verifying factor structure. Also, <strong>alpha alone cannot tell you about reliability in general or about validity.</strong> The order is: examine the structure by factor analysis, then check the internal consistency of that item group.</li>
+<li>Alpha tends to rise as the number of items grows. If needed, you may use McDonald’s omega alongside it.</li>
+</ul>
+</section>
+<section id="step-6-build-the-subscales" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-build-the-subscales">Step 6: Build the subscales</h2>
+<p>Once you have examined the structure and checked the internal consistency, build a subscale for each construct. Usually the simple mean of the items is the default.</p>
+<p><span class="math display">\[
+\text{Trust} = \frac{Q_1 + Q_2 + Q_3}{3}, \qquad
+\text{Quality} = \frac{Q_4 + Q_5 + Q_{6r}}{3}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Trust   <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>)])</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Quality <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q4"</span>, <span class="st">"Q5"</span>, <span class="st">"Q6r"</span>)])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Price   <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(dat[, <span class="fu">c</span>(<span class="st">"Q7"</span>, <span class="st">"Q8"</span>, <span class="st">"Q9"</span>)])</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(dat[, <span class="fu">c</span>(<span class="st">"Trust"</span>, <span class="st">"Quality"</span>, <span class="st">"Price"</span>)]), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Trust Quality Price
+Trust    1.00    0.43 -0.14
+Quality  0.43    1.00  0.01
+Price   -0.14    0.01  1.00</code></pre>
+</div>
+</div>
+<p>A scale built from a simple mean still contains measurement error. An ordinary regression that uses such a scale does not model the measurement error explicitly. Therefore, the coefficients you obtain are not necessarily the same as the relationships among the latent constructs themselves. With low reliability, this effect can be larger. In multiple regression especially, the effect of measurement error also depends on the correlations among the predictors, so you cannot judge the effect on the coefficients from reliability alone.</p>
+<p>A simple mean has the following advantages:</p>
+<ul>
+<li>The calculation is clear and highly reproducible</li>
+<li>It depends relatively little on the sample</li>
+<li>The unit of the original response scale is kept, so it is easy to interpret</li>
+<li>It can be used in both regression and QCA</li>
+</ul>
+<section id="why-not-use-factor-scores" class="level3">
+<h3 class="anchored" data-anchor-id="why-not-use-factor-scores">Why not use factor scores?</h3>
+<p>Using factor scores is not wrong in itself. However, factor scores have problems: the weights depend on the sample, the values change with the estimation method, the meaning of the score itself is hard to grasp, and the scale may not be the same in another sample. Unless there is a special reason, a policy of using simple-mean scales whose reliability has been checked is quite reasonable for MBA-level research.</p>
+</section>
+<section id="where-does-confirmatory-factor-analysis-cfa-come-in" class="level3">
+<h3 class="anchored" data-anchor-id="where-does-confirmatory-factor-analysis-cfa-come-in">Where does confirmatory factor analysis (CFA) come in?</h3>
+<p>In exploratory MBA research, it is practical to build simple-mean scales based on the content of the items, the EFA results, and internal consistency. However, that alone does not mean that the validity of the measurement has been fully established.</p>
+<p>How far to verify depends on the track record of verification of an existing scale, the extent of your changes, and the strength of the claim the research needs to make. When you want to verify the measurement structure explicitly, or when you have built a new scale or changed one substantially, consider additional verification such as CFA. In CFA, you specify in advance, as a model, which item measures which factor. If an existing measurement model is clear, you can also start with CFA without going through EFA. So there is no fixed order of “always do CFA after EFA.”</p>
+<p>If your sample is large enough, a better approach is to split the sample, running EFA on one part for exploration and CFA on the other for verification. Even if you do run CFA, you do not necessarily have to use the CFA factor scores afterward.</p>
+</section>
+</section>
+<section id="step-7-use-the-subscales-in-regression-and-qca" class="level2">
+<h2 class="anchored" data-anchor-id="step-7-use-the-subscales-in-regression-and-qca">Step 7: Use the subscales in regression and QCA</h2>
+<section id="regression" class="level3">
+<h3 class="anchored" data-anchor-id="regression">Regression</h3>
+<p>Once you have the subscales, you can run an ordinary regression.</p>
+<p><span class="math display">\[
+Y = \beta_0 + \beta_1 \text{Trust} + \beta_2 \text{Quality} + \beta_3 \text{Price} + \varepsilon
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(Y <span class="sc">~</span> Trust <span class="sc">+</span> Quality <span class="sc">+</span> Price, <span class="at">data =</span> dat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Y ~ Trust + Quality + Price, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.11817 -0.87767  0.06223  0.76259  2.85718 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.42862    0.37338   3.826 0.000159 ***
+Trust        0.57160    0.06622   8.632 3.78e-16 ***
+Quality      0.36507    0.05991   6.093 3.44e-09 ***
+Price       -0.27133    0.05812  -4.668 4.61e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.157 on 296 degrees of freedom
+Multiple R-squared:  0.4399,    Adjusted R-squared:  0.4342 
+F-statistic: 77.49 on 3 and 296 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="qca" class="level3">
+<h3 class="anchored" data-anchor-id="qca">QCA</h3>
+<p>QCA needs a value of each condition for each case. In this example, the subscales of brand trust, perceived quality, and price sensitivity can be used as conditions. In fuzzy-set QCA (fsQCA), you <strong>calibrate</strong> each of them into set membership (values from 0 to 1). The outcome, purchase intention Y, is also calibrated into the set “high purchase intention.”</p>
+<p>Then, for example, for the combination “high brand trust, high perceived quality, and low price sensitivity,” we examine a sufficiency relation such as the following (<code>~</code> is negation and <code>*</code> is logical AND).</p>
+<p><span class="math display">\[
+\mathrm{TRUST} * \mathrm{QUALITY} * {\sim}\mathrm{PRICE} \rightarrow \mathrm{PURCHASE}
+\]</span></p>
+<p>Points to note:</p>
+<ul>
+<li>This expression is not an analysis result. It is an <strong>example</strong> of a combination to examine.</li>
+<li>Decide the calibration anchors (full membership, full non-membership, and the crossover point) from the meaning of the set, not by mechanically converting the scale mean to a 0 to 1 range.</li>
+<li>Y in the example measures purchase “intention.” Please write it separately from actual purchase “behavior.”</li>
+</ul>
+<p>For the calibration and the analysis in practice, see the <a href="../../posts/thsqca-beginners-1/index.html">ThSQCA for beginners series</a>.</p>
+</section>
+<section id="what-it-means-to-use-regression-and-qca-together" class="level3">
+<h3 class="anchored" data-anchor-id="what-it-means-to-use-regression-and-qca-together">What it means to use regression and QCA together</h3>
+<p>If you run regression and QCA on the same subscales, you can look at the same phenomenon from different viewpoints. Regression looks at the <strong>average association</strong> when the other variables are held constant. QCA looks at <strong>which combinations of conditions lead to the outcome</strong>. The two are better seen as complementary methods with different viewpoints than as competing methods. If you use common subscales, the measurement is unified across the two analyses.</p>
+</section>
+</section>
+<section id="what-to-report" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-report">What to report</h2>
+<p>In a paper or report, writing at least the following lets readers follow your procedure:</p>
+<ul>
+<li>The definition of each construct and the source of the items (an existing scale, or one you created)</li>
+<li>The sample size and how missing values were handled (for example, only complete cases were used)</li>
+<li>The estimation method of the factor analysis (such as principal axis factoring), the rotation (promax), and the basis for the number of factors</li>
+<li>The reverse-keyed items</li>
+<li>The number of items and the alpha of each subscale</li>
+<li>How the subscales were built (the simple mean of the items)</li>
+</ul>
+</section>
+<section id="the-whole-procedure-in-a-few-words" class="level2">
+<h2 class="anchored" data-anchor-id="the-whole-procedure-in-a-few-words">The whole procedure in a few words</h2>
+<p>A standard practical procedure has the following 11 stages. Steps 1 to 7 of this article rearrange these stages, except CFA (8) and SEM (11), in the order of building a scale (with a check of reverse-keyed items added).</p>
+<ol type="1">
+<li>Define the construct from prior research</li>
+<li>Prepare several questionnaire items for each construct</li>
+<li>Hold in advance a theoretical expectation of “which item measures which construct”</li>
+<li>Use EFA to examine, in an exploratory way, whether that expectation is consistent with the actual data structure</li>
+<li>Examine the items from both theoretical and statistical viewpoints</li>
+<li>Check internal consistency with Cronbach’s alpha (and McDonald’s omega if needed)</li>
+<li>Build subscales by simple means</li>
+<li>Verify the measurement structure further with CFA, if needed</li>
+<li>Use the subscales in regression and similar analyses</li>
+<li>In QCA, calibrate the subscales and use them</li>
+<li>If the structure among latent variables is itself the research aim, consider SEM</li>
+</ol>
+<p>The most important point is not “collect data and then look for meaning by factor analysis,” but “define the meaning from theory, and use factor analysis to examine, in an exploratory way, whether that meaning also holds in the data.”</p>
+<p><span class="math display">\[
+\text{theory} \rightarrow \text{construct} \rightarrow \text{items} \rightarrow \text{examination of the measurement structure} \rightarrow \text{scaling} \rightarrow \text{hypothesis tests by regression, QCA, etc.}
+\]</span></p>
+<p>You do not need to decide mechanically that “we use constructs, so we use SEM.” What matters is that <strong>the research question, the theory, the measurement, the way of building scales, and the method of analysis are consistent with one another</strong>.</p>
+<p>This article does not cover why you might not use SEM, or how SEM compares. I plan to write about that in a separate article (Notes).</p>
+</section>
+<section id="what-to-read-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-read-next">What to read next</h2>
+<p>The subscales you built in this article can also be used in QCA. While regression looks at the average association when the other variables are held constant, QCA looks for <strong>which combinations of conditions lead to the outcome</strong>. ThSQCA is an R package that shows how those combinations change when you move the target level (the threshold) of the outcome.</p>
+<ul>
+<li><a href="../../posts/why-qca-decisions/index.html">Why QCA suits decision-making: looking for “recipes” instead of single effects</a></li>
+<li><a href="../../posts/introducing-thsqca/index.html">Introducing ThSQCA: threshold-sweep QCA in R</a></li>
+<li><a href="../../posts/thsqca-beginners-1/index.html">ThSQCA for beginners, part 1: your first threshold sweep</a></li>
+<li><a href="../../index.html">Home page</a>: all articles, in reading order</li>
+</ul>
+</section>
+<section id="r-environment-for-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="r-environment-for-this-page">R environment for this page</h2>
+<p>The results were checked in the following environment. A fixed seed produces the same data, but results can change slightly with different versions of R or of the packages.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R version 4.6.1 (2026-06-24 ucrt)"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"psych"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] '2.6.5'</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/im-research-yt\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 Yuki Toyoda, Graduate School of Innovation Management, Hosei University</p>
+<p>Developed with the assistance of Claude (Anthropic)</p>
+<p>Posts about R are also shared via <a href="https://www.r-bloggers.com/">R-bloggers</a>.</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

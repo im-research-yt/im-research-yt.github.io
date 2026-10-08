@@ -1,13 +1,27 @@
 ---
 sidebar: false
 title: "Analysis tools"
-description: "Browser-based tools for QCA, marketing research, and multivariate analysis (temporarily unavailable)."
+description: "Browser-based tools for QCA and for building survey scales. The other tools are being redesigned."
 image: /thumbnail-tools.png
 ---
 
-::: {.callout-note}
-## Temporarily unavailable
-The browser tools are not available at the moment. I am redesigning them (calculation checks, explanations, and warnings for users) before making them public again. Thank you for your patience.
-:::
+These tools run in your browser. Each one gives you R code (or an R script) so that you can check the result in R.
+
+## Available now
+
+### QCA
+
+- **[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html){target="_blank"}**: writes a first QCA script (`truthTable()` and then `minimize()`) from your variable names and settings. It assumes that your data are already calibrated.
+- **[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html){target="_blank"}**: turns a fixed-threshold QCA setup into ThSQCA sweep code, so that you can see how the solution changes across a range of thresholds. It goes with the [ThSQCA for beginners series](posts/thsqca-beginners-1/index.qmd).
+
+### Survey scales
+
+- **[Scale Maker](https://im-research-yt.github.io/analysis-tools/scale_maker.html){target="_blank"}**: builds subscales from survey items, step by step. It covers the number of factors, factor analysis (principal axis factoring with promax rotation), item assignment, reverse-coded items, Cronbach's alpha, and subscale scores. It can also write an R script that reproduces the same calculation. The article [From survey items to a scale, then on to regression and QCA](posts/scale-to-regression/index.qmd) explains the procedure.
+
+Sweep Builder and Scale Maker have similar names but different jobs: Sweep Builder writes threshold-sweep QCA code, and Scale Maker builds scales from survey items.
+
+## Being redesigned
+
+The following tools are paused while I redesign them (calculation checks, explanations, and warnings for users): price sensitivity analysis (Van Westendorp PSM), conjoint analysis (design and estimation), cluster analysis, principal component and factor analysis, correspondence analysis, and decision trees. They will come back when they are ready.
 
 In the meantime, you can learn threshold-sweep QCA with the R package [ThSQCA](software.qmd), or follow the suggested reading order on the [Start here](start-here.qmd) page.

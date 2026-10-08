@@ -1,6 +1,6 @@
 ---
 title: "分析ツール"
-description: "QCA、マーケティング調査、多変量解析のための、ブラウザで動くツール(現在は公開を休止中)。"
+description: "QCAと、アンケートの尺度づくりのための、ブラウザで動くツール。ほかのツールは、設計から見直しています。"
 image: /thumbnail-tools.png
 ---
 
@@ -8,9 +8,23 @@ image: /thumbnail-tools.png
 [日本語版トップ](index.qmd) | [はじめに](start.qmd) | [分析ツール](tools.qmd) | [ThSQCA](software.qmd) | [紹介](about.qmd) | [English](../index.qmd)
 :::
 
-::: {.callout-note}
-## 公開を休止しています
-ブラウザで動くツールは、現在、公開を休止しています。計算の確認、説明、利用者への注意書きを、設計から見直しているためです。準備ができたら、あらためて公開します。
-:::
+ブラウザで動くツールです。どのツールも、Rのコード(またはRスクリプト)を出すので、結果をRで確かめられます。
+
+## 公開中のツール
+
+### QCA
+
+- **[QCA Quickstart](https://im-research-yt.github.io/analysis-tools/qca-quickstart.html){target="_blank"}**: 変数名と設定から、最初のQCAのスクリプト(`truthTable()` のあと `minimize()`)を書きます。データは、すでにキャリブレーション済みであることを前提にしています。
+- **[Sweep Builder](https://im-research-yt.github.io/analysis-tools/sweep-builder.html){target="_blank"}**: 閾値を1つに決めたQCAの設定を、ThSQCAのスイープのコードに変えます。閾値の範囲で、解がどう変わるかを見られます。[ThSQCA 入門のシリーズ](articles/thsqca-beginners-1/index.qmd)と組みになっています。
+
+### アンケートの尺度
+
+- **[Scale Maker](https://im-research-yt.github.io/analysis-tools/scale_maker.html){target="_blank"}**: アンケートの項目から、下位尺度を、順を追って作ります。因子数、因子分析(主因子法・プロマックス回転)、項目の割り当て、逆転項目、Cronbachのα、下位尺度得点を扱います。同じ計算を再現するRスクリプトも出せます。手順は、記事[アンケートから尺度を作り、回帰分析・QCAに進む手順](articles/scale-to-regression/index.qmd)で説明しています。
+
+Sweep Builder と Scale Maker は、名前が似ていますが、役割が違います。Sweep Builder は閾値スイープQCAのコードを書き、Scale Maker はアンケートの項目から尺度を作ります。
+
+## 設計から見直しているツール
+
+次のツールは、計算の確認、説明、利用者への注意書きを見直すため、公開を休止しています。価格感度分析(Van Westendorp PSM)、コンジョイント分析(設計と推定)、クラスター分析、主成分分析・因子分析、コレスポンデンス分析、決定木です。準備ができたら、あらためて公開します。
 
 それまでの間は、Rパッケージ [ThSQCA](software.qmd) で、閾値スイープQCAを学べます。読む順の案内は、[はじめに](start.qmd)のページにあります。
