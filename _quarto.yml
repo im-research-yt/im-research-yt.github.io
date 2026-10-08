@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - google69da2143695325ce.html
 
 website:
   title: "Yuki Toyoda's Blog"
