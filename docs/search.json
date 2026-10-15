@@ -165,7 +165,7 @@
     "href": "posts/reading-list-basics/index.html#getting-the-idea-and-the-measures-papers",
     "title": "Papers and books for getting to know QCA: six to read first (basics)",
     "section": "1. Getting the idea and the measures (papers)",
-    "text": "1. Getting the idea and the measures (papers)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to.\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis."
+    "text": "1. Getting the idea and the measures (papers)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to. Paper guide available\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis."
   },
   {
     "objectID": "posts/reading-list-basics/index.html#learning-the-method-systematically-books",
@@ -215,6 +215,83 @@
     "title": "Is “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA",
     "section": "Try it on your own survey",
     "text": "Try it on your own survey\nYou do not need to write code from scratch.\n\nQCA Quickstart creates a first analysis script from the names of your columns.\nSweep Builder turns that setup into a threshold-sweep script.\nPaste the script into R. The package is free: install.packages(\"ThSQCA\").\n\nIf you would like a gentler walk through the same ideas, the beginner’s series explains every line with a practice data set. The method itself is described in Toyoda (2026), Threshold-sweep QCA: threshold dependence as an analytical dimension, Quality & Quantity, and the package is on CRAN."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html",
+    "href": "posts/paper-guide-mahoney-goertz/index.html",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "",
+    "text": "Reference: Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017\nSummary: This paper organizes quantitative and qualitative research not as a contest between better and worse, but as two cultures with different goals. I recommend it as required reading for anyone designing a research project. The paper shows that deciding first which kind of question you are asking makes it easier to choose an analytical method."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#overview",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#overview",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Overview",
+    "text": "Overview\nQuantitative research, which is built on statistics and aims to learn “average effects,” and qualitative research (case study research), which aims to pin down “the cause of a particular event,” ask different questions in the first place. Relatively speaking, quantitative research asks how much a cause affects outcomes on average, whereas qualitative research asks why this outcome happened in this case. The paper shows that the practices of both traditions are reasonable given their respective goals."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#why-i-chose-this-paper",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#why-i-chose-this-paper",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Why I chose this paper",
+    "text": "Why I chose this paper\nIn MBA research and business research, you may run into this wall: A/B tests and regression analysis reveal the overall trend, yet you still cannot tell why your single most important customer left.\nThis paper offers a way to think about why that happens. Measuring the “average trend” across the data and tracing the “causal mechanism” of an individual event are two different ways of thinking. The paper can be read as a “map of thinking” for choosing an analytical method that fits the question you want to answer. I chose it because I believe it is one of the papers MBA students should read before starting their own research."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#the-structure-of-the-paper",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#the-structure-of-the-paper",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "The structure of the paper",
+    "text": "The structure of the paper\nThe paper contrasts the two traditions across 10 areas (approaches to explanation, conceptions of causation, multivariate explanations, equifinality, scope and causal generalization, case selection practices, weighting observations, substantively important cases, lack of fit, and concepts and measurement). In this memo, to make the overall picture easier to grasp, I narrow them down to three: the purpose of the question, how causation is understood, and how cases are selected. For the other areas, please check the paper itself.\n\n\n\n\n\n\n\n\nThree axes\nQualitative culture (the detective’s view)\nQuantitative culture (the experimenter’s view)\n\n\n\n\nPurpose of the question\nExplain why the outcome happened in a particular case\nMeasure how much a factor affects outcomes on average\n\n\nHow causation is understood\nThinks in terms of the “multiplication” (combination) of conditions\nTypically thinks in terms of the “addition” (average effects) of variables\n\n\nHow cases are selected\nExamines in depth mainly the cases in which the outcome occurred\nTo avoid bias, does not select cases on the outcome (the dependent variable)\n\n\n\nReading the table from left to right, you can see that the differences between the two cultures are connected in a single line. The paper likens qualitative research to a detective. Quantitative research, by contrast, is explained as statistical methods that take the logic of the controlled experiment as their model. The phrase “the experimenter’s view” in this article is simply a label I use for this contrast.\nA detective wants to know the cause of a crime that has already happened, so the detective examines in depth the cases in which it happened. The detective also assumes that the cause is not one thing but a combination of several conditions.\nAn experimenter, on the other hand, wants to know the average effect of a factor, and therefore takes care not to select cases by their outcome, which would introduce bias. The experimenter also thinks of the effects of the factors as adding up.\nIf the goals differ, then both how cases are selected and how causation is understood differ as well."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#the-papers-contributions",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#the-papers-contributions",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "The paper’s contributions",
+    "text": "The paper’s contributions\nFirst, the paper makes the difference in the “goal of the question” clearly visible. The question “why did this case happen?” and the question “what effect does this factor have on average?” are different questions. Much of the reason why debates about analytical methods fail to connect lies not in which method is better, but in this difference in purpose.\nSecond, the paper shines a light on “combinations of conditions.” A factor may not work on its own; sometimes an outcome appears only “when conditions A, B, and C are all present.” Moreover, there may be more than one route to the same outcome (this is called equifinality). The paper organizes, in a logical way, this feature of the real world that is easy to overlook in models that simply add effects together.\n\nFrom here on, these are my own views, based on the paper."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#what-i-found-noteworthy",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#what-i-found-noteworthy",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "What I found noteworthy",
+    "text": "What I found noteworthy\nWhat I consider especially important about this paper is that it lets us understand qualitative and quantitative research by contrasting them. Seeing the two side by side makes clear what each aims for and why each works the way it does.\nAnother point is that it can serve as a foundation for understanding QCA as a method. If you grasp the logic of qualitative research (combinations of conditions, multiple routes), you can see what QCA has inherited."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#thinking-about-business-applications-the-case-of-customer-churn",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#thinking-about-business-applications-the-case-of-customer-churn",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Thinking about business applications: the case of customer churn",
+    "text": "Thinking about business applications: the case of customer churn\nLet us step away from the paper and think about applications. Consider an e-commerce company analyzing customer churn (the numbers are a made-up example to aid understanding).\nQuantitative approaches such as statistics and A/B tests are well suited to revealing the overall trend, for example “issuing a coupon lowers the churn rate across all customers by 3% on average.” However, this alone does not reveal the individual reason why customer A, one of the top contributors to sales, suddenly canceled.\nThis is where a qualitative, logic-based approach comes in. It can bring out candidate combinations: churn tends to occur when several conditions overlap, such as “a change of account manager,” “a system outage,” and “an overlapping contract renewal period.” However, this does not establish the cause; it is material for hypotheses to be checked later."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#connection-to-qca",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#connection-to-qca",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Connection to QCA",
+    "text": "Connection to QCA\nThis paper organized the differences between the qualitative and quantitative cultures. One method that connects the two is QCA (qualitative comparative analysis). It keeps the qualitative way of thinking, which emphasizes combinations of conditions and multiple routes, while analyzing a dataset systematically. I also discuss the ideas behind QCA in the article Why QCA suits decision-making on this blog.\n\nSummary points for review"
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#points-to-revisit",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#points-to-revisit",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Points to revisit",
+    "text": "Points to revisit\n\nBefore starting an analysis, decide whether your question is “why did this case happen?” or “how does this factor work on average?”\nOnce the question is decided, how to select cases and how to understand causation follow naturally.\nWhen you study QCA, return to this paper’s ideas of “combinations of conditions” and “multiple routes.”"
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#glossary",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#glossary",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "Glossary",
+    "text": "Glossary\n\nCauses-of-effects: A detective-style question that works backward from an outcome: “Why did this happen?”\nEffects-of-causes: An experimenter-style question that measures the average effect of adding a factor: “What effect does this factor have on average?”\nEquifinality: The fact that there is not just one route to the same outcome, but several."
+  },
+  {
+    "objectID": "posts/paper-guide-mahoney-goertz/index.html#references",
+    "href": "posts/paper-guide-mahoney-goertz/index.html#references",
+    "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
+    "section": "References",
+    "text": "References\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017\nBack to the reading list: Basics"
   },
   {
     "objectID": "ja/tools.html",
@@ -567,6 +644,48 @@
     "text": "4. しきい値の選び方を扱った論文\n\nKrogslund, C., Choi, D. D., & Poertner, M. (2015). Fuzzy sets on shaky ground: Parameter sensitivity and confirmation bias in fsQCA. Political Analysis, 23(1), 21-41. https://doi.org/10.1093/pan/mpu016 fsQCA の結果が、利用者が選ぶパラメータのわずかな変更に左右されうること、そして、ランダムに作った変数を含む組み合わせも、十分条件として見つかりやすいことを論じています。既存の3つの研究を再分析し、感度分析とモンテカルロ・シミュレーションで示しています。\n\n基準の置き方が結果をどう変えるかを扱ったものとして、Toyoda (2026), Quality & Quantity, https://doi.org/10.1007/s11135-026-03092-3 もあります。"
   },
   {
+    "objectID": "ja/articles/paper-guides-intro/index.html",
+    "href": "ja/articles/paper-guides-intro/index.html",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "",
+    "text": "このブログでは、質的比較分析(QCA)、マーケティング・サイエンス、ブランド・マネジメント、統計学に関係する論文を、随時、1本ずつ読み解いて紹介していきます。"
+  },
+  {
+    "objectID": "ja/articles/paper-guides-intro/index.html#この棚の目的",
+    "href": "ja/articles/paper-guides-intro/index.html#この棚の目的",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "この棚の目的",
+    "text": "この棚の目的\n論文を読む前に、「何が書かれているか」「どこが大事か」を、短い時間でつかめるようにすることが目的です。同時に、私自身が後から読み返すための文献メモにもなるように書いています。"
+  },
+  {
+    "objectID": "ja/articles/paper-guides-intro/index.html#紹介する論文",
+    "href": "ja/articles/paper-guides-intro/index.html#紹介する論文",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "紹介する論文",
+    "text": "紹介する論文\nこのブログで扱う内容に関係する論文を選びます。QCA の方法論、閾値(しきい値)の扱い、データ分析の基礎、マーケティングへの応用などです。"
+  },
+  {
+    "objectID": "ja/articles/paper-guides-intro/index.html#各記事の構成",
+    "href": "ja/articles/paper-guides-intro/index.html#各記事の構成",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "各記事の構成",
+    "text": "各記事の構成\nどの記事も、同じ順序で書きます。\n\n書誌情報と要点\n概要\nこの論文を選んだ理由\nこの論文の骨子\n本論文の貢献\n私が重視する点\n見返すときのポイント、用語解説、参考文献\n\nビジネスへの応用例と、関連記事への接続は、必要なときだけ付けます。"
+  },
+  {
+    "objectID": "ja/articles/paper-guides-intro/index.html#読むときの注意",
+    "href": "ja/articles/paper-guides-intro/index.html#読むときの注意",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "読むときの注意",
+    "text": "読むときの注意\n\n各記事は、論文の本文や図表を転載せず、私の言葉で書いています。\n内容の解釈は、私の理解にもとづきます。引用や研究で使うときは、必ず原典で確かめてください。"
+  },
+  {
+    "objectID": "ja/articles/paper-guides-intro/index.html#公開済みの論文ガイド",
+    "href": "ja/articles/paper-guides-intro/index.html#公開済みの論文ガイド",
+    "title": "論文ガイドについて:このブログで文献を紹介していきます",
+    "section": "公開済みの論文ガイド",
+    "text": "公開済みの論文ガイド\n\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)"
+  },
+  {
     "objectID": "ja/articles/introducing-thsqca/index.html",
     "href": "ja/articles/introducing-thsqca/index.html",
     "title": "ThSQCA の紹介: Rで閾値スイープQCAを行う",
@@ -620,7 +739,7 @@
     "href": "index.html",
     "title": "Yuki Toyoda’s Blog",
     "section": "",
-    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here About this blog: Welcome 日本語の方はこちら ThSQCA on CRAN\nThe eleven articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)"
+    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here About this blog: Welcome 日本語の方はこちら ThSQCA on CRAN\nThe thirteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)"
   },
   {
     "objectID": "index.html#get-to-know-qca-and-the-threshold-idea",
@@ -649,6 +768,13 @@
     "title": "Yuki Toyoda’s Blog",
     "section": "4. Research methods, step by step",
     "text": "4. Research methods, step by step\nProcedures from survey to analysis, one article at a time, with examples in R. More methods will be added over time.\n\n\n\n11\n\nFrom survey items to a scale, then on to regression and QCA: a step-by-step guide\n\n\nHow to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R."
+  },
+  {
+    "objectID": "index.html#paper-guides",
+    "href": "index.html#paper-guides",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "5. Paper guides",
+    "text": "5. Paper guides\nReading notes on papers related to QCA, marketing science, brand management, and statistics, added from time to time.\n\n\n\n12\n\nAbout Paper Guides: Introducing Papers on This Blog\n\n\nThe purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides.\n\n\n \n\n13\n\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)\n\n\nHow do quantitative and qualitative analysis differ? A paper guide to Mahoney & Goertz (2006), written for MBA students and business analysts."
   },
   {
     "objectID": "glossary.html",
@@ -770,6 +896,83 @@
     "text": "連絡先\n誤りの報告やご質問は、GitHub の Issues でお願いします。(ThSQCA、ブログとツール)機密データは送らないでください。"
   },
   {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "",
+    "text": "書誌情報: Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017\n要点: 定量研究と定性研究を、優劣ではなく「ゴールが違う2つの文化」として整理した論文です。リサーチ設計する際の指針になる必読論文として推奨します。自分の問いがどちらなのかを先に決めると、分析手法を選びやすくなることが分かります。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#概要",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#概要",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "概要",
+    "text": "概要\n　「平均的な効果」を知りたい統計学をベースにした定量研究と、「特定の出来事が起きた原因」を突き止めたい事例研究（定性研究）とでは、そもそも問いが違います。相対的には、定量研究は「原因が平均してどれだけ効くか」を、定性研究は「この事例で、なぜその結果が起きたか」を問うています。この論文は、双方のやり方が、それぞれのゴールに対して合理的であることを示しています。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#この論文を選んだ理由",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#この論文を選んだ理由",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "この論文を選んだ理由",
+    "text": "この論文を選んだ理由\n　MBAの研究やビジネスリサーチでは、こんな壁に当たることがあります。A/B テストや回帰分析で全体の傾向はつかめるのに、一番大事な顧客がなぜ離脱したのかは分からない。\n　この論文は、その理由を考える手がかりになります。全体の「平均的な傾向」を測る頭の使い方と、個別の出来事の「原因のメカニズム」を追う頭の使い方は、別のものだからです。自分の知りたい問いに合わせて分析手法を選ぶための、「思考の地図」として読めます。MBAの院生であれば、各自の研究を始める前に読んでおくべき論文の一つだと考え、この論文を選びました。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#この論文の骨子",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#この論文の骨子",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "この論文の骨子",
+    "text": "この論文の骨子\n　この論文は、2つの伝統の違いを、10の領域(説明への接近法、因果概念、多変量モデル、同効性、適用範囲、事例選定、観察値の重み付け、実質的に重要な事例の扱い、適合不足、概念と測定)で比べています。このメモでは、全体像をつかみやすいように、問いの目的、因果の捉え方、事例の選び方の3つに絞ります。残りの領域は、論文で確かめてください。\n\n\n\n\n\n\n\n\n3つの軸\n定性的研究の文化(探偵の視点)\n定量的研究の文化(実験者の視点)\n\n\n\n\n問いの目的\n特定の事例で、なぜその結果が起きたかを解明する\n要因が、平均してどれくらい影響を与えるかを測る\n\n\n因果の捉え方\n条件の「掛け算」(組み合わせ)で考える\n典型的には、変数の「足し算」(平均的な影響度)で考える\n\n\n事例の選び方\n結果が起きた事例を中心に、深く調べる\n偏りを防ぐため、結果(従属変数)では事例を選ばない\n\n\n\n　表を左から順に読むと、2つの文化の違いが、1本の筋でつながっていることが分かります。論文は、定性研究を探偵になぞらえて説明しています。定量研究は、統計の手法が統制実験の考え方をモデルにしている、という説明です。この記事の「実験者の視点」は、その対比のための呼び名です。\n　探偵は、起きてしまった事件の原因を知りたいので、事件が起きた事例を深く調べます。そして、原因は1つではなく、いくつかの条件の組み合わせだと考えます。\n　一方、実験者は、要因の平均的な効果を知りたいので、結果で事例を選んで偏らないように気をつけます。そして、各要因の影響を足し合わせて考えます。\n　ゴールが違えば、事例の選び方も、因果の捉え方も変わる、という関係です。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#本論文の貢献",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#本論文の貢献",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "本論文の貢献",
+    "text": "本論文の貢献\n　1つ目は、「問いのゴール」の違いを、はっきり見えるようにした点です。「なぜこの事案が起きたのか」を解き明かす問いと、「この要因は、平均してどんな効果を持つか」を測る問いは、別物です。分析手法をめぐる議論がかみ合わない原因の多くは、手法の良し悪しではなく、この目的の違いにあります。\n　2つ目は、「条件の組み合わせ」に光を当てた点です。ある要因が単独で効くのではなく、「条件 A・B・C がそろったときだけ結果が出る」ことがあります。また、同じ結果に至るルートが、1つとは限りません(これを同効性と呼びます)。平均的な足し算のモデルでは見落としやすい、こうした現実の構造を、論理的に整理しています。\n\nここからは、論文を踏まえた私見です。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#注目すべきと感じた部分",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#注目すべきと感じた部分",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "注目すべきと感じた部分",
+    "text": "注目すべきと感じた部分\n　私がこの論文で特に大事だと思うのは、定性研究と定量研究を対比しながら理解できることです。2つを並べて見ると、それぞれが何を目指し、なぜそのやり方を取るのかが、はっきりします。\n　もう1つは、QCA という手法を理解する上での基礎になりうることです。定性研究の論理(条件の組み合わせ、複数のルート)を押さえておくと、QCA が何を引き継いだ手法なのかが見えてきます。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#ビジネスへの応用を考える顧客離脱のケース",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#ビジネスへの応用を考える顧客離脱のケース",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "ビジネスへの応用を考える:顧客離脱のケース",
+    "text": "ビジネスへの応用を考える:顧客離脱のケース\n　論文を離れ、応用を考えてみます。たとえば、E コマース企業で、顧客の離脱を分析する場面を考えてみましょう(数字は、理解を助けるための架空の例です)。\n　統計や A/B テストのような定量的なアプローチは、「クーポンを発行すると、顧客全体の離脱率が、平均で3%下がる」といった、全体の傾向を導くのに向いています。ただし、これだけでは、売上に最も貢献していた優良顧客の A 社が、なぜ突然解約したのかという個別の理由は見えてきません。\n　そこで定性的・論理的なアプローチの出番になります。「担当者の変更」「システム障害の発生」「契約更新期の重なり」のように、複数の条件が重なったときに離脱が起きやすい、という組み合わせの候補を浮かび上がらせることができます。ただし、これは原因を確定するものではなく、あとで確かめるべき仮説の材料です。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#qca-への接続",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#qca-への接続",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "QCA への接続",
+    "text": "QCA への接続\n　この論文は、定性と定量の文化の違いを整理したものでした。両者をつなぐ方法のひとつに、QCA(質的比較分析)があります。定性研究の「条件の組み合わせと、複数のルートを重視する考え方」を保ちながら、データセットを使って、体系的に分析する手法です。QCA の考え方は、「なぜ QCA は意思決定に向くのか」の記事（Yuki Toyoda’s Blog）でも紹介しています。\n\n※以下、ポイントの整理"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#見返すときのポイント",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#見返すときのポイント",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "見返すときのポイント",
+    "text": "見返すときのポイント\n\n分析に入る前に、自分の問いが「この事例はなぜ起きたか」なのか、「この要因は平均してどう効くか」なのかを決める。\n問いが決まれば、事例の選び方と因果の捉え方も、おのずと決まってくる。\nQCA を学ぶときは、この論文の「条件の組み合わせ」と「複数のルート」に戻る。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#用語解説",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#用語解説",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "用語解説",
+    "text": "用語解説\n\n帰結の原因(causes-of-effects): 「なぜこの出来事が起きたのか」と、結果から原因をさかのぼる、探偵的な問い。\n原因の効果(effects-of-causes): 「この要因を加えると、平均してどんな効果があるか」を測る、実験者的な問い。\n同効性(equifinality): 同じ結果に至るルートが、1つではなく複数あること。"
+  },
+  {
+    "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#参考文献",
+    "href": "ja/articles/paper-guide-mahoney-goertz/index.html#参考文献",
+    "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
+    "section": "参考文献",
+    "text": "参考文献\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017\n文献の一覧に戻る: 基礎編"
+  },
+  {
     "objectID": "ja/articles/qca-for-marketers/index.html",
     "href": "ja/articles/qca-for-marketers/index.html",
     "title": "「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA",
@@ -823,7 +1026,7 @@
     "href": "ja/articles/reading-list-basics/index.html#考え方と測り方論文",
     "title": "QCA を知るための論文と本: 最初に読む 6 点(基礎編)",
     "section": "1. 考え方と測り方(論文)",
-    "text": "1. 考え方と測り方(論文)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 QCA とファジィ集合を用いるときの、標準的な良い実践(good practice)を整理した論文です。分析を始める前に、守るべき手続きを確認するのに役立ちます。"
+    "text": "1. 考え方と測り方(論文)\n\nMahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. Political Analysis, 14(3), 227-249. https://doi.org/10.1093/pan/mpj017 量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。論文ガイドあり\nRagin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. Political Analysis, 14(3), 291-310. https://doi.org/10.1093/pan/mpj019 集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。\nSchneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. Comparative Sociology, 9(3), 397-418. https://doi.org/10.1163/156913210X12493538729793 QCA とファジィ集合を用いるときの、標準的な良い実践(good practice)を整理した論文です。分析を始める前に、守るべき手続きを確認するのに役立ちます。"
   },
   {
     "objectID": "ja/articles/reading-list-basics/index.html#手法を体系的に学ぶ本",
@@ -973,6 +1176,13 @@
     "text": "4. リサーチ手法と手順ガイド\n調査から分析までの手順を、Rの例で1本ずつ示します。今後、ほかの手法も加えていきます。\n\n\n\n11\n\nアンケートから尺度を作り、回帰分析・QCAに進む手順\n\n\n「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。"
   },
   {
+    "objectID": "ja/index.html#論文ガイド",
+    "href": "ja/index.html#論文ガイド",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "5. 論文ガイド",
+    "text": "5. 論文ガイド\nQCA、マーケティング・サイエンス、ブランド・マネジメント、統計学に関係する論文を、随時、1本ずつ読み解いて紹介します。\n\n\n\n12\n\n論文ガイドについて:このブログで文献を紹介していきます\n\n\nこのブログの論文ガイドの目的、扱う論文、各記事の構成、公開済みの記事の一覧です。\n\n\n \n\n13\n\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)\n\n\n定量分析と定性分析は、何が違うのか。Mahoney & Goertz (2006) を、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。"
+  },
+  {
     "objectID": "ja/start.html",
     "href": "ja/start.html",
     "title": "はじめに",
@@ -984,7 +1194,7 @@
     "href": "ja/start.html#記事を読む順に",
     "title": "はじめに",
     "section": "記事を、読む順に",
-    "text": "記事を、読む順に\n日本語版トップにも、同じ並びで、画像つきの一覧があります。\n\n1. QCA と「閾値」の考え方を知る\n\nようこそ\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\n\n2. R で ThSQCA を使ってみる\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認\n\n\n\n3. 文献リスト\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)\n\n\n\n4. リサーチ手法と手順ガイド\n\nアンケートから尺度を作り、回帰分析・QCAに進む手順"
+    "text": "記事を、読む順に\n日本語版トップにも、同じ並びで、画像つきの一覧があります。\n\n1. QCA と「閾値」の考え方を知る\n\nようこそ\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\n\n2. R で ThSQCA を使ってみる\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認\n\n\n\n3. 文献リスト\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)\n\n\n\n4. リサーチ手法と手順ガイド\n\nアンケートから尺度を作り、回帰分析・QCAに進む手順\n\n\n\n5. 論文ガイド\n\n論文ガイドについて:このブログで文献を紹介していきます\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)"
   },
   {
     "objectID": "ja/start.html#分析ツールから始めたい方へ",
@@ -1048,6 +1258,48 @@
     "title": "Introducing ThSQCA: threshold-sweep QCA in R",
     "section": "Links",
     "text": "Links\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nPackage on CRAN: ThSQCA\nSource code: GitHub\nDocumentation: im-research-yt.github.io/ThSQCA\nBrowser tools: QCA Quickstart and Sweep Builder"
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html",
+    "href": "posts/paper-guides-intro/index.html",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "",
+    "text": "On this blog, I will read and introduce, one at a time and as time allows, papers related to qualitative comparative analysis (QCA), marketing science, brand management, and statistics."
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html#purpose-of-this-shelf",
+    "href": "posts/paper-guides-intro/index.html#purpose-of-this-shelf",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "Purpose of this shelf",
+    "text": "Purpose of this shelf\nThe purpose is to let you grasp, in a short time, what a paper says and where its important points lie before you read it. The guides are also written so that I can use them later as my own reading notes."
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html#papers-covered",
+    "href": "posts/paper-guides-intro/index.html#papers-covered",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "Papers covered",
+    "text": "Papers covered\nI choose papers related to the topics of this blog: QCA methodology, the handling of thresholds, the foundations of data analysis, applications to marketing, and so on."
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html#how-each-article-is-organized",
+    "href": "posts/paper-guides-intro/index.html#how-each-article-is-organized",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "How each article is organized",
+    "text": "How each article is organized\nEvery article follows the same order.\n\nReference and summary\nOverview\nWhy I chose this paper\nThe structure of the paper\nThe paper’s contributions\nWhat I found noteworthy\nPoints to revisit, glossary, and references\n\nA section on business applications and a section on connections to related articles are added only when needed."
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html#a-note-for-readers",
+    "href": "posts/paper-guides-intro/index.html#a-note-for-readers",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "A note for readers",
+    "text": "A note for readers\n\nEach article is written in my own words, without reproducing the text or the figures and tables of the paper.\nThe interpretations are based on my own understanding. If you cite a paper or use it in your research, please always check the original."
+  },
+  {
+    "objectID": "posts/paper-guides-intro/index.html#published-paper-guides",
+    "href": "posts/paper-guides-intro/index.html#published-paper-guides",
+    "title": "About Paper Guides: Introducing Papers on This Blog",
+    "section": "Published paper guides",
+    "text": "Published paper guides\n\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)"
   },
   {
     "objectID": "posts/reading-list-applied/index.html",
@@ -1358,11 +1610,11 @@
     "text": "This blog is about qualitative comparative analysis (QCA), the ThSQCA R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order."
   },
   {
-    "objectID": "start-here.html#the-eleven-core-articles-in-reading-order",
-    "href": "start-here.html#the-eleven-core-articles-in-reading-order",
+    "objectID": "start-here.html#the-thirteen-core-articles-in-reading-order",
+    "href": "start-here.html#the-thirteen-core-articles-in-reading-order",
     "title": "Start here",
-    "section": "The eleven core articles, in reading order",
-    "text": "The eleven core articles, in reading order\nThe home page shows the same list with pictures.\n\n1. Get to know QCA and the threshold idea\n\nWelcome\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\n\n2. Learn ThSQCA in R\n\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\n\n\n3. Reading lists\n\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)\n\n\n\n4. Research methods, step by step\n\nFrom survey items to a scale, then on to regression and QCA: a step-by-step guide"
+    "section": "The thirteen core articles, in reading order",
+    "text": "The thirteen core articles, in reading order\nThe home page shows the same list with pictures.\n\n1. Get to know QCA and the threshold idea\n\nWelcome\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\n\n2. Learn ThSQCA in R\n\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\n\n\n3. Reading lists\n\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)\n\n\n\n4. Research methods, step by step\n\nFrom survey items to a scale, then on to regression and QCA: a step-by-step guide\n\n\n\n5. Paper guides\n\nAbout Paper Guides: Introducing Papers on This Blog\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)"
   },
   {
     "objectID": "start-here.html#if-you-prefer-to-start-from-a-tool",

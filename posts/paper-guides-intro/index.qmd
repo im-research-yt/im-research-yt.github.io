@@ -1,0 +1,41 @@
+---
+sidebar: false
+title: "About Paper Guides: Introducing Papers on This Blog"
+image: thumbnail.png
+date: "2026-10-15"
+categories: [notes]
+description: "The purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides."
+---
+
+On this blog, I will read and introduce, one at a time and as time allows, papers related to qualitative comparative analysis (QCA), marketing science, brand management, and statistics.
+
+## Purpose of this shelf
+
+The purpose is to let you grasp, in a short time, what a paper says and where its important points lie before you read it. The guides are also written so that I can use them later as my own reading notes.
+
+## Papers covered
+
+I choose papers related to the topics of this blog: QCA methodology, the handling of thresholds, the foundations of data analysis, applications to marketing, and so on.
+
+## How each article is organized
+
+Every article follows the same order.
+
+- Reference and summary
+- Overview
+- Why I chose this paper
+- The structure of the paper
+- The paper's contributions
+- What I found noteworthy
+- Points to revisit, glossary, and references
+
+A section on business applications and a section on connections to related articles are added only when needed.
+
+## A note for readers
+
+- Each article is written in my own words, without reproducing the text or the figures and tables of the paper.
+- The interpretations are based on my own understanding. If you cite a paper or use it in your research, please always check the original.
+
+## Published paper guides
+
+- [Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)](../paper-guide-mahoney-goertz/index.qmd)

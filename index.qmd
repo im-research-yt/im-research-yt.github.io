@@ -42,7 +42,7 @@ Notes on the **ThSQCA** R package, qualitative comparative analysis, and hands-o
 .toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
 </style>
 
-The eleven articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
+The thirteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
 
 ## 1. Get to know QCA and the threshold idea
 
@@ -81,4 +81,13 @@ Procedures from survey to analysis, one article at a time, with examples in R. M
 
 <div class="toc-grid">
 <a class="toc-card" href="posts/scale-to-regression/index.html"><img src="posts/scale-to-regression/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">11</span><div class="toc-title">From survey items to a scale, then on to regression and QCA: a step-by-step guide</div><p>How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.</p></div></a>
+</div>
+
+## 5. Paper guides
+
+Reading notes on papers related to QCA, marketing science, brand management, and statistics, added from time to time.
+
+<div class="toc-grid">
+<a class="toc-card" href="posts/paper-guides-intro/index.html"><img src="posts/paper-guides-intro/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">12</span><div class="toc-title">About Paper Guides: Introducing Papers on This Blog</div><p>The purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides.</p></div></a>
+<a class="toc-card" href="posts/paper-guide-mahoney-goertz/index.html"><img src="posts/paper-guide-mahoney-goertz/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">13</span><div class="toc-title">Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</div><p>How do quantitative and qualitative analysis differ? A paper guide to Mahoney &amp; Goertz (2006), written for MBA students and business analysts.</p></div></a>
 </div>

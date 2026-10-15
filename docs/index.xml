@@ -16,8 +16,176 @@
 <height>76</height>
 <width>144</width>
 </image>
-<generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 07 Oct 2026 15:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Wed, 14 Oct 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</title>
+  <link>https://im-research-yt.github.io/posts/paper-guide-mahoney-goertz/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><strong>Reference</strong>: Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017" class="uri">https://doi.org/10.1093/pan/mpj017</a></p>
+<p><strong>Summary</strong>: This paper organizes quantitative and qualitative research not as a contest between better and worse, but as two cultures with different goals. I recommend it as required reading for anyone designing a research project. The paper shows that deciding first which kind of question you are asking makes it easier to choose an analytical method.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Quantitative research, which is built on statistics and aims to learn “average effects,” and qualitative research (case study research), which aims to pin down “the cause of a particular event,” ask different questions in the first place. Relatively speaking, quantitative research asks how much a cause affects outcomes on average, whereas qualitative research asks why this outcome happened in this case. The paper shows that the practices of both traditions are reasonable given their respective goals.</p>
+</section>
+<section id="why-i-chose-this-paper" class="level2">
+<h2 class="anchored" data-anchor-id="why-i-chose-this-paper">Why I chose this paper</h2>
+<p>In MBA research and business research, you may run into this wall: A/B tests and regression analysis reveal the overall trend, yet you still cannot tell why your single most important customer left.</p>
+<p>This paper offers a way to think about why that happens. Measuring the “average trend” across the data and tracing the “causal mechanism” of an individual event are two different ways of thinking. The paper can be read as a “map of thinking” for choosing an analytical method that fits the question you want to answer. I chose it because I believe it is one of the papers MBA students should read before starting their own research.</p>
+</section>
+<section id="the-structure-of-the-paper" class="level2">
+<h2 class="anchored" data-anchor-id="the-structure-of-the-paper">The structure of the paper</h2>
+<p>The paper contrasts the two traditions across 10 areas (approaches to explanation, conceptions of causation, multivariate explanations, equifinality, scope and causal generalization, case selection practices, weighting observations, substantively important cases, lack of fit, and concepts and measurement). In this memo, to make the overall picture easier to grasp, I narrow them down to three: the purpose of the question, how causation is understood, and how cases are selected. For the other areas, please check the paper itself.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Three axes</th>
+<th>Qualitative culture (the detective’s view)</th>
+<th>Quantitative culture (the experimenter’s view)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Purpose of the question</strong></td>
+<td>Explain why the outcome happened in a particular case</td>
+<td>Measure how much a factor affects outcomes on average</td>
+</tr>
+<tr class="even">
+<td><strong>How causation is understood</strong></td>
+<td>Thinks in terms of the “multiplication” (combination) of conditions</td>
+<td>Typically thinks in terms of the “addition” (average effects) of variables</td>
+</tr>
+<tr class="odd">
+<td><strong>How cases are selected</strong></td>
+<td>Examines in depth mainly the cases in which the outcome occurred</td>
+<td>To avoid bias, does not select cases on the outcome (the dependent variable)</td>
+</tr>
+</tbody>
+</table>
+<p>Reading the table from left to right, you can see that the differences between the two cultures are connected in a single line. The paper likens qualitative research to a detective. Quantitative research, by contrast, is explained as statistical methods that take the logic of the controlled experiment as their model. The phrase “the experimenter’s view” in this article is simply a label I use for this contrast.</p>
+<p>A detective wants to know the cause of a crime that has already happened, so the detective examines in depth the cases in which it happened. The detective also assumes that the cause is not one thing but a combination of several conditions.</p>
+<p>An experimenter, on the other hand, wants to know the average effect of a factor, and therefore takes care not to select cases by their outcome, which would introduce bias. The experimenter also thinks of the effects of the factors as adding up.</p>
+<p>If the goals differ, then both how cases are selected and how causation is understood differ as well.</p>
+</section>
+<section id="the-papers-contributions" class="level2">
+<h2 class="anchored" data-anchor-id="the-papers-contributions">The paper’s contributions</h2>
+<p>First, the paper makes the difference in the “goal of the question” clearly visible. The question “why did this case happen?” and the question “what effect does this factor have on average?” are different questions. Much of the reason why debates about analytical methods fail to connect lies not in which method is better, but in this difference in purpose.</p>
+<p>Second, the paper shines a light on “combinations of conditions.” A factor may not work on its own; sometimes an outcome appears only “when conditions A, B, and C are all present.” Moreover, there may be more than one route to the same outcome (this is called equifinality). The paper organizes, in a logical way, this feature of the real world that is easy to overlook in models that simply add effects together.</p>
+<hr>
+<p>From here on, these are my own views, based on the paper.</p>
+</section>
+<section id="what-i-found-noteworthy" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-found-noteworthy">What I found noteworthy</h2>
+<p>What I consider especially important about this paper is that it lets us understand qualitative and quantitative research by contrasting them. Seeing the two side by side makes clear what each aims for and why each works the way it does.</p>
+<p>Another point is that it can serve as a foundation for understanding <strong>QCA</strong> as a method. If you grasp the logic of qualitative research (combinations of conditions, multiple routes), you can see what QCA has inherited.</p>
+</section>
+<section id="thinking-about-business-applications-the-case-of-customer-churn" class="level2">
+<h2 class="anchored" data-anchor-id="thinking-about-business-applications-the-case-of-customer-churn">Thinking about business applications: the case of customer churn</h2>
+<p>Let us step away from the paper and think about applications. Consider an e-commerce company analyzing customer churn (the numbers are a made-up example to aid understanding).</p>
+<p>Quantitative approaches such as statistics and A/B tests are well suited to revealing the overall trend, for example “issuing a coupon lowers the churn rate across all customers by 3% on average.” However, this alone does not reveal the individual reason why customer A, one of the top contributors to sales, suddenly canceled.</p>
+<p>This is where a qualitative, logic-based approach comes in. It can bring out candidate combinations: churn tends to occur when several conditions overlap, such as “a change of account manager,” “a system outage,” and “an overlapping contract renewal period.” However, this does not establish the cause; it is material for hypotheses to be checked later.</p>
+</section>
+<section id="connection-to-qca" class="level2">
+<h2 class="anchored" data-anchor-id="connection-to-qca">Connection to QCA</h2>
+<p>This paper organized the differences between the qualitative and quantitative cultures. One method that connects the two is QCA (qualitative comparative analysis). It keeps the qualitative way of thinking, which emphasizes combinations of conditions and multiple routes, while analyzing a dataset systematically. I also discuss the ideas behind QCA in the article <a href="../../posts/why-qca-decisions/index.html">Why QCA suits decision-making</a> on this blog.</p>
+<hr>
+<p><em>Summary points for review</em></p>
+</section>
+<section id="points-to-revisit" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-revisit">Points to revisit</h2>
+<ul>
+<li>Before starting an analysis, decide whether your question is “why did this case happen?” or “how does this factor work on average?”</li>
+<li>Once the question is decided, how to select cases and how to understand causation follow naturally.</li>
+<li>When you study QCA, return to this paper’s ideas of “combinations of conditions” and “multiple routes.”</li>
+</ul>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<ul>
+<li><strong>Causes-of-effects</strong>: A detective-style question that works backward from an outcome: “Why did this happen?”</li>
+<li><strong>Effects-of-causes</strong>: An experimenter-style question that measures the average effect of adding a factor: “What effect does this factor have on average?”</li>
+<li><strong>Equifinality</strong>: The fact that there is not just one route to the same outcome, but several.</li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017" class="uri">https://doi.org/10.1093/pan/mpj017</a></p>
+<p>Back to the reading list: <a href="../../posts/reading-list-basics/index.html">Basics</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/posts/paper-guide-mahoney-goertz/</guid>
+  <pubDate>Wed, 14 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/paper-guide-mahoney-goertz/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>About Paper Guides: Introducing Papers on This Blog</title>
+  <link>https://im-research-yt.github.io/posts/paper-guides-intro/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>On this blog, I will read and introduce, one at a time and as time allows, papers related to qualitative comparative analysis (QCA), marketing science, brand management, and statistics.</p>
+<section id="purpose-of-this-shelf" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-this-shelf">Purpose of this shelf</h2>
+<p>The purpose is to let you grasp, in a short time, what a paper says and where its important points lie before you read it. The guides are also written so that I can use them later as my own reading notes.</p>
+</section>
+<section id="papers-covered" class="level2">
+<h2 class="anchored" data-anchor-id="papers-covered">Papers covered</h2>
+<p>I choose papers related to the topics of this blog: QCA methodology, the handling of thresholds, the foundations of data analysis, applications to marketing, and so on.</p>
+</section>
+<section id="how-each-article-is-organized" class="level2">
+<h2 class="anchored" data-anchor-id="how-each-article-is-organized">How each article is organized</h2>
+<p>Every article follows the same order.</p>
+<ul>
+<li>Reference and summary</li>
+<li>Overview</li>
+<li>Why I chose this paper</li>
+<li>The structure of the paper</li>
+<li>The paper’s contributions</li>
+<li>What I found noteworthy</li>
+<li>Points to revisit, glossary, and references</li>
+</ul>
+<p>A section on business applications and a section on connections to related articles are added only when needed.</p>
+</section>
+<section id="a-note-for-readers" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-for-readers">A note for readers</h2>
+<ul>
+<li>Each article is written in my own words, without reproducing the text or the figures and tables of the paper.</li>
+<li>The interpretations are based on my own understanding. If you cite a paper or use it in your research, please always check the original.</li>
+</ul>
+</section>
+<section id="published-paper-guides" class="level2">
+<h2 class="anchored" data-anchor-id="published-paper-guides">Published paper guides</h2>
+<ul>
+<li><a href="../../posts/paper-guide-mahoney-goertz/index.html">Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/posts/paper-guides-intro/</guid>
+  <pubDate>Wed, 14 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/paper-guides-intro/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>From survey items to a scale, then on to regression and QCA: a step-by-step guide</title>
   <dc:creator>Yuki Toyoda</dc:creator>
@@ -1090,7 +1258,7 @@ font-style: inherit;">"psych"</span>)</span></code></pre></div></div>
 <section id="getting-the-idea-and-the-measures-papers" class="level2">
 <h2 class="anchored" data-anchor-id="getting-the-idea-and-the-measures-papers">1. Getting the idea and the measures (papers)</h2>
 <ul>
-<li>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017">https://doi.org/10.1093/pan/mpj017</a> Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to.</li>
+<li>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017">https://doi.org/10.1093/pan/mpj017</a> Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to. <a href="../../posts/paper-guide-mahoney-goertz/index.html">Paper guide available</a></li>
 <li>Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019">https://doi.org/10.1093/pan/mpj019</a> Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.</li>
 <li>Schneider, C. Q., &amp; Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. <em>Comparative Sociology</em>, 9(3), 397-418. <a href="https://doi.org/10.1163/156913210X12493538729793">https://doi.org/10.1163/156913210X12493538729793</a> Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis.</li>
 </ul>

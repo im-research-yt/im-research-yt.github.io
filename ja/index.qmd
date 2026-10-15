@@ -82,3 +82,12 @@ R は要りません。なぜ QCA が意思決定に向くのか、なぜ閾値�
 <div class="toc-grid">
 <a class="toc-card" href="articles/scale-to-regression/index.html"><img src="articles/scale-to-regression/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">11</span><div class="toc-title">アンケートから尺度を作り、回帰分析・QCAに進む手順</div><p>「ブランド信頼」のような複数項目の概念を、理論から定義し、因子分析とαで検討し、下位尺度にして回帰分析やQCAに使うまでの手順を、Rの例で示します。</p></div></a>
 </div>
+
+## 5. 論文ガイド
+
+QCA、マーケティング・サイエンス、ブランド・マネジメント、統計学に関係する論文を、随時、1本ずつ読み解いて紹介します。
+
+<div class="toc-grid">
+<a class="toc-card" href="articles/paper-guides-intro/index.html"><img src="articles/paper-guides-intro/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">12</span><div class="toc-title">論文ガイドについて:このブログで文献を紹介していきます</div><p>このブログの論文ガイドの目的、扱う論文、各記事の構成、公開済みの記事の一覧です。</p></div></a>
+<a class="toc-card" href="articles/paper-guide-mahoney-goertz/index.html"><img src="articles/paper-guide-mahoney-goertz/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">13</span><div class="toc-title">論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney &amp; Goertz, 2006)</div><p>定量分析と定性分析は、何が違うのか。Mahoney &amp; Goertz (2006) を、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。</p></div></a>
+</div>

@@ -6,7 +6,7 @@ description: "A suggested reading order for new visitors."
 
 This blog is about **qualitative comparative analysis (QCA)**, the **ThSQCA** R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order.
 
-## The eleven core articles, in reading order
+## The thirteen core articles, in reading order
 
 The [home page](index.qmd) shows the same list with pictures.
 
@@ -32,6 +32,11 @@ The [home page](index.qmd) shows the same list with pictures.
 ### 4. Research methods, step by step
 
 11. [From survey items to a scale, then on to regression and QCA: a step-by-step guide](posts/scale-to-regression/index.qmd)
+
+### 5. Paper guides
+
+12. [About Paper Guides: Introducing Papers on This Blog](posts/paper-guides-intro/index.qmd)
+13. [Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)](posts/paper-guide-mahoney-goertz/index.qmd)
 
 ## If you prefer to start from a tool
 

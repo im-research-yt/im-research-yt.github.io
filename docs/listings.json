@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/paper-guide-mahoney-goertz/index.html",
+      "/posts/paper-guides-intro/index.html",
       "/posts/scale-to-regression/index.html",
       "/posts/reading-list-applied/index.html",
       "/posts/reading-list-basics/index.html",
@@ -18,6 +20,8 @@
   {
     "listing": "/ja/index.html",
     "items": [
+      "/ja/articles/paper-guide-mahoney-goertz/index.html",
+      "/ja/articles/paper-guides-intro/index.html",
       "/ja/articles/scale-to-regression/index.html",
       "/ja/articles/reading-list-applied/index.html",
       "/ja/articles/reading-list-basics/index.html",

@@ -16,8 +16,174 @@
 <height>76</height>
 <width>144</width>
 </image>
-<generator>quarto-1.9.38</generator>
-<lastBuildDate>Wed, 07 Oct 2026 15:00:00 GMT</lastBuildDate>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Wed, 14 Oct 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney &amp; Goertz, 2006)</title>
+  <link>https://im-research-yt.github.io/ja/articles/paper-guide-mahoney-goertz/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><strong>書誌情報</strong>: Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017" class="uri">https://doi.org/10.1093/pan/mpj017</a></p>
+<p><strong>要点</strong>: 定量研究と定性研究を、優劣ではなく「ゴールが違う2つの文化」として整理した論文です。リサーチ設計する際の指針になる必読論文として推奨します。自分の問いがどちらなのかを先に決めると、分析手法を選びやすくなることが分かります。</p>
+<section id="概要" class="level2">
+<h2 class="anchored" data-anchor-id="概要">概要</h2>
+<p>　「平均的な効果」を知りたい統計学をベースにした定量研究と、「特定の出来事が起きた原因」を突き止めたい事例研究（定性研究）とでは、そもそも問いが違います。相対的には、定量研究は「原因が平均してどれだけ効くか」を、定性研究は「この事例で、なぜその結果が起きたか」を問うています。この論文は、双方のやり方が、それぞれのゴールに対して合理的であることを示しています。</p>
+</section>
+<section id="この論文を選んだ理由" class="level2">
+<h2 class="anchored" data-anchor-id="この論文を選んだ理由">この論文を選んだ理由</h2>
+<p>　MBAの研究やビジネスリサーチでは、こんな壁に当たることがあります。A/B テストや回帰分析で全体の傾向はつかめるのに、一番大事な顧客がなぜ離脱したのかは分からない。</p>
+<p>　この論文は、その理由を考える手がかりになります。全体の「平均的な傾向」を測る頭の使い方と、個別の出来事の「原因のメカニズム」を追う頭の使い方は、別のものだからです。自分の知りたい問いに合わせて分析手法を選ぶための、「思考の地図」として読めます。MBAの院生であれば、各自の研究を始める前に読んでおくべき論文の一つだと考え、この論文を選びました。</p>
+</section>
+<section id="この論文の骨子" class="level2">
+<h2 class="anchored" data-anchor-id="この論文の骨子">この論文の骨子</h2>
+<p>　この論文は、2つの伝統の違いを、10の領域(説明への接近法、因果概念、多変量モデル、同効性、適用範囲、事例選定、観察値の重み付け、実質的に重要な事例の扱い、適合不足、概念と測定)で比べています。このメモでは、全体像をつかみやすいように、問いの目的、因果の捉え方、事例の選び方の3つに絞ります。残りの領域は、論文で確かめてください。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 40%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>3つの軸</th>
+<th>定性的研究の文化(探偵の視点)</th>
+<th>定量的研究の文化(実験者の視点)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>問いの目的</strong></td>
+<td>特定の事例で、なぜその結果が起きたかを解明する</td>
+<td>要因が、平均してどれくらい影響を与えるかを測る</td>
+</tr>
+<tr class="even">
+<td><strong>因果の捉え方</strong></td>
+<td>条件の「掛け算」(組み合わせ)で考える</td>
+<td>典型的には、変数の「足し算」(平均的な影響度)で考える</td>
+</tr>
+<tr class="odd">
+<td><strong>事例の選び方</strong></td>
+<td>結果が起きた事例を中心に、深く調べる</td>
+<td>偏りを防ぐため、結果(従属変数)では事例を選ばない</td>
+</tr>
+</tbody>
+</table>
+<p>　表を左から順に読むと、2つの文化の違いが、1本の筋でつながっていることが分かります。論文は、定性研究を探偵になぞらえて説明しています。定量研究は、統計の手法が統制実験の考え方をモデルにしている、という説明です。この記事の「実験者の視点」は、その対比のための呼び名です。</p>
+<p>　探偵は、起きてしまった事件の原因を知りたいので、事件が起きた事例を深く調べます。そして、原因は1つではなく、いくつかの条件の組み合わせだと考えます。</p>
+<p>　一方、実験者は、要因の平均的な効果を知りたいので、結果で事例を選んで偏らないように気をつけます。そして、各要因の影響を足し合わせて考えます。</p>
+<p>　ゴールが違えば、事例の選び方も、因果の捉え方も変わる、という関係です。</p>
+</section>
+<section id="本論文の貢献" class="level2">
+<h2 class="anchored" data-anchor-id="本論文の貢献">本論文の貢献</h2>
+<p>　1つ目は、「問いのゴール」の違いを、はっきり見えるようにした点です。「なぜこの事案が起きたのか」を解き明かす問いと、「この要因は、平均してどんな効果を持つか」を測る問いは、別物です。分析手法をめぐる議論がかみ合わない原因の多くは、手法の良し悪しではなく、この目的の違いにあります。</p>
+<p>　2つ目は、「条件の組み合わせ」に光を当てた点です。ある要因が単独で効くのではなく、「条件 A・B・C がそろったときだけ結果が出る」ことがあります。また、同じ結果に至るルートが、1つとは限りません(これを同効性と呼びます)。平均的な足し算のモデルでは見落としやすい、こうした現実の構造を、論理的に整理しています。</p>
+<hr>
+<p>ここからは、論文を踏まえた私見です。</p>
+</section>
+<section id="注目すべきと感じた部分" class="level2">
+<h2 class="anchored" data-anchor-id="注目すべきと感じた部分">注目すべきと感じた部分</h2>
+<p>　私がこの論文で特に大事だと思うのは、定性研究と定量研究を対比しながら理解できることです。2つを並べて見ると、それぞれが何を目指し、なぜそのやり方を取るのかが、はっきりします。</p>
+<p>　もう1つは、<strong>QCA</strong> という手法を理解する上での基礎になりうることです。定性研究の論理(条件の組み合わせ、複数のルート)を押さえておくと、QCA が何を引き継いだ手法なのかが見えてきます。</p>
+</section>
+<section id="ビジネスへの応用を考える顧客離脱のケース" class="level2">
+<h2 class="anchored" data-anchor-id="ビジネスへの応用を考える顧客離脱のケース">ビジネスへの応用を考える:顧客離脱のケース</h2>
+<p>　論文を離れ、応用を考えてみます。たとえば、E コマース企業で、顧客の離脱を分析する場面を考えてみましょう(数字は、理解を助けるための架空の例です)。</p>
+<p>　統計や A/B テストのような定量的なアプローチは、「クーポンを発行すると、顧客全体の離脱率が、平均で3%下がる」といった、全体の傾向を導くのに向いています。ただし、これだけでは、売上に最も貢献していた優良顧客の A 社が、なぜ突然解約したのかという個別の理由は見えてきません。</p>
+<p>　そこで定性的・論理的なアプローチの出番になります。「担当者の変更」「システム障害の発生」「契約更新期の重なり」のように、複数の条件が重なったときに離脱が起きやすい、という組み合わせの候補を浮かび上がらせることができます。ただし、これは原因を確定するものではなく、あとで確かめるべき仮説の材料です。</p>
+</section>
+<section id="qca-への接続" class="level2">
+<h2 class="anchored" data-anchor-id="qca-への接続">QCA への接続</h2>
+<p>　この論文は、定性と定量の文化の違いを整理したものでした。両者をつなぐ方法のひとつに、QCA(質的比較分析)があります。定性研究の「条件の組み合わせと、複数のルートを重視する考え方」を保ちながら、データセットを使って、体系的に分析する手法です。QCA の考え方は、<a href="../../../ja/articles/why-qca-decisions/index.html">「なぜ QCA は意思決定に向くのか」</a>の記事（Yuki Toyoda’s Blog）でも紹介しています。</p>
+<hr>
+<p>※以下、ポイントの整理</p>
+</section>
+<section id="見返すときのポイント" class="level2">
+<h2 class="anchored" data-anchor-id="見返すときのポイント">見返すときのポイント</h2>
+<ul>
+<li>分析に入る前に、自分の問いが「この事例はなぜ起きたか」なのか、「この要因は平均してどう効くか」なのかを決める。</li>
+<li>問いが決まれば、事例の選び方と因果の捉え方も、おのずと決まってくる。</li>
+<li>QCA を学ぶときは、この論文の「条件の組み合わせ」と「複数のルート」に戻る。</li>
+</ul>
+</section>
+<section id="用語解説" class="level2">
+<h2 class="anchored" data-anchor-id="用語解説">用語解説</h2>
+<ul>
+<li><strong>帰結の原因(causes-of-effects)</strong>: 「なぜこの出来事が起きたのか」と、結果から原因をさかのぼる、探偵的な問い。</li>
+<li><strong>原因の効果(effects-of-causes)</strong>: 「この要因を加えると、平均してどんな効果があるか」を測る、実験者的な問い。</li>
+<li><strong>同効性(equifinality)</strong>: 同じ結果に至るルートが、1つではなく複数あること。</li>
+</ul>
+</section>
+<section id="参考文献" class="level2">
+<h2 class="anchored" data-anchor-id="参考文献">参考文献</h2>
+<p>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017" class="uri">https://doi.org/10.1093/pan/mpj017</a></p>
+<p>文献の一覧に戻る: <a href="../../../ja/articles/reading-list-basics/index.html">基礎編</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/ja/articles/paper-guide-mahoney-goertz/</guid>
+  <pubDate>Wed, 14 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/paper-guide-mahoney-goertz/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>論文ガイドについて:このブログで文献を紹介していきます</title>
+  <link>https://im-research-yt.github.io/ja/articles/paper-guides-intro/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>このブログでは、質的比較分析(QCA)、マーケティング・サイエンス、ブランド・マネジメント、統計学に関係する論文を、随時、1本ずつ読み解いて紹介していきます。</p>
+<section id="この棚の目的" class="level2">
+<h2 class="anchored" data-anchor-id="この棚の目的">この棚の目的</h2>
+<p>論文を読む前に、「何が書かれているか」「どこが大事か」を、短い時間でつかめるようにすることが目的です。同時に、私自身が後から読み返すための文献メモにもなるように書いています。</p>
+</section>
+<section id="紹介する論文" class="level2">
+<h2 class="anchored" data-anchor-id="紹介する論文">紹介する論文</h2>
+<p>このブログで扱う内容に関係する論文を選びます。QCA の方法論、閾値(しきい値)の扱い、データ分析の基礎、マーケティングへの応用などです。</p>
+</section>
+<section id="各記事の構成" class="level2">
+<h2 class="anchored" data-anchor-id="各記事の構成">各記事の構成</h2>
+<p>どの記事も、同じ順序で書きます。</p>
+<ul>
+<li>書誌情報と要点</li>
+<li>概要</li>
+<li>この論文を選んだ理由</li>
+<li>この論文の骨子</li>
+<li>本論文の貢献</li>
+<li>私が重視する点</li>
+<li>見返すときのポイント、用語解説、参考文献</li>
+</ul>
+<p>ビジネスへの応用例と、関連記事への接続は、必要なときだけ付けます。</p>
+</section>
+<section id="読むときの注意" class="level2">
+<h2 class="anchored" data-anchor-id="読むときの注意">読むときの注意</h2>
+<ul>
+<li>各記事は、論文の本文や図表を転載せず、私の言葉で書いています。</li>
+<li>内容の解釈は、私の理解にもとづきます。引用や研究で使うときは、必ず原典で確かめてください。</li>
+</ul>
+</section>
+<section id="公開済みの論文ガイド" class="level2">
+<h2 class="anchored" data-anchor-id="公開済みの論文ガイド">公開済みの論文ガイド</h2>
+<ul>
+<li><a href="../../../ja/articles/paper-guide-mahoney-goertz/index.html">論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney &amp; Goertz, 2006)</a></li>
+</ul>
+
+
+</section>
+
+ ]]></description>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/ja/articles/paper-guides-intro/</guid>
+  <pubDate>Wed, 14 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/ja/articles/paper-guides-intro/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>アンケートから尺度を作り、回帰分析・QCAに進む手順</title>
   <dc:creator>Yuki Toyoda</dc:creator>
@@ -1085,7 +1251,7 @@ font-style: inherit;">"psych"</span>)</span></code></pre></div></div>
 <section id="考え方と測り方論文" class="level2">
 <h2 class="anchored" data-anchor-id="考え方と測り方論文">1. 考え方と測り方(論文)</h2>
 <ul>
-<li>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017">https://doi.org/10.1093/pan/mpj017</a> 量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。</li>
+<li>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017">https://doi.org/10.1093/pan/mpj017</a> 量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。<a href="../../../ja/articles/paper-guide-mahoney-goertz/index.html">論文ガイドあり</a></li>
 <li>Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019">https://doi.org/10.1093/pan/mpj019</a> 集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。</li>
 <li>Schneider, C. Q., &amp; Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. <em>Comparative Sociology</em>, 9(3), 397-418. <a href="https://doi.org/10.1163/156913210X12493538729793">https://doi.org/10.1163/156913210X12493538729793</a> QCA とファジィ集合を用いるときの、標準的な良い実践(good practice)を整理した論文です。分析を始める前に、守るべき手続きを確認するのに役立ちます。</li>
 </ul>

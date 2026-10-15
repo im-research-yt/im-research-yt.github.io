@@ -1,0 +1,90 @@
+---
+sidebar: false
+title: "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)"
+image: thumbnail.png
+date: "2026-10-15"
+categories: [QCA, notes]
+description: "How do quantitative and qualitative analysis differ? A paper guide to Mahoney & Goertz (2006), written for MBA students and business analysts."
+---
+
+**Reference**: Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. <https://doi.org/10.1093/pan/mpj017>
+
+**Summary**: This paper organizes quantitative and qualitative research not as a contest between better and worse, but as two cultures with different goals. I recommend it as required reading for anyone designing a research project. The paper shows that deciding first which kind of question you are asking makes it easier to choose an analytical method.
+
+## Overview
+
+Quantitative research, which is built on statistics and aims to learn "average effects," and qualitative research (case study research), which aims to pin down "the cause of a particular event," ask different questions in the first place. Relatively speaking, quantitative research asks how much a cause affects outcomes on average, whereas qualitative research asks why this outcome happened in this case. The paper shows that the practices of both traditions are reasonable given their respective goals.
+
+## Why I chose this paper
+
+In MBA research and business research, you may run into this wall: A/B tests and regression analysis reveal the overall trend, yet you still cannot tell why your single most important customer left.
+
+This paper offers a way to think about why that happens. Measuring the "average trend" across the data and tracing the "causal mechanism" of an individual event are two different ways of thinking. The paper can be read as a "map of thinking" for choosing an analytical method that fits the question you want to answer. I chose it because I believe it is one of the papers MBA students should read before starting their own research.
+
+## The structure of the paper
+
+The paper contrasts the two traditions across 10 areas (approaches to explanation, conceptions of causation, multivariate explanations, equifinality, scope and causal generalization, case selection practices, weighting observations, substantively important cases, lack of fit, and concepts and measurement). In this memo, to make the overall picture easier to grasp, I narrow them down to three: the purpose of the question, how causation is understood, and how cases are selected. For the other areas, please check the paper itself.
+
+| Three axes | Qualitative culture (the detective's view) | Quantitative culture (the experimenter's view) |
+| --- | --- | --- |
+| **Purpose of the question** | Explain why the outcome happened in a particular case | Measure how much a factor affects outcomes on average |
+| **How causation is understood** | Thinks in terms of the "multiplication" (combination) of conditions | Typically thinks in terms of the "addition" (average effects) of variables |
+| **How cases are selected** | Examines in depth mainly the cases in which the outcome occurred | To avoid bias, does not select cases on the outcome (the dependent variable) |
+
+Reading the table from left to right, you can see that the differences between the two cultures are connected in a single line. The paper likens qualitative research to a detective. Quantitative research, by contrast, is explained as statistical methods that take the logic of the controlled experiment as their model. The phrase "the experimenter's view" in this article is simply a label I use for this contrast.
+
+A detective wants to know the cause of a crime that has already happened, so the detective examines in depth the cases in which it happened. The detective also assumes that the cause is not one thing but a combination of several conditions.
+
+An experimenter, on the other hand, wants to know the average effect of a factor, and therefore takes care not to select cases by their outcome, which would introduce bias. The experimenter also thinks of the effects of the factors as adding up.
+
+If the goals differ, then both how cases are selected and how causation is understood differ as well.
+
+## The paper's contributions
+
+First, the paper makes the difference in the "goal of the question" clearly visible. The question "why did this case happen?" and the question "what effect does this factor have on average?" are different questions. Much of the reason why debates about analytical methods fail to connect lies not in which method is better, but in this difference in purpose.
+
+Second, the paper shines a light on "combinations of conditions." A factor may not work on its own; sometimes an outcome appears only "when conditions A, B, and C are all present." Moreover, there may be more than one route to the same outcome (this is called equifinality). The paper organizes, in a logical way, this feature of the real world that is easy to overlook in models that simply add effects together.
+
+---
+
+From here on, these are my own views, based on the paper.
+
+## What I found noteworthy
+
+What I consider especially important about this paper is that it lets us understand qualitative and quantitative research by contrasting them. Seeing the two side by side makes clear what each aims for and why each works the way it does.
+
+Another point is that it can serve as a foundation for understanding **QCA** as a method. If you grasp the logic of qualitative research (combinations of conditions, multiple routes), you can see what QCA has inherited.
+
+## Thinking about business applications: the case of customer churn
+
+Let us step away from the paper and think about applications. Consider an e-commerce company analyzing customer churn (the numbers are a made-up example to aid understanding).
+
+Quantitative approaches such as statistics and A/B tests are well suited to revealing the overall trend, for example "issuing a coupon lowers the churn rate across all customers by 3% on average." However, this alone does not reveal the individual reason why customer A, one of the top contributors to sales, suddenly canceled.
+
+This is where a qualitative, logic-based approach comes in. It can bring out candidate combinations: churn tends to occur when several conditions overlap, such as "a change of account manager," "a system outage," and "an overlapping contract renewal period." However, this does not establish the cause; it is material for hypotheses to be checked later.
+
+## Connection to QCA
+
+This paper organized the differences between the qualitative and quantitative cultures. One method that connects the two is QCA (qualitative comparative analysis). It keeps the qualitative way of thinking, which emphasizes combinations of conditions and multiple routes, while analyzing a dataset systematically. I also discuss the ideas behind QCA in the article [Why QCA suits decision-making](../why-qca-decisions/index.qmd) on this blog.
+
+---
+
+*Summary points for review*
+
+## Points to revisit
+
+- Before starting an analysis, decide whether your question is "why did this case happen?" or "how does this factor work on average?"
+- Once the question is decided, how to select cases and how to understand causation follow naturally.
+- When you study QCA, return to this paper's ideas of "combinations of conditions" and "multiple routes."
+
+## Glossary
+
+- **Causes-of-effects**: A detective-style question that works backward from an outcome: "Why did this happen?"
+- **Effects-of-causes**: An experimenter-style question that measures the average effect of adding a factor: "What effect does this factor have on average?"
+- **Equifinality**: The fact that there is not just one route to the same outcome, but several.
+
+## References
+
+Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. <https://doi.org/10.1093/pan/mpj017>
+
+Back to the reading list: [Basics](../reading-list-basics/index.qmd)
