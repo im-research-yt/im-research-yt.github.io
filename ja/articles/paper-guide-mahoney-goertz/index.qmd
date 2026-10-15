@@ -86,4 +86,4 @@ description: "定量分析と定性分析は、何が違うのか。Mahoney & Go
 
 Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. <https://doi.org/10.1093/pan/mpj017>
 
-文献の一覧に戻る: [基礎編](../reading-list-basics/index.qmd)
+論文ガイドの一覧に戻る: [この棚について](../paper-guides-intro/index.qmd)

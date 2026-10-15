@@ -87,4 +87,4 @@ This paper organized the differences between the qualitative and quantitative cu
 
 Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. <https://doi.org/10.1093/pan/mpj017>
 
-Back to the reading list: [Basics](../reading-list-basics/index.qmd)
+Back to the paper guides: [About this shelf](../paper-guides-intro/index.qmd)
