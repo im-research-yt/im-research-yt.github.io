@@ -263,7 +263,7 @@
     "href": "posts/paper-guide-mahoney-goertz/index.html#thinking-about-business-applications-the-case-of-customer-churn",
     "title": "Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)",
     "section": "Thinking about business applications: the case of customer churn",
-    "text": "Thinking about business applications: the case of customer churn\nLet us step away from the paper and think about applications. Consider an e-commerce company analyzing customer churn (the numbers are a made-up example to aid understanding).\nQuantitative approaches such as statistics and A/B tests are well suited to revealing the overall trend, for example “issuing a coupon lowers the churn rate across all customers by 3% on average.” However, this alone does not reveal the individual reason why customer A, one of the top contributors to sales, suddenly canceled.\nThis is where a qualitative, logic-based approach comes in. It can bring out candidate combinations: churn tends to occur when several conditions overlap, such as “a change of account manager,” “a system outage,” and “an overlapping contract renewal period.” However, this does not establish the cause; it is material for hypotheses to be checked later."
+    "text": "Thinking about business applications: the case of customer churn\nLet us step away from the paper and think about applications. Consider an e-commerce company analyzing customer churn (the numbers are a made-up example to aid understanding).\nQuantitative approaches such as statistics and A/B tests are well suited to revealing the overall trend, for example “issuing a coupon lowers the churn rate across all customers by 3% on average.” However, this alone does not reveal the individual reason why Customer A, who had spent the most with the company, suddenly stopped using the service.\nThis is where a qualitative, logic-based approach comes in. It can bring out candidate combinations: churn tends to occur when several conditions overlap, such as “a delivery delay,” “dissatisfaction with the support response,” and “a competitor’s discount campaign.” However, this does not establish the cause; it is material for hypotheses to be checked later."
   },
   {
     "objectID": "posts/paper-guide-mahoney-goertz/index.html#connection-to-qca",
@@ -921,14 +921,14 @@
     "href": "ja/articles/paper-guide-mahoney-goertz/index.html#この論文の骨子",
     "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
     "section": "この論文の骨子",
-    "text": "この論文の骨子\n　この論文は、2つの伝統の違いを、10の領域(説明への接近法、因果概念、多変量モデル、同効性、適用範囲、事例選定、観察値の重み付け、実質的に重要な事例の扱い、適合不足、概念と測定)で比べています。このメモでは、全体像をつかみやすいように、問いの目的、因果の捉え方、事例の選び方の3つに絞ります。残りの領域は、論文で確かめてください。\n\n\n\n\n\n\n\n\n3つの軸\n定性的研究の文化(探偵の視点)\n定量的研究の文化(実験者の視点)\n\n\n\n\n問いの目的\n特定の事例で、なぜその結果が起きたかを解明する\n要因が、平均してどれくらい影響を与えるかを測る\n\n\n因果の捉え方\n条件の「掛け算」(組み合わせ)で考える\n典型的には、変数の「足し算」(平均的な影響度)で考える\n\n\n事例の選び方\n結果が起きた事例を中心に、深く調べる\n偏りを防ぐため、結果(従属変数)では事例を選ばない\n\n\n\n　表を左から順に読むと、2つの文化の違いが、1本の筋でつながっていることが分かります。論文は、定性研究を探偵になぞらえて説明しています。定量研究は、統計の手法が統制実験の考え方をモデルにしている、という説明です。この記事の「実験者の視点」は、その対比のための呼び名です。\n　探偵は、起きてしまった事件の原因を知りたいので、事件が起きた事例を深く調べます。そして、原因は1つではなく、いくつかの条件の組み合わせだと考えます。\n　一方、実験者は、要因の平均的な効果を知りたいので、結果で事例を選んで偏らないように気をつけます。そして、各要因の影響を足し合わせて考えます。\n　ゴールが違えば、事例の選び方も、因果の捉え方も変わる、という関係です。"
+    "text": "この論文の骨子\n　この論文は、2つの伝統の違いを、10の領域(説明への接近法、因果概念、多変量モデル、等結果性、適用範囲、事例選定、観察値の重み付け、実質的に重要な事例の扱い、適合不足、概念と測定)で比べています。このメモでは、全体像をつかみやすいように、問いの目的、因果の捉え方、事例の選び方の3つに絞ります。残りの領域は、論文で確かめてください。\n\n\n\n\n\n\n\n\n3つの軸\n定性的研究の文化(探偵の視点)\n定量的研究の文化(実験者の視点)\n\n\n\n\n問いの目的\n特定の事例で、なぜその結果が起きたかを解明する\n要因が、平均してどれくらい影響を与えるかを測る\n\n\n因果の捉え方\n条件の「掛け算」(組み合わせ)で考える\n典型的には、変数の「足し算」(平均的な影響度)で考える\n\n\n事例の選び方\n結果が起きた事例を中心に、深く調べる\n偏りを防ぐため、結果(従属変数)では事例を選ばない\n\n\n\n　表を左から順に読むと、2つの文化の違いが、1本の筋でつながっていることが分かります。論文は、定性研究を探偵になぞらえて説明しています。定量研究は、統計の手法が統制実験の考え方をモデルにしている、という説明です。この記事の「実験者の視点」は、その対比のための呼び名です。\n　探偵は、起きてしまった事件の原因を知りたいので、事件が起きた事例を深く調べます。そして、原因は1つではなく、いくつかの条件の組み合わせだと考えます。\n　一方、実験者は、要因の平均的な効果を知りたいので、結果で事例を選んで偏らないように気をつけます。そして、各要因の影響を足し合わせて考えます。\n　ゴールが違えば、事例の選び方も、因果の捉え方も変わる、という関係です。"
   },
   {
     "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#本論文の貢献",
     "href": "ja/articles/paper-guide-mahoney-goertz/index.html#本論文の貢献",
     "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
     "section": "本論文の貢献",
-    "text": "本論文の貢献\n　1つ目は、「問いのゴール」の違いを、はっきり見えるようにした点です。「なぜこの事案が起きたのか」を解き明かす問いと、「この要因は、平均してどんな効果を持つか」を測る問いは、別物です。分析手法をめぐる議論がかみ合わない原因の多くは、手法の良し悪しではなく、この目的の違いにあります。\n　2つ目は、「条件の組み合わせ」に光を当てた点です。ある要因が単独で効くのではなく、「条件 A・B・C がそろったときだけ結果が出る」ことがあります。また、同じ結果に至るルートが、1つとは限りません(これを同効性と呼びます)。平均的な足し算のモデルでは見落としやすい、こうした現実の構造を、論理的に整理しています。\n\nここからは、論文を踏まえた私見です。"
+    "text": "本論文の貢献\n　1つ目は、「問いのゴール」の違いを、はっきり見えるようにした点です。「なぜこの事案が起きたのか」を解き明かす問いと、「この要因は、平均してどんな効果を持つか」を測る問いは、別物です。分析手法をめぐる議論がかみ合わない原因の多くは、手法の良し悪しではなく、この目的の違いにあります。\n　2つ目は、「条件の組み合わせ」に光を当てた点です。ある要因が単独で効くのではなく、「条件 A・B・C がそろったときだけ結果が出る」ことがあります。また、同じ結果に至るルートが、1つとは限りません(これを等結果性と呼びます)。平均的な足し算のモデルでは見落としやすい、こうした現実の構造を、論理的に整理しています。\n\nここからは、論文を踏まえた私見です。"
   },
   {
     "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#注目すべきと感じた部分",
@@ -942,7 +942,7 @@
     "href": "ja/articles/paper-guide-mahoney-goertz/index.html#ビジネスへの応用を考える顧客離脱のケース",
     "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
     "section": "ビジネスへの応用を考える:顧客離脱のケース",
-    "text": "ビジネスへの応用を考える:顧客離脱のケース\n　論文を離れ、応用を考えてみます。たとえば、E コマース企業で、顧客の離脱を分析する場面を考えてみましょう(数字は、理解を助けるための架空の例です)。\n　統計や A/B テストのような定量的なアプローチは、「クーポンを発行すると、顧客全体の離脱率が、平均で3%下がる」といった、全体の傾向を導くのに向いています。ただし、これだけでは、売上に最も貢献していた優良顧客の A 社が、なぜ突然解約したのかという個別の理由は見えてきません。\n　そこで定性的・論理的なアプローチの出番になります。「担当者の変更」「システム障害の発生」「契約更新期の重なり」のように、複数の条件が重なったときに離脱が起きやすい、という組み合わせの候補を浮かび上がらせることができます。ただし、これは原因を確定するものではなく、あとで確かめるべき仮説の材料です。"
+    "text": "ビジネスへの応用を考える:顧客離脱のケース\n　論文を離れ、応用を考えてみます。たとえば、E コマース企業で、顧客の離脱を分析する場面を考えてみましょう(数字は、理解を助けるための架空の例です)。\n　統計や A/B テストのような定量的なアプローチは、「クーポンを発行すると、顧客全体の離脱率が、平均で3%下がる」といった、全体の傾向を導くのに向いています。ただし、これだけでは、購入額が最も大きかった優良顧客の A さんが、なぜ突然利用をやめたのかという個別の理由は見えてきません。\n　そこで定性的・論理的なアプローチの出番になります。「配送の遅れ」「問い合わせ対応への不満」「競合の割引キャンペーン」のように、複数の条件が重なったときに離脱が起きやすい、という組み合わせの候補を浮かび上がらせることができます。ただし、これは原因を確定するものではなく、あとで確かめるべき仮説の材料です。"
   },
   {
     "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#qca-への接続",
@@ -963,7 +963,7 @@
     "href": "ja/articles/paper-guide-mahoney-goertz/index.html#用語解説",
     "title": "論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)",
     "section": "用語解説",
-    "text": "用語解説\n\n帰結の原因(causes-of-effects): 「なぜこの出来事が起きたのか」と、結果から原因をさかのぼる、探偵的な問い。\n原因の効果(effects-of-causes): 「この要因を加えると、平均してどんな効果があるか」を測る、実験者的な問い。\n同効性(equifinality): 同じ結果に至るルートが、1つではなく複数あること。"
+    "text": "用語解説\n\n帰結の原因(causes-of-effects): 「なぜこの出来事が起きたのか」と、結果から原因をさかのぼる、探偵的な問い。\n原因の効果(effects-of-causes): 「この要因を加えると、平均してどんな効果があるか」を測る、実験者的な問い。\n等結果性(equifinality): 同じ結果に至るルートが、1つではなく複数あること。"
   },
   {
     "objectID": "ja/articles/paper-guide-mahoney-goertz/index.html#参考文献",
