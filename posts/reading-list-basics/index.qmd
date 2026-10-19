@@ -17,7 +17,7 @@ The summaries below stay within what the publishers' abstracts and descriptions 
 - Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. [https://doi.org/10.1093/pan/mpj017](https://doi.org/10.1093/pan/mpj017)
   Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to. [Paper guide available](../paper-guide-mahoney-goertz/index.qmd)
 - Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. *Political Analysis*, 14(3), 291-310. [https://doi.org/10.1093/pan/mpj019](https://doi.org/10.1093/pan/mpj019)
-  Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.
+  Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error. [Paper guide available](../paper-guide-ragin/index.qmd)
 - Schneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. *Comparative Sociology*, 9(3), 397-418. [https://doi.org/10.1163/156913210X12493538729793](https://doi.org/10.1163/156913210X12493538729793)
   Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis.
 

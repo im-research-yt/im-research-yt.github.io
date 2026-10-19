@@ -90,4 +90,5 @@ QCA、マーケティング・サイエンス、ブランド・マネジメン�
 <div class="toc-grid">
 <a class="toc-card" href="articles/paper-guides-intro/index.html"><img src="articles/paper-guides-intro/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">12</span><div class="toc-title">論文ガイドについて:このブログで文献を紹介していきます</div><p>このブログの論文ガイドの目的、扱う論文、各記事の構成、公開済みの記事の一覧です。</p></div></a>
 <a class="toc-card" href="articles/paper-guide-mahoney-goertz/index.html"><img src="articles/paper-guide-mahoney-goertz/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">13</span><div class="toc-title">論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney &amp; Goertz, 2006)</div><p>定量分析と定性分析は、何が違うのか。Mahoney &amp; Goertz (2006) を、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。</p></div></a>
+<a class="toc-card" href="articles/paper-guide-ragin/index.html"><img src="articles/paper-guide-ragin/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">14</span><div class="toc-title">論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)</div><p>成功企業の共通点は、成功の条件といえるのか。Ragin (2006) を通して、必要条件と十分条件の違いと、その関係を評価する一貫性とカバレッジを、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。</p></div></a>
 </div>

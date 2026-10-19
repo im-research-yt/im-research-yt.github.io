@@ -39,3 +39,4 @@ A section on business applications and a section on connections to related artic
 ## Published paper guides
 
 - [Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)](../paper-guide-mahoney-goertz/index.qmd)
+- [Paper Guide: How Should We Evaluate the "Conditions for Success"? (Ragin, 2006)](../paper-guide-ragin/index.qmd)

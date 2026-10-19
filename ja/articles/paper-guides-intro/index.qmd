@@ -38,3 +38,4 @@ description: "このブログの論文ガイドの目的、扱う論文、各記
 ## 公開済みの論文ガイド
 
 - [論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)](../paper-guide-mahoney-goertz/index.qmd)
+- [論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)](../paper-guide-ragin/index.qmd)

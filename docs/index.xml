@@ -133,6 +133,193 @@
   <media:content url="https://im-research-yt.github.io/posts/paper-guide-mahoney-goertz/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
+  <title>Paper Guide: How Should We Evaluate the “Conditions for Success”? (Ragin, 2006)</title>
+  <link>https://im-research-yt.github.io/posts/paper-guide-ragin/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><strong>Reference</strong>: Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019" class="uri">https://doi.org/10.1093/pan/mpj019</a></p>
+<p><strong>Summary</strong>: “If a firm has this condition, it succeeds” and “to succeed, a firm must have this condition” are different claims. The paper treats this difference as a matter of set relations (sufficient and necessary conditions), and shows how to evaluate such a relation: consistency tells you how consistently the cases follow it, and coverage tells you how much of the outcome it covers. I recommend it to anyone who wants to ask what the phrase “success factor” actually means.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>　Suppose that many successful firms turn out to be customer-oriented. Can we then say that being thoroughly customer-oriented leads to success? Ragin deals with the logical problem behind this question.</p>
+<p>　Charles C. Ragin is a sociologist known as the originator of QCA. The starting point of this paper is a question: do the relations stated in a theory match the relations we actually check in an analysis?</p>
+<p>　Take the claim that “democracies do not fight wars with each other.” This claim states a set relation: the pairs of democracies form a subset of the pairs of countries that do not go to war. On the other hand, there are many pairs of countries that avoid war without both being democracies, so the correlation between “being a pair of democracies” and “not going to war” may not be strong. That does not, however, refute the original claim.</p>
+<p>　On this basis, Ragin points out that <strong>theories stated as set relations tend to be translated, in analysis, into hypotheses about correlation</strong>. He then presents simple descriptive measures for evaluating set relations in the form in which they were stated.</p>
+</section>
+<section id="why-i-chose-this-paper" class="level2">
+<h2 class="anchored" data-anchor-id="why-i-chose-this-paper">Why I chose this paper</h2>
+<p>　In MBA research, we sometimes want to analyze how a certain event comes about, for example the factors behind a company’s success. However, what successful companies have in common cannot always be treated as a law of success.</p>
+<p>　In business cases, we come across explanations such as “successful firms are thoroughly customer-oriented” or “high-performing stores offer good service.” To judge what can be concluded from them, we need to distinguish the following three questions.</p>
+<ul>
+<li>Do firms that have the condition succeed?</li>
+<li>Is the condition indispensable for success?</li>
+<li>How much of the success we observe can this condition explain?</li>
+</ul>
+<p>　The value of reading this paper is not limited to learning QCA’s measures. It also helps you clarify what a “success factor” means and look for evidence that fits the claim you are making. Whether or not you use QCA, I recommend it as a paper that conveys a perspective every MBA student should have.</p>
+</section>
+<section id="the-structure-of-the-paper" class="level2">
+<h2 class="anchored" data-anchor-id="the-structure-of-the-paper">The structure of the paper</h2>
+<p>　The paper discusses two measures for evaluating set relations (consistency and coverage), including how to use them. In this memo, I narrow the discussion to four points.</p>
+<section id="correlation-and-set-relations-answer-different-questions" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-and-set-relations-answer-different-questions">1. Correlation and set relations answer different questions</h3>
+<p>　Correlation looks at how two variables move together. A set relation looks at whether the set of cases that have a condition is contained in the set of cases that achieve the outcome (or the reverse). Let the condition be <img src="https://latex.codecogs.com/png.latex?X"> and the outcome be <img src="https://latex.codecogs.com/png.latex?Y">. Sufficient and necessary conditions can then be distinguished as follows.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Relation</th>
+<th>Question</th>
+<th>As sets</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?X"> is sufficient for <img src="https://latex.codecogs.com/png.latex?Y"></td>
+<td>If X is present, is Y present?</td>
+<td><img src="https://latex.codecogs.com/png.latex?X%20%5Csubseteq%20Y"></td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?X"> is necessary for <img src="https://latex.codecogs.com/png.latex?Y"></td>
+<td>If Y is present, is X present?</td>
+<td><img src="https://latex.codecogs.com/png.latex?Y%20%5Csubseteq%20X"></td>
+</tr>
+</tbody>
+</table>
+<p>　As an example, consider the claim that “stores that combine a good location with excellent service are high performers.” This is a claim of sufficiency: the set of stores with this combination is contained in the set of high-performing stores. The claim says only whether the stores with the combination are high performers. It does not say the reverse, that every high-performing store has this combination. For instance, some stores may have an ordinary location yet perform well thanks to a distinctive product mix and a strong brand. Such stores simply lie outside the claim; they do not contradict it. (The stores and numbers in this article are a made-up example for illustration. Only the figure 17/20 = 0.85 is chosen to match an example in the paper.)</p>
+<p>　A case that contradicts the claim is “a store with a good location and excellent service that is not a high performer.” To check a claim of sufficiency, we look at how many such stores there are.</p>
+<ul>
+<li>Suppose 20 stores have the combination, and 17 of them are high performers while 3 are not. These 3 stores are the cases that contradict the claim.</li>
+<li>Suppose there are 50 high-performing stores in total, and 17 of them have the combination. The remaining 33 stores achieve high performance without this combination. They do not contradict the claim.</li>
+</ul>
+<p>　The first ratio (17/20) leads to the idea of “consistency” explained next. The second (17/50) leads to “coverage” after that.</p>
+</section>
+<section id="consistency-shows-how-consistently-the-cases-fit-the-claim" class="level3">
+<h3 class="anchored" data-anchor-id="consistency-shows-how-consistently-the-cases-fit-the-claim">2. Consistency shows how consistently the cases fit the claim</h3>
+<p>　Consistency shows how well the observed cases follow the set relation we assume. For sufficiency with crisp sets (sets with only two values, in or out), it is the share of cases with the condition that also show the outcome. For example, if 17 of the 20 stores with a certain combination of conditions are high performers, consistency is 17/20 = 0.85.</p>
+<p>　With fuzzy sets (sets in which membership is expressed as a degree from 0 to 1), let <img src="https://latex.codecogs.com/png.latex?X_i"> be the membership of case <img src="https://latex.codecogs.com/png.latex?i"> in the condition and <img src="https://latex.codecogs.com/png.latex?Y_i"> its membership in the outcome. The consistency of sufficiency is then expressed as follows.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7BConsistency%7D(X%20%5Cto%20Y)%20=%20%5Cfrac%7B%5Csum_i%20%5Cmin(X_i,%20Y_i)%7D%7B%5Csum_i%20X_i%7D"></p>
+<p>　If <img src="https://latex.codecogs.com/png.latex?X_i%20%5Cle%20Y_i"> holds for every case, consistency is 1.</p>
+<p>　This formula does not simply count consistent and inconsistent cases. A case with a higher membership in the condition carries more weight. In addition, a small deviation, where membership in the condition exceeds membership in the outcome only slightly, is penalized only a little, while a large deviation is penalized heavily. The paper explains that this is the difference from a method that sorts cases into “consistent” and “inconsistent” and counts the proportion (pp.295-297).</p>
+<p>　Consistency is also affected by how memberships are distributed. If memberships in the condition are low across the board and memberships in the outcome are high across the board, a relation may merely look like sufficiency while actually being produced by the skewed distribution. The paper therefore says that calibration, the assignment of membership scores, should be done carefully, and that the procedure should be made public so that others can reproduce it (pp.298-299).</p>
+</section>
+<section id="coverage-shows-how-much-the-relation-covers" class="level3">
+<h3 class="anchored" data-anchor-id="coverage-shows-how-much-the-relation-covers">3. Coverage shows how much the relation covers</h3>
+<p>　The coverage of a sufficient condition shows how much of the set of cases with the outcome is covered by that condition (or combination of conditions). If the 17 stores above are part of 50 high-performing stores in total, coverage is 17/50 = 0.34. The combination is consistently linked to high performance, but it does not broadly cover high-performing stores as a whole.</p>
+<p>　For reference, with fuzzy sets the formula is as follows.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7BCoverage%7D(X%20%5Cto%20Y)%20=%20%5Cfrac%7B%5Csum_i%20%5Cmin(X_i,%20Y_i)%7D%7B%5Csum_i%20Y_i%7D"></p>
+<p>　The paper calls for using the two measures in order: first check consistency, and only then look at coverage. If consistency is not sufficient, a large coverage cannot make the condition empirically important as a sufficient condition. Consistency and coverage can also pull in opposite directions. A combination narrowed down by stacking many conditions tends to have high consistency but very small coverage. The paper also notes that coverage measures empirical importance, not theoretical importance.</p>
+</section>
+<section id="multiple-paths-have-overlapping-and-unique-parts" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-paths-have-overlapping-and-unique-parts">4. Multiple paths have overlapping and unique parts</h3>
+<p>　There is not always only one path to the same outcome. When different combinations of conditions lead to the same outcome, this is called equifinality.</p>
+<p>　When several paths cover the same successful cases, simply adding their coverages counts those cases more than once. The paper therefore separates the coverage of each path into raw coverage, which includes the overlap, and unique coverage, which shows the part not covered by any other path. The paper says this is somewhat similar to the way regression analysis partitions explained variance among variables. It adds, however, that this is not about removing the correlation among conditions; it is about the fact that a single case can fit more than one path.</p>
+</section>
+</section>
+<section id="the-papers-contributions" class="level2">
+<h2 class="anchored" data-anchor-id="the-papers-contributions">The paper’s contributions</h2>
+<p>　First, the paper presents simple descriptive measures for evaluating set relations. The paper itself says that consistency and coverage are neither complicated nor entirely new. What is new, it says, is that they are clearly tied to set-theoretic thinking, which shows how this differs from ordinary quantitative analysis built on correlation.</p>
+<p>　Second, the paper argues that for necessary conditions, too, consistency alone is not enough. A condition that is present in most cases regardless of the outcome can have high consistency as a necessary condition and still contribute little to understanding the outcome. The coverage of a necessary condition is a clue for spotting such trivial conditions. This point builds on Goertz’s discussion.</p>
+<p>　Third, the paper separates the coverage of multiple paths into overlapping and unique parts. This makes it possible to evaluate the diversity of patterns of success and the weight of each path.</p>
+<hr>
+<p>From here on, these are my own views, based on the paper.</p>
+</section>
+<section id="what-i-found-noteworthy" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-found-noteworthy">What I found noteworthy</h2>
+<p>　What I consider especially important is the order: check consistency first, then interpret coverage. When the consistency of a sufficient condition is weak, we cannot call a pattern a strong pattern of success merely because it covers the outcome broadly.</p>
+<p>　Another point is the stance emphasized in the conclusion: the measures themselves should not become the goal of research. Ragin treats consistency and coverage as aids to judgment, and gives priority to whether the results help us understand individual cases and the processes and mechanisms at work in them. When studying business cases in an MBA program, I think this stance of moving back and forth between the numbers and the substance of the cases is important.</p>
+</section>
+<section id="thinking-about-business-applications-analyzing-success-factors-with-care" class="level2">
+<h2 class="anchored" data-anchor-id="thinking-about-business-applications-analyzing-success-factors-with-care">Thinking about business applications: analyzing success factors with care</h2>
+<p>　For example, when comparing high-performing stores, before settling on a single explanation such as “low prices matter most,” we can examine different combinations, such as “a good location and excellent service” and “a strong brand and a distinctive product mix” (a made-up example). For each combination, we then check how consistently it is linked to high performance, how many of the high-performing stores it covers, and which stores are the exceptions.</p>
+<p>　However, high consistency does not guarantee a causal effect, in the sense that adopting the combination will raise performance. Large coverage does not directly translate into investment priorities either. To decide on a measure, we also need to consider cost, feasibility, the causal mechanism, and more.</p>
+</section>
+<section id="connection-to-qca" class="level2">
+<h2 class="anchored" data-anchor-id="connection-to-qca">Connection to QCA</h2>
+<p>　When reading the results of a QCA, we check not only the expression of the combinations of conditions but also consistency, coverage, and the specific cases behind them. Beyond “was the value high?”, being able to explain “consistency of what?”, “coverage with what as the denominator?”, and “what are the exceptions?” is what shows real understanding of the analysis. I also introduce the ideas behind QCA in the article <a href="../../posts/why-qca-decisions/index.html">Why QCA suits decision-making</a> on this blog.</p>
+<hr>
+<p><em>Summary points for review</em></p>
+</section>
+<section id="points-to-revisit" class="level2">
+<h2 class="anchored" data-anchor-id="points-to-revisit">Points to revisit</h2>
+<ul>
+<li>Distinguish sufficient from necessary conditions. “If the condition is present, the outcome is present” and “if the outcome is present, the condition is present” are different claims.</li>
+<li>Distinguish consistency from coverage. For a sufficient condition, the former is how consistent the relation is, and the latter is how much of the outcome it covers. Check consistency first, then look at coverage.</li>
+<li>Do not judge by the consistency value alone. In its discussion of crisp sets, the paper says that below 0.75 it becomes hard even to claim a rough set relation. This does not mean that 0.75 or above is automatically adequate; you still need to check the number and the substance of the cases.</li>
+<li>For necessary conditions, the denominators switch (see the table below).</li>
+<li>The measures are descriptive evaluations. They do not prove causal effects.</li>
+</ul>
+<p>　In the table below, let <img src="https://latex.codecogs.com/png.latex?M%20=%20%5Csum_i%20%5Cmin(X_i,%20Y_i)">.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Relation evaluated</th>
+<th>Consistency</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="https://latex.codecogs.com/png.latex?X"> is sufficient for <img src="https://latex.codecogs.com/png.latex?Y"></td>
+<td><img src="https://latex.codecogs.com/png.latex?M%20/%20%5Csum_i%20X_i"></td>
+<td><img src="https://latex.codecogs.com/png.latex?M%20/%20%5Csum_i%20Y_i"></td>
+</tr>
+<tr class="even">
+<td><img src="https://latex.codecogs.com/png.latex?X"> is necessary for <img src="https://latex.codecogs.com/png.latex?Y"></td>
+<td><img src="https://latex.codecogs.com/png.latex?M%20/%20%5Csum_i%20Y_i"></td>
+<td><img src="https://latex.codecogs.com/png.latex?M%20/%20%5Csum_i%20X_i"></td>
+</tr>
+</tbody>
+</table>
+<p>　The coverage of a necessary condition reads differently from the coverage of a sufficient condition, which asks how much of the outcome is covered. It is a measure for checking that the set of X, the supposed necessary condition, is not too large compared with the set of the outcome Y, so that X does not turn out to be an empirically trivial condition.</p>
+</section>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<ul>
+<li><strong>QCA (qualitative comparative analysis)</strong>: A method that treats each case as a combination of conditions and examines its relation to the outcome through set relations and logical comparison.</li>
+<li><strong>Condition</strong>: In QCA, the term for the explanatory side (<img src="https://latex.codecogs.com/png.latex?X"> in this article).</li>
+<li><strong>Outcome</strong>: In QCA, the term for the result to be explained (<img src="https://latex.codecogs.com/png.latex?Y"> in this article). In this article I often write simply “outcome” or “result” for readability.</li>
+<li><strong>Crisp set</strong>: A set in which membership is expressed as 0 or 1.</li>
+<li><strong>Fuzzy set</strong>: A set in which membership is expressed as a degree from 0 to 1. The values are calibrated according to the meaning of the concept.</li>
+<li><strong>Consistency</strong>: How consistently the cases follow the assumed set relation.</li>
+<li><strong>Coverage</strong>: The empirical importance of a consistent relation. For a sufficient condition, how much of the outcome it covers.</li>
+<li><strong>Equifinality</strong>: The fact that different combinations of conditions lead to the same outcome.</li>
+<li><strong>Raw / unique coverage</strong>: The total range covered by a path, and the part of it that no other path covers.</li>
+<li><strong>Trivial necessary condition</strong>: A condition that is widespread regardless of the outcome; it may be consistent as a necessary condition but does not help us understand the outcome.</li>
+</ul>
+</section>
+<section id="what-to-check-in-the-original" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-check-in-the-original">What to check in the original</h2>
+<p>　This article is my own summary of the paper’s main points. When you read the original, the following three places make good entry points.</p>
+<ul>
+<li>Introduction (pp.291-292): What goes wrong when a theory stated as a set relation is translated into a correlation hypothesis?</li>
+<li>The explanation of Figures 1 and 2 (pp.294-297): How do set relations show up in a scatterplot? Why are cases that look like “errors” from a correlation viewpoint not counterexamples to the claim?</li>
+<li>Conclusion (pp.309-310): Why is understanding the cases considered more important than the height of the measures?</li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019" class="uri">https://doi.org/10.1093/pan/mpj019</a></p>
+<p>Back to the paper guides: <a href="../../posts/paper-guides-intro/index.html">About this shelf</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>QCA</category>
+  <category>notes</category>
+  <guid>https://im-research-yt.github.io/posts/paper-guide-ragin/</guid>
+  <pubDate>Wed, 14 Oct 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/paper-guide-ragin/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
   <title>About Paper Guides: Introducing Papers on This Blog</title>
   <link>https://im-research-yt.github.io/posts/paper-guides-intro/</link>
   <description><![CDATA[ 
@@ -175,6 +362,7 @@
 <h2 class="anchored" data-anchor-id="published-paper-guides">Published paper guides</h2>
 <ul>
 <li><a href="../../posts/paper-guide-mahoney-goertz/index.html">Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</a></li>
+<li><a href="../../posts/paper-guide-ragin/index.html">Paper Guide: How Should We Evaluate the “Conditions for Success”? (Ragin, 2006)</a></li>
 </ul>
 
 
@@ -1259,7 +1447,7 @@ font-style: inherit;">"psych"</span>)</span></code></pre></div></div>
 <h2 class="anchored" data-anchor-id="getting-the-idea-and-the-measures-papers">1. Getting the idea and the measures (papers)</h2>
 <ul>
 <li>Mahoney, J., &amp; Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. <em>Political Analysis</em>, 14(3), 227-249. <a href="https://doi.org/10.1093/pan/mpj017">https://doi.org/10.1093/pan/mpj017</a> Contrasts quantitative and qualitative research as two cultures with different values, beliefs, and norms, and compares them across ten dimensions, including explanation, causation, case selection, and measurement. A starting point for seeing which research tradition QCA belongs to. <a href="../../posts/paper-guide-mahoney-goertz/index.html">Paper guide available</a></li>
-<li>Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019">https://doi.org/10.1093/pan/mpj019</a> Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error.</li>
+<li>Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. <em>Political Analysis</em>, 14(3), 291-310. <a href="https://doi.org/10.1093/pan/mpj019">https://doi.org/10.1093/pan/mpj019</a> Introduces two measures for evaluating set relations, consistency and coverage. It shows that fuzzy sets overcome earlier limits on binary variables and on tolerance for error. <a href="../../posts/paper-guide-ragin/index.html">Paper guide available</a></li>
 <li>Schneider, C. Q., &amp; Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. <em>Comparative Sociology</em>, 9(3), 397-418. <a href="https://doi.org/10.1163/156913210X12493538729793">https://doi.org/10.1163/156913210X12493538729793</a> Sets out standards of good practice for QCA and fuzzy sets. Useful for checking the procedures to follow before you start an analysis.</li>
 </ul>
 </section>

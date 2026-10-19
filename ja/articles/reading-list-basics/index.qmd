@@ -14,7 +14,7 @@ description: "QCA の考え方をつかむために、最初に読む価値の�
 - Mahoney, J., & Goertz, G. (2006). A tale of two cultures: Contrasting quantitative and qualitative research. *Political Analysis*, 14(3), 227-249. [https://doi.org/10.1093/pan/mpj017](https://doi.org/10.1093/pan/mpj017)
   量的研究と質的研究を、価値観、信念、規範の異なる「2つの文化」として対比し、説明、因果、事例の選び方、測定など、10の側面から比べています。QCA がどのような研究の伝統に立っているかを知る出発点になります。[論文ガイドあり](../paper-guide-mahoney-goertz/index.qmd)
 - Ragin, C. C. (2006). Set relations in social research: Evaluating their consistency and coverage. *Political Analysis*, 14(3), 291-310. [https://doi.org/10.1093/pan/mpj019](https://doi.org/10.1093/pan/mpj019)
-  集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。
+  集合の関係を評価する2つの指標、一貫性(consistency)とカバレッジ(coverage)を紹介した論文です。ファジィ集合を使うことで、二値の変数や誤差の扱いに関するそれまでの制約を乗り越えられることを示しています。[論文ガイドあり](../paper-guide-ragin/index.qmd)
 - Schneider, C. Q., & Wagemann, C. (2010). Standards of good practice in qualitative comparative analysis (QCA) and fuzzy-sets. *Comparative Sociology*, 9(3), 397-418. [https://doi.org/10.1163/156913210X12493538729793](https://doi.org/10.1163/156913210X12493538729793)
   QCA とファジィ集合を用いるときの、標準的な良い実践(good practice)を整理した論文です。分析を始める前に、守るべき手続きを確認するのに役立ちます。
 
