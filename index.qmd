@@ -42,7 +42,7 @@ Notes on the **ThSQCA** R package, qualitative comparative analysis, and hands-o
 .toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
 </style>
 
-The fourteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
+The fifteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)
 
 ## 1. Get to know QCA and the threshold idea
 
@@ -77,10 +77,11 @@ Where to read next: the standard readings for learning QCA, then papers that use
 
 ## 4. Research methods, step by step
 
-Procedures from survey to analysis, one article at a time, with examples in R. More methods will be added over time.
+Procedures from survey to analysis, one article at a time; some articles include examples in R. More methods will be added over time.
 
 <div class="toc-grid">
 <a class="toc-card" href="posts/scale-to-regression/index.html"><img src="posts/scale-to-regression/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">11</span><div class="toc-title">From survey items to a scale, then on to regression and QCA: a step-by-step guide</div><p>How to define a multi-item concept such as brand trust from theory, examine it with factor analysis and alpha, build subscales, and use them in regression and QCA, with an example in R.</p></div></a>
+<a class="toc-card" href="posts/before-latent-variables/index.html"><img src="posts/before-latent-variables/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">12</span><div class="toc-title">Before adding latent variables: what scale building and path analysis can do</div><p>A personal view for graduate students: build and check scales first, analyze with observed-variable models, and move to latent-variable models when a clear need appears.</p></div></a>
 </div>
 
 ## 5. Paper guides
@@ -88,7 +89,7 @@ Procedures from survey to analysis, one article at a time, with examples in R. M
 Reading notes on papers related to QCA, marketing science, brand management, and statistics, added from time to time.
 
 <div class="toc-grid">
-<a class="toc-card" href="posts/paper-guides-intro/index.html"><img src="posts/paper-guides-intro/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">12</span><div class="toc-title">About Paper Guides: Introducing Papers on This Blog</div><p>The purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides.</p></div></a>
-<a class="toc-card" href="posts/paper-guide-mahoney-goertz/index.html"><img src="posts/paper-guide-mahoney-goertz/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">13</span><div class="toc-title">Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</div><p>How do quantitative and qualitative analysis differ? A paper guide to Mahoney &amp; Goertz (2006), written for MBA students and business analysts.</p></div></a>
-<a class="toc-card" href="posts/paper-guide-ragin/index.html"><img src="posts/paper-guide-ragin/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">14</span><div class="toc-title">Paper Guide: How Should We Evaluate the &quot;Conditions for Success&quot;? (Ragin, 2006)</div><p>Are the traits shared by successful firms really conditions for success? A paper guide to Ragin (2006), on sufficient and necessary conditions, consistency, and coverage, written for MBA students and business analysts.</p></div></a>
+<a class="toc-card" href="posts/paper-guides-intro/index.html"><img src="posts/paper-guides-intro/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">13</span><div class="toc-title">About Paper Guides: Introducing Papers on This Blog</div><p>The purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides.</p></div></a>
+<a class="toc-card" href="posts/paper-guide-mahoney-goertz/index.html"><img src="posts/paper-guide-mahoney-goertz/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">14</span><div class="toc-title">Paper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney &amp; Goertz, 2006)</div><p>How do quantitative and qualitative analysis differ? A paper guide to Mahoney &amp; Goertz (2006), written for MBA students and business analysts.</p></div></a>
+<a class="toc-card" href="posts/paper-guide-ragin/index.html"><img src="posts/paper-guide-ragin/thumbnail.png" alt=""><div class="toc-body"><span class="toc-num">15</span><div class="toc-title">Paper Guide: How Should We Evaluate the &quot;Conditions for Success&quot;? (Ragin, 2006)</div><p>Are the traits shared by successful firms really conditions for success? A paper guide to Ragin (2006), on sufficient and necessary conditions, consistency, and coverage, written for MBA students and business analysts.</p></div></a>
 </div>

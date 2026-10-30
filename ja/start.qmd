@@ -35,12 +35,13 @@ description: "初めての方への、読む順序の案内です。"
 ### 4. リサーチ手法と手順ガイド
 
 11. [アンケートから尺度を作り、回帰分析・QCAに進む手順](articles/scale-to-regression/index.qmd)
+12. [潜在変数を入れる前に: 尺度化とパス解析でできること](articles/before-latent-variables/index.qmd)
 
 ### 5. 論文ガイド
 
-12. [論文ガイドについて:このブログで文献を紹介していきます](articles/paper-guides-intro/index.qmd)
-13. [論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)](articles/paper-guide-mahoney-goertz/index.qmd)
-14. [論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)](articles/paper-guide-ragin/index.qmd)
+13. [論文ガイドについて:このブログで文献を紹介していきます](articles/paper-guides-intro/index.qmd)
+14. [論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)](articles/paper-guide-mahoney-goertz/index.qmd)
+15. [論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)](articles/paper-guide-ragin/index.qmd)
 
 ## 分析ツールから始めたい方へ
 

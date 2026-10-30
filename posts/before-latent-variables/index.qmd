@@ -1,0 +1,331 @@
+---
+title: "Before adding latent variables: what scale building and path analysis can do"
+image: thumbnail.png
+date: "2026-10-27"
+sidebar: false
+categories: [marketing, notes]
+description: "A personal view for graduate students: build and check scales first, analyze with observed-variable models, and move to latent-variable models when a clear need appears."
+---
+
+<!--
+Publishing notes (delete before publishing; HTML comments do not appear on the page)
+1. The two videos are placed in Section 3. Move them if you prefer another position.
+2. categories is a proposal: [marketing, notes]. Do not add R (this article has no R code and is not for R-bloggers).
+3. The slug is a proposal: before-latent-variables.
+-->
+
+The previous article, "From survey items to a scale, then on to regression and QCA: a step-by-step guide," described a path from several survey items through factor analysis, Cronbach's alpha, and subscale scores to regression analysis. This article is its sequel.
+
+For some time, graduate students and other researchers have asked me the same kind of question: "If we are working with constructs, shouldn't we use SEM with latent variables (rather than regression or path analysis) instead of first building factor scores or subscales through factor analysis?" Sometimes the question comes from someone who understands the mathematics. In what I have seen and heard, however, a common reason is a non-essential one, such as "SEM looks cooler" (a person who really understands SEM would not ask the question in the first place). I also hear of cases where, in graduate supervision, a student was simply told, "Let's go with SEM (with latent variables) for now."
+
+This article is **my own answer** to that question. My position can be summarized in one point.
+
+> **A model with latent variables is not a "higher version" of analysis. There are questions that only latent variables can answer, but they also bring more assumptions, more judgment calls, and more responsibility in estimation. Therefore, I think such a model should be used when it is needed.**
+
+Of course, this does not mean "do not use models with latent variables." It means that if you use one, you should be able to explain in your own words why you are using it. The more advanced the method, the more serious a mistake made without understanding the reasoning tends to be.
+
+If you do not include latent variables and use subscale scores instead, the measurement error contained in the scores can make the coefficients in the structural part smaller than they should be, or biased. I am aware of this. I still recommend that beginners start with scale building. The reason is that adding latent variables increases the assumptions, the judgments, and the responsibility in estimation, and that using such a model without being able to explain these brings a different kind of problem. I do acknowledge that a latent-variable model is one answer to the problem of measurement error. What I would like readers to do is check, against their own research question, whether that answer is needed (Question A in Section 4). That is the point of this article.
+
+There are many opinions about how to use SEM. Please read every claim below as meaning "I (Toyoda) think that ...".
+
+---
+
+## 1. Terms: the issue is not "SEM or not"
+
+First, let me align the terms. If they stay vague, the later discussion will not connect.
+
+**SEM (structural equation modeling)** is the name of a broad framework that expresses and estimates the relations among several variables as one unified model. Several kinds of models belong to it.
+
+- **Models with observed variables only (path analysis):** These use only variables that were actually measured (including subscale scores built from them) and estimate the relations among them. (Multiple regression can be seen as a special case of path analysis.) In other words, path analysis is also part of SEM in the broad sense.
+- **Models with latent variables:** A construct that cannot be measured directly is placed in the model as a "latent variable," and several observed items are assumed to measure it. The part of the model that links items to a latent variable is called the **measurement model**. When relations among latent variables are added, we also handle the **structural model** (the part that describes the relations among constructs).
+- **Confirmatory factor analysis (CFA)** is one kind of latent-variable model. It contains latent variables, but it may have no structural model.
+
+For this reason, I avoid the phrase "use SEM or not" in this article. Saying it invites the fair objection that path analysis is also a kind of SEM. The issue of this article is one point.
+
+> **Whether to put latent variables into the model.**
+
+A method that builds scales in advance and then runs regression or path analysis with subscale scores does not put latent variables into the model. In this article I call it the "observed-variable model." A method that does put latent variables in is called the "latent-variable model."
+
+Note that "not putting latent variables in" does not mean that factor analysis is not used when you examine a scale. Factor analysis itself is a latent-variable model. The article distinguishes two things. One is a method in which factor analysis and similar tools are used at the measurement stage to build a scale, and the resulting scores are then treated as observed variables in regression or path analysis. The other is a method in which the measurement model is built into the structural model, and the relations among latent variables are estimated.
+
+In this article I also write "association" for the links between variables. Arrows in path analysis and regression coefficients do not show causal relations when the data are cross-sectional survey data (observational data). This is the same whether the model has latent variables or only observed variables.
+
+---
+
+## 2. Why does "latent variables for everything" happen so easily?
+
+From what I have seen and heard, I think the reasons fall roughly into the following three (this is my observation, not the result of a survey).
+
+1. **Because you see it in papers.** Academic papers often use models with latent variables. They look like "proper academic analysis," so people want to imitate them.
+2. **Because you think that constructs exist.** You are dealing with a concept such as "brand trust," so making it a latent variable feels natural. But having a construct and using a latent variable in the analysis are different things. As the previous article explained, defining a construct first, measuring it with several items, checking reliability, and using subscale scores is also a way of taking constructs seriously.
+3. **Because software makes it easy.** With software such as AMOS, you draw a diagram, press a button, and get results. (If you wrote out the structural equations, you would see the complexity, but drawing the model as a diagram makes it look simple.) Being able to run a model and being able to explain its results are different things.
+
+None of these reasons comes from the research question. The method comes first. I would like the order to be the opposite: first the question, then the conditions of measurement, and only after that the choice of method.
+
+---
+
+## 3. What increases when latent variables are added?
+
+Adding latent variables increases the expressive power of the model. At the same time, **the number of things you must judge yourself increases.**
+
+### An analogy: think of arrows as springs
+
+To understand models with latent variables intuitively, I use the following analogy (in lectures I sometimes say that the springs go "boing," stretching and shrinking). It is only an image, not a rigorous explanation.
+
+Think of each arrow in the model as a **spring**. Each spring represents a relation between variables. The strength of the spring is the estimate. When many springs are connected, changing the strength of one spring pulls on the others, and the whole system readjusts. The system then settles at a **balanced position** (the position where the computation settles). That position is the estimate that is finally reported.
+
+```{=html}
+<video controls preload="metadata" playsinline style="width:100%;max-width:100%;height:auto;">
+  <source src="spring_1_observed_en.mp4" type="video/mp4">
+</video>
+```
+
+*Video 1: a model with observed variables only. The numbers and the motion are illustrative.*
+
+As the springs increase and tangle with one another, a poorly specified part at one place can pass its distortion on to the other springs, and the system can **balance at an unexpected position**. Because it is balanced, the result looks "settled and plausible."
+
+In real models, something close to this happens in the following forms.
+
+- When the specification of the structural part changes, the estimates in the measurement part can move too (interpretational confounding; Burt, 1976).
+- Estimation does not converge, or an improper solution such as a negative variance appears.
+- Other models of a different form fit equally well (equivalent models; MacCallum et al., 1993).
+
+Let me separate three things here: "the computation settling (convergence)," "fitting the data well (fit)," and "being theoretically valid." They are different things. Even if the springs are balanced and settled, that is not necessarily the **right position**. A model can converge and still fit poorly, and a model can fit well and still lack theoretical validity.
+
+**Limits of the analogy:** Actual estimation is not a physical phenomenon in which springs sway and move. It is a computation that searches for numbers that make the gap between the data and the model as small as possible. Nor does "many springs" mean "a bad model." Complex models are also powerful. The point of the analogy is that, as models become more complex, everything moves together, so **it becomes harder to check by yourself where and what is happening.**
+
+#### Continuing the analogy: fixed points and invisible joints
+
+Each spring has "points" at both ends. There are two kinds of points.
+
+- **An observed variable is a fixed point whose position is set by the data.** Its position does not move (this is an analogy, so it is an image).
+- **A latent variable is an invisible joint that is not directly observed.** Its position is not set by the data, so where to place it is also decided inside the model, while looking at the relations as a whole. (The "position" here is not a coordinate in real space. It is an image of how to place the cluster that appears in common across several items.)
+
+If you only connect fixed points with springs, the points do not move, so mainly the strength of the springs changes. Even so, springs attached to the same point move together. If you remove or add one spring, the strength of other springs can also change.
+
+Adding invisible joints changes the situation. Where the joint is placed and how strong the attached springs are must be decided at the same time, while looking at the whole. So when you change one connection, the placement of the invisible joint changes too, and the estimates of other relations attached to it can be affected. And because the joint is invisible, it becomes harder to confirm from the outside "where, and what, moved."
+
+```{=html}
+<video controls preload="metadata" playsinline style="width:100%;max-width:100%;height:auto;">
+  <source src="spring_2_latent_en.mp4" type="video/mp4">
+</video>
+```
+
+*Video 2: a model with a latent variable. The numbers and the motion are illustrative.*
+
+So how does the procedure of building a scale ("measurement": factor analysis, alpha, subscale scores; see the previous article) look in this analogy? Building a subscale can be seen as a method that, instead of moving the invisible joint itself inside the model, creates a representative value from several items (the mean of the items) and treats it as one observed point (a fixed point). Before fixing it, we check whether the group of items is sensible, using factor analysis and alpha. After this check, we connect the fixed points with springs (regression or path analysis).
+
+Connecting everything at once, with the invisible joints still included from the start, is powerful. However, you must judge by yourself whether the balanced position is valid. As the first route for a beginner, I think fixing first and checking one step at a time is suitable.
+
+**Limits of this continued analogy:** The observed-variable model analyzes with positions fixed. But we can think that "the fixed points are actually wobbling a little, by the amount of measurement error" (this is dealt with under Question A in Section 4). The latent-variable model tries to handle even that wobble inside the model. That holds, however, only when the assumptions of the measurement model are satisfied. Nor does the analogy mean that "the observed-variable model is safe." Even with fixed points only, when the springs increase, everything moves together, and other ways of connecting that fit equally well appear.
+
+#### How the analogy maps onto the later discussion
+
+- "Interpretational confounding" corresponds to the placement of an invisible joint being changed by the pull of other springs.
+- "Checking measurement first (the two-step procedure)" corresponds to checking the invisible joint first, and handling it afterward.
+- The situations in which "there is a reason to consider a latent-variable model" correspond to situations where you want to handle even the wobble of the fixed points (measurement error) inside the model, or where you want to examine the relations among invisible joints themselves.
+
+### Examples of increased judgments
+
+Here are four examples of judgments that increase. None of them is entirely absent from observed-variable models. But adding latent variables changes their weight greatly.
+
+**(1) Identification:** This is the question of whether the number of unknowns in the model (the number of parameters to estimate) can be determined uniquely from the data. In a model where it cannot, the estimates are not determined. Observed-variable models also have identification problems, but with latent variables there are more points to decide, such as setting the unit of each latent variable.
+
+**(2) Balance between sample size and model complexity:** In models with latent variables, the number of parameters to estimate often increases, so the balance between sample size and model complexity must be considered more carefully. The necessary sample size varies greatly with the number of factors, the number of indicators, the size of the factor loadings, the size of the path coefficients, the presence of missing data, the estimation method, and so on. A uniform rule of thumb is considered inappropriate. This article does not give numbers.
+
+**(3) How to read model fit:** In models with latent variables, the match between the data and the model (model fit) is examined with several indices. Each index has its own meaning and limits, and there is no simple standard such as "this value is good." There is also criticism of treating cutoff values as mechanical pass criteria.
+
+**(4) The relation between the measurement part and the structural part:** In a typical latent-variable model, the measurement part and the structural part are in the end estimated within one model. As a result, the meaning of a latent variable is influenced not only by its own items but also by its relations with the other variables in the model. For example, when the specification of the structural part changes, the estimates of the measurement part (for example, factor loadings) also change, and the interpretation of what that latent variable substantively represents can change too. This is called the problem of "interpretational confounding." Burt (1976) discussed, as this problem, that a latent variable can come to be given, in the course of estimation, a meaning different from the one the researcher gave it in advance.
+
+There is also an idea of checking the measurement part first and then estimating the structural part (the two-step procedure). Anderson & Gerbing (1988) recommend first estimating and checking the measurement model, and take the position that being able to estimate in one step does not necessarily make it desirable. As a method that estimates the measurement part and the structural part separately, SAM (Rosseel & Loh, 2024) has been proposed. For SAM, the authors list as advantages that it is robust to local misspecification of the model, that convergence problems are less likely even with small samples, and that when the model is correctly specified the finite-sample bias is small. The authors position SAM as an estimation method, and distinguish it from the two-step procedure as a way of building a model. Let me state the difference in one sentence. In the procedure of regressing on mean scale scores, measurement error is not explicitly handled in the later model. SAM separates measurement and structure, but treats measurement error as a latent-variable model. They are similar in that "measurement comes first," but they are not the same method. A latent-variable model does not necessarily "estimate everything at once."
+
+In an observed-variable model, building the scale (measurement) and running the regression or path analysis (structure) are done in separate stages. The results of each stage can be checked separately. I think this ease of separation is a great advantage for beginners.
+
+---
+
+## 4. When latent variables are needed and when they can be avoided
+
+This section is the center of the article. It is also probably the part most open to debate. For that reason, I write the judgment in **two stages**.
+
+> **Stage 1: Is there a need to use latent variables?**
+> **Stage 2: Can the model be estimated and interpreted properly?**
+
+These are different questions. Stage 1 asks "is there a reason to use them?" and Stage 2 asks "are the conditions for using them in place?" For example, having a sufficient sample size is a Stage 2 condition. A sufficient sample size does not become a Stage 1 "reason to use." Conversely, even if there is a reason at Stage 1, it is difficult to use the model if the Stage 2 conditions are not in place.
+
+### 4.1 Stage 1: Is there a need to use latent variables?
+
+First, let me describe a way of drawing the line that I think is not appropriate (this is only my opinion).
+
+The division "use an observed-variable model when you want to know the size of associations between variables, and a latent-variable model when you want to know the structure among constructs" is often seen. But I think this division is not appropriate. This is because a regression or path analysis with subscale scores is also, in practice, examining associations among constructs. The type of research question alone cannot separate the two.
+
+I place the dividing line not on the type of question but on **how measurement is handled**. Specifically, I judge from the following three questions.
+
+| Question | When I think an observed-variable model (that is, path analysis) is enough | When it is a reason to consider a latent-variable model |
+|---|---|---|
+| A. Do I need to estimate associations among constructs after explicitly modeling measurement error? | Reliability of the scales is sufficiently high, and I can judge that the effect of measurement error does not change the conclusion | The effect of measurement error could change the conclusion, and I want to take that effect into account explicitly |
+| B. Is the measurement model itself the object of the research? | An existing scale or my own scale is used as a tool | I want to check the structure of the scale (the relation between items and constructs) as the center of the research |
+| C. Do I need to verify that a scale has the same meaning across groups? | No group comparison; or equivalence is assumed, and I can state its basis and limits | Group comparison is central to the conclusion, and equivalence cannot be left as an assumption |
+
+This table is of course not a ranking of methods. It is for organizing the **fit between a question and the conditions**. Also, "an observed-variable model is enough" does not mean "a latent-variable model should be avoided." It means "if you cannot explain the need, there is no hurry."
+
+### 4.2 Explaining each question of Stage 1
+
+**Question A: Is there a need to take measurement error into account explicitly?**
+
+In an observed-variable model, the subscale score is treated as a value without error. In fact, the score contains measurement error.
+
+When there is measurement error, in a regression with one explanatory variable the coefficient tends to come out smaller than it should (this is called attenuation). When there are several explanatory variables and they are correlated, the situation is a little more complicated. The measurement error of one variable can bias the coefficients of other variables, and the direction of the bias can be either upward or downward. Rosseel & Loh (2024) also point out that measurement error remains in scale scores and factor scores, and that this can bias the regression coefficients in the structural part.
+
+The size of this effect depends on the reliability of the scale. High reliability is a favorable condition for using an observed-variable model. But that alone does not let us judge that measurement error does not affect the conclusion, because the correlations among explanatory variables and other factors also bear on how large the effect on the coefficients is.
+
+There is one thing I want to emphasize here. **Low reliability is not solved by putting the scale into a latent-variable model.** If reliability is low, the first thing to doubt is how the scale measures. You need to review the meaning of the items, the number of items, and how easy they are to answer. Putting a poor scale into a latent-variable model does not rescue it. However, reviewing the scale and the need to take measurement error into account are compatible. If, after improving the scale, the effect of measurement error could still change the conclusion, that is a reason to use latent variables.
+
+A latent-variable model does not "remove" measurement error as if by magic. Under the assumptions of a specific measurement model, it models measurement error explicitly. So when the assumptions of the measurement model do not hold, the results also become difficult to interpret.
+
+A high alpha is also not the whole of sufficient evidence for reliability. Alpha is one indicator of reliability, and it is also affected by the number of items and the nature of the items. The judgment should include, besides alpha, the content of the scale (the meaning of the items, stability over repeated measurement, and so on).
+
+**Question B: Is the measurement model itself the object of the research?**
+
+In a study that develops a new scale and puts the structure of measurement at the center of the paper, a model with latent variables (such as confirmatory factor analysis) is a natural choice. On the other hand, in a study that borrows an existing scale as a tool, verifying the structure of measurement is not the center of the research. In this case, I think it is reasonable to consider first the procedure of checking the scale and then building subscales.
+
+**Question C: Do I need to examine measurement invariance?**
+
+Suppose you want to check "whether a scale measures with the same meaning for men and women, or across countries." To compare means across groups, the scale must have the same meaning across groups. This is called an examination of measurement invariance, and it is a representative analysis done with latent-variable models.
+
+Simply comparing subscale scores cannot answer this question directly. However, there are methods related to measurement invariance outside SEM as well (item response theory, the examination of differential item functioning, and so on). Here I only say that the latent-variable model is a representative method.
+
+### 4.3 Stage 2: Can the model be estimated and interpreted properly?
+
+Suppose a reason to use latent variables was found at Stage 1. Next, at Stage 2, check the following points.
+
+| What to check | What to look at |
+|---|---|
+| Balance between sample size and model complexity | Is the sample size sufficient for the number of factors, indicators, and parameters? Do not rely on a uniform rule such as "at least N people." |
+| Identification | Is the model identified? Can you explain the identification conditions in your own words? |
+| Estimation method and the nature of the data | How will you treat five-point scale data? Are the distributional assumptions reasonable? |
+| Explaining the results | Can you explain the identification, the estimation method, and the judgment of model fit to readers and reviewers? |
+
+Whether data such as five-point scales can be treated as continuous is one of the points of debate. There are also estimation methods that treat them as ordered categories. However, depending on the number of categories and the shape of the distribution, methods that treat them as continuous may work well enough. It is not something to decide mechanically as "it is a five-point scale, so it must be an ordered-categorical method."
+
+I think the last row of this table, "can you explain it," is the most important in practice. The results of research must be explainable to readers and reviewers. If you cannot answer questions such as "why did you include latent variables?", "how did you check identification?", and "how did you judge model fit?", trust in the results is damaged.
+
+### 4.4 Concrete examples
+
+**Example 1: A case where I think an observed-variable model is enough**
+
+Suppose a graduate student studies department-store customers, asking by questionnaire how "brand trust," "perceived quality," and "price acceptance" are associated with purchase intention. Existing scales are used, and each concept is measured with four or five items. The student has confirmed through factor analysis that there is no major problem in the structure of the items, and reliability is sufficient. No comparison between groups is made. Even if groups were compared, the student would not check that the scale has the same meaning across groups, but would place it as an assumption. In other words, the "checking whether the scale works in the same way across groups" in Question C of Stage 1 is not the purpose of this study. The sample size is small to medium.
+
+In this case, I think it is reasonable to consider first the method of building subscales and running a regression analysis. This is because none of the three Stage 1 questions gives a strong reason to include latent variables. However, if it seems that the effect of measurement error could change the conclusion, I would review the decision at that point.
+
+**Example 2: A case where I think it is meaningful to consider a latent-variable model**
+
+A researcher wants to check whether a scale measures with the same meaning across countries, and then to compare the means across countries. The sample size in each country is also sufficient.
+
+In this case, there is a clear reason under Question C of Stage 1. The Stage 2 conditions are also in place. The reason to use a latent-variable model is clear, and it can be explained.
+
+The difference between the two examples is not the difficulty or the coolness of the method. **It is whether the latent-variable model is needed for the question, and whether it can be handled properly.**
+
+---
+
+## 5. How I recommend beginners proceed (my view)
+
+Let me summarize the discussion so far as advice for beginners.
+
+1. **First, build a scale and check it.** Define the construct from theory, prepare the items, check them with factor analysis and alpha, and turn them into subscale scores. The details of this procedure are in the previous article.
+2. **Next, analyze with an observed-variable model.** Use the subscales to run regression or path analysis. Because the results of each stage can be checked separately, this is a method in which mistakes are easy to notice and easy to explain. However, because subscale scores contain measurement error, the coefficients of the structural part can come out smaller than they should be, or biased (Question A in Section 4). Thinking about whether this effect could change the conclusion leads to the judgment in step 3.
+3. **Move to a latent-variable model once the need is visible.** It is not too late to do so after a reason becomes clear in the research, such as wanting to take the effect of measurement error into account explicitly or wanting to check measurement invariance.
+
+There is one thing I want to emphasize. **"Being able to use a latent-variable model" and "being in a study that should use one" are different things.**
+
+There are also intermediate options between "estimate everything at once" and "do everything separately." They are the two-step procedure that checks the measurement part first (Anderson & Gerbing, 1988) and methods that estimate measurement and structure separately (such as SAM; Rosseel & Loh, 2024).
+
+---
+
+## 6. Reference: for readers who want to know more
+
+This section is a reference for readers who want to know more. It collects viewpoints for checking things by yourself before you use a latent-variable model.
+
+The point of this section is not that "latent-variable models are bad." It is that knowing **what can happen when you use them without understanding their mathematical properties** is useful.
+
+### 6.1 Problems that can occur
+
+**(1) Good model fit does not mean the model is correct.**
+
+Model fit is an index of how well the data and the model match. There can be other models (equivalent models) that fit the same data equally well. MacCallum et al. (1993) examined 53 applied studies in psychology and showed that equivalent models often exist in large numbers. A good fit alone cannot show that "no other explanation holds." I think we should not simply accept a statement like "the fit was good, so the hypothesis was supported."
+
+**(2) The identification problem**
+
+In a model that is not identified, the estimates are not determined uniquely. Software may still output numbers. But it may be impossible to explain what those numbers mean.
+
+**(3) Interpretational confounding**
+
+As touched on in Section 3, depending on the specification of the structural part, the estimates of the measurement part (factor loadings and so on) are affected, and the interpretation of what a latent variable substantively represents may change (Burt, 1976). Burt states that when the covariances among the items of a latent variable are low, and the covariances between those items and the items of other latent variables differ widely, the meaning of that latent variable in simultaneous estimation is easily swayed by variation in the items of the other latent variables (he cites an earlier analysis of latent variables with two indicators). For this reason, I think scales whose items are only weakly related need more attention. It is good to keep this point in mind in your own analyses as well.
+
+**(4) Trial and error with modification indices**
+
+When the fit is poor, you can revise the model following the "modification indices" that software shows (quite a few people accept these modifications uncritically). However, if you keep revising the model by looking at the data, you end up fitting the model to chance features specific to that data. It is worth checking whether you record and report why and in what order you revised the model.
+
+**(5) Assumptions of estimation**
+
+Standard estimation methods place certain assumptions on the distribution of the data. As touched on in Section 4, how to treat data such as five-point scales is one of the points of debate. When the sample size is small relative to the model, estimation may go badly, or improper solutions (such as negative variances) may appear.
+
+**(6) Reading causation into the results**
+
+When you draw arrows in a path analysis or a latent-variable model, it is easy for readers to take them as showing causal relations. In cross-sectional surveys, arrows represent the researcher's assumptions and are not proof of causation. In reports, I think it is safer to write "association."
+
+**(7) Problems in choosing a method**
+
+If you cannot reproduce the results by yourself, or cannot explain them, it becomes difficult to notice mistakes and difficult to have others check them. In an observed-variable model, measurement and structure can be checked stage by stage, and it is easier to trace at which stage the results changed. In a latent-variable model, many parameters move together, so isolating where a problem lies requires more understanding.
+
+### 6.2 A checklist of questions for choosing a method
+
+I have put the questions to ask yourself when choosing a method into a checklist.
+
+Before using a latent-variable model, please ask yourself the following.
+
+- Can I explain **in one sentence** why I include latent variables? (Which of the Stage 1 questions applies?)
+- What is **missing** from subscales and an observed-variable model?
+- Can I explain my choices of sample size, identification, and estimation method **in my own words**? (Stage 2)
+- If I revised the model with modification indices, do I have a **record** of it?
+- Even when the fit is good, did I consider **other explanations**?
+- Is the way I write the results a **causal claim**?
+
+### 6.3 In fairness
+
+Latent-variable models are of course wonderful methods. They are used for estimating associations with measurement error explicitly taken into account, for verifying measurement invariance, and for studies that take measurement itself as the subject. In such studies, a latent-variable model is an excellent tool. If you can use it properly, you should use it actively.
+
+It is not about giving up on using them. What matters is **to check whether your reason for using them is rooted in the research question, and whether you can explain the results in your own words**. That is what I think.
+
+---
+
+## Closing
+
+To repeat, a latent-variable model is a powerful tool. Because it is powerful, I think it is good to use it in a state in which you can explain why you use it.
+
+For beginners, I recommend the path of building and checking a scale and then analyzing with an observed-variable model. As you accumulate that experience, the situations in which a latent-variable model becomes necessary, such as "here I want to take measurement error into account explicitly" and "here I want to examine measurement itself," will come into view naturally. That is the next step.
+
+---
+
+## References cited in the text
+
+- Anderson, J. C., & Gerbing, D. W. (1988). Structural equation modeling in practice: A review and recommended two-step approach. *Psychological Bulletin*, 103(3), 411–423. <https://doi.org/10.1037/0033-2909.103.3.411>
+- Burt, R. S. (1976). Interpretational confounding of unobserved variables in structural equation models. *Sociological Methods & Research*, 5(1), 3–52. <https://doi.org/10.1177/004912417600500101>
+- MacCallum, R. C., Wegener, D. T., Uchino, B. N., & Fabrigar, L. R. (1993). The problem of equivalent models in applications of covariance structure analysis. *Psychological Bulletin*, 114(1), 185–199. <https://doi.org/10.1037/0033-2909.114.1.185>
+- Rosseel, Y., & Loh, W. W. (2024). A structural after measurement approach to structural equation modeling. *Psychological Methods*, 29(3), 561–588. <https://doi.org/10.1037/met0000503>
+
+## Recommended further reading
+
+These are not works cited in the text. They are introductory books and guides that I think are worth reading if you use SEM. The level and suitability of each book are my own impressions.
+
+### In Japanese
+
+- Toyoda, H. (Ed.). (2007). *Kyōbunsan kōzō bunseki [Amos hen]: Kōzō hōteishiki moderingu* [Covariance structure analysis, Amos edition: Structural equation modeling]. Tokyo Tosho.
+- Kosugi, K. (Ed.). (2014). *M-plus to R ni yoru kōzō hōteishiki moderingu nyūmon* [Introduction to structural equation modeling with Mplus and R]. Kitaohji Shobo.
+- Toyoda, H. (2003). *Kyōbunsan kōzō bunseki: Gimon hen* [Covariance structure analysis: Questions]. Asakura Shoten.
+
+### In English
+
+- Kline, R. B. (2023). *Principles and Practice of Structural Equation Modeling* (5th ed.). The Guilford Press. [Publisher's page](https://www.guilford.com/books/Principles-and-Practice-of-Structural-Equation-Modeling/Rex-Kline/9781462551910)
+- Brown, T. A. (2015). *Confirmatory Factor Analysis for Applied Research* (2nd ed.). The Guilford Press. [Publisher's page](https://www.guilford.com/books/Confirmatory-Factor-Analysis-for-Applied-Research/Timothy-Brown/9781462515363)
+- Beaujean, A. A. (2014). *Latent Variable Modeling Using R: A Step-by-Step Guide*. Routledge.
+- Rosseel, Y. (2012). lavaan: An R package for structural equation modeling. *Journal of Statistical Software*, 48(2), 1–36. <https://doi.org/10.18637/jss.v048.i02>
