@@ -1,0 +1,45 @@
+---
+title: "ThS-QCA Case Study: Sufficient Conditions by \"Recommend\" Level for UNIQLO and MUJI (Begin Here)"
+image: thumbnail.png
+date: "2026-11-06"
+sidebar: false
+categories: [marketing, tutorial]
+description: "A starting guide to a three-part series that uses UNIQLO and MUJI survey data to show how sufficient conditions change when the recommendation threshold and the conditions entered are moved."
+---
+*Start with this article. Each part can be read from the links below.*
+
+How many points out of 10 should count as "I recommend this brand to friends and acquaintances"? The Net Promoter Score uses 9 or higher, but when this line moves, the combinations of conditions that lead to recommendation (sufficient conditions) change. This series shows that with survey data on UNIQLO and MUJI.
+
+## What is ThS-QCA?
+
+Qualitative Comparative Analysis (QCA) asks which combinations of conditions are sufficient for an outcome. Threshold-Sweep QCA (ThS-QCA) moves the cut-off for the outcome (here, how strongly people would recommend the brand) step by step and lists the sufficient conditions at each step (Toyoda, 2026, *Quality & Quantity*). In this series, I use ThS-QCA to move the threshold on the outcome side. It does not look for one optimal threshold; it shows how the picture changes with the threshold. It runs with the R package ThSQCA (available on CRAN).
+
+## Data
+
+- A casual fashion survey (N = 300) that I ran in June 2026 for the lecture "Marketing 2" at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy. Part of it is released for these case studies (reproducible CSVs: `fashion_uniqlo.csv`, `fashion_muji.csv`).
+- Respondents had not answered "not conscious at all" about choosing casual fashion brands in the screening survey. The sample does not represent consumers in general.
+- Outcome (Y): "How strongly would you recommend this brand to friends and acquaintances?" (0 = would not recommend at all, 10 = would definitely recommend).
+- Conditions (X): from items where respondents ticked every item they thought applied to each brand, I take five: "affordable price range," "good quality," "easy to mix and match," "easy to walk into a physical store," and "offers products that downplay trends" (hereafter, basic). Each analysis uses four of them. Parts 1 and 2 use price, quality, versatility and basic. Part 3 drops price and adds easy to walk into a physical store, so it uses quality, versatility, easy store and basic.
+
+## An important note on conditions
+
+The survey has other items, but here I take five items as an example of how to use the method, and each analysis uses four of them. I picked them after looking at results, because they suit an illustration. **In a real analysis, conditions must be set in advance, based on hypotheses or prior research.**
+
+## The parts
+
+1. **[Part 1, UNIQLO](../thsqca-case-uniqlo/index.qmd)**: move the "recommend" line from 9 down to 5 and list the sufficient conditions.
+2. **[Part 2, MUJI with UNIQLO's conditions](../thsqca-case-muji-same-conditions/index.qmd)**: change only the brand, with the same conditions and settings.
+3. **[Part 3, swapping conditions with the same MUJI data](../thsqca-case-muji-swap/index.qmd)**: fix the brand and swap the conditions entered into the analysis.
+
+## Two findings
+
+1. **Moving the recommendation line changes the solution.** For UNIQLO, the solutions at 8 or higher contain price, quality and versatility together. When the line is lowered to 5 or higher, shorter combinations appear.
+2. **Changing the conditions entered into the analysis changes the solution.** With the four shared conditions, no solution met the criterion for MUJI at 7 or higher. With the same 251 respondents, replacing price with "easy to walk into a physical store" produced two routes containing quality at 7 or higher.
+
+At 9 or higher, the conditions tried here yield no sufficient condition. This does not mean nothing can be done; the chosen conditions may simply not include the drivers of the highest ratings.
+
+## Settings
+
+Minimum number of cases 4; consistency threshold 0.80; intermediate solution (no directional assumption for "basic").
+
+Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. https://doi.org/10.1007/s11135-026-03092-3

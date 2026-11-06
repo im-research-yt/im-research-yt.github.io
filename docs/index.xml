@@ -17,7 +17,909 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Mon, 26 Oct 2026 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 05 Nov 2026 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions</title>
+  <link>https://im-research-yt.github.io/posts/thsqca-case-muji-same-conditions/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>Series part 2. Written to be read on its own.</em></p>
+<p>In part 1, I moved the line for “recommend” from 9 down to 5 for UNIQLO. At 7 or 8 or higher, the sufficient condition was that, with the brand not seen as basic, price, quality and versatility all hold. What happens if we apply <strong>UNIQLO’s conditions</strong> to MUJI unchanged?</p>
+<section id="method-and-data-common-to-the-series" class="level2">
+<h2 class="anchored" data-anchor-id="method-and-data-common-to-the-series">Method and data (common to the series)</h2>
+<ul>
+<li><strong>Method</strong>: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the <strong>sufficient conditions</strong> at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, <em>Quality &amp; Quantity</em>). It does not search for one optimal threshold.</li>
+<li><strong>Data</strong>: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).</li>
+<li><strong>Cases</strong>: 251 respondents who rated MUJI.</li>
+<li><strong>Conditions (X)</strong>: the same four perceptions as for UNIQLO (“affordable price range,” “good quality,” “easy to mix and match,” and “offers products that downplay trends” (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are <strong>an example of how to use the method</strong>. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.</li>
+<li><strong>Consistency</strong>: among people holding a combination, the share who recommend (threshold 0.80 or higher). <strong>Coverage</strong>: among people who recommend, the share explained by the combination.</li>
+<li><strong>Settings</strong> (same at every level): minimum number of cases 4; <strong>intermediate solution</strong> (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction).</li>
+</ul>
+</section>
+<section id="results-same-conditions-same-line-moving" class="level2">
+<h2 class="anchored" data-anchor-id="results-same-conditions-same-line-moving">Results: same conditions, same line moving</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Recommend if score is</th>
+<th>MUJI share (UNIQLO)</th>
+<th>Sufficient conditions for MUJI</th>
+<th>Consistency</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9 or higher</td>
+<td>14% (18%)</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="even">
+<td>8 or higher</td>
+<td>29% (41%)</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>7 or higher</td>
+<td>46% (58%)</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="even">
+<td>6 or higher</td>
+<td>58% (67%)</td>
+<td>not price × quality × not versatile / price × quality × versatile × not basic</td>
+<td>0.87</td>
+<td>0.28</td>
+</tr>
+<tr class="odd">
+<td>5 or higher</td>
+<td>79% (86%)</td>
+<td>basic / price × versatile / quality × not versatile</td>
+<td>0.93</td>
+<td>0.40</td>
+</tr>
+</tbody>
+</table>
+<p>(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.)</p>
+<ul>
+<li><strong>For MUJI, sufficient conditions appear only down to 6 or higher.</strong> For UNIQLO they appeared from 8 or higher.</li>
+<li>For UNIQLO, at 7 or 8 or higher the sufficient condition was “price × quality × versatile × not basic.” For MUJI, this pattern first appears at 6 or higher.</li>
+<li>The other pattern at 6 or higher is “quality holds while neither price nor versatility is ticked.” Many people recommend on quality alone, even without a price perception.</li>
+<li>Perceptions are distributed differently too: 44% of UNIQLO raters ticked “affordable price range,” against 30% for MUJI.</li>
+</ul>
+<p>In short, with the four shared conditions, <strong>no solution met the criterion for MUJI at 7 or higher</strong>. The share of respondents at 7 or higher also differs (58% for UNIQLO, 46% for MUJI). With the same conditions and settings, the solutions obtained differed by brand.</p>
+</section>
+<section id="a-marketing-reading-as-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="a-marketing-reading-as-hypotheses">A marketing reading (as hypotheses)</h2>
+<p>What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.</p>
+<ol type="1">
+<li><strong>Even with the same conditions and settings, how solutions emerge differs.</strong> For UNIQLO, solutions appeared from 8 or higher. For MUJI, they appear only from 6 or higher. A view centered on price, quality and versatility, which fit UNIQLO’s recommendations, cannot simply be carried over to MUJI.</li>
+<li><strong>The way price is perceived differs.</strong> The share who ticked “affordable price range” is 44% for UNIQLO and 30% for MUJI. At 6 or higher, a pattern also appears in which quality is enough when price is not ticked. However, this is a difference in shares. It does not mean that people who recommend MUJI ignore price.</li>
+<li><strong>How “basic” appears at 5 or higher differs between UNIQLO and MUJI.</strong> The UNIQLO solutions contained “not basic.” The MUJI solution at 5 or higher contains “basic” itself. However, few MUJI respondents ticked basic (8%; UNIQLO 11%). Part 3 looks at this point again.</li>
+</ol>
+</section>
+<section id="cautions" class="level2">
+<h2 class="anchored" data-anchor-id="cautions">Cautions</h2>
+<ul>
+<li>These four conditions were chosen as an example for the UNIQLO analysis. With other conditions, the results for MUJI would change.</li>
+<li>“No sufficient condition” does not mean “no reason exists.”</li>
+<li>This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.</li>
+</ul>
+</section>
+<section id="reproducible-code-r" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-code-r">Reproducible code (R)</h2>
+<p>Data (same folder): <a href="fashion_muji.csv">fashion_muji.csv</a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(QCA); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb1-2">dat   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read.csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fashion_muji.csv"</span>)</span>
+<span id="cb1-3">conds <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRICE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUALITY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"VERSATILE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>)</span>
+<span id="cb1-4">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> dat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"REC"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> conds,</span>
+<span id="cb1-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb1-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">setNames</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(conds)), conds),</span>
+<span id="cb1-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir.exp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(conds <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"-"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>),</span>
+<span id="cb1-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.80</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb1-9">res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"thrY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inclS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"covS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n_solutions"</span>)]</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  thrY                                                 expression     inclS
+1    5               BASIC + PRICE*VERSATILE + QUALITY*~VERSATILE 0.9302326
+2    6 ~PRICE*QUALITY*~VERSATILE + PRICE*QUALITY*VERSATILE*~BASIC 0.8723404
+3    7                                                No solution        NA
+4    8                                                No solution        NA
+5    9                                                No solution        NA
+       covS n_solutions
+1 0.4020101           1
+2 0.2827586           1
+3        NA           0
+4        NA           0
+5        NA           0</code></pre>
+</div>
+</div>
+<p>Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. https://doi.org/10.1007/s11135-026-03092-3</p>
+</section>
+<section id="what-to-read-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-read-next">What to read next</h2>
+<ul>
+<li><a href="../../posts/thsqca-case-uniqlo/index.html">Part 1: UNIQLO</a></li>
+<li><a href="../../posts/thsqca-case-muji-swap/index.html">Part 3: Swapping conditions with the same MUJI data</a></li>
+<li><a href="../../posts/thsqca-case-overview/index.html">Begin here: ThS-QCA Case Study</a></li>
+</ul>
+</section>
+<section id="r-environment-for-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="r-environment-for-this-page">R environment for this page</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sessionInfo</span>()</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26300)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   
+[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   
+[5] LC_TIME=Japanese_Japan.utf8    
+
+time zone: Asia/Tokyo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       
+ [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        
+ [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      
+[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      
+[17] jsonlite_2.0.0    htmlwidgets_1.6.4</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>marketing</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/thsqca-case-muji-same-conditions/</guid>
+  <pubDate>Thu, 05 Nov 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/thsqca-case-muji-same-conditions/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data</title>
+  <link>https://im-research-yt.github.io/posts/thsqca-case-muji-swap/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>Series part 3. Written to be read on its own.</em></p>
+<p>In part 1, UNIQLO’s recommendations were explained by “price × quality × versatile × not basic.” In part 2, with the same conditions, no solution met the criterion for MUJI at 7 or higher. This time, I <strong>swap the conditions entered into the analysis, using the same 251 MUJI respondents</strong>, and check how the combinations we see change.</p>
+<section id="method-and-data-common-to-the-series" class="level2">
+<h2 class="anchored" data-anchor-id="method-and-data-common-to-the-series">Method and data (common to the series)</h2>
+<ul>
+<li><strong>Method</strong>: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the <strong>sufficient conditions</strong> at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, <em>Quality &amp; Quantity</em>). It does not search for one optimal threshold.</li>
+<li><strong>Data</strong>: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).</li>
+<li><strong>Cases</strong>: 251 respondents who rated MUJI.</li>
+<li><strong>Conditions (X)</strong>: brand perceptions (“good quality,” “easy to mix and match,” “easy to walk into a physical store,” and “offers products that downplay trends” (hereafter, basic)). I selected them, from combinations that yield a solution at 7 or higher in MUJI’s data. Compared with part 2, “price” is dropped and “easy to walk into a physical store” is added. For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are <strong>an example of how to use the method</strong>. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.</li>
+<li><strong>Consistency</strong>: among people holding a combination, the share who recommend (threshold 0.80 or higher). <strong>Coverage</strong>: among people who recommend, the share explained by the combination.</li>
+<li><strong>Settings</strong> (same at every level): minimum number of cases 4; <strong>intermediate solution</strong> (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction).</li>
+<li><strong>Note</strong>: Beyond the items used here, I tried other combinations of four conditions, using other survey items as well. At 9 or higher, no combination yielded a sufficient condition. At 8 or higher, some combinations have an overall solution consistency of 0.80 or higher, but they explain very few people (6 or fewer of 72). This search used items that are not in the public CSV, so it cannot be reproduced with the public CSV.</li>
+</ul>
+</section>
+<section id="results-sufficient-conditions-with-the-swapped-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="results-sufficient-conditions-with-the-swapped-conditions">Results: sufficient conditions with the swapped conditions</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Recommend if score is</th>
+<th>Share of respondents</th>
+<th>Sufficient conditions</th>
+<th>Consistency</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9 or higher</td>
+<td>14%</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="even">
+<td>8 or higher</td>
+<td>29%</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="odd">
+<td>7 or higher</td>
+<td>46%</td>
+<td>quality × basic / quality × versatile × easy store</td>
+<td>0.82</td>
+<td>0.16</td>
+</tr>
+<tr class="even">
+<td>6 or higher</td>
+<td>58%</td>
+<td>quality × not versatile × not easy store / quality × versatile × easy store × not basic</td>
+<td>0.85</td>
+<td>0.24</td>
+</tr>
+<tr class="odd">
+<td>5 or higher</td>
+<td>79%</td>
+<td>quality / basic / versatile × easy store</td>
+<td>0.90</td>
+<td>0.43</td>
+</tr>
+</tbody>
+</table>
+<p>(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.) “Easy store” means “easy to walk into a physical store.”</p>
+<ul>
+<li>With the same 251 MUJI respondents, replacing “price” with “easy to walk into a physical store” produced a sufficient condition <strong>at 7 or higher</strong>, which part 2 could not. Note that this set of conditions was selected from the same data as one that yields a solution at 7 or higher.</li>
+<li>Every sufficient condition at 7 or higher contains <strong>quality</strong>: a route in which quality is joined by the basic selection, and a route in which quality is joined by versatility and easy to walk into.</li>
+<li>At 5 or higher, quality alone is sufficient.</li>
+</ul>
+</section>
+<section id="a-marketing-reading-as-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="a-marketing-reading-as-hypotheses">A marketing reading (as hypotheses)</h2>
+<p>What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.</p>
+<ol type="1">
+<li><strong>Swapping conditions changes the combinations we see.</strong> With part 2’s four conditions, no solution appeared at 7 or higher. After the swap, two routes containing quality appeared at 7 or higher. What we put into the analysis changes what we see.</li>
+<li><strong>How “basic” appears differs by solution.</strong> The UNIQLO solutions contained “not basic,” and part of the MUJI solutions contains “basic.” However, the conditions entered differ, so a direct comparison is not possible. Few respondents ticked basic even for MUJI (8%). Also, the survey asked whether the brand “offers products that downplay trends,” and this survey alone cannot tell what that says about the brand.</li>
+<li><strong>In practice, conditions are set in advance, based on your own hypotheses.</strong> Here I use conditions chosen after seeing results, to show that swapping conditions changes the results. In a real analysis, you would run the analysis with conditions set beforehand and show how results differ when conditions change, as a sensitivity analysis.</li>
+<li><strong>A sufficient condition covers only “part” of the routes to recommendation.</strong> 22 respondents hold one of the solution’s routes, and 18 of them score 7 or higher (consistency 0.82). On the other hand, of the 116 respondents who score 7 or higher, only 18 hold one of these routes (about 16%, coverage 0.16).</li>
+</ol>
+</section>
+<section id="cautions" class="level2">
+<h2 class="anchored" data-anchor-id="cautions">Cautions</h2>
+<ul>
+<li>The conditions are an example chosen after seeing MUJI’s results. Until checked on other data, the findings remain hypotheses.</li>
+<li>“No sufficient condition” does not mean “no reason exists.”</li>
+<li>This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.</li>
+</ul>
+</section>
+<section id="reproducible-code-r" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-code-r">Reproducible code (R)</h2>
+<p>Data (same folder): <a href="fashion_muji.csv">fashion_muji.csv</a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(QCA); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb1-2">dat   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read.csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fashion_muji.csv"</span>)</span>
+<span id="cb1-3">conds <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUALITY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"VERSATILE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"EASYSTORE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>)</span>
+<span id="cb1-4">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> dat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"REC"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> conds,</span>
+<span id="cb1-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb1-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">setNames</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(conds)), conds),</span>
+<span id="cb1-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir.exp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(conds <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"-"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>),</span>
+<span id="cb1-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.80</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb1-9">res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"thrY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inclS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"covS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n_solutions"</span>)]</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  thrY                                                         expression
+1    5                              QUALITY + BASIC + VERSATILE*EASYSTORE
+2    6 QUALITY*~VERSATILE*~EASYSTORE + QUALITY*VERSATILE*EASYSTORE*~BASIC
+3    7                        QUALITY*BASIC + QUALITY*VERSATILE*EASYSTORE
+4    8                                                        No solution
+5    9                                                        No solution
+      inclS      covS n_solutions
+1 0.9042553 0.4271357           1
+2 0.8536585 0.2413793           1
+3 0.8181818 0.1551724           1
+4        NA        NA           0
+5        NA        NA           0</code></pre>
+</div>
+</div>
+<p>Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. https://doi.org/10.1007/s11135-026-03092-3</p>
+</section>
+<section id="what-to-read-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-read-next">What to read next</h2>
+<ul>
+<li><a href="../../posts/thsqca-case-muji-same-conditions/index.html">Part 2: MUJI with UNIQLO’s conditions</a></li>
+<li><a href="../../posts/thsqca-case-overview/index.html">Begin here: ThS-QCA Case Study</a></li>
+</ul>
+</section>
+<section id="r-environment-for-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="r-environment-for-this-page">R environment for this page</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sessionInfo</span>()</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26300)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   
+[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   
+[5] LC_TIME=Japanese_Japan.utf8    
+
+time zone: Asia/Tokyo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       
+ [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        
+ [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      
+[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      
+[17] jsonlite_2.0.0    htmlwidgets_1.6.4</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>marketing</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/thsqca-case-muji-swap/</guid>
+  <pubDate>Thu, 05 Nov 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/thsqca-case-muji-swap/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)</title>
+  <link>https://im-research-yt.github.io/posts/thsqca-case-overview/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>Start with this article. Each part can be read from the links below.</em></p>
+<p>How many points out of 10 should count as “I recommend this brand to friends and acquaintances”? The Net Promoter Score uses 9 or higher, but when this line moves, the combinations of conditions that lead to recommendation (sufficient conditions) change. This series shows that with survey data on UNIQLO and MUJI.</p>
+<section id="what-is-ths-qca" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-ths-qca">What is ThS-QCA?</h2>
+<p>Qualitative Comparative Analysis (QCA) asks which combinations of conditions are sufficient for an outcome. Threshold-Sweep QCA (ThS-QCA) moves the cut-off for the outcome (here, how strongly people would recommend the brand) step by step and lists the sufficient conditions at each step (Toyoda, 2026, <em>Quality &amp; Quantity</em>). In this series, I use ThS-QCA to move the threshold on the outcome side. It does not look for one optimal threshold; it shows how the picture changes with the threshold. It runs with the R package ThSQCA (available on CRAN).</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<ul>
+<li>A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy. Part of it is released for these case studies (reproducible CSVs: <code>fashion_uniqlo.csv</code>, <code>fashion_muji.csv</code>).</li>
+<li>Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey. The sample does not represent consumers in general.</li>
+<li>Outcome (Y): “How strongly would you recommend this brand to friends and acquaintances?” (0 = would not recommend at all, 10 = would definitely recommend).</li>
+<li>Conditions (X): from items where respondents ticked every item they thought applied to each brand, I take five: “affordable price range,” “good quality,” “easy to mix and match,” “easy to walk into a physical store,” and “offers products that downplay trends” (hereafter, basic). Each analysis uses four of them. Parts 1 and 2 use price, quality, versatility and basic. Part 3 drops price and adds easy to walk into a physical store, so it uses quality, versatility, easy store and basic.</li>
+</ul>
+</section>
+<section id="an-important-note-on-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="an-important-note-on-conditions">An important note on conditions</h2>
+<p>The survey has other items, but here I take five items as an example of how to use the method, and each analysis uses four of them. I picked them after looking at results, because they suit an illustration. <strong>In a real analysis, conditions must be set in advance, based on hypotheses or prior research.</strong></p>
+</section>
+<section id="the-parts" class="level2">
+<h2 class="anchored" data-anchor-id="the-parts">The parts</h2>
+<ol type="1">
+<li><strong><a href="../../posts/thsqca-case-uniqlo/index.html">Part 1, UNIQLO</a></strong>: move the “recommend” line from 9 down to 5 and list the sufficient conditions.</li>
+<li><strong><a href="../../posts/thsqca-case-muji-same-conditions/index.html">Part 2, MUJI with UNIQLO’s conditions</a></strong>: change only the brand, with the same conditions and settings.</li>
+<li><strong><a href="../../posts/thsqca-case-muji-swap/index.html">Part 3, swapping conditions with the same MUJI data</a></strong>: fix the brand and swap the conditions entered into the analysis.</li>
+</ol>
+</section>
+<section id="two-findings" class="level2">
+<h2 class="anchored" data-anchor-id="two-findings">Two findings</h2>
+<ol type="1">
+<li><strong>Moving the recommendation line changes the solution.</strong> For UNIQLO, the solutions at 8 or higher contain price, quality and versatility together. When the line is lowered to 5 or higher, shorter combinations appear.</li>
+<li><strong>Changing the conditions entered into the analysis changes the solution.</strong> With the four shared conditions, no solution met the criterion for MUJI at 7 or higher. With the same 251 respondents, replacing price with “easy to walk into a physical store” produced two routes containing quality at 7 or higher.</li>
+</ol>
+<p>At 9 or higher, the conditions tried here yield no sufficient condition. This does not mean nothing can be done; the chosen conditions may simply not include the drivers of the highest ratings.</p>
+</section>
+<section id="settings" class="level2">
+<h2 class="anchored" data-anchor-id="settings">Settings</h2>
+<p>Minimum number of cases 4; consistency threshold 0.80; intermediate solution (no directional assumption for “basic”).</p>
+<p>Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. https://doi.org/10.1007/s11135-026-03092-3</p>
+
+
+</section>
+
+ ]]></description>
+  <category>marketing</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/thsqca-case-overview/</guid>
+  <pubDate>Thu, 05 Nov 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/thsqca-case-overview/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5</title>
+  <link>https://im-research-yt.github.io/posts/thsqca-case-uniqlo/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p><em>Series part 1. Written to be read on its own.</em></p>
+<p>In the Net Promoter Score, people who give 9 or higher on a 0 to 10 recommendation scale are called “promoters.” What happens to the sufficient conditions for recommending UNIQLO if we move this line to 8, 7, 6 and 5?</p>
+<section id="method-and-data-common-to-the-series" class="level2">
+<h2 class="anchored" data-anchor-id="method-and-data-common-to-the-series">Method and data (common to the series)</h2>
+<ul>
+<li><strong>Method</strong>: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the <strong>sufficient conditions</strong> at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, <em>Quality &amp; Quantity</em>). It does not search for one optimal threshold.</li>
+<li><strong>Data</strong>: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).</li>
+<li><strong>Cases</strong>: 267 respondents who rated UNIQLO.</li>
+<li><strong>Conditions (X)</strong>: brand perceptions (“affordable price range,” “good quality,” “easy to mix and match,” and “offers products that downplay trends” (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are <strong>an example of how to use the method</strong>. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.</li>
+<li><strong>Consistency</strong>: among people holding a combination, the share who recommend (threshold 0.80 or higher). <strong>Coverage</strong>: among people who recommend, the share explained by the combination.</li>
+<li><strong>Settings</strong> (same at every level): minimum number of cases 4; <strong>intermediate solution</strong> (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction).</li>
+</ul>
+</section>
+<section id="results-sufficient-conditions-from-9-down-to-5" class="level2">
+<h2 class="anchored" data-anchor-id="results-sufficient-conditions-from-9-down-to-5">Results: sufficient conditions from 9 down to 5</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Recommend if score is</th>
+<th>Share of respondents</th>
+<th>Sufficient conditions</th>
+<th>Consistency</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>9 or higher</td>
+<td>18%</td>
+<td>none</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr class="even">
+<td>8 or higher</td>
+<td>41%</td>
+<td>price × quality × versatile × not basic</td>
+<td>0.81</td>
+<td>0.19</td>
+</tr>
+<tr class="odd">
+<td>7 or higher</td>
+<td>58%</td>
+<td>price × quality × versatile × not basic</td>
+<td>0.88</td>
+<td>0.15</td>
+</tr>
+<tr class="even">
+<td>6 or higher</td>
+<td>67%</td>
+<td>price × versatile × not basic / quality × not versatile × not basic</td>
+<td>0.89</td>
+<td>0.39</td>
+</tr>
+<tr class="odd">
+<td>5 or higher</td>
+<td>86%</td>
+<td>price × not basic / quality × not basic / versatile × not basic / price × quality × versatile</td>
+<td>0.93</td>
+<td>0.66</td>
+</tr>
+</tbody>
+</table>
+<p>(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.) “Not basic” means that “offers products that downplay trends” was not ticked.</p>
+<ul>
+<li>At 5 or higher, as long as the brand is not seen as basic, any one of price, quality or versatility is enough (when all three hold together, basic does not matter). The conditions are loose and take many forms.</li>
+<li>At 7 or 8 or higher, the sufficient condition is that, with the brand not seen as basic, <strong>price, quality and versatility all hold</strong>.</li>
+<li>At 9 or higher, these four conditions yield no sufficient condition.</li>
+</ul>
+<p>The higher the target, the stricter the sufficient condition becomes: from “any one of them” to “several together.”</p>
+</section>
+<section id="a-marketing-reading-as-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="a-marketing-reading-as-hypotheses">A marketing reading (as hypotheses)</h2>
+<p>What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.</p>
+<ol type="1">
+<li><strong>The lower the line, the shorter the combinations that appear in the solution.</strong> The solutions at 8 or higher (41% of respondents) contained price, quality and versatility together. When the line is defined as 5 or higher (86%), shorter combinations appear: with the brand not seen as basic, any one of price, quality or versatility is part of a solution. People who recommend at high scores appear to hold several perceptions at once.</li>
+<li><strong>“Not basic” appears in the solutions at every level.</strong> Not ticking “offers products that downplay trends” is part of every solution. However, this survey alone cannot tell what not ticking this item says about how people see the brand. It cannot be read as “they feel novelty or trendiness.”</li>
+<li><strong>A sufficient condition covers only “part” of the routes to recommendation.</strong> 26 respondents hold “price × quality × versatile × not basic,” and 23 of them score 7 or higher (consistency 0.88). On the other hand, of the 154 respondents (58%) who score 7 or higher, only 23 hold this combination (about 15%, coverage 0.15). Most people who score 7 or higher recommend through other routes. Actions that only satisfy this combination will not necessarily increase recommenders by much.</li>
+</ol>
+</section>
+<section id="cautions" class="level2">
+<h2 class="anchored" data-anchor-id="cautions">Cautions</h2>
+<ul>
+<li>“No sufficient condition” does not mean “no reason exists.” The chosen conditions may simply not include the drivers of the highest ratings. With other conditions, the results would change.</li>
+<li>The four conditions are an example (in a real analysis they are set in advance, as noted above).</li>
+<li>This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.</li>
+</ul>
+</section>
+<section id="reproducible-code-r" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-code-r">Reproducible code (R)</h2>
+<p>Data (same folder): <a href="fashion_uniqlo.csv">fashion_uniqlo.csv</a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(QCA); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ThSQCA)</span>
+<span id="cb1-2">dat   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read.csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fashion_uniqlo.csv"</span>)</span>
+<span id="cb1-3">conds <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"PRICE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"QUALITY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"VERSATILE"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>)</span>
+<span id="cb1-4">res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">otSweep</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> dat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">outcome =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"REC"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">conditions =</span> conds,</span>
+<span id="cb1-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sweep_range =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>,</span>
+<span id="cb1-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">thrX =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">setNames</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(conds)), conds),</span>
+<span id="cb1-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">include =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"?"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dir.exp =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(conds <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"BASIC"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"-"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>),</span>
+<span id="cb1-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">incl.cut =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.80</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n.cut =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>)</span>
+<span id="cb1-9">res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>summary[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"thrY"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"expression"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"inclS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"covS"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"n_solutions"</span>)]</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  thrY
+1    5
+2    6
+3    7
+4    8
+5    9
+                                                                  expression
+1 PRICE*~BASIC + QUALITY*~BASIC + VERSATILE*~BASIC + PRICE*QUALITY*VERSATILE
+2                         PRICE*VERSATILE*~BASIC + QUALITY*~VERSATILE*~BASIC
+3                                             PRICE*QUALITY*VERSATILE*~BASIC
+4                                             PRICE*QUALITY*VERSATILE*~BASIC
+5                                                                No solution
+      inclS      covS n_solutions
+1 0.9263804 0.6565217           1
+2 0.8860759 0.3888889           1
+3 0.8846154 0.1493506           1
+4 0.8076923 0.1926606           1
+5        NA        NA           0</code></pre>
+</div>
+</div>
+<p>Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. <em>Quality &amp; Quantity</em>. https://doi.org/10.1007/s11135-026-03092-3</p>
+</section>
+<section id="what-to-read-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-read-next">What to read next</h2>
+<ul>
+<li><a href="../../posts/thsqca-case-muji-same-conditions/index.html">Part 2: MUJI with UNIQLO’s conditions</a></li>
+<li><a href="../../posts/thsqca-case-overview/index.html">Begin here: ThS-QCA Case Study</a></li>
+</ul>
+</section>
+<section id="r-environment-for-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="r-environment-for-this-page">R environment for this page</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sessionInfo</span>()</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.6.1 (2026-06-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26300)
+
+Matrix products: default
+  LAPACK version 3.12.1
+
+locale:
+[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   
+[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   
+[5] LC_TIME=Japanese_Japan.utf8    
+
+time zone: Asia/Tokyo
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       
+ [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        
+ [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      
+[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      
+[17] jsonlite_2.0.0    htmlwidgets_1.6.4</code></pre>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>marketing</category>
+  <category>tutorial</category>
+  <guid>https://im-research-yt.github.io/posts/thsqca-case-uniqlo/</guid>
+  <pubDate>Thu, 05 Nov 2026 15:00:00 GMT</pubDate>
+  <media:content url="https://im-research-yt.github.io/posts/thsqca-case-uniqlo/thumbnail.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>Before adding latent variables: what scale building and path analysis can do</title>
   <link>https://im-research-yt.github.io/posts/before-latent-variables/</link>

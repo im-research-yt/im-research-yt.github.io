@@ -43,6 +43,12 @@ description: "初めての方への、読む順序の案内です。"
 14. [論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)](articles/paper-guide-mahoney-goertz/index.qmd)
 15. [論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)](articles/paper-guide-ragin/index.qmd)
 
+### 6. ThS-QCA を事例で使う
+
+ユニクロと無印良品の調査データを使う、全3回の連載です。この記事から読み始めてください。
+
+- [ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)](articles/thsqca-case-overview/index.qmd)
+
 ## 分析ツールから始めたい方へ
 
 - [分析ツール](tools.qmd): QCAとマーケティング調査のための、ブラウザで動くツール

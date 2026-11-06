@@ -2,6 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/thsqca-case-muji-same-conditions/index.html",
+      "/posts/thsqca-case-muji-swap/index.html",
+      "/posts/thsqca-case-overview/index.html",
+      "/posts/thsqca-case-uniqlo/index.html",
       "/posts/before-latent-variables/index.html",
       "/posts/paper-guide-mahoney-goertz/index.html",
       "/posts/paper-guide-ragin/index.html",
@@ -22,6 +26,10 @@
   {
     "listing": "/ja/index.html",
     "items": [
+      "/ja/articles/thsqca-case-muji-same-conditions/index.html",
+      "/ja/articles/thsqca-case-muji-swap/index.html",
+      "/ja/articles/thsqca-case-overview/index.html",
+      "/ja/articles/thsqca-case-uniqlo/index.html",
       "/ja/articles/before-latent-variables/index.html",
       "/ja/articles/paper-guide-mahoney-goertz/index.html",
       "/ja/articles/paper-guide-ragin/index.html",

@@ -56,6 +56,111 @@
     "text": "This blog collects notes on threshold-sweep QCA, the ThSQCA R package, and data analysis for marketing research.\nThree browser tools are already available for generating R code: the QCA Quickstart for a first truthTable() and minimize() script, the Sweep Builder for turning a fixed-threshold QCA setup into ThSQCA sweep code, and the Scale Maker for building a scale from survey items step by step, together with the matching R script.\nThe articles are arranged in reading order on the home page. If you are new, start from the top. Technical posts with reproducible R code are in the beginner’s series for ThSQCA."
   },
   {
+    "objectID": "posts/thsqca-case-overview/index.html",
+    "href": "posts/thsqca-case-overview/index.html",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "",
+    "text": "Start with this article. Each part can be read from the links below.\nHow many points out of 10 should count as “I recommend this brand to friends and acquaintances”? The Net Promoter Score uses 9 or higher, but when this line moves, the combinations of conditions that lead to recommendation (sufficient conditions) change. This series shows that with survey data on UNIQLO and MUJI."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#what-is-ths-qca",
+    "href": "posts/thsqca-case-overview/index.html#what-is-ths-qca",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "What is ThS-QCA?",
+    "text": "What is ThS-QCA?\nQualitative Comparative Analysis (QCA) asks which combinations of conditions are sufficient for an outcome. Threshold-Sweep QCA (ThS-QCA) moves the cut-off for the outcome (here, how strongly people would recommend the brand) step by step and lists the sufficient conditions at each step (Toyoda, 2026, Quality & Quantity). In this series, I use ThS-QCA to move the threshold on the outcome side. It does not look for one optimal threshold; it shows how the picture changes with the threshold. It runs with the R package ThSQCA (available on CRAN)."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#data",
+    "href": "posts/thsqca-case-overview/index.html#data",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "Data",
+    "text": "Data\n\nA casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy. Part of it is released for these case studies (reproducible CSVs: fashion_uniqlo.csv, fashion_muji.csv).\nRespondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey. The sample does not represent consumers in general.\nOutcome (Y): “How strongly would you recommend this brand to friends and acquaintances?” (0 = would not recommend at all, 10 = would definitely recommend).\nConditions (X): from items where respondents ticked every item they thought applied to each brand, I take five: “affordable price range,” “good quality,” “easy to mix and match,” “easy to walk into a physical store,” and “offers products that downplay trends” (hereafter, basic). Each analysis uses four of them. Parts 1 and 2 use price, quality, versatility and basic. Part 3 drops price and adds easy to walk into a physical store, so it uses quality, versatility, easy store and basic."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#an-important-note-on-conditions",
+    "href": "posts/thsqca-case-overview/index.html#an-important-note-on-conditions",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "An important note on conditions",
+    "text": "An important note on conditions\nThe survey has other items, but here I take five items as an example of how to use the method, and each analysis uses four of them. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#the-parts",
+    "href": "posts/thsqca-case-overview/index.html#the-parts",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "The parts",
+    "text": "The parts\n\nPart 1, UNIQLO: move the “recommend” line from 9 down to 5 and list the sufficient conditions.\nPart 2, MUJI with UNIQLO’s conditions: change only the brand, with the same conditions and settings.\nPart 3, swapping conditions with the same MUJI data: fix the brand and swap the conditions entered into the analysis."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#two-findings",
+    "href": "posts/thsqca-case-overview/index.html#two-findings",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "Two findings",
+    "text": "Two findings\n\nMoving the recommendation line changes the solution. For UNIQLO, the solutions at 8 or higher contain price, quality and versatility together. When the line is lowered to 5 or higher, shorter combinations appear.\nChanging the conditions entered into the analysis changes the solution. With the four shared conditions, no solution met the criterion for MUJI at 7 or higher. With the same 251 respondents, replacing price with “easy to walk into a physical store” produced two routes containing quality at 7 or higher.\n\nAt 9 or higher, the conditions tried here yield no sufficient condition. This does not mean nothing can be done; the chosen conditions may simply not include the drivers of the highest ratings."
+  },
+  {
+    "objectID": "posts/thsqca-case-overview/index.html#settings",
+    "href": "posts/thsqca-case-overview/index.html#settings",
+    "title": "ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)",
+    "section": "Settings",
+    "text": "Settings\nMinimum number of cases 4; consistency threshold 0.80; intermediate solution (no directional assumption for “basic”).\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "",
+    "text": "Series part 2. Written to be read on its own.\nIn part 1, I moved the line for “recommend” from 9 down to 5 for UNIQLO. At 7 or 8 or higher, the sufficient condition was that, with the brand not seen as basic, price, quality and versatility all hold. What happens if we apply UNIQLO’s conditions to MUJI unchanged?"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#method-and-data-common-to-the-series",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#method-and-data-common-to-the-series",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "Method and data (common to the series)",
+    "text": "Method and data (common to the series)\n\nMethod: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the sufficient conditions at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, Quality & Quantity). It does not search for one optimal threshold.\nData: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).\nCases: 251 respondents who rated MUJI.\nConditions (X): the same four perceptions as for UNIQLO (“affordable price range,” “good quality,” “easy to mix and match,” and “offers products that downplay trends” (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are an example of how to use the method. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.\nConsistency: among people holding a combination, the share who recommend (threshold 0.80 or higher). Coverage: among people who recommend, the share explained by the combination.\nSettings (same at every level): minimum number of cases 4; intermediate solution (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction)."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#results-same-conditions-same-line-moving",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#results-same-conditions-same-line-moving",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "Results: same conditions, same line moving",
+    "text": "Results: same conditions, same line moving\n\n\n\n\n\n\n\n\n\n\nRecommend if score is\nMUJI share (UNIQLO)\nSufficient conditions for MUJI\nConsistency\nCoverage\n\n\n\n\n9 or higher\n14% (18%)\nnone\nn/a\nn/a\n\n\n8 or higher\n29% (41%)\nnone\nn/a\nn/a\n\n\n7 or higher\n46% (58%)\nnone\nn/a\nn/a\n\n\n6 or higher\n58% (67%)\nnot price × quality × not versatile / price × quality × versatile × not basic\n0.87\n0.28\n\n\n5 or higher\n79% (86%)\nbasic / price × versatile / quality × not versatile\n0.93\n0.40\n\n\n\n(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.)\n\nFor MUJI, sufficient conditions appear only down to 6 or higher. For UNIQLO they appeared from 8 or higher.\nFor UNIQLO, at 7 or 8 or higher the sufficient condition was “price × quality × versatile × not basic.” For MUJI, this pattern first appears at 6 or higher.\nThe other pattern at 6 or higher is “quality holds while neither price nor versatility is ticked.” Many people recommend on quality alone, even without a price perception.\nPerceptions are distributed differently too: 44% of UNIQLO raters ticked “affordable price range,” against 30% for MUJI.\n\nIn short, with the four shared conditions, no solution met the criterion for MUJI at 7 or higher. The share of respondents at 7 or higher also differs (58% for UNIQLO, 46% for MUJI). With the same conditions and settings, the solutions obtained differed by brand."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#a-marketing-reading-as-hypotheses",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#a-marketing-reading-as-hypotheses",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "A marketing reading (as hypotheses)",
+    "text": "A marketing reading (as hypotheses)\nWhat the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.\n\nEven with the same conditions and settings, how solutions emerge differs. For UNIQLO, solutions appeared from 8 or higher. For MUJI, they appear only from 6 or higher. A view centered on price, quality and versatility, which fit UNIQLO’s recommendations, cannot simply be carried over to MUJI.\nThe way price is perceived differs. The share who ticked “affordable price range” is 44% for UNIQLO and 30% for MUJI. At 6 or higher, a pattern also appears in which quality is enough when price is not ticked. However, this is a difference in shares. It does not mean that people who recommend MUJI ignore price.\nHow “basic” appears at 5 or higher differs between UNIQLO and MUJI. The UNIQLO solutions contained “not basic.” The MUJI solution at 5 or higher contains “basic” itself. However, few MUJI respondents ticked basic (8%; UNIQLO 11%). Part 3 looks at this point again."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#cautions",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#cautions",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "Cautions",
+    "text": "Cautions\n\nThese four conditions were chosen as an example for the UNIQLO analysis. With other conditions, the results for MUJI would change.\n“No sufficient condition” does not mean “no reason exists.”\nThis is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#reproducible-code-r",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#reproducible-code-r",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "Reproducible code (R)",
+    "text": "Reproducible code (R)\nData (same folder): fashion_muji.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_muji.csv\")\nconds &lt;- c(\"PRICE\", \"QUALITY\", \"VERSATILE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY                                                 expression     inclS\n1    5               BASIC + PRICE*VERSATILE + QUALITY*~VERSATILE 0.9302326\n2    6 ~PRICE*QUALITY*~VERSATILE + PRICE*QUALITY*VERSATILE*~BASIC 0.8723404\n3    7                                                No solution        NA\n4    8                                                No solution        NA\n5    9                                                No solution        NA\n       covS n_solutions\n1 0.4020101           1\n2 0.2827586           1\n3        NA           0\n4        NA           0\n5        NA           0\n\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#what-to-read-next",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#what-to-read-next",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "What to read next",
+    "text": "What to read next\n\nPart 1: UNIQLO\nPart 3: Swapping conditions with the same MUJI data\nBegin here: ThS-QCA Case Study"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-same-conditions/index.html#r-environment-for-this-page",
+    "href": "posts/thsqca-case-muji-same-conditions/index.html#r-environment-for-this-page",
+    "title": "Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions",
+    "section": "R environment for this page",
+    "text": "R environment for this page\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
+  },
+  {
     "objectID": "posts/thsqca-beginners-3/index.html",
     "href": "posts/thsqca-beginners-3/index.html",
     "title": "ThSQCA for beginners, part 3: solution types and multiple solutions",
@@ -439,6 +544,118 @@
     "title": "なぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析",
     "section": "参考文献",
     "text": "参考文献\n\nRagin, C. C. (2008). Redesigning Social Inquiry: Fuzzy Sets and Beyond. University of Chicago Press.\nFiss, P. C. (2011). Building better causal theories: A fuzzy set approach to typologies in organization research. Academy of Management Journal, 54(2), 393-420.\nWoodside, A. G. (2013). Moving beyond multiple regression analysis to algorithms: Calling for adoption of a paradigm shift from symmetric to asymmetric thinking in data analysis and crafting theory. Journal of Business Research, 66(4), 463-472."
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "",
+    "text": "連載第1弾。この記事だけで読めるように書いています。\nNPS(ネット・プロモーター・スコア)では、0から10点で測定した推奨意向の得点から、9点以上を「推奨者」と呼びます。この「9点」を8点、7点、6点、5点と動かしたら、ユニクロの推奨をもたらす十分条件は、どう変わるでしょうか。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#方法とデータ連載共通",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#方法とデータ連載共通",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "方法とデータ(連載共通)",
+    "text": "方法とデータ(連載共通)\n\n方法:Threshold-Sweep QCA(ThS-QCA)。「友人や知人に勧めたい度合い」(0〜10点。0=まったく勧めたくない、10=ぜひ勧めたい)の線引き（閾値）を動かしながら、推奨をもたらす十分条件(その組み合わせを持つ人の多くが、推奨に至っている組み合わせ)を並べて記述します(Toyoda, 2026, Quality & Quantity)。最適な閾値を探す方法ではありません。\nデータ:2026年6月、法政大学大学院イノベーション・マネジメント研究科の講義「マーケティング２」で行った自主調査「カジュアルファッション調査(300名)：Freeasy社にて実施」の一部を、事例用に公開しています。対象は、スクリーニング調査で、カジュアルファッションブランドを選ぶことを「まったく意識していない」とは答えなかった人です(一般の消費者を代表する標本ではありません)。各ブランドを評価した人が分析の対象です(「わからない」は除外)。\n対象:ユニクロを評価した267名。\n条件(X):ブランドへの認識(「買いやすい価格帯」「品質がよい」「着回しやすい」「トレンドを抑えた商品がある(以下、ベーシック)」)。各ブランドについて、「あてはまると思う項目をすべて選ぶ」形式で聞き、選ばれた/選ばれなかったで分けています。ここで取り上げる4つは、手法の使い方を示す例です。例示に適したものを、結果を見て選んでいます。実際の分析では、事前に、仮説や先行研究にもとづいて、条件を決める必要があります。\n一貫性:その組み合わせを持つ人のうち、推奨した人の割合(基準は0.80以上)。カバレッジ:推奨した人のうち、その組み合わせで説明できた人の割合。\n設定(全レベル共通):最小事例数4。中間解を使います(データにない組み合わせにも、「その認識があれば推奨に寄与する」という方向の仮定を置いて、式を短くします。ただし、ベーシックだけは、どちらの方向とも決められないため、方向の仮定を置きません)。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#結果十分条件の列挙9点から5点",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#結果十分条件の列挙9点から5点",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "結果:十分条件の列挙(9点から5点)",
+    "text": "結果:十分条件の列挙(9点から5点)\n\n\n\n\n\n\n\n\n\n\n「推奨」のレベル\n該当する人の割合\n十分条件\n一貫性\nカバレッジ\n\n\n\n\n9点以上\n18%\nなし\n−\n−\n\n\n8点以上\n41%\n価格×品質×着回し×ベーシックでない\n0.81\n0.19\n\n\n7点以上\n58%\n価格×品質×着回し×ベーシックでない\n0.88\n0.15\n\n\n6点以上\n67%\n価格×着回し×ベーシックでない / 品質×着回しでない×ベーシックでない\n0.89\n0.39\n\n\n5点以上\n86%\n価格×ベーシックでない / 品質×ベーシックでない / 着回し×ベーシックでない / 価格×品質×着回し\n0.93\n0.66\n\n\n\n(「/」は「または」、「ベーシックでない」は、「トレンドを抑えた商品がある」とは認識されていない(選ばれなかった)ことです。表の一貫性とカバレッジは、「/」で結んだ解全体の値です。)\n\n5点以上では、ベーシックと認識されていない状態であれば、価格・品質・着回しのどれか1つがあれば十分です(3つが揃う場合は、ベーシックかどうかを問いません)。条件が緩く、十分条件の形も多様です。\n7〜8点以上では、ベーシックとは認識されていない状態で、価格×品質×着回しがすべて揃うことが、十分条件です。\nなお、9点以上では、この4つの条件では十分条件が得られませんでした。\n\n目標のレベルが上がるほど、十分条件は「どれか1つ」から「複数が揃う」へと厳しくなることがわかります。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#マーケティング的な読み方仮説として",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#マーケティング的な読み方仮説として",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "マーケティング的な読み方(仮説として)",
+    "text": "マーケティング的な読み方(仮説として)\n結果から言えるのは、「どの認識の組み合わせを持つ人が、どの程度の推奨に至っているか」までです。以下は、そこから考えられる、マーケティング上の解釈で、あくまで仮説です。\n\n線引きを下げるほど、短い組み合わせが解に現れます。8点以上(41%)で得られた解には、価格・品質・着回しの3つが含まれていました。5点以上(86%)と定義した場合は、ベーシックと認識されていない状態であれば、価格・品質・着回しのどれか1つを含む、より短い組み合わせが現れます。高い得点で薦める人たちには、複数の認識が重なった組み合わせが見えている、と読めます。\nどのレベルの解にも、「ベーシックでない」が含まれています。「トレンドを抑えた商品がある」が選ばれなかったことが、すべての解に入っています。ただし、この項目が選ばれなかったことが、ブランドのどんな見方を表しているのかは、この調査だけでは分かりません。「新しさや流行を感じている」とまでは、読めません。\n十分条件は、推奨の道筋の「一部」です。「価格×品質×着回し×ベーシックでない」に当てはまる人は26名で、そのうち23名が7点以上です(一貫性0.88)。一方、7点以上の154名(58%)のうち、この組み合わせに当てはまるのは23名(約15%、カバレッジ0.15)にとどまります。7点以上の人の大半は、ほかの道筋で推奨しています。この組み合わせを満たす施策だけで、推奨者が大きく増えるとは限りません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#読むときの注意",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#読むときの注意",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "読むときの注意",
+    "text": "読むときの注意\n\n「十分条件が得られなかった」は、「理由がない」という意味ではありません。選んだ条件に、高い推奨をもたらす要因が含まれていないだけかもしれません。別の条件を選べば、十分条件は変わります。\n4つの条件は例示です(上記のとおり、実際は事前に決めます)。\n講義の一環で実施したオンライン調査(300名)であり、一般の消費者を代表する標本ではありません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#再現用コードr",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#再現用コードr",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "再現用コード(R)",
+    "text": "再現用コード(R)\nデータ(同じフォルダ): fashion_uniqlo.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_uniqlo.csv\")\nconds &lt;- c(\"PRICE\", \"QUALITY\", \"VERSATILE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY\n1    5\n2    6\n3    7\n4    8\n5    9\n                                                                  expression\n1 PRICE*~BASIC + QUALITY*~BASIC + VERSATILE*~BASIC + PRICE*QUALITY*VERSATILE\n2                         PRICE*VERSATILE*~BASIC + QUALITY*~VERSATILE*~BASIC\n3                                             PRICE*QUALITY*VERSATILE*~BASIC\n4                                             PRICE*QUALITY*VERSATILE*~BASIC\n5                                                                No solution\n      inclS      covS n_solutions\n1 0.9263804 0.6565217           1\n2 0.8860759 0.3888889           1\n3 0.8846154 0.1493506           1\n4 0.8076923 0.1926606           1\n5        NA        NA           0\n\n\n論文:Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#次に読むもの",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#次に読むもの",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "次に読むもの",
+    "text": "次に読むもの\n\n第2弾 ユニクロの条件のまま、無印良品を分析する\nここから読む:ThS-QCAの事例"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-uniqlo/index.html#このページのrの環境",
+    "href": "ja/articles/thsqca-case-uniqlo/index.html#このページのrの環境",
+    "title": "ThS-QCA を使ってみる(1)ユニクロ: 「推奨」の線引きを9点から5点まで動かす",
+    "section": "このページのRの環境",
+    "text": "このページのRの環境\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "",
+    "text": "連載第3弾。この記事だけで読めるように書いています。\n第1弾では、ユニクロの推奨を、ベーシックとは認識されていない状態で、価格×品質×着回しがすべて揃うこと、で説明できました。第2弾では、その物差しで無印良品を測ると、7点以上の推奨を説明できませんでした。今回は、同じ無印良品の251名で、分析に入れる条件を入れ替えると、見える組み合わせがどう変わるかを確かめます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#方法とデータ連載共通",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#方法とデータ連載共通",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "方法とデータ(連載共通)",
+    "text": "方法とデータ(連載共通)\n\n方法:Threshold-Sweep QCA(ThS-QCA)。「友人や知人に勧めたい度合い」(0〜10点。0=まったく勧めたくない、10=ぜひ勧めたい)の線引き（閾値）を動かしながら、推奨をもたらす十分条件(その組み合わせを持つ人の多くが、推奨に至っている組み合わせ)を並べて記述します(Toyoda, 2026, Quality & Quantity)。最適な閾値を探す方法ではありません。\nデータ:2026年6月、法政大学大学院イノベーション・マネジメント研究科の講義「マーケティング２」で行った自主調査「カジュアルファッション調査(300名)：Freeasy社にて実施」の一部を、事例用に公開しています。対象は、スクリーニング調査で、カジュアルファッションブランドを選ぶことを「まったく意識していない」とは答えなかった人です(一般の消費者を代表する標本ではありません)。各ブランドを評価した人が分析の対象です(「わからない」は除外)。\n対象:無印良品を評価した251名。\n条件(X):ブランドへの認識(「品質がよい」「着回しやすい」「実店舗に入りやすい」「トレンドを抑えた商品がある(以下、ベーシック)」)。無印良品のデータを見て、7点以上で十分条件が得られる組み合わせから、選んだものです。第2弾とは、「価格」を外して「実店舗に入りやすい」を入れています。各ブランドについて、「あてはまると思う項目をすべて選ぶ」形式で聞き、選ばれた/選ばれなかったで分けています。ここで取り上げる4つは、手法の使い方を示す例です。例示に適したものを、結果を見て選んでいます。実際の分析では、事前に、仮説や先行研究にもとづいて、条件を決める必要があります。\n一貫性:その組み合わせを持つ人のうち、推奨した人の割合(基準は0.80以上)。カバレッジ:推奨した人のうち、その組み合わせで説明できた人の割合。\n設定(全レベル共通):最小事例数4。中間解を使います(データにない組み合わせにも、「その認識があれば推奨に寄与する」という方向の仮定を置いて、式を短くします。ただし、ベーシックだけは、どちらの方向とも決められないため、方向の仮定を置きません)。\n補足:調査の他の項目も含めて、4つの条件の組み合わせを、ほかにも試しました。9点以上では、どの組み合わせでも十分条件が得られませんでした。8点以上では、解全体の一貫性が0.80以上になる組み合わせはありますが、説明できる人は、72名中6名以下とごくわずかでした。この探索には、公開CSVに含まれない項目も使っているため、公開CSVでは再現できません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#結果無印良品に合わせた条件での十分条件",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#結果無印良品に合わせた条件での十分条件",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "結果:無印良品に合わせた条件での十分条件",
+    "text": "結果:無印良品に合わせた条件での十分条件\n\n\n\n\n\n\n\n\n\n\n「推奨」のレベル\n該当割合\n十分条件\n一貫性\nカバレッジ\n\n\n\n\n9点以上\n14%\nなし\n−\n−\n\n\n8点以上\n29%\nなし\n−\n−\n\n\n7点以上\n46%\n品質×ベーシック / 品質×着回し×実店舗に入りやすい\n0.82\n0.16\n\n\n6点以上\n58%\n品質×着回しでない×実店舗に入りにくい / 品質×着回し×実店舗に入りやすい×ベーシックでない\n0.85\n0.24\n\n\n5点以上\n79%\n品質 / ベーシック / 着回し×実店舗に入りやすい\n0.90\n0.43\n\n\n\n(「/」は「または」、「〜でない」「入りにくい」は、その認識が選ばれなかったことです。表の一貫性とカバレッジは、「/」で結んだ解全体の値です。)\n\n同じ無印良品の251名でも、「価格」を「実店舗に入りやすい」に入れ替えると、第2弾では得られなかった7点以上で、十分条件が得られました。なお、この条件の組み合わせは、7点以上で解が得られるものを、同じデータから選んでいます。\n7点以上の十分条件には、いずれも品質が含まれます。「品質に、ベーシックの選択が加わる経路」と、「品質に、着回しと実店舗への入りやすさが加わる経路」の2つです。\n5点以上では、品質があるだけで十分です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#マーケティング的な読み方仮説として",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#マーケティング的な読み方仮説として",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "マーケティング的な読み方(仮説として)",
+    "text": "マーケティング的な読み方(仮説として)\n結果から言えるのは、「どの認識の組み合わせを持つ人が、どの程度の推奨に至っているか」までです。以下は、そこから考えられる、マーケティング上の解釈で、あくまで仮説です。\n\n条件の入れ替えで、見える組み合わせが変わります。第2弾の4条件では、7点以上で解が得られませんでした。条件を入れ替えると、7点以上で、品質を含む2つの経路が見えました。分析に何を入れるかで、見える組み合わせが変わる、ということです。\n「ベーシック」の現れ方は、解によって異なります。ユニクロの解には「ベーシックでない」が含まれ、無印良品の解の一部には「ベーシック」が含まれました。ただし、投入した条件が異なるため、直接の比較はできません。ベーシックが選ばれた人は、無印良品でも8%と少数です。また、調査で聞いたのは「トレンドを抑えた商品があるか」であり、これがブランドの何を表しているのかは、この調査だけでは分かりません。\n実務では、条件は事前に、自社の仮説にもとづいて決めます。ここでは、条件の入れ替えで結果が変わることを示すために、結果を見て選んだ条件を使っています。実際の分析では、事前に決めた条件で行い、条件を変えたときの結果の違いを、感度分析として示します。\n十分条件は、推奨の道筋の「一部」です。解に当てはまる人は22名で、そのうち18名が7点以上です(一貫性0.82)。一方、7点以上の116名のうち、解に当てはまるのは18名(約16%、カバレッジ0.16)です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#読むときの注意",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#読むときの注意",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "読むときの注意",
+    "text": "読むときの注意\n\n条件は、無印良品のデータを見て選んだ例示です。別のデータで確かめるまでは、仮説です。\n「十分条件が得られなかった」は、「理由がない」という意味ではありません。\n講義の一環で実施したオンライン調査(300名)であり、一般の消費者を代表する標本ではありません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#再現用コードr",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#再現用コードr",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "再現用コード(R)",
+    "text": "再現用コード(R)\nデータ(同じフォルダ): fashion_muji.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_muji.csv\")\nconds &lt;- c(\"QUALITY\", \"VERSATILE\", \"EASYSTORE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY                                                         expression\n1    5                              QUALITY + BASIC + VERSATILE*EASYSTORE\n2    6 QUALITY*~VERSATILE*~EASYSTORE + QUALITY*VERSATILE*EASYSTORE*~BASIC\n3    7                        QUALITY*BASIC + QUALITY*VERSATILE*EASYSTORE\n4    8                                                        No solution\n5    9                                                        No solution\n      inclS      covS n_solutions\n1 0.9042553 0.4271357           1\n2 0.8536585 0.2413793           1\n3 0.8181818 0.1551724           1\n4        NA        NA           0\n5        NA        NA           0\n\n\n論文:Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#次に読むもの",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#次に読むもの",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "次に読むもの",
+    "text": "次に読むもの\n\n第2弾 ユニクロの条件のまま、無印良品を分析する\nここから読む:ThS-QCAの事例"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-swap/index.html#このページのrの環境",
+    "href": "ja/articles/thsqca-case-muji-swap/index.html#このページのrの環境",
+    "title": "ThS-QCA を使ってみる(3)無印良品に合わせた物差しを選び直す",
+    "section": "このページのRの環境",
+    "text": "このページのRの環境\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
   },
   {
     "objectID": "ja/articles/thsqca-beginners-4/index.html",
@@ -893,7 +1110,7 @@
     "href": "index.html",
     "title": "Yuki Toyoda’s Blog",
     "section": "",
-    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here About this blog: Welcome 日本語の方はこちら ThSQCA on CRAN\nThe fifteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)"
+    "text": "Notes on the ThSQCA R package, qualitative comparative analysis, and hands-on web tools for marketing research.\nNew here? Start here About this blog: Welcome 日本語の方はこちら ThSQCA on CRAN\nThe articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)"
   },
   {
     "objectID": "index.html#get-to-know-qca-and-the-threshold-idea",
@@ -929,6 +1146,13 @@
     "title": "Yuki Toyoda’s Blog",
     "section": "5. Paper guides",
     "text": "5. Paper guides\nReading notes on papers related to QCA, marketing science, brand management, and statistics, added from time to time.\n\n\n\n13\n\nAbout Paper Guides: Introducing Papers on This Blog\n\n\nThe purpose of the paper guides on this blog, the kinds of papers covered, how each article is organized, and a list of published guides.\n\n\n \n\n14\n\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)\n\n\nHow do quantitative and qualitative analysis differ? A paper guide to Mahoney & Goertz (2006), written for MBA students and business analysts.\n\n\n \n\n15\n\nPaper Guide: How Should We Evaluate the \"Conditions for Success\"? (Ragin, 2006)\n\n\nAre the traits shared by successful firms really conditions for success? A paper guide to Ragin (2006), on sufficient and necessary conditions, consistency, and coverage, written for MBA students and business analysts."
+  },
+  {
+    "objectID": "index.html#ths-qca-in-practice",
+    "href": "index.html#ths-qca-in-practice",
+    "title": "Yuki Toyoda’s Blog",
+    "section": "6. ThS-QCA in practice",
+    "text": "6. ThS-QCA in practice\nA short series that applies threshold-sweep QCA to survey data on UNIQLO and MUJI, and shows how the results change when the “recommend” line and the conditions change.\n\n\n\n\nThS-QCA Case Study: Sufficient Conditions by \"Recommend\" Level for UNIQLO and MUJI (Begin Here)\n\n\nA three-part series with survey data on UNIQLO and MUJI. Begin with this article; it links to each part."
   },
   {
     "objectID": "glossary.html",
@@ -1344,6 +1568,111 @@
     "text": "次回\n最終回の第4回では、結果を報告できる形にします。Markdown形式のレポート、構成図、QCAパッケージとの照合です。\n使ったソフトウェア: R 4.6.1、QCA 3.25.5、ThSQCA 2.0.9"
   },
   {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "",
+    "text": "連載第2弾。この記事だけで読めるように書いています。\n前回(第1弾)は、ユニクロの「推奨」の線引きを9点から5点まで動かし、7〜8点以上では、ベーシックとは認識されていない状態で、価格×品質×着回しがすべて揃うことが十分条件になることを示しました。では、このユニクロ用の物差しを、そのまま無印良品に当てはめると、何が見えるでしょうか。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#方法とデータ連載共通",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#方法とデータ連載共通",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "方法とデータ(連載共通)",
+    "text": "方法とデータ(連載共通)\n\n方法:Threshold-Sweep QCA(ThS-QCA)。「友人や知人に勧めたい度合い」(0〜10点。0=まったく勧めたくない、10=ぜひ勧めたい)の線引き（閾値）を動かしながら、推奨をもたらす十分条件(その組み合わせを持つ人の多くが、推奨に至っている組み合わせ)を並べて記述します(Toyoda, 2026, Quality & Quantity)。最適な閾値を探す方法ではありません。\nデータ:2026年6月、法政大学大学院イノベーション・マネジメント研究科の講義「マーケティング２」で行った自主調査「カジュアルファッション調査(300名)：Freeasy社にて実施」の一部を、事例用に公開しています。対象は、スクリーニング調査で、カジュアルファッションブランドを選ぶことを「まったく意識していない」とは答えなかった人です(一般の消費者を代表する標本ではありません)。各ブランドを評価した人が分析の対象です(「わからない」は除外)。\n対象:無印良品を評価した251名。\n条件(X):ユニクロと同じ4つの認識(「買いやすい価格帯」「品質がよい」「着回しやすい」「トレンドを抑えた商品がある(以下、ベーシック)」)。各ブランドについて、「あてはまると思う項目をすべて選ぶ」形式で聞き、選ばれた/選ばれなかったで分けています。ここで取り上げる4つは、手法の使い方を示す例です。例示に適したものを、結果を見て選んでいます。実際の分析では、事前に、仮説や先行研究にもとづいて、条件を決める必要があります。\n一貫性:その組み合わせを持つ人のうち、推奨した人の割合(基準は0.80以上)。カバレッジ:推奨した人のうち、その組み合わせで説明できた人の割合。\n設定(全レベル共通):最小事例数4。中間解を使います(データにない組み合わせにも、「その認識があれば推奨に寄与する」という方向の仮定を置いて、式を短くします。ただし、ベーシックだけは、どちらの方向とも決められないため、方向の仮定を置きません)。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#結果同じ物差しで同じ線引きを動かす",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#結果同じ物差しで同じ線引きを動かす",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "結果:同じ物差しで、同じ線引きを動かす",
+    "text": "結果:同じ物差しで、同じ線引きを動かす\n\n\n\n\n\n\n\n\n\n\n「推奨」のレベル\n無印良品の該当割合(ユニクロ)\n無印良品の十分条件\n一貫性\nカバレッジ\n\n\n\n\n9点以上\n14%(18%)\nなし\n−\n−\n\n\n8点以上\n29%(41%)\nなし\n−\n−\n\n\n7点以上\n46%(58%)\nなし\n−\n−\n\n\n6点以上\n58%(67%)\n価格でない×品質×着回しでない / 価格×品質×着回し×ベーシックでない\n0.87\n0.28\n\n\n5点以上\n79%(86%)\nベーシック / 価格×着回し / 品質×着回しでない\n0.93\n0.40\n\n\n\n(「/」は「または」、「〜でない」は、その認識が選ばれなかったことです。表の一貫性とカバレッジは、「/」で結んだ解全体の値です。)\n\n無印良品で十分条件が得られるのは、6点以上までです。ユニクロでは8点以上まで得られました。\nユニクロでは、7〜8点以上で、ベーシックとは認識されていない状態で、価格×品質×着回しがすべて揃うことが十分条件でした。無印良品では、この形は、6点以上で初めて現れます。\n6点以上のもう1つの形は、価格も着回しも認識されていない状態で、品質があれば十分、というものです。価格の認識がなくても、品質だけで推奨に至る人が目立ちます。\n認識の持たれ方も違います。「買いやすい価格帯」と認識する人は、ユニクロで44%、無印良品で30%でした。\n\nつまり、共通の4条件を使ったところ、無印良品では、7点以上で基準を満たす解が得られませんでした。7点以上の割合も、ユニクロ58%、無印良品46%と異なります。同じ条件・設定でも、得られる解は、ブランドによって異なりました。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#マーケティング的な読み方仮説として",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#マーケティング的な読み方仮説として",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "マーケティング的な読み方(仮説として)",
+    "text": "マーケティング的な読み方(仮説として)\n結果から言えるのは、「どの認識の組み合わせを持つ人が、どの程度の推奨に至っているか」までです。以下は、そこから考えられる、マーケティング上の解釈で、あくまで仮説です。\n\n同じ条件・設定でも、解の得られ方が違います。ユニクロでは、8点以上で解が得られました。無印良品では、6点以上でようやく解が得られます。ユニクロの推奨に当てはまった「価格・品質・着回し」を中心とした見方は、そのまま無印良品に持ち込めるとは限りません。\n価格の認識の持たれ方が違います。「買いやすい価格帯」が選ばれた割合は、ユニクロの44%に対して、無印良品は30%です。6点以上では、価格が選ばれていない状態で、品質があれば十分、という形も現れます。ただし、これは認識の割合の違いです。無印良品を薦める人が価格を見ていない、とまでは言えません。\n5点以上では、ユニクロと無印良品で、「ベーシック」の現れ方が違います。ユニクロの解には、「ベーシックでない」が含まれていました。無印良品の5点以上の解には、「ベーシック」そのものが含まれます。ただし、無印良品でベーシックが選ばれた人は8%と少数です(ユニクロは11%)。この点は、第3弾でもう一度見ます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#読むときの注意",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#読むときの注意",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "読むときの注意",
+    "text": "読むときの注意\n\nこの4つの条件は、ユニクロの分析用に選んだ例示です。別の条件を選べば、無印良品の結果は変わります。\n「十分条件が得られなかった」は、「理由がない」という意味ではありません。\n講義の一環で実施したオンライン調査(300名)であり、一般の消費者を代表する標本ではありません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#再現用コードr",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#再現用コードr",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "再現用コード(R)",
+    "text": "再現用コード(R)\nデータ(同じフォルダ): fashion_muji.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_muji.csv\")\nconds &lt;- c(\"PRICE\", \"QUALITY\", \"VERSATILE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY                                                 expression     inclS\n1    5               BASIC + PRICE*VERSATILE + QUALITY*~VERSATILE 0.9302326\n2    6 ~PRICE*QUALITY*~VERSATILE + PRICE*QUALITY*VERSATILE*~BASIC 0.8723404\n3    7                                                No solution        NA\n4    8                                                No solution        NA\n5    9                                                No solution        NA\n       covS n_solutions\n1 0.4020101           1\n2 0.2827586           1\n3        NA           0\n4        NA           0\n5        NA           0\n\n\n論文:Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#次に読むもの",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#次に読むもの",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "次に読むもの",
+    "text": "次に読むもの\n\n第1弾 ユニクロ\n第3弾 同じ無印良品のデータで、条件を入れ替える\nここから読む:ThS-QCAの事例"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-muji-same-conditions/index.html#このページのrの環境",
+    "href": "ja/articles/thsqca-case-muji-same-conditions/index.html#このページのrの環境",
+    "title": "ThS-QCA を使ってみる(2)ユニクロの物差しで、無印良品を測ってみる",
+    "section": "このページのRの環境",
+    "text": "このページのRの環境\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html",
+    "href": "ja/articles/thsqca-case-overview/index.html",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "",
+    "text": "連載の入口の記事です。ここから読み始めてください。各回は、下のリンクから読めます。\n「友人や知人に勧めたい」という気持ちを、何点以上で「推奨する」と考えるか。NPSでは9点以上が「推奨者」ですが、この線引きを動かすと、推奨をもたらす条件の組み合わせ(十分条件)は変わります。このシリーズは、その様子を、ユニクロと無印良品の調査データで見ていきます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#ths-qca-とは",
+    "href": "ja/articles/thsqca-case-overview/index.html#ths-qca-とは",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "ThS-QCA とは",
+    "text": "ThS-QCA とは\n質的比較分析(QCA)は、「どの条件の組み合わせが、結果に十分か」を調べる方法です。Threshold-Sweep QCA(ThS-QCA)は、結果(ここでは、勧めたい度合い)の線引きを、段階的に動かして、そのたびに十分条件を並べて記述します(Toyoda, 2026, Quality & Quantity)。この連載では、ThS-QCAで、結果側の閾値(線引き)を動かします。最適な閾値を探す方法ではなく、「閾値によって、見え方がどう変わるか」を見る方法です。Rパッケージ ThSQCA(CRAN公開中)で実行できます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#データ",
+    "href": "ja/articles/thsqca-case-overview/index.html#データ",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "データ",
+    "text": "データ\n\n2026年6月、法政大学大学院イノベーション・マネジメント研究科の講義「マーケティング２」で行った自主調査「カジュアルファッション調査(300名)：Freeasy社にて実施」の一部を、事例用に公開しています(再現用CSV: fashion_uniqlo.csv、fashion_muji.csv)。\n対象は、スクリーニング調査で、カジュアルファッションブランドを選ぶことを「まったく意識していない」とは答えなかった人です。一般の消費者を代表する標本ではありません。\n結果(Y):「友人や知人に、どの程度勧めたいと思いますか」(0=まったく勧めたくない 〜 10=ぜひ勧めたい)。\n条件(X):各ブランドについて、「あてはまると思う項目をすべて選ぶ」形式で聞いた項目から、5項目(「買いやすい価格帯か」「品質がよいか」「着回しやすいか」「実店舗に入りやすいか」「トレンドを抑えた商品があるか(以下、ベーシック)」)を取り上げます。1回の分析で使うのは、4項目です。第1弾と第2弾は、価格・品質・着回し・ベーシックの4項目、第3弾は、価格を外して実店舗に入りやすいを加えた、品質・着回し・実店舗に入りやすい・ベーシックの4項目です。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#条件についての大切な注意",
+    "href": "ja/articles/thsqca-case-overview/index.html#条件についての大切な注意",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "条件についての大切な注意",
+    "text": "条件についての大切な注意\n調査には、他にも項目がありますが、ここでは、手法の使い方を示す例として、5項目を取り上げ、1回の分析には、そのうちの4項目を使います。この項目の選び方は、例示に適したものを、結果を見て選んでいます。実際の分析では、事前に、仮説や先行研究にもとづいて、条件を決める必要があります。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#シリーズの構成",
+    "href": "ja/articles/thsqca-case-overview/index.html#シリーズの構成",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "シリーズの構成",
+    "text": "シリーズの構成\n\n第1弾 ユニクロ:「推奨」の線引きを9点から5点まで動かして、十分条件を並べます。\n第2弾 ユニクロの条件のまま、無印良品を分析する:同じ条件・設定で、ブランドだけを変えます。\n第3弾 同じ無印良品のデータで、条件を入れ替える:ブランドを固定して、分析に入れる条件を入れ替えます。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#結果のポイントは2つ結果の予告",
+    "href": "ja/articles/thsqca-case-overview/index.html#結果のポイントは2つ結果の予告",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "結果のポイントは2つ(結果の予告)",
+    "text": "結果のポイントは2つ(結果の予告)\n\n推奨の線引きを変えると、解が変わります。ユニクロでは、8点以上の解には、価格・品質・着回しの3つが含まれました。線引きを5点以上に下げると、より短い組み合わせが現れます。\n分析に入れる条件を変えると、解が変わります。共通の4条件では、無印良品の7点以上で、基準を満たす解が得られませんでした。同じ251名で、価格を実店舗への入りやすさに入れ替えると、7点以上で、品質を含む2つの経路が見えました。\n\nどちらも、9点以上では、今回の条件では十分条件が得られていません。これは、「手立てがない」という意味ではなく、選んだ条件に、高い推奨をもたらす要因が含まれていないだけかもしれません。"
+  },
+  {
+    "objectID": "ja/articles/thsqca-case-overview/index.html#設定",
+    "href": "ja/articles/thsqca-case-overview/index.html#設定",
+    "title": "ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)",
+    "section": "設定",
+    "text": "設定\n最小事例数4、一貫性の基準0.80、中間解(ベーシックだけは、方向の仮定を置かない)。\n論文:Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
     "objectID": "ja/articles/welcome/index.html",
     "href": "ja/articles/welcome/index.html",
     "title": "ようこそ",
@@ -1393,6 +1722,13 @@
     "text": "5. 論文ガイド\nQCA、マーケティング・サイエンス、ブランド・マネジメント、統計学に関係する論文を、随時、1本ずつ読み解いて紹介します。\n\n\n\n13\n\n論文ガイドについて:このブログで文献を紹介していきます\n\n\nこのブログの論文ガイドの目的、扱う論文、各記事の構成、公開済みの記事の一覧です。\n\n\n \n\n14\n\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)\n\n\n定量分析と定性分析は、何が違うのか。Mahoney & Goertz (2006) を、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。\n\n\n \n\n15\n\n論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)\n\n\n成功企業の共通点は、成功の条件といえるのか。Ragin (2006) を通して、必要条件と十分条件の違いと、その関係を評価する一貫性とカバレッジを、MBA の院生とビジネスの分析者向けに読み解く論文ガイド。"
   },
   {
+    "objectID": "ja/index.html#ths-qca-を事例で使う",
+    "href": "ja/index.html#ths-qca-を事例で使う",
+    "title": "Yuki Toyoda のブログ(日本語版)",
+    "section": "6. ThS-QCA を事例で使う",
+    "text": "6. ThS-QCA を事例で使う\nユニクロと無印良品の調査データに、閾値スイープQCAを使います。「推奨」の線引きと、分析に入れる条件を変えると、結果がどう変わるかを見る連載です。\n\n\n\n\nThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)\n\n\nユニクロと無印良品の調査データを使う、全3回の連載です。この記事から読み始めて、各回に進めます。"
+  },
+  {
     "objectID": "ja/start.html",
     "href": "ja/start.html",
     "title": "はじめに",
@@ -1404,7 +1740,7 @@
     "href": "ja/start.html#記事を読む順に",
     "title": "はじめに",
     "section": "記事を、読む順に",
-    "text": "記事を、読む順に\n日本語版トップにも、同じ並びで、画像つきの一覧があります。\n\n1. QCA と「閾値」の考え方を知る\n\nようこそ\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\n\n2. R で ThSQCA を使ってみる\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認\n\n\n\n3. 文献リスト\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)\n\n\n\n4. リサーチ手法と手順ガイド\n\nアンケートから尺度を作り、回帰分析・QCAに進む手順\n潜在変数を入れる前に: 尺度化とパス解析でできること\n\n\n\n5. 論文ガイド\n\n論文ガイドについて:このブログで文献を紹介していきます\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)\n論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)"
+    "text": "記事を、読む順に\n日本語版トップにも、同じ並びで、画像つきの一覧があります。\n\n1. QCA と「閾値」の考え方を知る\n\nようこそ\nなぜ QCA は意思決定に向くのか: 「単独の効果」ではなく「レシピ」を探す分析\n「ほどほど」と「大好き」は、同じ目標でしょうか。マーケターのための閾値スイープ QCA\nThSQCA の紹介: Rで閾値スイープQCAを行う\n\n\n\n2. R で ThSQCA を使ってみる\n\nThSQCA 入門 第1回: はじめての閾値スイープ\n第2回: 4つのスイープと、範囲の決め方\n第3回: 解の種類と、複数の解\n第4回: 結果の報告と確認\n\n\n\n3. 文献リスト\n\nQCA を知るための論文と本: 最初に読む 6 点(基礎編)\nマーケティング・経営学で QCA を使った論文: 最初に読む 10 本(応用編)\n\n\n\n4. リサーチ手法と手順ガイド\n\nアンケートから尺度を作り、回帰分析・QCAに進む手順\n潜在変数を入れる前に: 尺度化とパス解析でできること\n\n\n\n5. 論文ガイド\n\n論文ガイドについて:このブログで文献を紹介していきます\n論文ガイド:定量と定性は、優劣ではなく「2つの文化」(Mahoney & Goertz, 2006)\n論文ガイド:「成功の条件」をどう評価するか(Ragin, 2006)\n\n\n\n6. ThS-QCA を事例で使う\nユニクロと無印良品の調査データを使う、全3回の連載です。この記事から読み始めてください。\n\nThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)"
   },
   {
     "objectID": "ja/start.html#分析ツールから始めたい方へ",
@@ -1869,6 +2205,118 @@
     "text": "Where to go from here\nYou now know the whole workflow: choose a sweep, set a defensible range, run it, read it, and report it. If you want more, the package documentation has the full tutorial with additional examples, and the methodology is explained in the paper.\n\nThSQCA documentation and tutorial\nThSQCA on CRAN\nToyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3\nBrowser tools: QCA Quickstart and Sweep Builder\n\nSoftware used: R 4.6.1, QCA 3.25.5, and ThSQCA 2.0.9."
   },
   {
+    "objectID": "posts/thsqca-case-muji-swap/index.html",
+    "href": "posts/thsqca-case-muji-swap/index.html",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "",
+    "text": "Series part 3. Written to be read on its own.\nIn part 1, UNIQLO’s recommendations were explained by “price × quality × versatile × not basic.” In part 2, with the same conditions, no solution met the criterion for MUJI at 7 or higher. This time, I swap the conditions entered into the analysis, using the same 251 MUJI respondents, and check how the combinations we see change."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#method-and-data-common-to-the-series",
+    "href": "posts/thsqca-case-muji-swap/index.html#method-and-data-common-to-the-series",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "Method and data (common to the series)",
+    "text": "Method and data (common to the series)\n\nMethod: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the sufficient conditions at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, Quality & Quantity). It does not search for one optimal threshold.\nData: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).\nCases: 251 respondents who rated MUJI.\nConditions (X): brand perceptions (“good quality,” “easy to mix and match,” “easy to walk into a physical store,” and “offers products that downplay trends” (hereafter, basic)). I selected them, from combinations that yield a solution at 7 or higher in MUJI’s data. Compared with part 2, “price” is dropped and “easy to walk into a physical store” is added. For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are an example of how to use the method. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.\nConsistency: among people holding a combination, the share who recommend (threshold 0.80 or higher). Coverage: among people who recommend, the share explained by the combination.\nSettings (same at every level): minimum number of cases 4; intermediate solution (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction).\nNote: Beyond the items used here, I tried other combinations of four conditions, using other survey items as well. At 9 or higher, no combination yielded a sufficient condition. At 8 or higher, some combinations have an overall solution consistency of 0.80 or higher, but they explain very few people (6 or fewer of 72). This search used items that are not in the public CSV, so it cannot be reproduced with the public CSV."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#results-sufficient-conditions-with-the-swapped-conditions",
+    "href": "posts/thsqca-case-muji-swap/index.html#results-sufficient-conditions-with-the-swapped-conditions",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "Results: sufficient conditions with the swapped conditions",
+    "text": "Results: sufficient conditions with the swapped conditions\n\n\n\n\n\n\n\n\n\n\nRecommend if score is\nShare of respondents\nSufficient conditions\nConsistency\nCoverage\n\n\n\n\n9 or higher\n14%\nnone\nn/a\nn/a\n\n\n8 or higher\n29%\nnone\nn/a\nn/a\n\n\n7 or higher\n46%\nquality × basic / quality × versatile × easy store\n0.82\n0.16\n\n\n6 or higher\n58%\nquality × not versatile × not easy store / quality × versatile × easy store × not basic\n0.85\n0.24\n\n\n5 or higher\n79%\nquality / basic / versatile × easy store\n0.90\n0.43\n\n\n\n(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.) “Easy store” means “easy to walk into a physical store.”\n\nWith the same 251 MUJI respondents, replacing “price” with “easy to walk into a physical store” produced a sufficient condition at 7 or higher, which part 2 could not. Note that this set of conditions was selected from the same data as one that yields a solution at 7 or higher.\nEvery sufficient condition at 7 or higher contains quality: a route in which quality is joined by the basic selection, and a route in which quality is joined by versatility and easy to walk into.\nAt 5 or higher, quality alone is sufficient."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#a-marketing-reading-as-hypotheses",
+    "href": "posts/thsqca-case-muji-swap/index.html#a-marketing-reading-as-hypotheses",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "A marketing reading (as hypotheses)",
+    "text": "A marketing reading (as hypotheses)\nWhat the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.\n\nSwapping conditions changes the combinations we see. With part 2’s four conditions, no solution appeared at 7 or higher. After the swap, two routes containing quality appeared at 7 or higher. What we put into the analysis changes what we see.\nHow “basic” appears differs by solution. The UNIQLO solutions contained “not basic,” and part of the MUJI solutions contains “basic.” However, the conditions entered differ, so a direct comparison is not possible. Few respondents ticked basic even for MUJI (8%). Also, the survey asked whether the brand “offers products that downplay trends,” and this survey alone cannot tell what that says about the brand.\nIn practice, conditions are set in advance, based on your own hypotheses. Here I use conditions chosen after seeing results, to show that swapping conditions changes the results. In a real analysis, you would run the analysis with conditions set beforehand and show how results differ when conditions change, as a sensitivity analysis.\nA sufficient condition covers only “part” of the routes to recommendation. 22 respondents hold one of the solution’s routes, and 18 of them score 7 or higher (consistency 0.82). On the other hand, of the 116 respondents who score 7 or higher, only 18 hold one of these routes (about 16%, coverage 0.16)."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#cautions",
+    "href": "posts/thsqca-case-muji-swap/index.html#cautions",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "Cautions",
+    "text": "Cautions\n\nThe conditions are an example chosen after seeing MUJI’s results. Until checked on other data, the findings remain hypotheses.\n“No sufficient condition” does not mean “no reason exists.”\nThis is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general."
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#reproducible-code-r",
+    "href": "posts/thsqca-case-muji-swap/index.html#reproducible-code-r",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "Reproducible code (R)",
+    "text": "Reproducible code (R)\nData (same folder): fashion_muji.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_muji.csv\")\nconds &lt;- c(\"QUALITY\", \"VERSATILE\", \"EASYSTORE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY                                                         expression\n1    5                              QUALITY + BASIC + VERSATILE*EASYSTORE\n2    6 QUALITY*~VERSATILE*~EASYSTORE + QUALITY*VERSATILE*EASYSTORE*~BASIC\n3    7                        QUALITY*BASIC + QUALITY*VERSATILE*EASYSTORE\n4    8                                                        No solution\n5    9                                                        No solution\n      inclS      covS n_solutions\n1 0.9042553 0.4271357           1\n2 0.8536585 0.2413793           1\n3 0.8181818 0.1551724           1\n4        NA        NA           0\n5        NA        NA           0\n\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#what-to-read-next",
+    "href": "posts/thsqca-case-muji-swap/index.html#what-to-read-next",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "What to read next",
+    "text": "What to read next\n\nPart 2: MUJI with UNIQLO’s conditions\nBegin here: ThS-QCA Case Study"
+  },
+  {
+    "objectID": "posts/thsqca-case-muji-swap/index.html#r-environment-for-this-page",
+    "href": "posts/thsqca-case-muji-swap/index.html#r-environment-for-this-page",
+    "title": "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data",
+    "section": "R environment for this page",
+    "text": "R environment for this page\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html",
+    "href": "posts/thsqca-case-uniqlo/index.html",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "",
+    "text": "Series part 1. Written to be read on its own.\nIn the Net Promoter Score, people who give 9 or higher on a 0 to 10 recommendation scale are called “promoters.” What happens to the sufficient conditions for recommending UNIQLO if we move this line to 8, 7, 6 and 5?"
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#method-and-data-common-to-the-series",
+    "href": "posts/thsqca-case-uniqlo/index.html#method-and-data-common-to-the-series",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "Method and data (common to the series)",
+    "text": "Method and data (common to the series)\n\nMethod: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on “how strongly would you recommend this brand to friends and acquaintances” (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the sufficient conditions at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, Quality & Quantity). It does not search for one optimal threshold.\nData: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture “Marketing 2” at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered “not conscious at all” about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand (“don’t know” is excluded).\nCases: 267 respondents who rated UNIQLO.\nConditions (X): brand perceptions (“affordable price range,” “good quality,” “easy to mix and match,” and “offers products that downplay trends” (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are an example of how to use the method. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.\nConsistency: among people holding a combination, the share who recommend (threshold 0.80 or higher). Coverage: among people who recommend, the share explained by the combination.\nSettings (same at every level): minimum number of cases 4; intermediate solution (for logical remainders, I assume that each perception contributes toward recommending, except “basic”, for which I assume no direction)."
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#results-sufficient-conditions-from-9-down-to-5",
+    "href": "posts/thsqca-case-uniqlo/index.html#results-sufficient-conditions-from-9-down-to-5",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "Results: sufficient conditions from 9 down to 5",
+    "text": "Results: sufficient conditions from 9 down to 5\n\n\n\n\n\n\n\n\n\n\nRecommend if score is\nShare of respondents\nSufficient conditions\nConsistency\nCoverage\n\n\n\n\n9 or higher\n18%\nnone\nn/a\nn/a\n\n\n8 or higher\n41%\nprice × quality × versatile × not basic\n0.81\n0.19\n\n\n7 or higher\n58%\nprice × quality × versatile × not basic\n0.88\n0.15\n\n\n6 or higher\n67%\nprice × versatile × not basic / quality × not versatile × not basic\n0.89\n0.39\n\n\n5 or higher\n86%\nprice × not basic / quality × not basic / versatile × not basic / price × quality × versatile\n0.93\n0.66\n\n\n\n(“/” means “or”. “Not X” means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by “/”.) “Not basic” means that “offers products that downplay trends” was not ticked.\n\nAt 5 or higher, as long as the brand is not seen as basic, any one of price, quality or versatility is enough (when all three hold together, basic does not matter). The conditions are loose and take many forms.\nAt 7 or 8 or higher, the sufficient condition is that, with the brand not seen as basic, price, quality and versatility all hold.\nAt 9 or higher, these four conditions yield no sufficient condition.\n\nThe higher the target, the stricter the sufficient condition becomes: from “any one of them” to “several together.”"
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#a-marketing-reading-as-hypotheses",
+    "href": "posts/thsqca-case-uniqlo/index.html#a-marketing-reading-as-hypotheses",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "A marketing reading (as hypotheses)",
+    "text": "A marketing reading (as hypotheses)\nWhat the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.\n\nThe lower the line, the shorter the combinations that appear in the solution. The solutions at 8 or higher (41% of respondents) contained price, quality and versatility together. When the line is defined as 5 or higher (86%), shorter combinations appear: with the brand not seen as basic, any one of price, quality or versatility is part of a solution. People who recommend at high scores appear to hold several perceptions at once.\n“Not basic” appears in the solutions at every level. Not ticking “offers products that downplay trends” is part of every solution. However, this survey alone cannot tell what not ticking this item says about how people see the brand. It cannot be read as “they feel novelty or trendiness.”\nA sufficient condition covers only “part” of the routes to recommendation. 26 respondents hold “price × quality × versatile × not basic,” and 23 of them score 7 or higher (consistency 0.88). On the other hand, of the 154 respondents (58%) who score 7 or higher, only 23 hold this combination (about 15%, coverage 0.15). Most people who score 7 or higher recommend through other routes. Actions that only satisfy this combination will not necessarily increase recommenders by much."
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#cautions",
+    "href": "posts/thsqca-case-uniqlo/index.html#cautions",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "Cautions",
+    "text": "Cautions\n\n“No sufficient condition” does not mean “no reason exists.” The chosen conditions may simply not include the drivers of the highest ratings. With other conditions, the results would change.\nThe four conditions are an example (in a real analysis they are set in advance, as noted above).\nThis is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general."
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#reproducible-code-r",
+    "href": "posts/thsqca-case-uniqlo/index.html#reproducible-code-r",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "Reproducible code (R)",
+    "text": "Reproducible code (R)\nData (same folder): fashion_uniqlo.csv\n\nlibrary(QCA); library(ThSQCA)\ndat   &lt;- read.csv(\"fashion_uniqlo.csv\")\nconds &lt;- c(\"PRICE\", \"QUALITY\", \"VERSATILE\", \"BASIC\")\nres &lt;- otSweep(dat = dat, outcome = \"REC\", conditions = conds,\n  sweep_range = 5:9,\n  thrX = setNames(rep(1, length(conds)), conds),\n  include = \"?\", dir.exp = ifelse(conds == \"BASIC\", \"-\", \"1\"),\n  incl.cut = 0.80, n.cut = 4)\nres$summary[, c(\"thrY\", \"expression\", \"inclS\", \"covS\", \"n_solutions\")]\n\n  thrY\n1    5\n2    6\n3    7\n4    8\n5    9\n                                                                  expression\n1 PRICE*~BASIC + QUALITY*~BASIC + VERSATILE*~BASIC + PRICE*QUALITY*VERSATILE\n2                         PRICE*VERSATILE*~BASIC + QUALITY*~VERSATILE*~BASIC\n3                                             PRICE*QUALITY*VERSATILE*~BASIC\n4                                             PRICE*QUALITY*VERSATILE*~BASIC\n5                                                                No solution\n      inclS      covS n_solutions\n1 0.9263804 0.6565217           1\n2 0.8860759 0.3888889           1\n3 0.8846154 0.1493506           1\n4 0.8076923 0.1926606           1\n5        NA        NA           0\n\n\nPaper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. Quality & Quantity. https://doi.org/10.1007/s11135-026-03092-3"
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#what-to-read-next",
+    "href": "posts/thsqca-case-uniqlo/index.html#what-to-read-next",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "What to read next",
+    "text": "What to read next\n\nPart 2: MUJI with UNIQLO’s conditions\nBegin here: ThS-QCA Case Study"
+  },
+  {
+    "objectID": "posts/thsqca-case-uniqlo/index.html#r-environment-for-this-page",
+    "href": "posts/thsqca-case-uniqlo/index.html#r-environment-for-this-page",
+    "title": "Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5",
+    "section": "R environment for this page",
+    "text": "R environment for this page\n\nsessionInfo()\n\nR version 4.6.1 (2026-06-24 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26300)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nother attached packages:\n[1] ThSQCA_2.0.9 QCA_3.25.5   admisc_0.41 \n\nloaded via a namespace (and not attached):\n [1] digest_0.6.39     fastmap_1.2.0     xfun_0.60         knitr_1.52       \n [5] htmltools_0.5.9   rmarkdown_2.32    cli_3.6.6         venn_1.13        \n [9] declared_0.27     compiler_4.6.1    rstudioapi_0.19.0 tools_4.6.1      \n[13] evaluate_1.0.5    yaml_2.3.12       otel_0.2.0        rlang_1.3.0      \n[17] jsonlite_2.0.0    htmlwidgets_1.6.4"
+  },
+  {
     "objectID": "posts/why-qca-decisions/index.html",
     "href": "posts/why-qca-decisions/index.html",
     "title": "Why QCA suits decision-making: looking for “recipes” instead of single effects",
@@ -1918,11 +2366,11 @@
     "text": "This blog is about qualitative comparative analysis (QCA), the ThSQCA R package, and practical tools for marketing research and data analysis. If you are new, here is a suggested order."
   },
   {
-    "objectID": "start-here.html#the-fifteen-core-articles-in-reading-order",
-    "href": "start-here.html#the-fifteen-core-articles-in-reading-order",
+    "objectID": "start-here.html#the-core-articles-in-reading-order",
+    "href": "start-here.html#the-core-articles-in-reading-order",
     "title": "Start here",
-    "section": "The fifteen core articles, in reading order",
-    "text": "The fifteen core articles, in reading order\nThe home page shows the same list with pictures.\n\n1. Get to know QCA and the threshold idea\n\nWelcome\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\n\n2. Learn ThSQCA in R\n\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\n\n\n3. Reading lists\n\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)\n\n\n\n4. Research methods, step by step\n\nFrom survey items to a scale, then on to regression and QCA: a step-by-step guide\nBefore adding latent variables: what scale building and path analysis can do\n\n\n\n5. Paper guides\n\nAbout Paper Guides: Introducing Papers on This Blog\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)\nPaper Guide: How Should We Evaluate the “Conditions for Success”? (Ragin, 2006)"
+    "section": "The core articles, in reading order",
+    "text": "The core articles, in reading order\nThe home page shows the same list with pictures.\n\n1. Get to know QCA and the threshold idea\n\nWelcome\nWhy QCA suits decision-making: looking for “recipes” instead of single effects\nIs “good enough” the same goal as “loved”? A marketer’s guide to threshold-sweep QCA\nIntroducing ThSQCA: threshold-sweep QCA in R\n\n\n\n2. Learn ThSQCA in R\n\nThSQCA for beginners, part 1: your first threshold sweep\nPart 2: the four sweeps and how to choose a range\nPart 3: solution types and multiple solutions\nPart 4: reporting and checking your results\n\n\n\n3. Reading lists\n\nPapers and books for getting to know QCA: six to read first (basics)\nQCA in marketing and management: ten papers to read first (applications)\n\n\n\n4. Research methods, step by step\n\nFrom survey items to a scale, then on to regression and QCA: a step-by-step guide\nBefore adding latent variables: what scale building and path analysis can do\n\n\n\n5. Paper guides\n\nAbout Paper Guides: Introducing Papers on This Blog\nPaper Guide: Quantitative and Qualitative Research Are Two Cultures, Not Rivals (Mahoney & Goertz, 2006)\nPaper Guide: How Should We Evaluate the “Conditions for Success”? (Ragin, 2006)\n\n\n\n6. ThS-QCA in practice\nA three-part series with survey data on UNIQLO and MUJI. Begin with this article.\n\nThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)"
   },
   {
     "objectID": "start-here.html#if-you-prefer-to-start-from-a-tool",

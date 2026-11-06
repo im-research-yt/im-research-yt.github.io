@@ -87,7 +87,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 18,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
@@ -253,7 +254,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(15)</span></div><div class="category" data-category="bWFya2V0aW5n">marketing <span class="quarto-category-count">(5)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZXM=">notes <span class="quarto-category-count">(6)</span></div><div class="category" data-category="UUNB">QCA <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="VGhTUUNB">ThSQCA <span class="quarto-category-count">(6)</span></div><div class="category" data-category="dHV0b3JpYWw=">tutorial <span class="quarto-category-count">(5)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="bWFya2V0aW5n">marketing <span class="quarto-category-count">(9)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm90ZXM=">notes <span class="quarto-category-count">(6)</span></div><div class="category" data-category="UUNB">QCA <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(4)</span></div><div class="category" data-category="VGhTUUNB">ThSQCA <span class="quarto-category-count">(6)</span></div><div class="category" data-category="dHV0b3JpYWw=">tutorial <span class="quarto-category-count">(9)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -277,7 +278,7 @@ window.Quarto = {
 .toc-title { font-weight: 700; font-size: 1.02rem; line-height: 1.35; margin-bottom: 0.3rem; }
 .toc-body p { font-size: 0.9rem; margin: 0; opacity: 0.85; }
 </style>
-<p>The fifteen articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)</p>
+<p>The articles below are the core of this site. They are arranged in reading order, so you can start at the top and go down. (Posts about R are also shared via R-bloggers.)</p>
 <section id="get-to-know-qca-and-the-threshold-idea" class="level2">
 <h2 class="anchored" data-anchor-id="get-to-know-qca-and-the-threshold-idea">1. Get to know QCA and the threshold idea</h2>
 <p>No R needed. Why QCA suits decisions, why the threshold matters, and the package that makes it an object of analysis.</p>
@@ -462,6 +463,22 @@ Are the traits shared by successful firms really conditions for success? A paper
 </div>
 </a><p><a class="toc-card" href="posts/paper-guide-ragin/index.html"></a></p>
 </div>
+</section>
+<section id="ths-qca-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="ths-qca-in-practice">6. ThS-QCA in practice</h2>
+<p>A short series that applies threshold-sweep QCA to survey data on UNIQLO and MUJI, and shows how the results change when the “recommend” line and the conditions change.</p>
+<div class="toc-grid">
+<a class="toc-card" href="posts/thsqca-case-overview/index.html"><img src="posts/thsqca-case-overview/thumbnail.png" alt="">
+<div class="toc-body">
+<div class="toc-title">
+ThS-QCA Case Study: Sufficient Conditions by "Recommend" Level for UNIQLO and MUJI (Begin Here)
+</div>
+<p>
+A three-part series with survey data on UNIQLO and MUJI. Begin with this article; it links to each part.
+</p>
+</div>
+</a><p><a class="toc-card" href="posts/thsqca-case-overview/index.html"></a></p>
+</div>
 
 
 
@@ -469,7 +486,119 @@ Are the traits shared by successful firms really conditions for success? A paper
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-2">
-<div class="g-col-1" data-index="0" data-categories="bWFya2V0aW5nJTJDbm90ZXM=" data-listing-date-sort="1793026800000" data-listing-file-modified-sort="1793296270000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5756">
+<div class="g-col-1" data-index="0" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1793890800000" data-listing-file-modified-sort="1793894082000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="975">
+<a href="./posts/thsqca-case-muji-same-conditions/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-case-muji-same-conditions/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Trying ThS-QCA (2) MUJI with UNIQLO’s Conditions
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Applies the four conditions chosen for UNIQLO to MUJI unchanged and shows how the sufficient conditions differ.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Nov 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1793890800000" data-listing-file-modified-sort="1793894082000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1113">
+<a href="./posts/thsqca-case-muji-swap/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-case-muji-swap/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Swaps the conditions entered into ThS-QCA with the same MUJI data and shows how the visible sufficient conditions change.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Nov 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1793890800000" data-listing-file-modified-sort="1793894082000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="587">
+<a href="./posts/thsqca-case-overview/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-case-overview/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+ThS-QCA Case Study: Sufficient Conditions by “Recommend” Level for UNIQLO and MUJI (Begin Here)
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>A starting guide to a three-part series that uses UNIQLO and MUJI survey data to show how sufficient conditions change when the recommendation threshold and the conditions…</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Nov 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="3" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1793890800000" data-listing-file-modified-sort="1793894082000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1007">
+<a href="./posts/thsqca-case-uniqlo/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./posts/thsqca-case-uniqlo/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Trying ThS-QCA (1) UNIQLO: Moving the Line for “Recommend” from 9 Down to 5
+</h5>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('bWFya2V0aW5n'); return false;">marketing</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dHV0b3JpYWw='); return false;">tutorial</div>
+
+</div>
+<div class="card-text listing-description delink">
+<p>Moves the Net Promoter Score line from 9 down to 5 and uses ThS-QCA to show how the sufficient conditions for recommending UNIQLO change.</p>
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Nov 6, 2026
+</div>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="4" data-categories="bWFya2V0aW5nJTJDbm90ZXM=" data-listing-date-sort="1793026800000" data-listing-file-modified-sort="1793296270000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="29" data-listing-word-count-sort="5756">
 <a href="./posts/before-latent-variables/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -497,7 +626,7 @@ Oct 27, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792325131291" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1187">
+<div class="g-col-1" data-index="5" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792325131291" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1187">
 <a href="./posts/paper-guide-mahoney-goertz/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -525,7 +654,7 @@ Oct 15, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792378684000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2437">
+<div class="g-col-1" data-index="6" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792378684000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2437">
 <a href="./posts/paper-guide-ragin/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -553,7 +682,7 @@ Oct 15, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-categories="bm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792411648866" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="230">
+<div class="g-col-1" data-index="7" data-categories="bm90ZXM=" data-listing-date-sort="1791990000000" data-listing-file-modified-sort="1792411648866" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="230">
 <a href="./posts/paper-guides-intro/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -579,7 +708,7 @@ Oct 15, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1791385200000" data-listing-file-modified-sort="1791404280000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4374">
+<div class="g-col-1" data-index="8" data-categories="bWFya2V0aW5nJTJDdHV0b3JpYWw=" data-listing-date-sort="1791385200000" data-listing-file-modified-sort="1791404280000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="22" data-listing-word-count-sort="4374">
 <a href="./posts/scale-to-regression/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -607,7 +736,7 @@ Oct 8, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="5" data-categories="UUNBJTJDbWFya2V0aW5nJTJDbm90ZXM=" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791161806000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="780">
+<div class="g-col-1" data-index="9" data-categories="UUNBJTJDbWFya2V0aW5nJTJDbm90ZXM=" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791161806000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="780">
 <a href="./posts/reading-list-applied/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -637,7 +766,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="6" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1792411653117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="402">
+<div class="g-col-1" data-index="10" data-categories="UUNBJTJDbm90ZXM=" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1792411653117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="402">
 <a href="./posts/reading-list-basics/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -665,7 +794,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="7" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791179886000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1227">
+<div class="g-col-1" data-index="11" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791179886000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1227">
 <a href="./posts/thsqca-beginners-1/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -695,7 +824,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="8" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791180064000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1596">
+<div class="g-col-1" data-index="12" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791180064000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1596">
 <a href="./posts/thsqca-beginners-2/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -725,7 +854,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791180180000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1541">
+<div class="g-col-1" data-index="13" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791180180000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1541">
 <a href="./posts/thsqca-beginners-3/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -755,7 +884,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="10" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791438757599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1352">
+<div class="g-col-1" data-index="14" data-categories="UiUyQ1RoU1FDQSUyQ3R1dG9yaWFs" data-listing-date-sort="1791126000000" data-listing-file-modified-sort="1791438757599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1352">
 <a href="./posts/thsqca-beginners-4/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -785,7 +914,7 @@ Oct 5, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="11" data-categories="VGhTUUNBJTJDbWFya2V0aW5nJTJDUUNB" data-listing-date-sort="1791039600000" data-listing-file-modified-sort="1791438757599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="804">
+<div class="g-col-1" data-index="15" data-categories="VGhTUUNBJTJDbWFya2V0aW5nJTJDUUNB" data-listing-date-sort="1791039600000" data-listing-file-modified-sort="1791438757599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="804">
 <a href="./posts/qca-for-marketers/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -815,7 +944,7 @@ Oct 4, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="12" data-categories="UUNBJTJDbWFya2V0aW5n" data-listing-date-sort="1790953200000" data-listing-file-modified-sort="1791160368000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="723">
+<div class="g-col-1" data-index="16" data-categories="UUNBJTJDbWFya2V0aW5n" data-listing-date-sort="1790953200000" data-listing-file-modified-sort="1791160368000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="723">
 <a href="./posts/why-qca-decisions/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -843,7 +972,7 @@ Oct 3, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="13" data-categories="VGhTUUNB" data-listing-date-sort="1790866800000" data-listing-file-modified-sort="1791438757597" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
+<div class="g-col-1" data-index="17" data-categories="VGhTUUNB" data-listing-date-sort="1790866800000" data-listing-file-modified-sort="1791438757597" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="847">
 <a href="./posts/introducing-thsqca/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -869,11 +998,11 @@ Oct 2, 2026
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="14" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1791439305676" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="100">
+<div class="g-col-1" data-index="18" data-categories="bmV3cw==" data-listing-date-sort="1790780400000" data-listing-file-modified-sort="1791439305676" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="100">
 <a href="./posts/welcome/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="./posts/welcome/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" data-src="./posts/welcome/thumbnail.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -897,6 +1026,9 @@ Oct 1, 2026
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -1,0 +1,84 @@
+---
+title: "Trying ThS-QCA (1) UNIQLO: Moving the Line for \"Recommend\" from 9 Down to 5"
+image: thumbnail.png
+date: "2026-11-06"
+sidebar: false
+categories: [marketing, tutorial]
+description: "Moves the Net Promoter Score line from 9 down to 5 and uses ThS-QCA to show how the sufficient conditions for recommending UNIQLO change."
+---
+*Series part 1. Written to be read on its own.*
+
+In the Net Promoter Score, people who give 9 or higher on a 0 to 10 recommendation scale are called "promoters." What happens to the sufficient conditions for recommending UNIQLO if we move this line to 8, 7, 6 and 5?
+
+## Method and data (common to the series)
+
+- **Method**: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on "how strongly would you recommend this brand to friends and acquaintances" (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the **sufficient conditions** at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, *Quality & Quantity*). It does not search for one optimal threshold.
+- **Data**: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture "Marketing 2" at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered "not conscious at all" about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand ("don't know" is excluded).
+- **Cases**: 267 respondents who rated UNIQLO.
+- **Conditions (X)**: brand perceptions ("affordable price range," "good quality," "easy to mix and match," and "offers products that downplay trends" (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are **an example of how to use the method**. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.
+- **Consistency**: among people holding a combination, the share who recommend (threshold 0.80 or higher). **Coverage**: among people who recommend, the share explained by the combination.
+- **Settings** (same at every level): minimum number of cases 4; **intermediate solution** (for logical remainders, I assume that each perception contributes toward recommending, except "basic", for which I assume no direction).
+
+## Results: sufficient conditions from 9 down to 5
+
+| Recommend if score is | Share of respondents | Sufficient conditions | Consistency | Coverage |
+|---|---|---|---|---|
+| 9 or higher | 18% | none | n/a | n/a |
+| 8 or higher | 41% | price × quality × versatile × not basic | 0.81 | 0.19 |
+| 7 or higher | 58% | price × quality × versatile × not basic | 0.88 | 0.15 |
+| 6 or higher | 67% | price × versatile × not basic / quality × not versatile × not basic | 0.89 | 0.39 |
+| 5 or higher | 86% | price × not basic / quality × not basic / versatile × not basic / price × quality × versatile | 0.93 | 0.66 |
+
+("/" means "or". "Not X" means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by "/".) "Not basic" means that "offers products that downplay trends" was not ticked.
+
+- At 5 or higher, as long as the brand is not seen as basic, any one of price, quality or versatility is enough (when all three hold together, basic does not matter). The conditions are loose and take many forms.
+- At 7 or 8 or higher, the sufficient condition is that, with the brand not seen as basic, **price, quality and versatility all hold**.
+- At 9 or higher, these four conditions yield no sufficient condition.
+
+The higher the target, the stricter the sufficient condition becomes: from "any one of them" to "several together."
+
+## A marketing reading (as hypotheses)
+
+What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.
+
+1. **The lower the line, the shorter the combinations that appear in the solution.** The solutions at 8 or higher (41% of respondents) contained price, quality and versatility together. When the line is defined as 5 or higher (86%), shorter combinations appear: with the brand not seen as basic, any one of price, quality or versatility is part of a solution. People who recommend at high scores appear to hold several perceptions at once.
+2. **"Not basic" appears in the solutions at every level.** Not ticking "offers products that downplay trends" is part of every solution. However, this survey alone cannot tell what not ticking this item says about how people see the brand. It cannot be read as "they feel novelty or trendiness."
+3. **A sufficient condition covers only "part" of the routes to recommendation.** 26 respondents hold "price × quality × versatile × not basic," and 23 of them score 7 or higher (consistency 0.88). On the other hand, of the 154 respondents (58%) who score 7 or higher, only 23 hold this combination (about 15%, coverage 0.15). Most people who score 7 or higher recommend through other routes. Actions that only satisfy this combination will not necessarily increase recommenders by much.
+
+## Cautions
+
+- "No sufficient condition" does not mean "no reason exists." The chosen conditions may simply not include the drivers of the highest ratings. With other conditions, the results would change.
+- The four conditions are an example (in a real analysis they are set in advance, as noted above).
+- This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.
+
+
+## Reproducible code (R)
+
+Data (same folder): [fashion_uniqlo.csv](fashion_uniqlo.csv)
+
+```{r}
+#| warning: false
+#| message: false
+library(QCA); library(ThSQCA)
+dat   <- read.csv("fashion_uniqlo.csv")
+conds <- c("PRICE", "QUALITY", "VERSATILE", "BASIC")
+res <- otSweep(dat = dat, outcome = "REC", conditions = conds,
+  sweep_range = 5:9,
+  thrX = setNames(rep(1, length(conds)), conds),
+  include = "?", dir.exp = ifelse(conds == "BASIC", "-", "1"),
+  incl.cut = 0.80, n.cut = 4)
+res$summary[, c("thrY", "expression", "inclS", "covS", "n_solutions")]
+```
+
+Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. https://doi.org/10.1007/s11135-026-03092-3
+
+## What to read next
+
+- [Part 2: MUJI with UNIQLO's conditions](../thsqca-case-muji-same-conditions/index.qmd)
+- [Begin here: ThS-QCA Case Study](../thsqca-case-overview/index.qmd)
+
+## R environment for this page
+
+```{r}
+sessionInfo()
+```

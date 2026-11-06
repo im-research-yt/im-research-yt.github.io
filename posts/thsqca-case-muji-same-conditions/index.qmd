@@ -1,0 +1,86 @@
+---
+title: "Trying ThS-QCA (2) MUJI with UNIQLO's Conditions"
+image: thumbnail.png
+date: "2026-11-06"
+sidebar: false
+categories: [marketing, tutorial]
+description: "Applies the four conditions chosen for UNIQLO to MUJI unchanged and shows how the sufficient conditions differ."
+---
+*Series part 2. Written to be read on its own.*
+
+In part 1, I moved the line for "recommend" from 9 down to 5 for UNIQLO. At 7 or 8 or higher, the sufficient condition was that, with the brand not seen as basic, price, quality and versatility all hold. What happens if we apply **UNIQLO's conditions** to MUJI unchanged?
+
+## Method and data (common to the series)
+
+- **Method**: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on "how strongly would you recommend this brand to friends and acquaintances" (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the **sufficient conditions** at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, *Quality & Quantity*). It does not search for one optimal threshold.
+- **Data**: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture "Marketing 2" at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered "not conscious at all" about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand ("don't know" is excluded).
+- **Cases**: 251 respondents who rated MUJI.
+- **Conditions (X)**: the same four perceptions as for UNIQLO ("affordable price range," "good quality," "easy to mix and match," and "offers products that downplay trends" (hereafter, basic)). For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are **an example of how to use the method**. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.
+- **Consistency**: among people holding a combination, the share who recommend (threshold 0.80 or higher). **Coverage**: among people who recommend, the share explained by the combination.
+- **Settings** (same at every level): minimum number of cases 4; **intermediate solution** (for logical remainders, I assume that each perception contributes toward recommending, except "basic", for which I assume no direction).
+
+## Results: same conditions, same line moving
+
+| Recommend if score is | MUJI share (UNIQLO) | Sufficient conditions for MUJI | Consistency | Coverage |
+|---|---|---|---|---|
+| 9 or higher | 14% (18%) | none | n/a | n/a |
+| 8 or higher | 29% (41%) | none | n/a | n/a |
+| 7 or higher | 46% (58%) | none | n/a | n/a |
+| 6 or higher | 58% (67%) | not price × quality × not versatile / price × quality × versatile × not basic | 0.87 | 0.28 |
+| 5 or higher | 79% (86%) | basic / price × versatile / quality × not versatile | 0.93 | 0.40 |
+
+("/" means "or". "Not X" means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by "/".)
+
+- **For MUJI, sufficient conditions appear only down to 6 or higher.** For UNIQLO they appeared from 8 or higher.
+- For UNIQLO, at 7 or 8 or higher the sufficient condition was "price × quality × versatile × not basic." For MUJI, this pattern first appears at 6 or higher.
+- The other pattern at 6 or higher is "quality holds while neither price nor versatility is ticked." Many people recommend on quality alone, even without a price perception.
+- Perceptions are distributed differently too: 44% of UNIQLO raters ticked "affordable price range," against 30% for MUJI.
+
+In short, with the four shared conditions, **no solution met the criterion for MUJI at 7 or higher**. The share of respondents at 7 or higher also differs (58% for UNIQLO, 46% for MUJI). With the same conditions and settings, the solutions obtained differed by brand.
+
+## A marketing reading (as hypotheses)
+
+What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.
+
+1. **Even with the same conditions and settings, how solutions emerge differs.** For UNIQLO, solutions appeared from 8 or higher. For MUJI, they appear only from 6 or higher. A view centered on price, quality and versatility, which fit UNIQLO's recommendations, cannot simply be carried over to MUJI.
+2. **The way price is perceived differs.** The share who ticked "affordable price range" is 44% for UNIQLO and 30% for MUJI. At 6 or higher, a pattern also appears in which quality is enough when price is not ticked. However, this is a difference in shares. It does not mean that people who recommend MUJI ignore price.
+3. **How "basic" appears at 5 or higher differs between UNIQLO and MUJI.** The UNIQLO solutions contained "not basic." The MUJI solution at 5 or higher contains "basic" itself. However, few MUJI respondents ticked basic (8%; UNIQLO 11%). Part 3 looks at this point again.
+
+## Cautions
+
+- These four conditions were chosen as an example for the UNIQLO analysis. With other conditions, the results for MUJI would change.
+- "No sufficient condition" does not mean "no reason exists."
+- This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.
+
+
+## Reproducible code (R)
+
+Data (same folder): [fashion_muji.csv](fashion_muji.csv)
+
+```{r}
+#| warning: false
+#| message: false
+library(QCA); library(ThSQCA)
+dat   <- read.csv("fashion_muji.csv")
+conds <- c("PRICE", "QUALITY", "VERSATILE", "BASIC")
+res <- otSweep(dat = dat, outcome = "REC", conditions = conds,
+  sweep_range = 5:9,
+  thrX = setNames(rep(1, length(conds)), conds),
+  include = "?", dir.exp = ifelse(conds == "BASIC", "-", "1"),
+  incl.cut = 0.80, n.cut = 4)
+res$summary[, c("thrY", "expression", "inclS", "covS", "n_solutions")]
+```
+
+Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. https://doi.org/10.1007/s11135-026-03092-3
+
+## What to read next
+
+- [Part 1: UNIQLO](../thsqca-case-uniqlo/index.qmd)
+- [Part 3: Swapping conditions with the same MUJI data](../thsqca-case-muji-swap/index.qmd)
+- [Begin here: ThS-QCA Case Study](../thsqca-case-overview/index.qmd)
+
+## R environment for this page
+
+```{r}
+sessionInfo()
+```

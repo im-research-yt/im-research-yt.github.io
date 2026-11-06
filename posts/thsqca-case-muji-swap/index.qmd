@@ -1,0 +1,83 @@
+---
+title: "Trying ThS-QCA (3) Swapping the Conditions with the Same MUJI Data"
+image: thumbnail.png
+date: "2026-11-06"
+sidebar: false
+categories: [marketing, tutorial]
+description: "Swaps the conditions entered into ThS-QCA with the same MUJI data and shows how the visible sufficient conditions change."
+---
+*Series part 3. Written to be read on its own.*
+
+In part 1, UNIQLO's recommendations were explained by "price × quality × versatile × not basic." In part 2, with the same conditions, no solution met the criterion for MUJI at 7 or higher. This time, I **swap the conditions entered into the analysis, using the same 251 MUJI respondents**, and check how the combinations we see change.
+
+## Method and data (common to the series)
+
+- **Method**: Threshold-Sweep QCA (ThS-QCA). I move the cut-off (threshold) on "how strongly would you recommend this brand to friends and acquaintances" (0 to 10; 0 = would not recommend at all, 10 = would definitely recommend) and list the **sufficient conditions** at each cut-off (combinations of conditions whose holders mostly end up recommending the brand; Toyoda, 2026, *Quality & Quantity*). It does not search for one optimal threshold.
+- **Data**: A casual fashion survey (N = 300) that I ran in June 2026 for the lecture "Marketing 2" at the Graduate School of Innovation Management, Hosei University, fielded by Freeasy; part of it is released for these case studies. Respondents had not answered "not conscious at all" about choosing casual fashion brands in the screening survey, so the sample does not represent consumers in general. The analysis uses the respondents who rated each brand ("don't know" is excluded).
+- **Cases**: 251 respondents who rated MUJI.
+- **Conditions (X)**: brand perceptions ("good quality," "easy to mix and match," "easy to walk into a physical store," and "offers products that downplay trends" (hereafter, basic)). I selected them, from combinations that yield a solution at 7 or higher in MUJI's data. Compared with part 2, "price" is dropped and "easy to walk into a physical store" is added. For each brand, respondents ticked every item they thought applied, and I split the cases into ticked and not ticked. The four conditions used here are **an example of how to use the method**. I picked them after looking at results, because they suit an illustration. In a real analysis, conditions must be set in advance, based on hypotheses or prior research.
+- **Consistency**: among people holding a combination, the share who recommend (threshold 0.80 or higher). **Coverage**: among people who recommend, the share explained by the combination.
+- **Settings** (same at every level): minimum number of cases 4; **intermediate solution** (for logical remainders, I assume that each perception contributes toward recommending, except "basic", for which I assume no direction).
+- **Note**: Beyond the items used here, I tried other combinations of four conditions, using other survey items as well. At 9 or higher, no combination yielded a sufficient condition. At 8 or higher, some combinations have an overall solution consistency of 0.80 or higher, but they explain very few people (6 or fewer of 72). This search used items that are not in the public CSV, so it cannot be reproduced with the public CSV.
+
+## Results: sufficient conditions with the swapped conditions
+
+| Recommend if score is | Share of respondents | Sufficient conditions | Consistency | Coverage |
+|---|---|---|---|---|
+| 9 or higher | 14% | none | n/a | n/a |
+| 8 or higher | 29% | none | n/a | n/a |
+| 7 or higher | 46% | quality × basic / quality × versatile × easy store | 0.82 | 0.16 |
+| 6 or higher | 58% | quality × not versatile × not easy store / quality × versatile × easy store × not basic | 0.85 | 0.24 |
+| 5 or higher | 79% | quality / basic / versatile × easy store | 0.90 | 0.43 |
+
+("/" means "or". "Not X" means X was not ticked. Consistency and coverage in the table are values for the whole solution joined by "/".) "Easy store" means "easy to walk into a physical store."
+
+- With the same 251 MUJI respondents, replacing "price" with "easy to walk into a physical store" produced a sufficient condition **at 7 or higher**, which part 2 could not. Note that this set of conditions was selected from the same data as one that yields a solution at 7 or higher.
+- Every sufficient condition at 7 or higher contains **quality**: a route in which quality is joined by the basic selection, and a route in which quality is joined by versatility and easy to walk into.
+- At 5 or higher, quality alone is sufficient.
+
+## A marketing reading (as hypotheses)
+
+What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.
+
+1. **Swapping conditions changes the combinations we see.** With part 2's four conditions, no solution appeared at 7 or higher. After the swap, two routes containing quality appeared at 7 or higher. What we put into the analysis changes what we see.
+2. **How "basic" appears differs by solution.** The UNIQLO solutions contained "not basic," and part of the MUJI solutions contains "basic." However, the conditions entered differ, so a direct comparison is not possible. Few respondents ticked basic even for MUJI (8%). Also, the survey asked whether the brand "offers products that downplay trends," and this survey alone cannot tell what that says about the brand.
+3. **In practice, conditions are set in advance, based on your own hypotheses.** Here I use conditions chosen after seeing results, to show that swapping conditions changes the results. In a real analysis, you would run the analysis with conditions set beforehand and show how results differ when conditions change, as a sensitivity analysis.
+4. **A sufficient condition covers only "part" of the routes to recommendation.** 22 respondents hold one of the solution's routes, and 18 of them score 7 or higher (consistency 0.82). On the other hand, of the 116 respondents who score 7 or higher, only 18 hold one of these routes (about 16%, coverage 0.16).
+
+## Cautions
+
+- The conditions are an example chosen after seeing MUJI's results. Until checked on other data, the findings remain hypotheses.
+- "No sufficient condition" does not mean "no reason exists."
+- This is an online survey run as part of a lecture (N = 300), and the sample does not represent consumers in general.
+
+## Reproducible code (R)
+
+Data (same folder): [fashion_muji.csv](fashion_muji.csv)
+
+```{r}
+#| warning: false
+#| message: false
+library(QCA); library(ThSQCA)
+dat   <- read.csv("fashion_muji.csv")
+conds <- c("QUALITY", "VERSATILE", "EASYSTORE", "BASIC")
+res <- otSweep(dat = dat, outcome = "REC", conditions = conds,
+  sweep_range = 5:9,
+  thrX = setNames(rep(1, length(conds)), conds),
+  include = "?", dir.exp = ifelse(conds == "BASIC", "-", "1"),
+  incl.cut = 0.80, n.cut = 4)
+res$summary[, c("thrY", "expression", "inclS", "covS", "n_solutions")]
+```
+
+Paper: Toyoda, Y. (2026). Threshold-sweep QCA: threshold dependence as an analytical dimension. *Quality & Quantity*. https://doi.org/10.1007/s11135-026-03092-3
+
+## What to read next
+
+- [Part 2: MUJI with UNIQLO's conditions](../thsqca-case-muji-same-conditions/index.qmd)
+- [Begin here: ThS-QCA Case Study](../thsqca-case-overview/index.qmd)
+
+## R environment for this page
+
+```{r}
+sessionInfo()
+```
