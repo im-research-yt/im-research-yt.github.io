@@ -1,14 +1,14 @@
 ---
-title: "Trying ThS-QCA (1) UNIQLO: Moving the Line for \"Recommend\" from 9 Down to 5"
+title: "Trying ThS-QCA (1) UNIQLO: Moving the \"Recommend\" Level from 9 Down to 5"
 image: thumbnail.png
 date: "2026-11-06"
 sidebar: false
 categories: [marketing, tutorial]
-description: "Moves the Net Promoter Score line from 9 down to 5 and uses ThS-QCA to show how the sufficient conditions for recommending UNIQLO change."
+description: "Moves the Net Promoter Score recommendation level from 9 down to 5 and uses ThS-QCA to show how the sufficient conditions for recommending UNIQLO change."
 ---
 *Series part 1. Written to be read on its own.*
 
-In the Net Promoter Score, people who give 9 or higher on a 0 to 10 recommendation scale are called "promoters." What happens to the sufficient conditions for recommending UNIQLO if we move this line to 8, 7, 6 and 5?
+In the Net Promoter Score, people who give 9 or higher on a 0 to 10 recommendation scale are called "promoters." What happens to the sufficient conditions for recommending UNIQLO if we move this level to 8, 7, 6 and 5?
 
 ## Method and data (common to the series)
 
@@ -41,7 +41,7 @@ The higher the target, the stricter the sufficient condition becomes: from "any 
 
 What the results show is only which combinations of perceptions are held by people who recommend at each level. What follows is marketing interpretation drawn from that, and it remains a hypothesis.
 
-1. **The lower the line, the shorter the combinations that appear in the solution.** The solutions at 8 or higher (41% of respondents) contained price, quality and versatility together. When the line is defined as 5 or higher (86%), shorter combinations appear: with the brand not seen as basic, any one of price, quality or versatility is part of a solution. People who recommend at high scores appear to hold several perceptions at once.
+1. **The lower the level, the shorter the combinations that appear in the solution.** The solutions at 8 or higher (41% of respondents) contained price, quality and versatility together. When the level is defined as 5 or higher (86%), shorter combinations appear: with the brand not seen as basic, any one of price, quality or versatility is part of a solution. People who recommend at high scores appear to hold several perceptions at once.
 2. **"Not basic" appears in the solutions at every level.** Not ticking "offers products that downplay trends" is part of every solution. However, this survey alone cannot tell what not ticking this item says about how people see the brand. It cannot be read as "they feel novelty or trendiness."
 3. **A sufficient condition covers only "part" of the routes to recommendation.** 26 respondents hold "price × quality × versatile × not basic," and 23 of them score 7 or higher (consistency 0.88). On the other hand, of the 154 respondents (58%) who score 7 or higher, only 23 hold this combination (about 15%, coverage 0.15). Most people who score 7 or higher recommend through other routes. Actions that only satisfy this combination will not necessarily increase recommenders by much.
 

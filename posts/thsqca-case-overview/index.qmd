@@ -8,7 +8,7 @@ description: "A starting guide to a three-part series that uses UNIQLO and MUJI 
 ---
 *Start with this article. Each part can be read from the links below.*
 
-How many points out of 10 should count as "I recommend this brand to friends and acquaintances"? The Net Promoter Score uses 9 or higher, but when this line moves, the combinations of conditions that lead to recommendation (sufficient conditions) change. This series shows that with survey data on UNIQLO and MUJI.
+How many points out of 10 should count as "I recommend this brand to friends and acquaintances"? The Net Promoter Score uses 9 or higher, but when this cut-off moves, the combinations of conditions that lead to recommendation (sufficient conditions) change. This series shows that with survey data on UNIQLO and MUJI.
 
 ## What is ThS-QCA?
 
@@ -27,13 +27,13 @@ The survey has other items, but here I take five items as an example of how to u
 
 ## The parts
 
-1. **[Part 1, UNIQLO](../thsqca-case-uniqlo/index.qmd)**: move the "recommend" line from 9 down to 5 and list the sufficient conditions.
+1. **[Part 1, UNIQLO](../thsqca-case-uniqlo/index.qmd)**: move the "recommend" level from 9 down to 5 and list the sufficient conditions.
 2. **[Part 2, MUJI with UNIQLO's conditions](../thsqca-case-muji-same-conditions/index.qmd)**: change only the brand, with the same conditions and settings.
 3. **[Part 3, swapping conditions with the same MUJI data](../thsqca-case-muji-swap/index.qmd)**: fix the brand and swap the conditions entered into the analysis.
 
 ## Two findings
 
-1. **Moving the recommendation line changes the solution.** For UNIQLO, the solutions at 8 or higher contain price, quality and versatility together. When the line is lowered to 5 or higher, shorter combinations appear.
+1. **Changing the recommendation level changes the solution.** For UNIQLO, the solutions at 8 or higher contain price, quality and versatility together. When the level is lowered to 5 or higher, shorter combinations appear.
 2. **Changing the conditions entered into the analysis changes the solution.** With the four shared conditions, no solution met the criterion for MUJI at 7 or higher. With the same 251 respondents, replacing price with "easy to walk into a physical store" produced two routes containing quality at 7 or higher.
 
 At 9 or higher, the conditions tried here yield no sufficient condition. This does not mean nothing can be done; the chosen conditions may simply not include the drivers of the highest ratings.

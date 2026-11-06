@@ -8,7 +8,7 @@ description: "Applies the four conditions chosen for UNIQLO to MUJI unchanged an
 ---
 *Series part 2. Written to be read on its own.*
 
-In part 1, I moved the line for "recommend" from 9 down to 5 for UNIQLO. At 7 or 8 or higher, the sufficient condition was that, with the brand not seen as basic, price, quality and versatility all hold. What happens if we apply **UNIQLO's conditions** to MUJI unchanged?
+In part 1, I moved the "recommend" level from 9 down to 5 for UNIQLO. At 7 or 8 or higher, the sufficient condition was that, with the brand not seen as basic, price, quality and versatility all hold. What happens if we apply **UNIQLO's conditions** to MUJI unchanged?
 
 ## Method and data (common to the series)
 
@@ -19,7 +19,7 @@ In part 1, I moved the line for "recommend" from 9 down to 5 for UNIQLO. At 7 or
 - **Consistency**: among people holding a combination, the share who recommend (threshold 0.80 or higher). **Coverage**: among people who recommend, the share explained by the combination.
 - **Settings** (same at every level): minimum number of cases 4; **intermediate solution** (for logical remainders, I assume that each perception contributes toward recommending, except "basic", for which I assume no direction).
 
-## Results: same conditions, same line moving
+## Results: same conditions, same level moving
 
 | Recommend if score is | MUJI share (UNIQLO) | Sufficient conditions for MUJI | Consistency | Coverage |
 |---|---|---|---|---|

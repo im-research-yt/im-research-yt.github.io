@@ -96,7 +96,7 @@ Reading notes on papers related to QCA, marketing science, brand management, and
 
 ## 6. ThS-QCA in practice
 
-A short series that applies threshold-sweep QCA to survey data on UNIQLO and MUJI, and shows how the results change when the "recommend" line and the conditions change.
+A short series that applies threshold-sweep QCA to survey data on UNIQLO and MUJI, and shows how the results change when the "recommend" level and the conditions change.
 
 <div class="toc-grid">
 <a class="toc-card" href="posts/thsqca-case-overview/index.html"><img src="posts/thsqca-case-overview/thumbnail.png" alt=""><div class="toc-body"><div class="toc-title">ThS-QCA Case Study: Sufficient Conditions by &quot;Recommend&quot; Level for UNIQLO and MUJI (Begin Here)</div><p>A three-part series with survey data on UNIQLO and MUJI. Begin with this article; it links to each part.</p></div></a>

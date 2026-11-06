@@ -96,7 +96,7 @@ QCA、マーケティング・サイエンス、ブランド・マネジメン�
 
 ## 6. ThS-QCA を事例で使う
 
-ユニクロと無印良品の調査データに、閾値スイープQCAを使います。「推奨」の線引きと、分析に入れる条件を変えると、結果がどう変わるかを見る連載です。
+ユニクロと無印良品の調査データに、閾値スイープQCAを使います。「推奨」レベルと、分析に入れる条件を変えると、結果がどう変わるかを見る連載です。
 
 <div class="toc-grid">
 <a class="toc-card" href="articles/thsqca-case-overview/index.html"><img src="articles/thsqca-case-overview/thumbnail.png" alt=""><div class="toc-body"><div class="toc-title">ThS-QCAの事例: ユニクロと無印良品で見る「推奨」レベルごとの十分条件(ここから読む)</div><p>ユニクロと無印良品の調査データを使う、全3回の連載です。この記事から読み始めて、各回に進めます。</p></div></a>
